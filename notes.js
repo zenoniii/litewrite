@@ -76,10 +76,10 @@ function highlightSelected(){
     }
 }
 
-function color-toggle() {
+function colorToggle() {
 	var body = document.getElementsByTagName('body');
-	if(body.hasClass('dark')) { body.removeClass('dark'); }
-	else { body.addClass('dark'); }
+	if(body.hasClass('dark')) body.removeClass('dark');
+	else body.addClass('dark');
 }
 
 editor.onkeyup = editor.onpaste = function(e){
