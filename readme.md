@@ -1,3 +1,11 @@
+# Notes.js
+
+Notes web app for [10K Apart 2010](http://10k.aneventapart.com/1/Entry/72).
+
+
+
+## MIT License
+
 Copyright (c) Nikita Vasilyev
 
 Permission is hereby granted, free of charge, to any person obtaining
