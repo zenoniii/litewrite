@@ -4,11 +4,12 @@
 	<meta name="description" content="Just notes and writing, no distraction.">
 	<link rel="stylesheet" href="notes.css">
 
+<body class="dark">
+	<div id="editor" contenteditable></div>
+	<div id="aside">
+		<div id="add" onclick="create()">New note</div>
+		<!--<div id="color-toggle" onclick="color-toggle()"> </div>-->
+		<div id="entries"></div>
+	</div>
 
-<div id="editor" contenteditable></div>
-<div id="aside">
-	<div id="add" onclick="create()">+ New note</div>
-	<div id="entries"></div>
-</div>
-
-<script src="notes.js"></script>
+	<script src="notes.js"></script>

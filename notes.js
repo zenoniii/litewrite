@@ -76,6 +76,12 @@ function highlightSelected(){
     }
 }
 
+function color-toggle() {
+	var body = document.getElementsByTagName('body');
+	if(body.hasClass('dark')) { body.removeClass('dark'); }
+	else { body.addClass('dark'); }
+}
+
 editor.onkeyup = editor.onpaste = function(e){
     var html = e.target.innerHTML
     if (html != S.getItem(id+"_html")) {

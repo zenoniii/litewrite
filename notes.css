@@ -15,7 +15,7 @@ html, body {
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 }
 #aside:hover, #aside:focus { opacity:1; }
-#aside a, #add {
+#aside a, #add, #switch-color {
 	display:block; padding:.5em; cursor:pointer;
 	color:#444; text-shadow:0 1px 0 #fff; text-decoration:none;
 	white-space:nowrap; overflow:hidden; text-overflow:hidden;
@@ -23,8 +23,14 @@ html, body {
 #aside a:hover { color:#000; }
 #aside .selected { color:#000; font-weight:bold; }
 
-#add { display:inline-block; width:60% font-size:120%; font-weight:bold; color:#000; }
+#add { display:inline-block; width:60%; font-size:120%; font-weight:bold; color:#000; }
 #add:hover:after { content:' +'; }
+
+#switch-color { display:inline-block; float:right; margin-top:.95em; border-radius:1em; background:#444; }
+/*.dark html, .dark body, .dark #editor { background:#181818; color:#eee; text-shadow:0 1px 0 #555; }
+.dark #aside a, .dark #add, .dark #switch-color { color:#bbb; text-shadow:0 1px 0 #555; }
+.dark #aside a:hover, .dark #aside .selected, #add { color:#eee; }
+.dark #switch-color { background:#bbb; } */
 
 
 ::-webkit-scrollbar { width:.2em; color:rgba(50,50,50,.3); }
