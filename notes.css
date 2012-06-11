@@ -2,17 +2,23 @@ html, body { height:100%; margin:0; background:#eee; }
 body { width:100% }
 #editor {
 	position:absolute; width:60%; height:100%; left:20%; padding:1em 2em;
-	background:#eee; font:2em/1.4 FreeSans,Helvetica,sans-serif; color:#333; text-shadow:0 0 1px #fff;
+	background:#eee; font:1.5em/1.4 FreeSans,Helvetica,sans-serif; color:#333; text-shadow:0 0 1px #fff;
 	outline:none; overflow:auto;
 }
 #aside {
 	position:fixed; width:18%; padding:1em 0;
 	font:80% FreeSans,Helvetica,sans-serif;
+	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 }
+#aside:hover, #aside:focus { opacity:1; }
 #aside a, #add {
 	display:block; padding:.3em .5em .3em 1em; cursor:pointer;
 	color:#315379; text-shadow:#fff 0 1px; text-decoration:none;
-	white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+	white-space:nowrap; overflow:hidden; text-overflow:hidden;
 }
-#aside .selected { color:#000; font-weight:bold; text-shadow:#fff 0 1px; }
+#aside a:hover { color:#000; }
+#aside .selected { color:#000; font-weight:bold; }
 #add { font-weight:bold; color:#000; }
+
+::-webkit-scrollbar { width:5px; height:3px; color:rgba(50,50,50,.3); }
+::-webkit-scrollbar-track-piece { background-color:transparent; -webkit-border-radius:1em; }
