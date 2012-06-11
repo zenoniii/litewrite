@@ -6,7 +6,7 @@ body { width:100% }
 	outline:none; overflow:auto;
 }
 #aside {
-	width:18%; padding:1em 0;
+	position:fixed; width:18%; padding:1em 0;
 	font:80% FreeSans,Helvetica,sans-serif;
 }
 #aside a, #add {
