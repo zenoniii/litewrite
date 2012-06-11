@@ -1,7 +1,7 @@
 html, body { height:100%; margin:0; background:#eee; }
 body { width:100% }
 #editor {
-	position:absolute; width:60%; height:100%; left:20%; padding:1em 2em;
+	position:absolute; width:60%; height:90%; left:20%; padding:1em 2em;
 	background:#eee; font:1.5em/1.4 FreeSans,Helvetica,sans-serif; color:#333; text-shadow:0 0 1px #fff;
 	outline:none; overflow:auto;
 }
