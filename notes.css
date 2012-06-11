@@ -1,54 +1,18 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    background: #d4dde6
-}
-body {
-    display: table;
-    table-layout: fixed;
-    width: 100%
-}
-#editor,
-#aside {
-    display: table-cell;
-    vertical-align: top
-}
+html, body { height:100%; margin:0; background:#eee; }
+body { width:100% }
 #editor {
-    font: 120%/1.4 Cambria, sans-serif;
-    padding: 1em 2em;
-    background: #FFF;
-    outline: none;
-    overflow: auto;
-    border-right: 1px solid #BBB
+	position:absolute; width:60%; height:100%; left:20%; padding:1em 2em;
+	background:#eee; font:2em/1.4 FreeSans,Helvetica,sans-serif; color:#333; text-shadow:0 0 1px #fff;
+	outline:none; overflow:auto;
 }
 #aside {
-    width: 200px;
-    padding: 1em 0;
-    font: 80% Segoe UI, Lucida Grande, sans-serif
+	width:18%; padding:1em 0;
+	font:80% FreeSans,Helvetica,sans-serif;
 }
-#aside a {
-    padding: .3em .5em .3em 1em;
-    display: block;
-    border-top: 1px solid transparent;
-    text-decoration: none;
-    cursor: pointer;
-    color: #315379;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-shadow: #fff 0 1px
+#aside a, #add {
+	display:block; padding:.3em .5em .3em 1em; cursor:pointer;
+	color:#315379; text-shadow:#fff 0 1px; text-decoration:none;
+	white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-#aside .selected {
-    background: #405770 url(bg.png) repeat-x 0 0;
-    border-top-color: #68788c;
-    margin-left: -1px;
-    color: #fff;
-    text-shadow: #000 0 1px
-}
-button {
-    margin: 0 0 1em 1em
-}
-#destroy {
-    position: absolute;
-    bottom: 0
-}
+#aside .selected { color:#000; font-weight:bold; text-shadow:#fff 0 1px; }
+#add { font-weight:bold; color:#000; }
