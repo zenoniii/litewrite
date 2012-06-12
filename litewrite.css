@@ -16,7 +16,7 @@ html, body {
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 }
 #aside:hover, #aside:focus { opacity:1; }
-#aside a, #add, #switch-color {
+#aside a, #add, #color-toggle {
 	display:block; padding:.5em; cursor:pointer;
 	color:#444; text-shadow:0 1px 0 #fff; text-decoration:none;
 	white-space:nowrap; overflow:hidden; text-overflow:hidden;
@@ -27,11 +27,14 @@ html, body {
 #add { display:inline-block; width:60%; font-size:120%; font-weight:bold; color:#000; }
 #add:hover:after { content:' +'; }
 
-#switch-color { display:inline-block; float:right; margin-top:.95em; border-radius:1em; background:#444; }
-/*.dark html, .dark body, .dark #editor { background:#181818 url(broken_noise.png); color:#eee; text-shadow:0 1px 0 #555; }
-.dark #aside a, .dark #add, .dark #switch-color { color:#bbb; text-shadow:0 1px 0 #555; }
-.dark #aside a:hover, .dark #aside .selected, #add { color:#eee; }
-.dark #switch-color { background:#bbb; } */
+#color-toggle {
+	position:absolute; width:3em; height:3em; top:-2.5em; left:-2.5em;
+	background:#181818; box-shadow:0 1px 0 #444; border-radius:50%;
+}
+.dark #editor { background:#181818 url(broken_noise.png) repeat; color:#eee; text-shadow:0 1px 0 #444; }
+.dark #aside a, .dark #add { color:#bbb; text-shadow:0 1px 0 #444; }
+.dark #aside a:hover, .dark #aside .selected { color:#eee; }
+.dark #color-toggle { background:#bbb; box-shadow:0 1px 0 #ddd; }
 
 
 ::-webkit-scrollbar { width:.2em; color:rgba(50,50,50,.3); }
