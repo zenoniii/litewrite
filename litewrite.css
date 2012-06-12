@@ -8,7 +8,7 @@ html, body {
 	background:#eee url(lightpaperfibers.png) repeat; font:normal 1.5em/150% FreeSans,Helvetica,sans-serif; text-shadow:0 1px 0 #fff;
 	outline:none; overflow:auto;
 }
-#editor>div:first-child { font-size:2em; font-weight:bold; }
+#editor:first-line { font-size:2em; line-height:2em; font-weight:bold; }
 
 #aside {
 	position:fixed; width:16%; padding:1%;
