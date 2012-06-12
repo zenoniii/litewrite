@@ -5,7 +5,7 @@ html, body {
 
 #editor {
 	box-sizing:border-box; position:absolute; width:100%; height:100%; padding:5% 20%;
-	background:#eee; font:normal 1.5em/150% FreeSans,Helvetica,sans-serif; text-shadow:0 1px 0 #fff;
+	background:#eee url(lightpaperfibers.png) repeat; font:normal 1.5em/150% FreeSans,Helvetica,sans-serif; text-shadow:0 1px 0 #fff;
 	outline:none; overflow:auto;
 }
 
@@ -27,7 +27,7 @@ html, body {
 #add:hover:after { content:' +'; }
 
 #switch-color { display:inline-block; float:right; margin-top:.95em; border-radius:1em; background:#444; }
-/*.dark html, .dark body, .dark #editor { background:#181818; color:#eee; text-shadow:0 1px 0 #555; }
+/*.dark html, .dark body, .dark #editor { background:#181818 url(broken_noise.png); color:#eee; text-shadow:0 1px 0 #555; }
 .dark #aside a, .dark #add, .dark #switch-color { color:#bbb; text-shadow:0 1px 0 #555; }
 .dark #aside a:hover, .dark #aside .selected, #add { color:#eee; }
 .dark #switch-color { background:#bbb; } */

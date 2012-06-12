@@ -1,12 +1,22 @@
-# Notes.js
+# [Litewrite](http://litewrite.net)
 
-Notes web app for [10K Apart 2010](http://10k.aneventapart.com/1/Entry/72).
+**Just notes and writing, no distraction.** by [Jan-Christoph Borchardt](http://jancborchardt.net)
 
+Based on [Notes](http://nv.github.com/notes) made by [Nikita Vasilyev](http://elv1s.ru) for [10K Apart 2010](http://10k.aneventapart.com/1/Entry/72).
+
+Backgrounds by [Subtle Patterns](http://subtlepatterns.com): [Light paper fibers](http://subtlepatterns.com/?p=1311) by Jorge Fuentes, [Broken noise](http://subtlepatterns.com/?p=852) by Vincent Klaiber
+
+
+## Unhosted
+
+**This app allows every user to use their own data storage!** Its code is fully client-side, without any server backend you need to trust! Find out more about the [Unhosted movement](http://unhosted.org). localStorage is used as fallback, so you can also use it offline.
 
 
 ## MIT License
 
-Copyright (c) Nikita Vasilyev
+Short: **Do anything you want as long as you credit us.**
+
+Copyright (c) 2010 [Nikita Vasilyev](http://elv1s.ru), 2012 [Jan-Christoph Borchardt](http://jancborchardt.net)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
