@@ -78,15 +78,25 @@ function colorToggle(){
 	else body.className = 'dark';
 }
 
-function subheading(){ // this needs to get incredibly optimized …
+function formatting(){ // this needs to get incredibly optimized …
 	for(i=0; i<$('editor').getElementsByTagName('div').length; i++) {
-		if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '# ') {
+		// bullet points, deactivated for now /*
+		/*if(($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '* ') || ($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '• ')) {
+			$('editor').getElementsByTagName('div')[i].className = 'listelement';
+			if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '* ') {
+				$('editor').getElementsByTagName('div')[i].innerHTML = '•' + $('editor').getElementsByTagName('div')[i].innerHTML.substring(1);
+			}
+		}
+		// headings
+		else */if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 1) == '#') {
 			$('editor').getElementsByTagName('div')[i].className = 'subheading';
-		} else{
+		}
+		else {
 			$('editor').getElementsByTagName('div')[i].className = '';
 		}
 	}
 }
+
 
 $('editor').onkeyup = $('editor').onpaste = function(e){
     var html = e.target.innerHTML
@@ -95,7 +105,7 @@ $('editor').onkeyup = $('editor').onpaste = function(e){
         S.setItem(id+'_html', html)
         updateList()
     }
-    subheading();
+    formatting();
 }
 
 onload=onhashchange=check
