@@ -78,6 +78,16 @@ function colorToggle(){
 	else body.className = 'dark';
 }
 
+function subheading(){ // this needs to get incredibly optimized …
+	for(i=0; i<$('editor').getElementsByTagName('div').length; i++) {
+		if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '# ') {
+			$('editor').getElementsByTagName('div')[i].className = 'subheading';
+		} else{
+			$('editor').getElementsByTagName('div')[i].className = '';
+		}
+	}
+}
+
 $('editor').onkeyup = $('editor').onpaste = function(e){
     var html = e.target.innerHTML
     if (html != S.getItem(id+'_html')) {
@@ -85,6 +95,7 @@ $('editor').onkeyup = $('editor').onpaste = function(e){
         S.setItem(id+'_html', html)
         updateList()
     }
+    subheading();
 }
 
 onload=onhashchange=check

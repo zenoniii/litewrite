@@ -9,6 +9,8 @@ html, body {
 	outline:none; overflow:auto;
 }
 #editor:first-line { font-size:2em; line-height:2em; font-weight:bold; }
+.subheading { margin:1em 0px .5em -.9em; font-size:1.6em; font-weight:bold; }
+
 
 #aside {
 	position:fixed; width:16%; padding:1%;
