@@ -73,7 +73,7 @@ function highlightSelected(){
 }
 
 function colorToggle(){
-	var body = document.getElementsByTagName('body');
+	var body = document.getElementsByTagName('body')[0];
 	if(body.className == 'dark') body.className = '';
 	else body.className = 'dark';
 }
