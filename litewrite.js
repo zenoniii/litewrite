@@ -28,8 +28,11 @@ function updateList() {
     var r = []
     for (var i=0; i<l; ++i) {
         var item = localStorage.getItem(i)
+        // var itemhtml = localStorage.getItem(i+'_html')
         if (item) {
             r.push('<a id="item_'+ i +'" href="#'+i+'">'+ item.slice(0, 50) +'</a>')
+            // this makes for a better cut, but does not always work
+            // r.push('<a id="item_'+ i +'" href="#'+i+'">'+ itemhtml.slice(0, itemhtml.indexOf('<') +'</a>')
         }
     }
 
