@@ -1,12 +1,11 @@
 function $(id){
     return document.getElementById(id)
 }
-var S = localStorage
-var id = S.last_id = S.last_id || 0
+var id = localStorage.last_id = localStorage.last_id || 0
 
 
 function show(id) {
-    $('editor').innerHTML = S.getItem(id + '_html') || ''
+    $('editor').innerHTML = localStorage.getItem(id + '_html') || ''
 }
 
 function select() {
@@ -16,19 +15,19 @@ function select() {
 }
 
 function create() {
-    id = ++S.last_id
+    id = ++localStorage.last_id
     $('editor').textContent = ''
-    S.setItem(id, '')
+    localStorage.setItem(id, '')
     location.hash = '#'+ id
     select()
     updateList()
 }
 
 function updateList() {
-    var l = parseInt(S.last_id) + 1
+    var l = parseInt(localStorage.last_id) + 1
     var r = []
     for (var i=0; i<l; ++i) {
-        var item = S.getItem(i)
+        var item = localStorage.getItem(i)
         if (item) {
             r.push('<a id="item_'+ i +'" href="#'+i+'">'+ item.slice(0, 50) +'</a>')
         }
@@ -42,7 +41,7 @@ function check() {
     var hash = location.hash
     if (hash) {
         id = hash.slice(1)
-        if (id in S) {
+        if (id in localStorage) {
             show(id)
         }
     } else {
@@ -100,9 +99,9 @@ function formatting(){ // this needs to get incredibly optimized …
 
 $('editor').onkeyup = $('editor').onpaste = function(e){
     var html = e.target.innerHTML
-    if (html != S.getItem(id+'_html')) {
-        S.setItem(id, e.target.textContent)
-        S.setItem(id+'_html', html)
+    if (html != localStorage.getItem(id+'_html')) {
+        localStorage.setItem(id, e.target.textContent)
+        localStorage.setItem(id+'_html', html)
         updateList()
     }
     formatting();
