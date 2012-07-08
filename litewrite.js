@@ -5,7 +5,7 @@ var id = localStorage.last_id = localStorage.last_id || 0
 
 
 function show(id) { // fill the editor and memorize the current document
-	$('editor').innerHTML = localStorage.getItem(id + '_html') || ''
+	$('editor').value = localStorage.getItem(id + '_html') || ''
 	localStorage.setItem('current-document', id)
 }
 
@@ -17,7 +17,7 @@ function select() { // not sure what this does
 
 function create() { // create a new document and focus on it
 	id = ++localStorage.last_id
-	$('editor').textContent = ''
+	$('editor').value = ''
 	localStorage.setItem(id, '')
 	location.hash = '#'+ id
 	select()
@@ -115,9 +115,9 @@ function formatting() { // this needs to get incredibly optimized …
 
 
 $('editor').onkeyup = $('editor').onpaste = function(e) {
-	var html = e.target.innerHTML
+	var html = e.target.value
 	if (html != localStorage.getItem(id+'_html')) {
-		localStorage.setItem(id, e.target.textContent)
+		localStorage.setItem(id, e.target.value)
 		localStorage.setItem(id+'_html', html)
 		updateList()
 	}
