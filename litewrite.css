@@ -19,7 +19,7 @@ html, body {
 	font:90% FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 }
-#aside:hover, #aside:focus { opacity:1; }
+#aside:hover, #aside:focus, #aside.visible { opacity:1; }
 #aside a, #add, #color-toggle {
 	display:block; padding:.5em; cursor:pointer;
 	color:#444; text-shadow:0 1px 0 #fff; text-decoration:none;

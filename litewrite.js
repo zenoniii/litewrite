@@ -53,6 +53,8 @@ function check() {
     updateList()
     select()
     document.getElementsByTagName('body')[0].className = localStorage.getItem('bgcolor');
+    $('aside').className = 'visible';
+    setTimeout( function() { $('aside').className = ''; } , 2000);
 }
 
 function setTitle(str) {
