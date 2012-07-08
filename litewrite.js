@@ -94,17 +94,19 @@ function colorToggle() {
 
 function formatting() { // this needs to get incredibly optimized …
 	for(i=0; i<$('editor').getElementsByTagName('div').length; i++) {
-		// bullet points, deactivated for now /*
+		// TODO: bullet points, deactivated for now /*
 		/*if(($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '* ') || ($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '• ')) {
 			$('editor').getElementsByTagName('div')[i].className = 'listelement'
 			if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '* ') {
 				$('editor').getElementsByTagName('div')[i].innerHTML = '•' + $('editor').getElementsByTagName('div')[i].innerHTML.substring(1)
 			}
 		}
-		// headings
-		else */if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 1) == '#') {
+		else */
+		// style every line beginning with # like a heading
+		if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 1) == '#') {
 			$('editor').getElementsByTagName('div')[i].className = 'subheading'
 		}
+		// TODO: also style when <h1> etc is used
 		else {
 			$('editor').getElementsByTagName('div')[i].className = ''
 		}
