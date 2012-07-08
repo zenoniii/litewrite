@@ -4,26 +4,25 @@ function $(id){
 var id = localStorage.last_id = localStorage.last_id || 0
 
 
-function show(id) {
+function show(id) { // fill the editor and memorize the current document
 	$('editor').innerHTML = localStorage.getItem(id + '_html') || ''
 	localStorage.setItem('current-document', id)
-	$('editor').focus()
 }
 
-function select() {
+function select() { // not sure what this does
 	document.createRange().setStart($('editor'), 0)
 	getSelection().removeAllRanges()
 	getSelection().addRange(document.createRange())
 }
 
-function create() {
+function create() { // create a new document and focus on it
 	id = ++localStorage.last_id
 	$('editor').textContent = ''
 	localStorage.setItem(id, '')
 	location.hash = '#'+ id
 	select()
 	updateList()
-	$('editor').focus()
+	$('editor').focus() // still does not really work in Firefox …
 }
 
 function updateList() {
