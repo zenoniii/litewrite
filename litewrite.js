@@ -1,4 +1,4 @@
-function $(id){
+function $(id) {
 	return document.getElementById(id)
 }
 var id = localStorage.last_id = localStorage.last_id || 0
@@ -55,9 +55,9 @@ function check() {
 	}
 	updateList()
 	select()
-	document.getElementsByTagName('body')[0].className = localStorage.getItem('bgcolor');
-	$('aside').className = 'visible';
-	setTimeout( function() { $('aside').className = ''; } , 2000); // maybe only fade out after typing start
+	document.getElementsByTagName('body')[0].className = localStorage.getItem('bgcolor')
+	$('aside').className = 'visible'
+	setTimeout( function() { $('aside').className = '' } , 2000) // maybe only fade out after typing start
 }
 
 function setTitle(str) {
@@ -70,7 +70,7 @@ function setTitle(str) {
 	document.title = str
 }
 
-function highlightSelected(){
+function highlightSelected() {
 	var hash = location.hash.slice(1)
 	if (!hash) return
 	var element = $('item_'+hash)
@@ -80,8 +80,8 @@ function highlightSelected(){
 	}
 }
 
-function colorToggle(){
-	var body = document.getElementsByTagName('body')[0];
+function colorToggle() {
+	var body = document.getElementsByTagName('body')[0]
 	if(body.className == 'dark') {
 		body.className = ''
 		localStorage.setItem('bgcolor', '')
@@ -92,34 +92,34 @@ function colorToggle(){
 	}
 }
 
-function formatting(){ // this needs to get incredibly optimized …
+function formatting() { // this needs to get incredibly optimized …
 	for(i=0; i<$('editor').getElementsByTagName('div').length; i++) {
 		// bullet points, deactivated for now /*
 		/*if(($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '* ') || ($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '• ')) {
-			$('editor').getElementsByTagName('div')[i].className = 'listelement';
+			$('editor').getElementsByTagName('div')[i].className = 'listelement'
 			if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '* ') {
-				$('editor').getElementsByTagName('div')[i].innerHTML = '•' + $('editor').getElementsByTagName('div')[i].innerHTML.substring(1);
+				$('editor').getElementsByTagName('div')[i].innerHTML = '•' + $('editor').getElementsByTagName('div')[i].innerHTML.substring(1)
 			}
 		}
 		// headings
 		else */if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 1) == '#') {
-			$('editor').getElementsByTagName('div')[i].className = 'subheading';
+			$('editor').getElementsByTagName('div')[i].className = 'subheading'
 		}
 		else {
-			$('editor').getElementsByTagName('div')[i].className = '';
+			$('editor').getElementsByTagName('div')[i].className = ''
 		}
 	}
 }
 
 
-$('editor').onkeyup = $('editor').onpaste = function(e){
+$('editor').onkeyup = $('editor').onpaste = function(e) {
 	var html = e.target.innerHTML
 	if (html != localStorage.getItem(id+'_html')) {
 		localStorage.setItem(id, e.target.textContent)
 		localStorage.setItem(id+'_html', html)
 		updateList()
 	}
-	formatting();
+	formatting()
 }
 
 onload=onhashchange=check
