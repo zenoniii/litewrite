@@ -6,6 +6,7 @@ var id = localStorage.last_id = localStorage.last_id || 0
 
 function show(id) {
 	$('editor').innerHTML = localStorage.getItem(id + '_html') || ''
+	localStorage.setItem('current-document', id)
 }
 
 function select() {
@@ -48,7 +49,8 @@ function check() {
 			show(id)
 		}
 	} else {
-		create()
+		show(localStorage.getItem('current-document'))
+		location.hash = '#'+localStorage.getItem('current-document')
 	}
 	updateList()
 	select()
