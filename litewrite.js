@@ -7,6 +7,7 @@ var id = localStorage.last_id = localStorage.last_id || 0
 function show(id) {
 	$('editor').innerHTML = localStorage.getItem(id + '_html') || ''
 	localStorage.setItem('current-document', id)
+	$('editor').focus()
 }
 
 function select() {
@@ -22,6 +23,7 @@ function create() {
 	location.hash = '#'+ id
 	select()
 	updateList()
+	$('editor').focus()
 }
 
 function updateList() {
