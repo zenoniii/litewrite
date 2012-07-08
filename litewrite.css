@@ -25,11 +25,11 @@ html, body {
 	color:#444; text-shadow:0 1px 0 #fff; text-decoration:none;
 	white-space:nowrap; overflow:hidden; text-overflow:hidden;
 }
-#aside a:hover { color:#000; }
+#aside a:hover, #aside a:focus { color:#000; }
 #aside .selected { color:#000; font-weight:bold; }
 
 #add { display:inline-block; width:60%; font-size:120%; font-weight:bold; color:#000; }
-#add:hover:after { content:' +'; }
+#add:hover:after, #add:focus:after { content:' +'; }
 
 #entries { height:80%; overflow-y:auto; }
 #entries a { text-overflow:ellipsis; }
@@ -43,7 +43,7 @@ html, body {
 }
 .dark #editor { background:#181818 url(broken_noise.png) repeat; color:#eee; text-shadow:0 1px 0 #444; }
 .dark #aside a, .dark #add, .dark { color:#bbb; text-shadow:0 1px 0 #444; }
-.dark #aside a:hover, .dark #aside .selected { color:#eee; }
+.dark #aside a:hover, .dark #aside a:focus, .dark #aside .selected { color:#eee; }
 .dark #color-toggle { background:#bbb; box-shadow:0 1px 0 #ddd; }
 
 
