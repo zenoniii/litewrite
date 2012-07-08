@@ -52,6 +52,7 @@ function check() {
     }
     updateList()
     select()
+    document.getElementsByTagName('body')[0].className = localStorage.getItem('bgcolor');
 }
 
 function setTitle(str) {
@@ -76,8 +77,14 @@ function highlightSelected(){
 
 function colorToggle(){
 	var body = document.getElementsByTagName('body')[0];
-	if(body.className == 'dark') body.className = '';
-	else body.className = 'dark';
+	if(body.className == 'dark') {
+		body.className = ''
+		localStorage.setItem('bgcolor', '')
+	}
+	else {
+		body.className = 'dark'
+		localStorage.setItem('bgcolor', 'dark')
+	}
 }
 
 function formatting(){ // this needs to get incredibly optimized …
