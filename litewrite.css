@@ -34,7 +34,7 @@ html, body {
 #entries { height:80%; overflow-y:auto; }
 #entries a { text-overflow:ellipsis; }
 
-#credits { position:absolute; bottom:2em; padding:.5em; font-size:.7em; white-space:nowrap; opacity:.7; }
+#credits { position:absolute; bottom:3em; padding:.5em; font-size:.7em; white-space:nowrap; opacity:.7; }
 #credits a { display:inline; padding:0; }
 
 #color-toggle {
