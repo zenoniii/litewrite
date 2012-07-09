@@ -102,7 +102,7 @@ function formatting() { // this needs to get incredibly optimized …
 			}
 		}
 		else */
-		// style every line beginning with # like a heading
+		// style every line beginning with # like a heading, TODO: make work in Firefox
 		if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 1) == '#') {
 			$('editor').getElementsByTagName('div')[i].className = 'subheading'
 		}
