@@ -1,16 +1,21 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html>
+<html>
+<head>
 	<meta charset="utf-8">
 	<title>Litewrite</title>
 	<meta name="description" content="Just notes and writing, no distraction.">
 	<link rel="stylesheet" href="litewrite.css">
-
+</head>
 <body>
 	<textarea id="editor" placeholder="Write …" class="scrollbox" contenteditable autofocus></textarea>
 	<div id="aside">
 		<div id="add" onclick="create()">New note</div>
-		<div id="color-toggle" onclick="colorToggle()"></div>
+		<div id="color-toggle"></div>
 		<div id="entries"></div>
+
 		<div id="credits"><strong>unobtrusive writing</strong>, <a href="http://github.com/jancborchardt/litewrite">open source</a><br>by <a href="http://jancborchardt.net">Jan-Christoph Borchardt</a></div>
 	</div>
 
-	<script src="litewrite.js"></script>
+	<script src="js/lib/require.js" data-main="js/main"></script>
+</body>
+</html>
