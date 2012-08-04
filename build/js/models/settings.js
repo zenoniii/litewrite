@@ -1,0 +1,1 @@
+define(["require","backbone","localstorage"],function(e){var t=e("backbone"),n=e("localstorage"),r=t.Model.extend({defaults:{id:0,darkBackground:!1,content:"",openDocId:"doc_1",title:"Welcome to Litewrite!"},localStorage:new n("appSettings"),initialize:function(){this.fetch()}});return new r})

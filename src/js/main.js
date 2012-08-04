@@ -1,15 +1,31 @@
 require.config( {
+  deps: [
+    //only used for development
+    'utils/log',
+
+    'utils/customizations'
+  ],
   paths: {
-    jquery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min',
+    // not included in production version
+    text: 'lib/require.text',
+
+    jquery: 'utils/jquery-loader',
     underscore: 'lib/underscore',
     backbone: 'lib/backbone',
-    localstorage: 'lib/backbone-localstorage'
+    localstorage: 'lib/backbone.localstorage',
+
+    //specify all models in the config for easy dependency injection
+    appView: 'views/app',
+    editorView: 'views/editor',
+    entriesView: 'views/entries',
+    settings: 'models/settings',
+    docModel: 'models/doc',
+    docs: 'collections/docs',
+    cache: 'utils/cache'
   },
   baseUrl: 'js'
 });
 
-require(['jquery', 'views/app', 'models/app'], function($, AppView, AppModel) {
-  $(function() {
-    new AppView(new AppModel());
-  });
+require(['litewrite'], function(litewrite) {
+  litewrite();
 });

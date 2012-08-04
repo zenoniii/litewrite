@@ -1,127 +1,48 @@
-function $(id) {
-	return document.getElementById(id)
-}
-var id = localStorage.last_id = localStorage.last_id || 0
+define(function(require) {
+
+  var AppView = require('appView');
+  var docs = require('docs');
+  var cache = require('cache');
+  var settings = require('settings');
+
+  function setOpenDoc() {
+    cache.openDoc = docs.get( settings.get('openDocId') );
+  }
+
+  function setWindowTitle() {
+    document.title = 'Litewrite: ' + cache.openDoc.get('title');
+  }
+
+  function litewrite() {
+
+    setOpenDoc();
+
+    settings.on('change:openDocId', function() {
+      setOpenDoc();
+      setWindowTitle();
+
+      var previousDoc = docs.get(settings.previous('openDocId'));
+      previousDoc.save( 'content', $.trim(previousDoc.get('content')) );
+      if ( _.isEmpty(previousDoc.get('content')) ) {
+        previousDoc.destroy();
+      }
+    });
+
+    docs.on('change:title', setWindowTitle);
+    setWindowTitle();
+
+    docs.on('add', function(doc) {
+      settings.save('openDocId', doc.id);
+    });
 
 
-function show(id) { // fill the editor and memorize the current document
-	$('editor').value = localStorage.getItem(id + '_html') || ''
-	localStorage.setItem('current-document', id)
-}
+    //Load on DOM-ready
+    $(function() {
+      new AppView();
+    });
 
-function select() { // not sure what this does
-	document.createRange().setStart($('editor'), 0)
-	getSelection().removeAllRanges()
-	getSelection().addRange(document.createRange())
-}
-
-function create() { // create a new document and focus on it
-	id = ++localStorage.last_id
-	$('editor').value = ''
-	localStorage.setItem(id, '')
-	location.hash = '#'+ id
-	select()
-	updateList()
-	$('editor').focus() // still does not really work in Firefox …
-}
-
-function updateList() {
-	var l = parseInt(localStorage.last_id) + 1
-	var r = []
-	for (var i=0; i<l; ++i) {
-		var item = localStorage.getItem(i)
-		// var itemhtml = localStorage.getItem(i+'_html')
-		if (item) {
-			r.push('<a id="item_'+ i +'" href="#'+i+'">'+ item.slice(0, 50) +'</a>')
-			// this makes for a better cut, but does not always work
-			// r.push('<a id="item_'+ i +'" href="#'+i+'">'+ itemhtml.slice(0, itemhtml.indexOf('<') +'</a>')
-		}
-	}
-
-	$('entries').innerHTML = r.join('')
-	highlightSelected()
-}
-
-function check() {
-	var hash = location.hash
-	if (hash) {
-		id = hash.slice(1)
-		if (id in localStorage) {
-			show(id)
-		}
-	} else {
-		show(localStorage.getItem('current-document'))
-		location.hash = '#'+localStorage.getItem('current-document')
-	}
-	updateList()
-	select()
-	document.getElementsByTagName('body')[0].className = localStorage.getItem('bgcolor')
-	$('aside').className = 'visible'
-	setTimeout( function() { $('aside').className = '' } , 2000) // maybe only fade out after typing start
-}
-
-function setTitle(str) {
-	if (str.length >= 30) {
-		var i = str.lastIndexOf(" ") + 1
-		if (i)
-			str = str.slice(0, i)
-		str += '...'
-	}
-	document.title = str
-}
-
-function highlightSelected() {
-	var hash = location.hash.slice(1)
-	if (!hash) return
-	var element = $('item_'+hash)
-	if (element) {
-		element.className += ' selected'
-		setTitle(element.textContent)
-	}
-}
-
-function colorToggle() {
-	var body = document.getElementsByTagName('body')[0]
-	if(body.className == 'dark') {
-		body.className = ''
-		localStorage.setItem('bgcolor', '')
-	}
-	else {
-		body.className = 'dark'
-		localStorage.setItem('bgcolor', 'dark')
-	}
-}
-
-function formatting() { // this needs to get incredibly optimized …
-	for(i=0; i<$('editor').getElementsByTagName('div').length; i++) {
-		// TODO: bullet points, deactivated for now /*
-		/*if(($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '* ') || ($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '• ')) {
-			$('editor').getElementsByTagName('div')[i].className = 'listelement'
-			if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 2) == '* ') {
-				$('editor').getElementsByTagName('div')[i].innerHTML = '•' + $('editor').getElementsByTagName('div')[i].innerHTML.substring(1)
-			}
-		}
-		else */
-		// style every line beginning with # like a heading, TODO: make work in Firefox
-		if($('editor').getElementsByTagName('div')[i].innerHTML.substring(0, 1) == '#') {
-			$('editor').getElementsByTagName('div')[i].className = 'subheading'
-		}
-		// TODO: also style when <h1> etc is used
-		else {
-			$('editor').getElementsByTagName('div')[i].className = ''
-		}
-	}
-}
+  }
 
 
-$('editor').onkeyup = $('editor').onpaste = function(e) {
-	var html = e.target.value
-	if (html != localStorage.getItem(id+'_html')) {
-		localStorage.setItem(id, e.target.value)
-		localStorage.setItem(id+'_html', html)
-		updateList()
-	}
-	formatting()
-}
-
-onload=onhashchange=check
+  return litewrite;
+});
