@@ -17,8 +17,15 @@ define(function(require) {
     initialize: function(models) {
 
       this.on('change:content', function(doc) {
-        //Title is the first line of the content
-        doc.save( 'title', doc.get('content').match(/.*/)[0] );
+        //Title is the first line of the content:
+        //empty if content starts with '<br>'
+        //skip '<div>' if content starts with '<div>'
+        //matches everything until the first '<'
+        //this way it works for me in Chrome and Firefox
+        var regex = doc.get('content').match(/(?=<br>)|<div>(.*?)<|.+?(?=<|$)/);
+        var title = !_.isUndefined(regex[1]) ? regex[1] : regex[0];
+
+        doc.save('title', title);
       });
 
       this.fetch({

@@ -15,15 +15,13 @@ define(function(require) {
 
       this.setContent();
 
-      settings.on('change:openDocId', function() {
-        this.setContent();
-        this.$el.focus();
-      }, this);
+      settings.on('change:openDocId', this.setContent, this);
 
     },
 
     setContent: function() {
-      this.$el.val( cache.openDoc.get('content') );
+      this.$el.html( cache.openDoc.get('content') );
+      this.$el.focus();
     },
 
     events: {
@@ -31,7 +29,8 @@ define(function(require) {
     },
 
     updateOpenDoc: function() {
-      cache.openDoc.save( 'content', this.$el.val() );
+      log(this.$el.html())
+      cache.openDoc.save( 'content', this.$el.html() );
     }
 
   });
