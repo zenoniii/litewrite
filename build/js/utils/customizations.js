@@ -1,1 +1,1 @@
-define(["require","backbone"],function(e){var t=e("backbone");t.Model.prototype.toggle=function(e,t){var n={};return n[e]=!this.get(e),this.save(n,t),this}})
+define(["require","backbone"],function(e){var t=e("backbone");console.log("customi"),t.Model.prototype.toggle=function(e,t){var n={};return n[e]=!this.get(e),this.save(n,t),this}})

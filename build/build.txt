@@ -5,12 +5,11 @@ litewrite.css
 
 js/main.js
 ----------------
-/Users/jorin/git/litewrite/node_modules/grunt-requirejs/node_modules/almond/almond.js
+/Users/jorin/Desktop/litewrite/node_modules/grunt-requirejs/node_modules/almond/almond.js
 js/utils/log.js
-js/lib/underscore.js
 js/utils/jquery-loader.js
+js/lib/underscore.js
 js/lib/backbone.js
-js/utils/customizations.js
 js/lib/require.text.js
 text!templates/entries.html
 js/lib/backbone.localstorage.js
@@ -22,4 +21,5 @@ js/utils/cache.js
 js/views/editor.js
 js/views/app.js
 js/litewrite.js
+js/utils/customizations.js
 js/main.js

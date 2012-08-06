@@ -29,7 +29,6 @@ define(function(require) {
     },
 
     updateOpenDoc: function() {
-      log(this.$el.html())
       cache.openDoc.save( 'content', this.$el.html() );
     }
 

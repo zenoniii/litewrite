@@ -1,9 +1,7 @@
 require.config( {
   deps: [
     //only used for development
-    'utils/log',
-
-    'utils/customizations'
+    'utils/log'
   ],
   paths: {
     // not included in production version
@@ -21,11 +19,12 @@ require.config( {
     settings: 'models/settings',
     docModel: 'models/doc',
     docs: 'collections/docs',
-    cache: 'utils/cache'
+    cache: 'utils/cache',
+    customizations: 'utils/customizations'
   },
   baseUrl: 'js'
 });
 
-require(['litewrite'], function(litewrite) {
+require(['litewrite', 'customizations'], function(litewrite) {
   litewrite();
 });
