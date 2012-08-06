@@ -3,8 +3,8 @@ define(function(require) {
   var $ = require('jquery');
   var _ = require('underscore');
   var Backbone = require('backbone');
-  var settings = require('settings');
-  var cache = require('cache');
+  var settings = require('models/settings');
+  var cache = require('utils/cache');
 
 
   var EditorView = Backbone.View.extend({

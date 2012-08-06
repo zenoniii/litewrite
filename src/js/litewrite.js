@@ -1,9 +1,9 @@
 define(function(require) {
 
-  var AppView = require('appView');
-  var docs = require('docs');
-  var cache = require('cache');
-  var settings = require('settings');
+  var AppView = require('views/app');
+  var docs = require('collections/docs');
+  var cache = require('utils/cache');
+  var settings = require('models/settings');
 
   function setOpenDoc() {
     cache.openDoc = docs.get( settings.get('openDocId') );

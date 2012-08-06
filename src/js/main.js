@@ -10,21 +10,11 @@ require.config( {
     jquery: 'utils/jquery-loader',
     underscore: 'lib/underscore',
     backbone: 'lib/backbone',
-    localstorage: 'lib/backbone.localstorage',
-
-    //specify all models in the config for easy dependency injection
-    appView: 'views/app',
-    editorView: 'views/editor',
-    entriesView: 'views/entries',
-    settings: 'models/settings',
-    docModel: 'models/doc',
-    docs: 'collections/docs',
-    cache: 'utils/cache',
-    customizations: 'utils/customizations'
+    localstorage: 'lib/backbone.localstorage'
   },
   baseUrl: 'js'
 });
 
-require(['litewrite', 'customizations'], function(litewrite) {
+require(['litewrite', 'utils/customizations'], function(litewrite) {
   litewrite();
 });

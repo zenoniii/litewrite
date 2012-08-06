@@ -5,7 +5,7 @@ define(function(require) {
   var _ = require('underscore');
   var Backbone = require('backbone');
   var Store = require('localstorage');
-  var Doc = require('docModel');
+  var Doc = require('models/doc');
 
 
   var Docs = Backbone.Collection.extend({

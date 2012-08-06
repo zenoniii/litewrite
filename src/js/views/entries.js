@@ -4,8 +4,8 @@ define(function(require) {
   var _ = require('underscore');
   var Backbone = require('backbone');
   var entriesTemplate = require('text!templates/entries.html');
-  var docs = require('docs');
-  var settings = require('settings');
+  var docs = require('collections/docs');
+  var settings = require('models/settings');
 
   var EntriesView = Backbone.View.extend({
 
