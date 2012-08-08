@@ -22,9 +22,14 @@ define(function(require) {
       setWindowTitle();
 
       var previousDoc = docs.get(settings.previous('openDocId'));
-      previousDoc.save( 'content', $.trim(previousDoc.get('content')) );
-      if ( _.isEmpty(previousDoc.get('content')) ) {
+      //When doc gets cloesd remove spaces and returns at the beginning
+      //and remove spaces at the end of each line
+      var previousContent = previousDoc.get('content').replace(/^<.*?>([^<].*?)(<\/div>|(?=<br>)|$)/, '$1');
+      //Contenteditable never is really empty
+      if ( !_.isNull(previousContent.match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/)) || _.isEmpty(previousContent) ) {
         previousDoc.destroy();
+      } else {
+        previousDoc.save('content', previousContent);
       }
     });
 

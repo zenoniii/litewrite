@@ -16,7 +16,7 @@ define(function(require) {
       this.render();
 
       docs.on('change:title', function(doc) {
-        this.$itemById(doc.id).find('a').text( doc.get('title') );
+        this.$itemById(doc.id).find('a').html( doc.get('title') );
       }, this);
 
       docs.on('destroy', function(doc) {
