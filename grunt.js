@@ -21,10 +21,23 @@ module.exports = function(grunt) {
         'utils/log',
         'text'
       ]
+    },
+
+    server: {
+      base: 'src'
+    },
+
+    watch: {
+        files: [],
+        tasks: ''
     }
+
   });
 
   grunt.loadNpmTasks('grunt-requirejs');
 
   grunt.registerTask('build', 'requirejs');
+
+  grunt.registerTask('dev', 'server watch');
+
 };
