@@ -16,17 +16,7 @@ define(function(require) {
 
     initialize: function(models) {
 
-      this.on('change:content', function(doc) {
-        //Title is the first line of the content:
-        //empty if content starts with '<br>'
-        //skip '<div>' if content starts with '<div>'
-        //matches everything until the first '<'
-        //this way it works for me in Chrome and Firefox
-        var regex = doc.get('content').match(/(?=<br>)|<div>(.*?)<|.+?(?=<|$)/);
-        var title = !_.isUndefined(regex[1]) ? regex[1] : regex[0];
-
-        doc.save('title', title);
-      });
+      this.on('change:content', saveTitle);
 
       this.fetch({
         success: _.bind(function() {
@@ -42,6 +32,19 @@ define(function(require) {
       this.create({id: _.uniqueId('doc_')});
     }
   });
+
+
+  function saveTitle(doc) {
+    //Title is the first line of the content:
+    //empty if content starts with '<br>'
+    //skip '<div>' if content starts with '<div>'
+    //matches everything until the first '<'
+    //this way it works in Chrome and Firefox
+    var matchTitle = doc.get('content').match(/(?=<br>)|<div>(.*?)<|.+?(?=<|$)/);
+    var title = !_.isUndefined(matchTitle[1]) ? matchTitle[1] : matchTitle[0];
+
+    doc.save('title', title);
+  }
 
 
   return new Docs();
