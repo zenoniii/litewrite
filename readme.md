@@ -1,13 +1,25 @@
 # [Litewrite](http://litewrite.net)
+**unobtrusive writing** by [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](http://jorin-vogel.com)
 
-**Just notes and writing, no distraction.** by [Jan-Christoph Borchardt](http://jancborchardt.net)
+## Contribute
 
-Based on [Notes](http://nv.github.com/notes) made by [Nikita Vasilyev](http://elv1s.ru) for [10K Apart 2010](http://10k.aneventapart.com/1/Entry/72).
+Play with the [development version](litewrite.github.com/litewrite), check out [issues](https://github.com/litewrite/litewrite/issues) and dive into the code if you like. Set up your development environment:
+
+1. Clone http://github.com/litewrite/litewrite
+2. Install [node.js](http://nodejs.org/#download)
+3. Run `npm install` to install the dependencies
+4. `./grunt build` to build the code
+5. `./grunt` to start a web server at http://localhost:8000
+
+
+## Thanks
+
+Inspired by [iA Writer](http://iawriter.com) & [LightWrite](http://gun.io/w). Initial prototype built on [Notes](http://nv.github.com/notes).
 
 Backgrounds by [Subtle Patterns](http://subtlepatterns.com): [Light paper fibers](http://subtlepatterns.com/?p=1311) by Jorge Fuentes, [Broken noise](http://subtlepatterns.com/?p=852) by Vincent Klaiber
 
 
-## Unhosted
+## Unhosted coming soon!
 
 **This app allows every user to use their own data storage!** Its code is fully client-side, without any server backend you need to trust! Find out more about the [Unhosted movement](http://unhosted.org). localStorage is used as fallback, so you can also use it offline.
 
@@ -16,7 +28,7 @@ Backgrounds by [Subtle Patterns](http://subtlepatterns.com): [Light paper fibers
 
 Short: **Do anything you want as long as you credit us.**
 
-Copyright (c) 2010 [Nikita Vasilyev](http://elv1s.ru), 2012 [Jan-Christoph Borchardt](http://jancborchardt.net)
+Copyright (c) 2012 [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](http://jorin-vogel.com)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
