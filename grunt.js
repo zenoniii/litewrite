@@ -10,21 +10,17 @@ module.exports = function(grunt) {
       }],
       modules: [{name: 'main'}],
       dir: 'build/',
-      appDir: 'src',
+      appDir: '.',
       baseUrl: 'js',
       inlineText: true,
       wrap: true,
-      mainConfigFile: 'src/js/main.js',
+      mainConfigFile: 'js/main.js',
       paths: {
       },
       stubModules: [
         'utils/log',
         'text'
       ]
-    },
-
-    server: {
-      base: 'src'
     },
 
     watch: {
