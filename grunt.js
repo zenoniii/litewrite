@@ -38,6 +38,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', 'requirejs');
 
-  grunt.registerTask('dev', 'server watch');
+  grunt.registerTask('default', 'server watch');
 
 };
