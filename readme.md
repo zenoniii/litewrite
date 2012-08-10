@@ -9,7 +9,7 @@ Play with the [development version](litewrite.github.com/litewrite), check out [
 2. Install [node.js](http://nodejs.org/#download)
 3. Run `npm install` to install the dependencies
 4. `./grunt build` to build the code
-5. `./grunt` to start a web server at http://localhost:8000
+5. `./grunt` to start a web server at [http://localhost:8000](http://localhost:8000)
 
 
 ## Thanks
