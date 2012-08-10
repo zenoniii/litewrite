@@ -1,30 +1,40 @@
 define(function(require) {
 
+  var Backbone = require('backbone');
   var AppView = require('views/app');
   var docs = require('collections/docs');
   var cache = require('utils/cache');
   var settings = require('models/settings');
+  var router = require('utils/router');
 
 
   function litewrite() {
+    if ( _.isUndefined(settings.get('openDocId')) ) {
+      settings.set('openDocId', docs.first().id);
+    }
 
     setOpenDoc();
-
-    settings.on('change:openDocId', setOpenDoc);
-    settings.on('change:openDocId', setWindowTitle);
-    settings.on('change:openDocId', deleteEmpty);
-
-    docs.on('change:title', setWindowTitle);
     setWindowTitle();
 
-    docs.on('add', function(doc) {
-      settings.save('openDocId', doc.id);
-    });
+    settings
+      .on('change:openDocId', setOpenDoc)
+      .on('change:openDocId', setWindowTitle)
+      .on('change:openDocId', setUrl)
+      .on('change:openDocId', deleteEmpty);
+
+    docs
+      .on('change:title', setUrl)
+      .on('change:title', setWindowTitle)
+      .on('add', function(doc) {
+        settings.save('openDocId', doc.id);
+      });
 
 
     //Load on DOM-ready
     $(function() {
       new AppView();
+      Backbone.history.start();
+      setUrl();
     });
 
   }
@@ -36,6 +46,13 @@ define(function(require) {
 
   function setWindowTitle() {
     document.title = 'Litewrite: ' + cache.openDoc.get('title');
+  }
+
+  function setUrl() {
+    var formattedTitle = cache.openDoc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-');
+    //document url contains id because we can't force your users to use only unique titles
+    var url = formattedTitle.length > 0 ? cache.openDoc.id + '-' + formattedTitle : '';
+    router.navigate(url);
   }
 
   function deleteEmpty() {

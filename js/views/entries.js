@@ -24,10 +24,8 @@ define(function(require) {
       }, this);
 
       docs.on('add', this.render, this);
-    },
 
-    $itemById: function(id) {
-      return this.$('.item[data-id=' + id + ']');
+      settings.on('change:openDocId', this.selectOpenDoc, this);
     },
 
     render: function() {
@@ -35,8 +33,7 @@ define(function(require) {
         this.template({ docs: docs.toJSON() })
       );
 
-      this.$selected = this.$itemById( settings.get('openDocId') )
-        .addClass('selected');
+      this.selectOpenDoc();
     },
 
     events: {
@@ -46,10 +43,19 @@ define(function(require) {
     openDoc: function(e) {
       e.preventDefault();
 
-      this.$selected.removeClass('selected');
+      settings.save('openDocId', this.$(e.currentTarget).attr('data-id'));
+    },
 
-      this.$selected = $(e.currentTarget).addClass('selected');
-      settings.save('openDocId', this.$selected.attr('data-id'));
+    $itemById: function(id) {
+      return this.$('.item[data-id=' + id + ']');
+    },
+
+    selectOpenDoc: function() {
+      if (this.$selected) {
+        this.$selected.removeClass('selected');
+      }
+      this.$selected = this.$itemById( settings.get('openDocId') )
+        .addClass('selected');
     }
 
   });

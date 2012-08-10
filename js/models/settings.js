@@ -9,9 +9,7 @@ define(function(require) {
     defaults: {
       id: 0,
       darkBackground: false,
-      content: '',
-      openDocId: 'doc_1',
-      title: 'Welcome to Litewrite!'
+      openDocId: undefined
     },
 
     localStorage: new Store('appSettings'),

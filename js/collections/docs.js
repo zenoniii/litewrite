@@ -29,7 +29,7 @@ define(function(require) {
     },
 
     addNew: function() {
-      this.create({id: _.uniqueId('doc_')});
+      this.create({id: _.uniqueId()});
     }
   });
 

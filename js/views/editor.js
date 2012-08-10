@@ -20,8 +20,9 @@ define(function(require) {
     },
 
     setContent: function() {
-      this.$el.html( cache.openDoc.get('content') );
-      this.$el.focus();
+      this.$el
+        .html( cache.openDoc.get('content') )
+        .focus();
     },
 
     events: {
