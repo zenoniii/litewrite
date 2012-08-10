@@ -14,28 +14,12 @@ define(function(require) {
     el: 'body',
 
     initialize: function() {
-
       new EditorView();
       new EntriesView();
-
-
-      if (settings.get('darkBackground')) {
-        this.$el.toggleClass('dark');
-      }
-
-      settings.on('change:darkBackground', function() {
-        this.$el.toggleClass('dark');
-      }, this);
-
     },
 
     events: {
-      'click #color-toggle': 'toggleColor',
       'click #add': 'newDoc'
-    },
-
-    toggleColor: function() {
-      settings.toggle('darkBackground');
     },
 
     newDoc: function(e) {

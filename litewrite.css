@@ -18,7 +18,7 @@ aside {
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 }
 aside:hover, aside:focus, aside.visible { opacity:1; }
-aside a, .add, .color-toggle {
+aside a, .add {
 	display:block; padding:.5em; cursor:pointer; outline:none;
 	color:#444; text-shadow:0 1px 0 #fff; text-decoration:none;
 	white-space:nowrap; overflow:hidden; text-overflow:hidden;
@@ -34,15 +34,6 @@ aside .selected { color:#000; font-weight:bold; }
 
 footer { position:absolute; bottom:3em; padding:.5em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
-
-.color-toggle {
-	position:absolute; width:3em; height:3em; top:-2.5em; left:-2.5em;
-	background:#181818; box-shadow:0 1px 0 #444; border-radius:50%;
-}
-.dark .editor { background:#1b1b1b url(img/broken_noise.png) repeat; color:#eee; text-shadow:0 1px 0 #444; }
-.dark aside a, .dark .add, .dark { color:#bbb; text-shadow:0 1px 0 #444; }
-.dark aside a:hover, .dark aside a:focus, .dark aside .selected { color:#eee; }
-.dark .color-toggle { background:#bbb; box-shadow:0 1px 0 #ddd; }
 
 
 ::-webkit-scrollbar { width:.2em; color:rgba(50,50,50,.3); }

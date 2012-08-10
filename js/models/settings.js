@@ -8,7 +8,6 @@ define(function(require) {
 
     defaults: {
       id: 0,
-      darkBackground: false,
       openDocId: undefined
     },
 

@@ -16,7 +16,7 @@ Play with the [development version](litewrite.github.com/litewrite), check out [
 
 Inspired by [iA Writer](http://iawriter.com) & [LightWrite](http://gun.io/w). Initial prototype built on [Notes](http://nv.github.com/notes).
 
-Backgrounds by [Subtle Patterns](http://subtlepatterns.com): [Light paper fibers](http://subtlepatterns.com/?p=1311) by Jorge Fuentes, [Broken noise](http://subtlepatterns.com/?p=852) by Vincent Klaiber
+[Alegreya](http://www.huertatipografica.com.ar/tipografias/alegreya/ejemplos.html) typeface by Juan Pablo del Peral, [light paper fibers](http://subtlepatterns.com/?p=1311) background by Jorge Fuentes.
 
 
 ## Unhosted coming soon!
