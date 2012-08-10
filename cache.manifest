@@ -1,0 +1,13 @@
+CACHE MANIFEST
+NETWORK:
+*
+CACHE:
+index.html
+css/litewrite.css
+css/Alegreya-Regular.ttf
+css/Alegreya-Bold.ttf
+img/lightpaperfibers.png
+img/litewrite.svg
+img/litewrite.png
+js/lib/jquery.js
+js/lib/require.js
