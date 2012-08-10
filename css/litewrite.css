@@ -12,7 +12,6 @@ html, body {
 	background:#fcfcfc url(img/lightpaperfibers.png) repeat; font:normal 1.7em/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none; resize:none;
 }
-
 .editor:first-line { font-size:2em; line-height:2.4em; font-weight:bold; } /* need to fix this for when it's a div */
 
 aside {
@@ -35,6 +34,8 @@ aside .selected { color:#000; font-weight:bold; }
 .entries { height:80%; overflow-y:auto; }
 .entries a { text-overflow:ellipsis; }
 
+.item { list-style: none; }
+
 footer { position:absolute; bottom:3em; padding:.5em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
 
@@ -42,11 +43,6 @@ footer a { display:inline; padding:0; }
 ::-webkit-scrollbar { width:.2em; color:rgba(50,50,50,.3); }
 ::-webkit-scrollbar-track-piece { background-color:transparent; }
 
+::selection { background-color:rgba(255,255,0,.3); }
+::-moz-selection { background-color:rgba(255,255,0,.3); }
 
-
-/*selection color is not working*/
-/*
-textarea::-moz-selection { background: #FFFF00; color: #fff; text-shadow: none; }
-textarea::selection { background: #FFFF00; color: #fff; text-shadow: none; }
-*/
-.item { list-style: none; }
