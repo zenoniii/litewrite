@@ -39,10 +39,8 @@ aside .selected { color:#000; font-weight:bold; }
 .add:hover:before, .add:focus:before { content:'+ '; }
 .add:hover, .add:focus { color:#000; margin-left:-.9em; }
 
-.entries { height:80%; overflow-y:auto; }
-.entries a { text-overflow:ellipsis; }
-
-.item { list-style: none; }
+.entries { height:80%; overflow-y:auto; margin:0; padding:0; list-style:none; }
+.entries a { text-overflow:ellipsis; height:1.35em; }
 
 footer { position:absolute; bottom:3em; padding:.5em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
