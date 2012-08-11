@@ -50,9 +50,8 @@ define(function(require) {
   }
 
   function setUrl() {
-    var formattedTitle = cache.openDoc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-');
-    //document url contains id because we can't force your users to use only unique titles
-    var url = formattedTitle.length > 0 ? cache.openDoc.id + '-' + formattedTitle : '';
+    var formattedTitle = router.getDocUrl(cache.openDoc);
+    var url = formattedTitle.length > 0 ? formattedTitle : '';
     router.navigate(url);
   }
 

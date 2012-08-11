@@ -12,12 +12,18 @@ define(function(require) {
     },
 
     openDoc: function(slug) {
-      var docId = slug.split('-')[0];
-      if ( _.isUndefined(docs.get(docId)) ) {
+      var doc = docs.find(function(doc) {
+        return this.getDocUrl(doc) === slug;
+      }, this);
+      if ( _.isUndefined(doc) ) {
         this.navigate('', { replace: true });
       } else {
-        settings.save('openDocId', docId);
+        settings.save('openDocId', doc.id);
       }
+    },
+
+    getDocUrl: function(doc) {
+      return encodeURI( doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-') );
     }
   });
 
