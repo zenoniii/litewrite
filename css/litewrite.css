@@ -9,7 +9,7 @@ html, body {
 .editor {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing: border-box; box-sizing:border-box;
 	position:absolute; width:100%; height:100%; padding:5% 20% 20%;
-	background:#fcfcfc url(img/lightpaperfibers.png) repeat; font:normal 1.7em/150% 'Alegreya',Georgia,serif;
+	background:#fcfcfc url(../img/lightpaperfibers.png) repeat; font:normal 1.7em/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none; resize:none;
 }
 .editor:first-line { font-size:2em; line-height:2.4em; font-weight:bold; } /* need to fix this for when it's a div */
