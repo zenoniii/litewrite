@@ -7,7 +7,16 @@ define(function(require) {
 
     defaults: {
       title: '',
-      content: ''
+      content: '',
+      lastEdited: undefined
+    },
+
+    initialize: function() {
+      this.on('change:content', this.updateLastEdited, this);
+    },
+
+    updateLastEdited: function() {
+        this.set('lastEdited', new Date().getTime());
     }
 
   });

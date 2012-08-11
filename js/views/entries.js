@@ -15,15 +15,11 @@ define(function(require) {
       this.template = _.template(entriesTemplate);
       this.render();
 
-      docs.on('change:title', function(doc) {
-        this.$itemById(doc.id).find('a').html( doc.get('title') );
-      }, this);
-
-      docs.on('destroy', function(doc) {
-        this.$itemById(doc.id).remove();
-      }, this);
-
-      docs.on('add', this.render, this);
+      docs
+        .on('add', this.render, this)
+        .on('reset', this.render, this)
+        .on('change:title', this.updateTitle, this)
+        .on('destroy', this.removeItem, this);
 
       settings.on('change:openDocId', this.selectOpenDoc, this);
     },
@@ -36,18 +32,16 @@ define(function(require) {
       this.selectOpenDoc();
     },
 
-    events: {
-      'click .item': 'openDoc'
-    },
-
-    openDoc: function(e) {
-      e.preventDefault();
-
-      settings.save('openDocId', this.$(e.currentTarget).attr('data-id'));
-    },
-
     $itemById: function(id) {
       return this.$('.item[data-id=' + id + ']');
+    },
+
+    updateTitle: function(doc) {
+      this.$itemById(doc.id).find('a').html( doc.get('title') );
+    },
+
+    removeItem: function(doc) {
+      this.$itemById(doc.id).remove();
     },
 
     selectOpenDoc: function() {
@@ -56,6 +50,16 @@ define(function(require) {
       }
       this.$selected = this.$itemById( settings.get('openDocId') )
         .addClass('selected');
+    },
+
+    events: {
+      'click .item': 'openDoc'
+    },
+
+    openDoc: function(e) {
+      e.preventDefault();
+
+      settings.save('openDocId', this.$(e.currentTarget).attr('data-id'));
     }
 
   });

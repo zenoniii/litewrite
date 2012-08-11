@@ -20,7 +20,8 @@ define(function(require) {
       .on('change:openDocId', setOpenDoc)
       .on('change:openDocId', setWindowTitle)
       .on('change:openDocId', setUrl)
-      .on('change:openDocId', deleteEmpty);
+      .on('change:openDocId', deleteEmpty)
+      .on('change:openDocId', docs.sort, docs);
 
     docs
       .on('change:title', setUrl)

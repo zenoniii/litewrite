@@ -6,6 +6,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var Store = require('localstorage');
   var Doc = require('models/doc');
+  var settings = require('models/settings');
 
 
   var Docs = Backbone.Collection.extend({
@@ -29,8 +30,25 @@ define(function(require) {
     },
 
     addNew: function() {
-      this.create({id: _.uniqueId()});
+      this.create({
+        id: _.uniqueId(),
+        lastEdited: new Date().getTime()
+      });
+    },
+
+    //Open doc has the highest priority
+    //Otherwise sort by 'lastEdited'
+    comparator: function(first, second) {
+      var openDocId = settings.get('openDocId');
+      if (first.id == openDocId) {
+        return -1;
+      }
+      if (second.id == openDocId) {
+        return 1;
+      }
+      return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
     }
+
   });
 
 
