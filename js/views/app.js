@@ -16,6 +16,11 @@ define(function(require) {
     initialize: function() {
       new EditorView();
       new EntriesView();
+
+      //fade out document list after 3s
+      setTimeout(_.bind(function() {
+        this.$('aside').removeClass('visible');
+      }, this), 3000);
     },
 
     events: {
