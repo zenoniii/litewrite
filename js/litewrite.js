@@ -10,7 +10,7 @@ define(function(require) {
 
   function litewrite() {
     if ( _.isUndefined(settings.get('openDocId')) ) {
-      settings.set('openDocId', docs.first().id);
+      settings.save('openDocId', docs.first().id);
     }
 
     setOpenDoc();

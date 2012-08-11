@@ -18,7 +18,7 @@ define(function(require) {
     },
 
     updateLastEdited: function() {
-        this.set('lastEdited', new Date().getTime());
+        this.save('lastEdited', new Date().getTime());
     },
 
 

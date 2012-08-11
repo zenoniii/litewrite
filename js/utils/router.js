@@ -16,7 +16,7 @@ define(function(require) {
       if ( _.isUndefined(docs.get(docId)) ) {
         this.navigate('', { replace: true });
       } else {
-        settings.set('openDocId', docId);
+        settings.save('openDocId', docId);
       }
     }
   });
