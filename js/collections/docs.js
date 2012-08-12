@@ -25,6 +25,8 @@ define(function(require) {
         }, this)
       });
 
+      this.on('reset', this.updateOpacity, this);
+
     },
 
     addNew: function() {
@@ -45,7 +47,13 @@ define(function(require) {
         return 1;
       }
       return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
-    }
+    },
+
+    updateOpacity: _.throttle(function() {
+      this.each(function(doc) {
+        doc.calculateOpacity();
+      });
+    }, 3000)
 
   });
 

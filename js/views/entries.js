@@ -18,6 +18,7 @@ define(function(require) {
       docs
         .on('reset', this.render, this)
         .on('change:title', this.updateTitle, this)
+        .on('change:content', this.updateOpacity, this)
         .on('destroy', this.removeItem, this);
 
       settings.on('change:openDocId', this.selectOpenDoc, this);
@@ -38,6 +39,11 @@ define(function(require) {
     updateTitle: function(doc) {
       this.$itemById(doc.id).find('a').html( doc.get('title') );
     },
+
+    updateOpacity: _.throttle(function(doc) {
+      log('updateOpacity')
+      this.$itemById(doc.id).css('opacity', doc.get('opacity'));
+    }, 5000),
 
     removeItem: function(doc) {
       this.$itemById(doc.id).remove();
