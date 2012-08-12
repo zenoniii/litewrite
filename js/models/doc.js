@@ -8,13 +8,15 @@ define(function(require) {
     defaults: {
       title: '',
       content: '',
-      lastEdited: undefined
+      lastEdited: undefined,
+      color: 'rgb(0, 0, 0)'
     },
 
     initialize: function() {
       this
         .on('change:content', this.updateLastEdited, this)
-        .on('change:content', this.updateTitle, this);
+        .on('change:content', this.updateTitle, this)
+        .on('change:lastEdited', this.resetColor, this);
     },
 
     updateLastEdited: function() {
@@ -31,6 +33,21 @@ define(function(require) {
       var title = !_.isUndefined(matchTitle[1]) ? matchTitle[1] : matchTitle[0];
 
       this.save('title', title);
+    },
+
+    resetColor: function() {
+      this.save('color', 'rgb(0, 0, 0)');
+    },
+
+    calculateColor: function() {
+      //Time passed since last this document was edited the last time in milliseconds
+      var diff = (new Date().getTime() - this.get('lastEdited'));
+      //For documents older than 2 Weeks the color won't change anymore
+      var limit = 14 * 86400000;
+      //The older the document the lighter the color
+      var c = diff > limit ? 200 : Math.round(diff / limit * 200);
+
+      this.save('color', 'rgb('+c+', '+c+', '+c+')');
     }
 
 
