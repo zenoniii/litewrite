@@ -8,15 +8,13 @@ define(function(require) {
     defaults: {
       title: '',
       content: '',
-      lastEdited: undefined,
-      opacity: 1
+      lastEdited: undefined
     },
 
     initialize: function() {
       this
         .on('change:content', this.updateLastEdited, this)
-        .on('change:content', this.updateTitle, this)
-        .on('change:lastEdited', this.resetOpacity, this);
+        .on('change:content', this.updateTitle, this);
     },
 
     updateLastEdited: function() {
@@ -33,21 +31,6 @@ define(function(require) {
       var title = !_.isUndefined(matchTitle[1]) ? matchTitle[1] : matchTitle[0];
 
       this.save('title', title);
-    },
-
-    resetOpacity: function() {
-      this.save('opacity', 1);
-    },
-
-    calculateOpacity: function() {
-      //Time passed since last this document was edited the last time in milliseconds
-      var diff = (new Date().getTime() - this.get('lastEdited'));
-      //The older the document the smaller the opacity
-      //but the opacity is allway between 0.1 and 1
-      //For documents older than 2 Weeks the opacity won't change anymore
-      var limit = 14 * 86400000;
-      var opacity = diff > limit ? 0.1 : Math.round( (0.1 + ((limit - diff) / limit) * 0.9) * 100 ) / 100;
-      this.save('opacity', opacity);
     }
 
 
