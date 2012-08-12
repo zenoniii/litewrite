@@ -16,7 +16,6 @@ define(function(require) {
       this.render();
 
       docs
-        .on('add', this.render, this)
         .on('reset', this.render, this)
         .on('change:title', this.updateTitle, this)
         .on('destroy', this.removeItem, this);
