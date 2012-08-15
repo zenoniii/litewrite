@@ -36,16 +36,8 @@ define(function(require) {
       });
     },
 
-    //Open doc has the highest priority
-    //Otherwise sort by 'lastEdited'
+    // Sort by 'lastEdited'
     comparator: function(first, second) {
-      var openDocId = settings.get('openDocId');
-      if (first.id == openDocId) {
-        return -1;
-      }
-      if (second.id == openDocId) {
-        return 1;
-      }
       return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
     },
 

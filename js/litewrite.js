@@ -20,12 +20,12 @@ define(function(require) {
       .on('change:openDocId', setOpenDoc)
       .on('change:openDocId', setWindowTitle)
       .on('change:openDocId', setUrl)
-      .on('change:openDocId', deleteEmpty)
-      .on('change:openDocId', docs.sort, docs);
+      .on('change:openDocId', deleteEmpty);
 
     docs
       .on('change:title', setUrl)
       .on('change:title', setWindowTitle)
+      .on('change:content', docs.sort)
       .on('add', function(doc) {
         settings.save('openDocId', doc.id);
       });
