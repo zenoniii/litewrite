@@ -1,26 +1,11 @@
 {
   "name": "litewrite",
-  "description": "",
   "version": "0.0.1",
-  "homepage": "http://litewrite.net/",
-  "author": {
-    "name": "",
-    "email": "",
-    "url": ""
-  },
+  "homepage": "http://litewrite.net",
   "repository": {
     "type": "git",
-    "url": "git://github.com/jorin-vogel/litewrite.git"
+    "url": "git://github.com/litewrite/litewrite.git"
   },
-  "bugs": {
-    "url": "https://github.com/jorin-vogel/litewrite/issues"
-  },
-  "licenses": [
-    {
-      "type": "",
-      "url": ""
-    }
-  ],
   "devDependencies": {
     "grunt": ">=0.3.1",
     "grunt-requirejs": ">=0.2.9"
