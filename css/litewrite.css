@@ -1,5 +1,5 @@
 html, body {
-	position:absolute; height:100%; width:100%; margin:0; padding:0;
+	position:absolute; height:100%; width:100%; margin:0; padding:0; overflow:hidden;
 	background:#fcfcfc; color:#000;
 }
 
