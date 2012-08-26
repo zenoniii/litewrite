@@ -14,9 +14,9 @@ define(function(require) {
 
     initialize: function() {
       this
-        .on('change:content', this.updateLastEdited, this)
-        .on('change:content', this.updateTitle, this)
-        .on('change:lastEdited', this.resetColor, this);
+        .on('change:content', this.updateLastEdited)
+        .on('change:content', this.updateTitle)
+        .on('change:lastEdited', this.resetColor);
     },
 
     updateLastEdited: function() {
