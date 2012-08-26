@@ -25,7 +25,6 @@ define(function(require) {
     docs
       .on('change:title', setUrl)
       .on('change:title', setWindowTitle)
-      .on('change:content', docs.sort)
       .on('add', function(doc) {
         settings.save('openDocId', doc.id);
       });
@@ -54,22 +53,11 @@ define(function(require) {
   }
 
   function setUrl() {
-    var formattedTitle = router.getDocUrl(cache.openDoc);
-    var url = formattedTitle.length > 0 ? formattedTitle : '';
-    router.navigate(url);
+    router.setUrl(cache.openDoc);
   }
 
   function deleteEmpty() {
-    var previousDoc = docs.get(settings.previous('openDocId'));
-    //When doc gets cloesd remove spaces and returns at the beginning
-    //and remove spaces at the end of each line
-    var previousContent = previousDoc.get('content').replace(/^<.*?>([^<].*?)(<\/div>|(?=<br>)|$)/, '$1');
-    //Contenteditable never is really empty
-    if ( !_.isNull(previousContent.match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/)) || _.isEmpty(previousContent) ) {
-      previousDoc.destroy();
-    } else {
-      previousDoc.save('content', previousContent);
-    }
+    docs.get(settings.previous('openDocId')).deleteIfEmpty();
   }
 
 

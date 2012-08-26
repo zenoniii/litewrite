@@ -24,7 +24,15 @@ define(function(require) {
 
     getDocUrl: function(doc) {
       return encodeURI( doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-') );
+    },
+
+
+    setUrl: function(doc) {
+      var formattedTitle = this.getDocUrl(doc);
+      var url = formattedTitle.length > 0 ? formattedTitle : '';
+      this.navigate(url);
     }
+
   });
 
   return new Router();

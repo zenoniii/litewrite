@@ -25,7 +25,10 @@ define(function(require) {
         }, this)
       });
 
-      this.on('reset', this.updateColor, this);
+      this
+        .on('reset', this.updateColor)
+        .on('change:content', this.sort);
+
 
     },
 

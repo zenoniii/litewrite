@@ -48,8 +48,19 @@ define(function(require) {
       var c = diff > limit ? 200 : Math.round(diff / limit * 200);
 
       this.save('color', 'rgb('+c+', '+c+', '+c+')');
-    }
+    },
 
+    deleteIfEmpty: function() {
+      //When doc gets closed remove spaces and returns at the beginning
+      //and remove spaces at the end of each line
+      var previousContent = this.get('content').replace(/^<.*?>([^<].*?)(<\/div>|(?=<br>)|$)/, '$1');
+      //Contenteditable never is really empty
+      if ( !_.isNull(previousContent.match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/)) || _.isEmpty(previousContent) ) {
+        this.destroy();
+      } else {
+        this.save('content', previousContent);
+      }
+    }
 
   });
 
