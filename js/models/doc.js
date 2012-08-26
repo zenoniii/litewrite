@@ -24,14 +24,8 @@ define(function(require) {
     },
 
     updateTitle: function() {
-      //Title is the first line of the content:
-      //empty if content starts with '<br>'
-      //skip '<div>' if content starts with '<div>'
-      //matches everything until the first '<'
-      //this way it works in Chrome and Firefox
-      var matchTitle = this.get('content').match(/(?=<br>)|<div>(.*?)<|.+?(?=<|$)/);
-      var title = !_.isUndefined(matchTitle[1]) ? matchTitle[1] : matchTitle[0];
-
+      //Title is the first not empty line of the content
+      var title = this.get('content').match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*(.*?)(<div>|<\/div>|<br>|$)/)[2];
       this.save('title', title);
     },
 
@@ -51,14 +45,9 @@ define(function(require) {
     },
 
     deleteIfEmpty: function() {
-      //When doc gets closed remove spaces and returns at the beginning
-      //and remove spaces at the end of each line
-      var previousContent = this.get('content').replace(/^<.*?>([^<].*?)(<\/div>|(?=<br>)|$)/, '$1');
       //Contenteditable never is really empty
-      if ( !_.isNull(previousContent.match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/)) || _.isEmpty(previousContent) ) {
+      if (this.get('content').match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/) !== null) {
         this.destroy();
-      } else {
-        this.save('content', previousContent);
       }
     }
 
