@@ -3,9 +3,9 @@
 
 ## Contribute
 
-Play with the [development version](litewrite.github.com/litewrite), check out [issues](https://github.com/litewrite/litewrite/issues) and dive into the code if you like. Set up your development environment:
+Play with the [development version](http://litewrite.github.com/litewrite), check out [issues](http://github.com/litewrite/litewrite/issues) and dive into the code if you like. Set up your development environment:
 
-1. Clone http://github.com/litewrite/litewrite
+1. git clone http://github.com/litewrite/litewrite
 2. Install [node.js](http://nodejs.org/#download)
 3. Run `npm install` to install the dependencies
 4. `./grunt build` to build the code
