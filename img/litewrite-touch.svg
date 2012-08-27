@@ -12,9 +12,9 @@
    id="Capa_1"
    x="0px"
    y="0px"
-   width="16"
-   height="16"
-   viewBox="0 0 11.111111 11.111111"
+   width="144"
+   height="144"
+   viewBox="0 0 99.999999 99.999999"
    enable-background="new 0 0 100 100"
    space="preserve"
    inkscape:version="0.48.3.1 r9886"
@@ -53,9 +53,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="13.111111"
-     inkscape:cx="9.9107638"
-     inkscape:cy="14.117995"
+     inkscape:zoom="3.2777778"
+     inkscape:cx="90.663558"
+     inkscape:cy="76.887584"
      inkscape:window-x="0"
      inkscape:window-y="-31"
      inkscape:window-maximized="1"
@@ -66,10 +66,12 @@
        empspacing="4"
        visible="true"
        enabled="true"
-       snapvisiblegridlinesonly="true" />
+       snapvisiblegridlinesonly="true"
+       originx="0px"
+       originy="1.2949711e-14px" />
   </sodipodi:namedview>
   <path
-     d="M 8 0 C 3.5889603 0 -2.9959246e-17 3.5889603 0 8 C 5.7824116e-19 12.411521 3.5889603 16 8 16 C 12.411521 16 16 12.411521 16 8 C 16 3.5889603 12.411521 -2.9959246e-17 8 0 z M 8 2 C 11.30864 2 14 4.6917195 14 8 C 14 11.308639 11.30864 14 8 14 C 4.6917198 14 2 11.308641 2 8 C 2 4.6917209 4.6917198 2 8 2 z "
-     transform="scale(0.69444444,0.69444444)"
-     id="path3053" />
+     d="M 49.999999,0 C 22.431002,0 0,22.431002 0,50 c 0,27.572006 22.431002,49.999999 49.999999,49.999999 27.572006,0 50,-22.427993 50,-49.999999 0,-27.568998 -22.427994,-50 -50,-50 z m 0,12.5 c 20.679,0 37.5,16.823247 37.5,37.5 0,20.678993 -16.821,37.499999 -37.5,37.499999 C 29.323248,87.499999 12.5,70.679006 12.5,50 12.5,29.323255 29.323248,12.5 49.999999,12.5 z"
+     id="path3053"
+     inkscape:connector-curvature="0" />
 </svg>
