@@ -16,27 +16,28 @@ html, body {
 
 aside {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing: border-box; box-sizing:border-box;
-	position:fixed; width:16%; height:100%; padding:1%;
+	position:fixed; width:16%; height:100%;
 	font:90% FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 }
 aside:hover, aside:focus, aside.visible { opacity:1; }
 aside a, .add {
-	display:block; padding:.5em; cursor:pointer; outline:none;
+	display:block; cursor:pointer; outline:none;
 	color:#444; text-decoration:none;
 	white-space:nowrap; overflow:hidden; text-overflow:hidden;
 }
-aside a:hover, aside a:focus { color:#000; }
-aside .selected { color:#000; font-weight:bold; }
 
-.add { display:inline-block; font-size:120%; font-weight:bold; color:#777; }
-.add:hover:before, .add:focus:before { content:'+ '; }
-.add:hover, .add:focus { color:#000; margin-left:-.9em; }
+.add { position:relative; display:inline-block; font-size:120%; font-weight:normal; color:#999; width:100%; padding:1em; height:.5em; }
+.add:hover, .add:focus { color:#000; }
+	.add .add-plus, .add .add-text { position:absolute; -webkit-transition:opacity 200ms; -moz-transition:opacity 200ms; -o-transition:opacity 200ms; transition:opacity 200ms; }
+	.add .add-plus { opacity:1; font-size:140%; top:.45em; } .add:hover .add-plus { opacity:0; }
+	.add .add-text { opacity:0; font-weight:bold; color:#000; } .add:hover .add-text { opacity:1; }
 
 .entries { height:80%; overflow-y:auto; margin:0; padding:0; list-style:none; }
-.entries a { text-overflow:ellipsis; height:1.35em; }
+.entries a { text-overflow:ellipsis; height:1.35em; padding:.5em 1.2em; }
+.entries a:hover, .entries a:focus, .entries .selected { color:#000; font-weight:bold; }
 
-footer { position:absolute; bottom:0; margin:1em .7em; font-size:.7em; white-space:nowrap; opacity:.7; }
+footer { position:absolute; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
 
 
