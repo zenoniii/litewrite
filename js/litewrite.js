@@ -47,7 +47,7 @@ define(function(require) {
 
   function setWindowTitle() {
     if(cache.openDoc.get('title') != '') {
-      document.title = cache.openDoc.get('title');
+      document.title = cache.openDoc.get('title').replace(/&nbsp;/gi,'');
     } else {
       document.title = 'Litewrite';
     }
