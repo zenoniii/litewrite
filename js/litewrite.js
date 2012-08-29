@@ -46,7 +46,11 @@ define(function(require) {
   }
 
   function setWindowTitle() {
-    document.title = 'Litewrite: ' + cache.openDoc.get('title');
+    if(cache.openDoc.get('title') != '') {
+      document.title = cache.openDoc.get('title');
+    } else {
+      document.title = 'Litewrite';
+    }
   }
 
   function setUrl() {
