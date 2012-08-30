@@ -20,7 +20,7 @@ define(function(require) {
       .on('change:openDocId', setOpenDoc)
       .on('change:openDocId', setWindowTitle)
       .on('change:openDocId', setUrl)
-      .on('change:openDocId', deleteEmpty);
+      .on('change:openDocId', docs.deleteEmpty, docs);
 
     docs
       .on('change:title', setUrl)
@@ -54,10 +54,6 @@ define(function(require) {
 
   function setUrl() {
     router.setUrl(cache.openDoc);
-  }
-
-  function deleteEmpty() {
-    docs.get(settings.previous('openDocId')).deleteIfEmpty();
   }
 
 

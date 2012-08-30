@@ -19,6 +19,11 @@ define(function(require) {
         .on('change:lastEdited', this.resetColor);
     },
 
+    isEmpty: function() {
+      //Contenteditable never is really empty
+      return this.get('content').match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/) !== null;
+    },
+
     updateLastEdited: function() {
         this.save('lastEdited', new Date().getTime());
     },
@@ -42,13 +47,6 @@ define(function(require) {
       var c = diff > limit ? 200 : Math.round(diff / limit * 200);
 
       this.save('color', 'rgb('+c+', '+c+', '+c+')');
-    },
-
-    deleteIfEmpty: function() {
-      //Contenteditable never is really empty
-      if (this.get('content').match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/) !== null) {
-        this.destroy();
-      }
     }
 
   });

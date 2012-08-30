@@ -48,7 +48,14 @@ define(function(require) {
       this.each(function(doc) {
         doc.calculateColor();
       });
-    }, 3000)
+    }, 3000),
+
+    deleteEmpty: function() {
+      var previousDoc = this.get(settings.previous('openDocId'));
+      if (previousDoc && previousDoc.isEmpty()) {
+        this.remove(previousDoc);
+      }
+    }
 
   });
 

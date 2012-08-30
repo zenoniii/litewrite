@@ -7,6 +7,7 @@ define(function(require) {
   var EditorView = require('views/editor');
   var settings = require('models/settings');
   var docs = require('collections/docs');
+  var cache = require('utils/cache');
 
 
   var AppView = Backbone.View.extend({
@@ -14,8 +15,8 @@ define(function(require) {
     el: 'body',
 
     initialize: function() {
-      new EditorView();
-      new EntriesView();
+      this.editor = new EditorView();
+      this.entries = new EntriesView();
 
       //fade out document list after 3s
       setTimeout(_.bind(function() {
@@ -30,7 +31,11 @@ define(function(require) {
     newDoc: function(e) {
       e.preventDefault();
 
-      docs.addNew();
+      if (!cache.openDoc.isEmpty()) {
+        docs.addNew();
+      } else {
+        this.editor.focus();
+      }
     }
   });
 
