@@ -26,7 +26,14 @@ define(function(require) {
 
     render: function() {
       this.$el.html(
-        this.template({ docs: docs.toJSON() })
+        this.template({
+          docs: docs
+            .filter(function(doc) {
+              return !doc.isEmpty();
+            }).map(function(doc) {
+              return doc.toJSON();
+            })
+        })
       );
 
       this.selectOpenDoc();
