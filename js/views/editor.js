@@ -13,15 +13,22 @@ define(function(require) {
 
     initialize: function() {
 
-      this.setContent();
+      this.changeContent();
 
-      settings.on('change:openDocId', this.setContent, this);
+      settings.on('change:openDocId', this.changeContent, this);
 
     },
 
-    setContent: function() {
+    changeContent: function() {
+      this.$el
+        .fadeOut(200, _.bind(this.render, this))
+        .delay(100)
+        .fadeIn(200)
+        .focus();
+    },
+
+    render: function() {
       this.$el.html(cache.openDoc.get('content'));
-      this.focus();
     },
 
     focus: function() {
