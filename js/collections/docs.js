@@ -8,12 +8,15 @@ define(function(require) {
   var Doc = require('models/doc');
   var settings = require('models/settings');
 
+  var remoteStorageDocuments = require('remotestorage-documents');
+
+  remoteStorage.claimAccess(['documents']);
 
   var Docs = Backbone.Collection.extend({
 
     model: Doc,
 
-    localStorage: new Store('docsCollection'),
+    localStorage: remoteStorageDocuments.getBackboneStore('notes'),
 
     initialize: function(models) {
 

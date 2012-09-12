@@ -10,7 +10,9 @@ require.config( {
     jquery: 'utils/jquery-loader',
     underscore: 'lib/underscore',
     backbone: 'lib/backbone',
-    localstorage: 'lib/backbone.localstorage'
+    localstorage: 'lib/backbone.localstorage',
+    remotestorage: 'lib/remoteStorage-debug',
+    'remotestorage-documents': 'lib/remoteStorage-documents'
   },
   baseUrl: 'js'
 });

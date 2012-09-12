@@ -13,6 +13,8 @@ define(function(require) {
       settings.save('openDocId', docs.first().id);
     }
 
+    remoteStorage.displayWidget('remotestorage-connect')
+
     setOpenDoc();
     setWindowTitle();
 
@@ -45,7 +47,9 @@ define(function(require) {
   }
 
   function setWindowTitle() {
-    document.title = cache.openDoc.get('title') || 'Litewrite';
+    document.title = (
+      cache.openDoc ? cache.openDoc.get('title') : null
+    ) || 'Litewrite';
   }
 
   function setUrl() {
