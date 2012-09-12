@@ -87,8 +87,8 @@ define(function(require) {
       }
 
       function storeObject(model) {
-        if(! model.id) {
-          model.set(model.idAttribute, getUuid());
+        if((! model.id) || (Number(model.id) == model.id)) {
+          model.id = getUuid();
         }
 
         myBaseClient.storeObject('text', absPath(model.id), model.attributes);
@@ -117,7 +117,7 @@ define(function(require) {
           console.log('FIND ALL', arguments);
           var ids = myBaseClient.getListing(absPath(''));
           models = [];
-          for(var i=0;i<ids;i++) {
+          for(var i=0;i<ids.length;i++) {
             models.push(myBaseClient.getObject(absPath(ids[i])));
           }
           return models;
@@ -145,7 +145,9 @@ define(function(require) {
       },
       exports: {
         getPrivateList: getPrivateList,
-        getBackboneStore: getBackboneStore
+        getBackboneStore: getBackboneStore,
+        // for debugging:
+        client: myBaseClient
       }
     };
   });
