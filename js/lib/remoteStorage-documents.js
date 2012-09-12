@@ -91,7 +91,7 @@ define(function(require) {
           model.set(model.idAttribute, getUuid());
         }
 
-        myBaseClient.storeObject('text', absPath(model.id), model);
+        myBaseClient.storeObject('text', absPath(model.id), model.attributes);
 
         return model;
       }
