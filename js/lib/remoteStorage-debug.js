@@ -1466,6 +1466,14 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         return (isPublic?'/public/':'/')+moduleName+'/'+path;
       }
 
+      function ensureAccess(mode) {
+        var path = makePath('');
+        var node = store.getNode(path);
+        if(! (new RegExp(mode)).test(node.startAccess)) {
+          throw "Not sufficient access claimed for node at " + path + " (need: " + mode + ", have: " + (node.startAccess || 'none') + ")";
+        }
+      }
+
       return {
 
         // helpers for implementations
@@ -1474,6 +1482,7 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         },
 
         on: function(eventType, cb, context) {//'error' or 'change'. Change events have a path and origin (tab, device, cloud) field
+          ensureAccess('r');
           if(eventType=='change') {
             if(moduleName) {
               if(!moduleChangeHandlers[moduleName]) {
@@ -1485,6 +1494,7 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         },
 
         getObject: function(path, cb, context) {
+          ensureAccess('r');
           var absPath = makePath(path);
           if(cb) {
             sync.fetchNow(absPath, function(err, node) {
@@ -1503,6 +1513,7 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         },
 
         getListing: function(path, cb, context) {
+          ensureAccess('r');
           var absPath = makePath(path);
           if(cb) {
             sync.fetchNow(absPath, function(err, node) {
@@ -1523,6 +1534,7 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         },
 
         getDocument: function(path, cb, context) {
+          ensureAccess('r');
           var absPath = makePath(path);
           if(cb) {
             sync.fetchNow(absPath, function(err, node) {
@@ -1541,6 +1553,7 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         },
 
         remove: function(path) {
+          ensureAccess('w');
           var ret = set(path, makePath(path));
           //sync.syncNow('/', function(errors) {
           //});
@@ -1548,6 +1561,7 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         },
 
         storeObject: function(type, path, obj) {
+          ensureAccess('w');
           obj['@type'] = 'https://remotestoragejs.com/spec/modules/'+moduleName+'/'+type;
           //checkFields(obj);
           var ret = set(path, makePath(path), obj, 'application/json');
@@ -1557,6 +1571,7 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         },
 
         storeDocument: function(mimeType, path, data) {
+          ensureAccess('w');
           var ret = set(path, makePath(path), data, mimeType);
           //sync.syncNow('/', function(errors) {
           //});
@@ -1568,6 +1583,7 @@ define('lib/baseClient',['./sync', './store'], function (sync, store) {
         },
 
         sync: function(path, switchVal) {
+          ensureAccess('r');
           var absPath = makePath(path);
           store.setNodeForce(absPath, (switchVal != false));
         },
@@ -1737,7 +1753,7 @@ define('remoteStorage', [
         }
       }
       for(var moduleName in claimed) {
-        this.claimModuleAccess(moduleName, modules[moduleName]);
+        this.claimModuleAccess(moduleName, claimed[moduleName]);
       }
     },
 
