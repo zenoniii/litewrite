@@ -34,6 +34,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-requirejs');
 
   grunt.registerTask('build', 'requirejs');
+  grunt.registerTask('b', 'requirejs');
 
   grunt.registerTask('default', 'server watch');
 
