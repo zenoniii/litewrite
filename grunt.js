@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     requirejs: {
-      almond: true,
+      almond: false,
       replaceRequireScript: [{
         files: ['build/index.html'],
         module: 'main'
@@ -16,6 +16,7 @@ module.exports = function(grunt) {
       wrap: true,
       mainConfigFile: 'js/main.js',
       paths: {
+        jquery: 'empty:'
       },
       stubModules: [
         'utils/log',
