@@ -19,32 +19,11 @@ Inspired by [iA Writer](http://iawriter.com) & [LightWrite](http://gun.io/w). In
 [Alegreya](http://www.huertatipografica.com.ar/tipografias/alegreya/ejemplos.html) typeface by Juan Pablo del Peral, [light paper fibers](http://subtlepatterns.com/?p=1311) background by Jorge Fuentes.
 
 
-## Unhosted coming soon!
+## Remotestorage coming soon!
 
-**This app allows every user to use their own data storage!** Its code is fully client-side, without any server backend you need to trust! Find out more about the [Unhosted movement](http://unhosted.org). localStorage is used as fallback, so you can also use it offline.
+This is an [unhosted web app](http://unhosted.org), meaning its code is fully client-side, without any server backend you need to trust! Soon we’ll add support for the open [remotestorage](http://remotestorage.io) protocol so you will be able to sync your data across devices & browsers.
 
 
-## MIT License
+## License
 
-Short: **Do anything you want as long as you credit us.**
-
-Copyright (c) 2012 [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](http://jorin-vogel.com)
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Copyright (c) 2012 [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](http://jorin-vogel.com), licensed under the [Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html) version 3 or later. See license.txt for the full license text. Short: **Do anything you want as long as you credit us and redistribute your changes under the same conditions.**
