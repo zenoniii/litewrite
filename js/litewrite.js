@@ -49,7 +49,7 @@ define(function(require) {
   }
 
   function setUrl() {
-    router.setUrl(cache.openDoc);
+    router.navigate(cache.openDoc.get('url'));
   }
 
 

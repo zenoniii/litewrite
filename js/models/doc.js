@@ -7,6 +7,7 @@ define(function(require) {
 
     defaults: {
       title: '',
+      url: '',
       content: '',
       lastEdited: undefined,
       color: 'rgb(0, 0, 0)'
@@ -33,7 +34,7 @@ define(function(require) {
       var title = this.get('content')
         .match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*(.*?)(<div>|<\/div>|<br>|$)/)[2]
         .replace(/&nbsp;/gi,'');
-      this.save('title', title);
+      this.set('title', title);
     },
 
     resetColor: function() {

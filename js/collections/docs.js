@@ -27,9 +27,8 @@ define(function(require) {
 
       this
         .on('reset', this.updateColor)
-        .on('change:content', this.sort);
-
-
+	.on('change:content', this.sort)
+	.on('change:title', this.updateUrl);
     },
 
     addNew: function() {
@@ -49,6 +48,19 @@ define(function(require) {
         doc.calculateColor();
       });
     }, 3000),
+
+    updateUrl: function(doc) {
+      var url = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
+      if (url.length < 1) {
+	doc.save('url', '');
+	return;
+      }
+      var len = this.filter(function(doc) {
+	return new RegExp('^' + url + '(-[0-9]|$)').test(doc.get('url'));
+      }).length;
+      url = len < 1 ? url : url + '-' + len;
+      doc.save('url', url);
+    },
 
     deleteEmpty: function() {
       var previousDoc = this.get(settings.previous('openDocId'));
