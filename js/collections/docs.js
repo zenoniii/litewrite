@@ -61,8 +61,19 @@ define(function(require) {
     }
 
   });
+  
+  var docs = new Docs();
 
+  var hasConnected = false;
 
-  return new Docs();
+  remoteStorage.onWidget('state', function(state) {
+    if((! hasConnected) && state == 'connected') {
+      hasConnected = true;
+
+      docs.reset(docs.localStorage.findAll());
+    }
+  })
+
+  return docs;
 
 });
