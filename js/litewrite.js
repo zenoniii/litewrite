@@ -13,6 +13,7 @@ define(function(require) {
       settings.save('openDocId', docs.first().id);
     }
 
+
     remoteStorage.displayWidget('remotestorage-connect')
 
     setOpenDoc();

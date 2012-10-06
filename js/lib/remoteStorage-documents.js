@@ -87,13 +87,20 @@ define(function(require) {
       }
 
       function storeObject(model) {
-        if((! model.id) || (Number(model.id) == model.id)) {
-          model.id = getUuid();
+        if(! model.id || (typeof(model.id) === 'number')) {
+          console.log("SET ID");
+          model.set(model.idAttribute, getUuid());
         }
 
         myBaseClient.storeObject('text', absPath(model.id), model.attributes);
 
         return model;
+      }
+
+      function getById(id) {
+        var object = myBaseClient.getObject(absPath(id));
+        object.id = id;
+        return object;
       }
 
       return {
@@ -110,7 +117,7 @@ define(function(require) {
 
         find: function(model) {
           console.log('FIND', arguments);
-          return myBaseClient.getObject(absPath(model.id));
+          return getById(model.id);
         },
 
         findAll: function() {
@@ -118,14 +125,14 @@ define(function(require) {
           var ids = myBaseClient.getListing(absPath(''));
           models = [];
           for(var i=0;i<ids.length;i++) {
-            models.push(myBaseClient.getObject(absPath(ids[i])));
+            models.push(getById(ids[i]));
           }
           return models;
         },
 
         destroy: function(model) {
           console.log('DESTROY', arguments);
-          return remoteStorage.remove(absPath(model));
+          return myBaseClient.remove(absPath(model.id));
         }
 
       }

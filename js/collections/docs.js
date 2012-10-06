@@ -10,7 +10,7 @@ define(function(require) {
 
   var remoteStorageDocuments = require('remotestorage-documents');
 
-  remoteStorage.claimAccess(['documents']);
+  remoteStorage.claimAccess('documents', 'rw');
 
   var Docs = Backbone.Collection.extend({
 
