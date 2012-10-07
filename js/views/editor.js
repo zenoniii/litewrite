@@ -39,7 +39,7 @@ define(function(require) {
     },
 
     updateOpenDoc: function() {
-      cache.openDoc.put( 'content', this.$el.html() );
+      cache.openDoc.save( 'content', this.$el.html() );
     }
 
   });

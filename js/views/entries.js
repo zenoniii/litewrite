@@ -70,7 +70,7 @@ define(function(require) {
     openDoc: function(e) {
       e.preventDefault();
 
-      settings.put('openDocId', this.$(e.currentTarget).attr('data-id'));
+      settings.save('openDocId', this.$(e.currentTarget).attr('data-id'));
     }
 
   });

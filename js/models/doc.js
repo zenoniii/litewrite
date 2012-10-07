@@ -15,7 +15,6 @@ define(function(require) {
 
     initialize: function() {
       this
-      // .on('sync', _.bind(console.log, console))
         .on('change:content', this.updateLastEdited)
         .on('change:content', this.updateTitle)
         .on('change:lastEdited', this.resetColor);
@@ -27,7 +26,7 @@ define(function(require) {
     },
 
     updateLastEdited: function() {
-	this.put('lastEdited', new Date().getTime());
+        this.save('lastEdited', new Date().getTime());
     },
 
     updateTitle: function() {
@@ -35,11 +34,11 @@ define(function(require) {
       var title = this.get('content')
         .match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*(.*?)(<div>|<\/div>|<br>|$)/)[2]
         .replace(/&nbsp;/gi,'');
-      this.put('title', title);
+      this.set('title', title);
     },
 
     resetColor: function() {
-      this.put('color', 'rgb(0, 0, 0)');
+      this.save('color', 'rgb(0, 0, 0)');
     },
 
     calculateColor: function() {
@@ -50,7 +49,7 @@ define(function(require) {
       //The older the document the lighter the color
       var c = diff > limit ? 200 : Math.round(diff / limit * 200);
 
-      this.put('color', 'rgb('+c+', '+c+', '+c+')');
+      this.save('color', 'rgb('+c+', '+c+', '+c+')');
     }
 
   });
