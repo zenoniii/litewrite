@@ -10,7 +10,7 @@ define(function(require) {
 
   function litewrite() {
     if ( _.isUndefined(settings.get('openDocId')) ) {
-      settings.save('openDocId', docs.first().id);
+      settings.set('openDocId', docs.first().id);
     }
 
 
@@ -30,7 +30,7 @@ define(function(require) {
       .on('change:title', setUrl)
       .on('change:title', setWindowTitle)
       .on('add', function(doc) {
-        settings.save('openDocId', doc.id);
+        settings.set('openDocId', doc.id);
       });
 
 

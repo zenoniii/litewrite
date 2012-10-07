@@ -7,7 +7,7 @@ define(function(require) {
   Backbone.Model.prototype.toggle = function(attr, options) {
     var data = {};
     data[attr] = !this.get(attr);
-    this.save(data, options);
+    this.set(data, options);
     return this;
   };
 

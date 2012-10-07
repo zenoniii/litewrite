@@ -18,7 +18,7 @@ define(function(require) {
       if ( _.isUndefined(doc) ) {
         this.navigate('', { replace: true });
       } else {
-        settings.save('openDocId', doc.id);
+        settings.set('openDocId', doc.id);
       }
     }
   });
