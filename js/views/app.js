@@ -5,7 +5,6 @@ define(function(require) {
   var Backbone = require('backbone');
   var EntriesView = require('views/entries');
   var EditorView = require('views/editor');
-  var settings = require('models/settings');
   var docs = require('collections/docs');
   var cache = require('utils/cache');
 
