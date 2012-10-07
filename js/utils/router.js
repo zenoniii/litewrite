@@ -13,12 +13,12 @@ define(function(require) {
 
     openDoc: function(url) {
       var doc = docs.find(function(doc) {
-	return doc.get('url') === url;
+	      return doc.get('url') === url;
       }, this);
       if ( _.isUndefined(doc) ) {
         this.navigate('', { replace: true });
       } else {
-        settings.save('openDocId', doc.id);
+	settings.put('openDocId', doc.id);
       }
     }
   });
