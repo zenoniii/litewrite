@@ -1,13 +1,10 @@
 require.config( {
   deps: [
-    //only used for development
     'utils/log'
   ],
   paths: {
-    // not included in production version
     text: 'lib/require.text',
-
-    jquery: 'utils/jquery-loader',
+    jquery: ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min', 'lib/jquery.min'],
     underscore: 'lib/underscore',
     backbone: 'lib/backbone',
     localstorage: 'lib/backbone.localstorage',

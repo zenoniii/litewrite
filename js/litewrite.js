@@ -10,11 +10,12 @@ define(function(require) {
 
   function litewrite() {
     if ( _.isUndefined(settings.get('openDocId')) ) {
-      settings.save('openDocId', docs.first().id);
+      settings.set('openDocId', docs.first().id);
     }
 
 
-    remoteStorage.displayWidget('remotestorage-connect')
+    remoteStorage.displayWidget('remotestorage-connect');
+    remoteStorage.util.silenceAllLoggers();
 
     setOpenDoc();
     setWindowTitle();
@@ -29,7 +30,7 @@ define(function(require) {
       .on('change:title', setUrl)
       .on('change:title', setWindowTitle)
       .on('add', function(doc) {
-        settings.save('openDocId', doc.id);
+        settings.set('openDocId', doc.id);
       });
 
 
@@ -54,7 +55,7 @@ define(function(require) {
   }
 
   function setUrl() {
-    router.setUrl(cache.openDoc);
+    router.navigate(cache.openDoc.get('url'));
   }
 
 
