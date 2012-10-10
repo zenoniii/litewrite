@@ -93,7 +93,7 @@ define(function(require) {
 
       docs.reset(docs.localStorage.findAll());
     } else if ( state == 'disconnected') {
-      docs.reset();
+      docs.reset().addNew();
     }
   });
 
