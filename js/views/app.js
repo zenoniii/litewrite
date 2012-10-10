@@ -18,10 +18,15 @@ define(function(require) {
       this.editor = new EditorView();
       this.entries = new EntriesView();
 
-      //fade out document list after 3s
+      this.$aside = this.$('aside');
+
       setTimeout(_.bind(function() {
-        this.$('aside').removeClass('visible');
+	if (docs.length > 2) { this.$aside.removeClass('visible'); }
       }, this), 3000);
+
+      docs.on('add', function() {
+	if (docs.length === 3) { this.$aside.removeClass('visible'); }
+      }, this);
     },
 
     events: {
