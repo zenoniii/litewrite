@@ -7,6 +7,7 @@ define(function(require) {
   var EditorView = require('views/editor');
   var docs = require('collections/docs');
   var cache = require('utils/cache');
+  var settings = require('models/settings');
 
 
   var AppView = Backbone.View.extend({
@@ -24,7 +25,8 @@ define(function(require) {
     },
 
     events: {
-      'click #add': 'newDoc'
+      'click #add': 'newDoc',
+      'keydown': 'handleKey'
     },
 
     newDoc: function(e) {
@@ -34,6 +36,23 @@ define(function(require) {
         docs.addNew();
       } else {
         this.editor.focus();
+      }
+    },
+
+    handleKey: function(e) {
+      if (e.ctrlKey) {
+        if (e.which === 78) { // n
+          this.newDoc(e);
+          return false;
+        } else if (e.which === 38) { //up
+          var previousDoc = docs.at(docs.indexOf(cache.openDoc) - 1);
+          settings.set('openDocId', previousDoc ? previousDoc.id : docs.last().id);
+          return false;
+        } else if (e.which === 40) { //down
+          var nextDoc = docs.at(docs.indexOf(cache.openDoc) + 1);
+          settings.set('openDocId', nextDoc ? nextDoc.id : docs.first().id);
+          return false;
+        }
       }
     }
   });

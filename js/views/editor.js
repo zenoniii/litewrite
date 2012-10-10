@@ -21,7 +21,7 @@ define(function(require) {
 
     changeContent: function() {
       this.$el
-        .fadeOut(100, _.bind(this.render, this))
+        .stop().fadeOut(100, _.bind(this.render, this))
         .fadeIn(100)
         .focus();
     },
