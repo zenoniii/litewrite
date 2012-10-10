@@ -40,7 +40,10 @@ define(function(require) {
     },
 
     handleKey: function(e) {
-      if (e.ctrlKey) {
+      //disable tab key
+      if (e.which === 9) {
+        e.preventDefault();
+      } else if (e.ctrlKey) {
         if (e.which === 78) { // n
           this.newDoc(e);
           return false;
