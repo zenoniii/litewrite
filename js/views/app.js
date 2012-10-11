@@ -10,6 +10,9 @@ define(function(require) {
   var settings = require('models/settings');
 
 
+  var isMac = /Mac/.test(navigator.platform);
+
+
   var AppView = Backbone.View.extend({
 
     el: 'body',
@@ -45,10 +48,10 @@ define(function(require) {
     },
 
     handleKey: function(e) {
-      //disable tab key
       if (e.which === 9) {
+        //disable tab key
         e.preventDefault();
-      } else if (e.ctrlKey) {
+      } else if (isMac ? e.metaKey : e.ctrlKey) {
         if (e.which === 78) { // n
           this.newDoc(e);
           return false;
