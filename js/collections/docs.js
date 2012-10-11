@@ -83,15 +83,20 @@ define(function(require) {
 
   var docs = new Docs();
 
+
+
   var hasConnected = false;
 
   remoteStorage.onWidget('state', function(state) {
-    if((! hasConnected) && state == 'connected') {
+    if ((! hasConnected) && state == 'connected') {
       hasConnected = true;
 
       docs.reset(docs.localStorage.findAll());
+    } else if ( state == 'disconnected') {
+      docs.reset().addNew();
     }
-  })
+  });
+
 
   return docs;
 

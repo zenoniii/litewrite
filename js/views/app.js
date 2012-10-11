@@ -7,6 +7,7 @@ define(function(require) {
   var EditorView = require('views/editor');
   var docs = require('collections/docs');
   var cache = require('utils/cache');
+  var settings = require('models/settings');
 
 
   var AppView = Backbone.View.extend({
@@ -17,14 +18,20 @@ define(function(require) {
       this.editor = new EditorView();
       this.entries = new EntriesView();
 
-      //fade out document list after 3s
+      this.$aside = this.$('aside');
+
       setTimeout(_.bind(function() {
-        this.$('aside').removeClass('visible');
+	if (docs.length > 2) { this.$aside.removeClass('visible'); }
       }, this), 3000);
+
+      docs.on('add', function() {
+	if (docs.length === 3) { this.$aside.removeClass('visible'); }
+      }, this);
     },
 
     events: {
-      'click #add': 'newDoc'
+      'click #add': 'newDoc',
+      'keydown': 'handleKey'
     },
 
     newDoc: function(e) {
@@ -34,6 +41,26 @@ define(function(require) {
         docs.addNew();
       } else {
         this.editor.focus();
+      }
+    },
+
+    handleKey: function(e) {
+      //disable tab key
+      if (e.which === 9) {
+        e.preventDefault();
+      } else if (e.ctrlKey) {
+        if (e.which === 78) { // n
+          this.newDoc(e);
+          return false;
+        } else if (e.which === 38) { //up
+          var previousDoc = docs.at(docs.indexOf(cache.openDoc) - 1);
+          settings.set('openDocId', previousDoc ? previousDoc.id : docs.last().id);
+          return false;
+        } else if (e.which === 40) { //down
+          var nextDoc = docs.at(docs.indexOf(cache.openDoc) + 1);
+          settings.set('openDocId', nextDoc ? nextDoc.id : docs.first().id);
+          return false;
+        }
       }
     }
   });
