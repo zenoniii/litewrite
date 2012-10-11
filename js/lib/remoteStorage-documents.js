@@ -147,8 +147,15 @@ define(function(require) {
       exports: {
         getPrivateList: getPrivateList,
         getBackboneStore: getBackboneStore,
-        // for debugging:
-        client: myBaseClient
+        onChange: function(listName, callback) {
+          myBaseClient.on('change', function(event) {
+            var md = event.relativePath.match(new RegExp('^' + listName + '/(.+)$'));
+            if(md) {
+              event.id = md[1];
+              callback(event);
+            }
+          });
+        }
       }
     };
   });
