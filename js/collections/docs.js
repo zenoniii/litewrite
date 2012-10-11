@@ -75,7 +75,8 @@ define(function(require) {
     deleteEmpty: function() {
       var previousDoc = this.get(settings.previous('openDocId'));
       if (previousDoc && previousDoc.isEmpty()) {
-        this.remove(previousDoc);
+        log('here');
+        previousDoc.destroy();
       }
     }
 
