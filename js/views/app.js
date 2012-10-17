@@ -10,6 +10,9 @@ define(function(require) {
   var settings = require('models/settings');
 
 
+  var isMac = /Mac/.test(navigator.platform);
+
+
   var AppView = Backbone.View.extend({
 
     el: 'body',
@@ -45,23 +48,29 @@ define(function(require) {
     },
 
     handleKey: function(e) {
-      //disable tab key
-      if (e.which === 9) {
+      if (e.which === 9) { //tab
         e.preventDefault();
-      } else if (e.ctrlKey) {
-        if (e.which === 78) { // n
+      } else if (isMac ? e.ctrlKey : e.altKey) {
+        if (e.which === 78) { //n
           this.newDoc(e);
-          return false;
         } else if (e.which === 38) { //up
-          var previousDoc = docs.at(docs.indexOf(cache.openDoc) - 1);
-          settings.set('openDocId', previousDoc ? previousDoc.id : docs.last().id);
+          this.openPreviousDoc();
           return false;
         } else if (e.which === 40) { //down
-          var nextDoc = docs.at(docs.indexOf(cache.openDoc) + 1);
-          settings.set('openDocId', nextDoc ? nextDoc.id : docs.first().id);
+          this.openNextDoc();
           return false;
         }
       }
+    },
+
+    openPreviousDoc: function() {
+      var previousDoc = docs.at(docs.indexOf(cache.openDoc) - 1);
+      settings.set('openDocId', previousDoc ? previousDoc.id : docs.last().id);
+    },
+
+    openNextDoc: function() {
+      var nextDoc = docs.at(docs.indexOf(cache.openDoc) + 1);
+      settings.set('openDocId', nextDoc ? nextDoc.id : docs.first().id);
     }
   });
 

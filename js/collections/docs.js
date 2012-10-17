@@ -12,6 +12,12 @@ define(function(require) {
 
   remoteStorage.claimAccess('documents', 'rw');
 
+
+  var escapeRegExp = function(str) {
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+  };
+
+
   var Docs = Backbone.Collection.extend({
 
     model: Doc,
@@ -66,7 +72,7 @@ define(function(require) {
         return;
       }
       var len = this.filter(function(doc) {
-	return new RegExp('^' + url + '(-[0-9]|$)').test(doc.get('url'));
+        return new RegExp('^' + escapeRegExp(url) + '(-[0-9]|$)').test(doc.get('url'));
       }).length;
       url = len < 1 ? url : url + '-' + len;
       doc.set('url', url);
@@ -75,7 +81,8 @@ define(function(require) {
     deleteEmpty: function() {
       var previousDoc = this.get(settings.previous('openDocId'));
       if (previousDoc && previousDoc.isEmpty()) {
-        this.remove(previousDoc);
+        log('here');
+        previousDoc.destroy();
       }
     }
 

@@ -20,10 +20,8 @@ define(function(require) {
     },
 
     changeContent: function() {
-      this.$el
-        .stop().fadeOut(100, _.bind(this.render, this))
-        .fadeIn(100)
-        .focus();
+      this.render();
+      this.focus();
     },
 
     render: function() {
