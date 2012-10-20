@@ -92,22 +92,10 @@ define(function(require) {
 
 
 
-  var hasConnected = false;
-
-  // TODO: remove this once event handler below is implemented.
-  remoteStorage.onWidget('state', function(state) {
-    if ((! hasConnected) && state == 'connected') {
-      hasConnected = true;
-
-      docs.reset(docs.localStorage.findAll());
-    } else if ( state == 'disconnected') {
-      docs.reset().addNew();
-    }
-  });
-
   remoteStorage.documents.onChange('notes', function(event) {
-    // TODO: apply update to docs collection
+    docs.fetch();
   });
+
 
   return docs;
 
