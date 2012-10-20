@@ -18,6 +18,8 @@ define(function(require) {
       this.editor = new EditorView();
       this.entries = new EntriesView();
 
+      this.$aside = this.$el.find('aside');
+
       //fade out document list after 3s
       setTimeout(_.bind(function() {
         this.$('aside').removeClass('visible');
@@ -25,7 +27,9 @@ define(function(require) {
     },
 
     events: {
+      'click #aside': 'toggleAside',
       'click #add': 'newDoc',
+      'click #menu-button': 'toggleAside',
       'keydown': 'handleKey'
     },
 
@@ -37,6 +41,11 @@ define(function(require) {
       } else {
         this.editor.focus();
       }
+    },
+
+    toggleAside:  function(e) {
+      e.stopImmediatePropagation();
+      this.$aside.toggleClass('visible');
     },
 
     handleKey: function(e) {
