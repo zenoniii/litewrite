@@ -65,12 +65,16 @@ define(function(require) {
 
     openPreviousDoc: function() {
       var previousDoc = docs.at(docs.indexOf(cache.openDoc) - 1);
-      settings.set('openDocId', previousDoc ? previousDoc.id : docs.last().id);
+      if (previousDoc) {
+        settings.set('openDocId', previousDoc.id);
+      }
     },
 
     openNextDoc: function() {
       var nextDoc = docs.at(docs.indexOf(cache.openDoc) + 1);
-      settings.set('openDocId', nextDoc ? nextDoc.id : docs.first().id);
+      if (nextDoc) {
+        settings.set('openDocId', nextDoc.id);
+      }
     }
   });
 
