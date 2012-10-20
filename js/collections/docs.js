@@ -55,7 +55,7 @@ define(function(require) {
 
     updateColor: _.throttle(function() {
       this.each(function(doc) {
-        doc.calculateColor();
+        doc.calculateOpacity();
       });
     }, 3000),
 
