@@ -24,11 +24,15 @@ define(function(require) {
       this.$aside = this.$('aside');
 
       setTimeout(_.bind(function() {
-	if (docs.length > 2) { this.$aside.removeClass('visible'); }
+        if ((docs.length > 2) && (editor.innerHTML != '')) {
+          this.$aside.removeClass('visible');
+        }
       }, this), 3000);
 
       docs.on('add', function() {
-	if (docs.length === 3) { this.$aside.removeClass('visible'); }
+        if ((docs.length === 3) && (editor.innerHTML != '')) {
+          this.$aside.removeClass('visible');
+        }
       }, this);
     },
 
