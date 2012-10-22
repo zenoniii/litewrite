@@ -8,16 +8,18 @@ html, body {
 @font-face { font-family:'Alegreya'; font-weight:bold; src:url(Alegreya-Bold.ttf); }
 
 .editor {
-	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing: border-box; box-sizing:border-box;
-	position:absolute; width:100%; height:100%; padding:5% 20% 20%;
+	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
+	position:absolute; width:80%; height:100%; padding:5% 20% 20% 0; margin:0 0 0 20%;
 	font:normal 1.7em/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none; resize:none;
 }
-.editor:first-line { font-size:2em; line-height:2.4em; font-weight:bold; } /* need to fix this for when it's a div */
+.editor:first-line { font-size:2em; line-height:2.4em; font-weight:bold; }
+[contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; font-size:2em; line-height:2.4em; }
+
 
 aside {
-	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing: border-box; box-sizing:border-box;
-	position:fixed; width:16%; height:100%; padding-top: 50px;
+	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
+	position:fixed; width:16%; height:100%; padding-top:50px;
 	font:90% FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 }
@@ -35,7 +37,7 @@ aside a, .add {
 	.add .add-plus { opacity:1; font-size:160%; top:.51em; } .add:hover .add-plus { opacity:0; }
 	.add .add-text { opacity:0; font-weight:bold; color:#000; } .add:hover .add-text { opacity:1; }
 
-.entries { height:80%; overflow-y:auto; margin:0; padding:0; list-style:none; }
+.entries { height:100%; overflow-x:hidden !important; margin:0; padding:0; list-style:none; }
 .entries a { text-overflow:ellipsis; height:1.35em; padding:.5em 1.2em; }
 .entries a:hover, .entries a:focus, .entries .selected { color:#000; font-weight:bold; }
 
@@ -43,10 +45,10 @@ footer { position:absolute; bottom:0; padding:1em 2em; font-size:.7em; white-spa
 footer a { display:inline; padding:0; }
 
 .menu-button {
-	display: none;
-	position: fixed;
-	left: 10px;
-	top: 10px;
+	display:none;
+	position:fixed;
+	left:10px;
+	top:10px;
 }
 
 ::-webkit-scrollbar { width:.2em; }
@@ -56,13 +58,50 @@ footer a { display:inline; padding:0; }
 ::selection { background-color:rgba(255,255,0,.3); }
 ::-moz-selection { background-color:rgba(255,255,0,.3); }
 
+
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
-  aside {width: 100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; display: none; }
-  aside:hover, aside:focus { opacity:0; }
-  aside.visible { display: block; }
-  .editor { padding-top: 30px; }
-  .menu-button { display: block !important; background: red; }
+and (min-device-width:320px)
+and (max-device-width:480px) {
+	aside {width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; display:none; }
+	aside:hover, aside:focus { opacity:0; }
+	aside.visible { display:block; }
+	.editor { padding-top:30px; }
+	.menu-button { display:block !important; background:red; }
+}
+
+
+/** Scrolling shadows by @kizmarh and @leaverou
+ *  Only works in browsers supporting background-attachment:local; & CSS gradients
+ *  Degrades gracefully */
+.scrollbox {
+	overflow:auto;
+
+	background:
+		/* Shadow covers */
+		-webkit-linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
+		-webkit-linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
+		/* Shadows */
+		-webkit-radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		-webkit-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	background:
+		/* Shadow covers */
+		-moz-linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
+		-moz-linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
+		/* Shadows */
+		-moz-radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		-moz-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	background:
+		/* Shadow covers */
+		linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
+		linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
+		/* Shadows */
+		radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	background-repeat:no-repeat;
+	background-color:transparent;
+	background-size:100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+	/* Opera doesn't support this in the shorthand */
+	background-attachment:local, local, scroll, scroll;
 }

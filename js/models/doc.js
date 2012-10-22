@@ -10,14 +10,14 @@ define(function(require) {
       url: '',
       content: '',
       lastEdited: undefined,
-      color: 'rgb(0, 0, 0)'
+      opacity: 1
     },
 
     initialize: function() {
       this
         .on('change:content', this.updateLastEdited)
         .on('change:content', this.updateTitle)
-        .on('change:lastEdited', this.resetColor);
+        .on('change:lastEdited', this.resetOpacity);
     },
 
     isEmpty: function() {
@@ -37,19 +37,19 @@ define(function(require) {
       this.set('title', title);
     },
 
-    resetColor: function() {
-      this.set('color', 'rgb(0, 0, 0)');
+    resetOpacity: function() {
+      this.set('color', '1');
     },
 
-    calculateColor: function() {
+    calculateOpacity: function() {
       //Time passed since last this document was edited the last time in milliseconds
       var diff = (new Date().getTime() - this.get('lastEdited'));
-      //For documents older than 2 Weeks the color won't change anymore
+      //The older the document the smaller the opacity
+      //but the opacity is allway between 0.1 and 1
+      //For documents older than 2 Weeks the opacity won't change anymore
       var limit = 14 * 86400000;
-      //The older the document the lighter the color
-      var c = diff > limit ? 200 : Math.round(diff / limit * 200);
-
-      this.set('color', 'rgb('+c+', '+c+', '+c+')');
+      var opacity = diff > limit ? 0.1 : Math.round( (0.1 + ((limit - diff) / limit) * 0.9) * 100 ) / 100;
+      this.set('opacity', opacity);
     }
 
   });

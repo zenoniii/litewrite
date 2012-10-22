@@ -38,7 +38,6 @@ define(function(require) {
     $(function() {
       new AppView();
       Backbone.history.start();
-      setUrl();
     });
 
   }
