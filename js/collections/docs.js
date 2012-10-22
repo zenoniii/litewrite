@@ -89,7 +89,12 @@ define(function(require) {
 
   // TODO: remove this once event handler below is implemented.
   remoteStorage.onWidget('ready', function() {
-    docs.reset(docs.localStorage.findAll());
+    var all = docs.localStorage.findAll();
+    if(all.length > 0) {
+      docs.reset(docs);
+    } else if(docs.length == 0) {
+      docs.addNew();
+    }
   });
 
   remoteStorage.onWidget('state', function(state) {
