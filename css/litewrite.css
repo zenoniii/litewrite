@@ -19,7 +19,7 @@ html, body {
 
 aside {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
-	position:fixed; width:16%; height:100%; padding-top:50px;
+	position:fixed; width:16%; height:100%;
 	font:90% FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 }
@@ -44,12 +44,6 @@ aside a, .add {
 footer { position:absolute; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
 
-.menu-button {
-	display:none;
-	position:fixed;
-	left:10px;
-	top:10px;
-}
 
 ::-webkit-scrollbar { width:.2em; }
 ::-webkit-scrollbar-track-piece { background-color:transparent; }
@@ -59,13 +53,16 @@ footer a { display:inline; padding:0; }
 ::-moz-selection { background-color:rgba(255,255,0,.3); }
 
 
+.menu-button { display:none; position:absolute; left:0; top:0; }
 /* Smartphones (portrait and landscape) ----------- */
 @media (max-width:480px) {
-	aside {width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; display:none; }
+	aside { font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; display:none;  padding-top:50px; }
 	aside:hover, aside:focus { opacity:0; }
-	aside.visible { display:block; }
+	aside.visible { display:block; opacity:1; }
+	.add-plus, .add-text { color:#000; opacity:1 !important; position:relative !important; }
+	.add-plus { top:0 !important; }
 	.editor { padding:5% 5% 5% 0; margin:0 0 0 5%; width:95%; }
-	.menu-button { display:block !important; background:red; }
+	.menu-button { display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px; }
 }
 
 
