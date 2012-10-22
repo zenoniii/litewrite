@@ -8,7 +8,7 @@ require.config( {
     underscore: 'lib/underscore',
     backbone: 'lib/backbone',
     localstorage: 'lib/backbone.localstorage',
-    remotestorage: /*['http://remotestoragejs.com/build/0.7.0-head/remoteStorage-debug', */'lib/remoteStorage'/*]*/,
+    remotestorage: ['http://remotestoragejs.com/build/0.7.0-rc1/remoteStorage', 'lib/remoteStorage'],
     'remotestorage-documents': 'lib/remoteStorage-documents'
   },
   baseUrl: 'js'

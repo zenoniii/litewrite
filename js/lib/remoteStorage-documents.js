@@ -31,7 +31,7 @@ define(function(require) {
       return uuid;
     }
     function getPrivateList(listName) {
-      myBaseClient.sync(listName+'/');
+      myBaseClient.use(listName+'/');
       function getIds() {
         return myBaseClient.getListing(listName+'/');
       }
@@ -80,7 +80,7 @@ define(function(require) {
 
     function getBackboneStore(listName) {
 
-      myBaseClient.sync(listName+'/');
+      myBaseClient.use(listName+'/');
 
       function absPath(path) {
         return listName + '/' + path;
