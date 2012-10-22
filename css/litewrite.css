@@ -38,7 +38,7 @@ aside a, .add {
 	.add .add-text { opacity:0; font-weight:bold; color:#000; } .add:hover .add-text { opacity:1; }
 
 .entries { height:100%; overflow-x:hidden !important; margin:0; padding:0; list-style:none; }
-.entries a { text-overflow:ellipsis; height:1.35em; padding:.5em 1.2em; }
+.entries a { text-overflow:ellipsis; height:1.35em; padding:.5em 0 .5em 1.2em; }
 .entries a:hover, .entries a:focus, .entries .selected { color:#000; font-weight:bold; }
 
 footer { position:absolute; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
