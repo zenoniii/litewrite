@@ -41,11 +41,10 @@ define(function(require) {
     },
 
     addNew: function() {
-
-      this.create({
+      this.add(new Doc({
         id: _.uniqueId(),
         lastEdited: new Date().getTime()
-      });
+      }));
     },
 
     // Sort by 'lastEdited'
