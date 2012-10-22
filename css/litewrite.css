@@ -40,6 +40,7 @@ aside a, .add {
 .entries { height:100%; overflow-x:hidden !important; margin:0; padding:0; list-style:none; }
 .entries a { text-overflow:ellipsis; height:1.35em; padding:.5em 0 .5em 1.2em; }
 .entries a:hover, .entries a:focus, .entries .selected { color:#000; font-weight:bold; }
+.entries .item:last-child a { padding-bottom:50px; }
 
 footer { position:absolute; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
