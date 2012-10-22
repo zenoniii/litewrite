@@ -31,7 +31,9 @@ define(function(require) {
             .filter(function(doc) {
               return !doc.isEmpty();
             }).map(function(doc) {
-              return doc.toJSON();
+	      var res = doc.toJSON();
+	      res.opacity = doc.getOpacity();
+	      return res;
             })
         })
       );

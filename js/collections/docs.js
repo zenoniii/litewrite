@@ -35,7 +35,6 @@ define(function(require) {
       });
 
       this
-        .on('reset', this.updateColor)
         .on('change:content', this.sort)
         .on('change:lastEdited', this.saveWhenIdle)
         .on('change:title', this.updateUrl);
@@ -52,12 +51,6 @@ define(function(require) {
     comparator: function(first, second) {
       return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
     },
-
-    updateColor: _.throttle(function() {
-      this.each(function(doc) {
-        doc.calculateOpacity();
-      });
-    }, 3000),
 
     saveTimeout: undefined,
     saveWhenIdle: function(doc) {
