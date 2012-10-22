@@ -41,6 +41,7 @@ define(function(require) {
     },
 
     addNew: function() {
+
       this.create({
         id: _.uniqueId(),
         lastEdited: new Date().getTime()
@@ -88,12 +89,12 @@ define(function(require) {
   var hasConnected = false;
 
   // TODO: remove this once event handler below is implemented.
-  remoteStorage.onWidget('state', function(state) {
-    if ((! hasConnected) && state == 'connected') {
-      hasConnected = true;
+  remoteStorage.onWidget('ready', function() {
+    docs.reset(docs.localStorage.findAll());
+  });
 
-      docs.reset(docs.localStorage.findAll());
-    } else if ( state == 'disconnected') {
+  remoteStorage.onWidget('state', function(state) {
+    if(state == 'disconnected') {
       docs.reset().addNew();
     }
   });
