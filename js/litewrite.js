@@ -15,7 +15,7 @@ define(function(require) {
 
 
     remoteStorage.displayWidget('remotestorage-connect');
-    remoteStorage.util.silenceAllLoggers();
+    //remoteStorage.util.silenceAllLoggers();
 
     setOpenDoc();
     setWindowTitle();
@@ -32,7 +32,6 @@ define(function(require) {
       .on('add', function(doc) {
         settings.set('openDocId', doc.id);
       });
-
 
     //Load on DOM-ready
     $(function() {
