@@ -60,9 +60,7 @@ footer a { display:inline; padding:0; }
 
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen
-and (min-device-width:320px)
-and (max-device-width:480px) {
+@media (max-width:480px) {
 	aside {width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; display:none; }
 	aside:hover, aside:focus { opacity:0; }
 	aside.visible { display:block; }
