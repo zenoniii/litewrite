@@ -64,7 +64,7 @@ footer a { display:inline; padding:0; }
 	aside {width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; display:none; }
 	aside:hover, aside:focus { opacity:0; }
 	aside.visible { display:block; }
-	.editor { padding-top:30px; }
+	.editor { padding:5% 5% 5% 0; margin:0 0 0 5%; width:95%; }
 	.menu-button { display:block !important; background:red; }
 }
 
