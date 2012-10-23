@@ -55,7 +55,7 @@ define(function(require) {
     saveTimeout: undefined,
     saveWhenIdle: function(doc) {
       clearTimeout(this.saveTimeout);
-      this.saveTimeout = setTimeout(_.bind(doc.save, doc), 300);
+      this.saveTimeout = setTimeout(_.bind(doc.save, doc), 1000);
     },
 
     updateUrl: function(doc) {
