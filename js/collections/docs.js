@@ -91,7 +91,6 @@ define(function(require) {
   remoteStorage.onWidget('ready', function() {
     var all = docs.localStorage.findAll();
     if(all.length > 0) {
-      console.log('ALL', all);
       docs.reset(all);
     } else if(docs.length == 0) {
       docs.addNew();
