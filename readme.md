@@ -7,7 +7,7 @@ Play with the [development version](http://litewrite.github.com/litewrite), chec
 
 1. git clone http://github.com/litewrite/litewrite
 2. Install [node.js](http://nodejs.org/#download)
-3. Run `npm install` to install the dependencies
+3. Run `sudo npm install` to install the dependencies
 4. `./grunt build` to build the code
 5. `./grunt` to start a web server at [http://localhost:8000](http://localhost:8000)
 
@@ -19,9 +19,9 @@ Inspired by [iA Writer](http://iawriter.com) & [LightWrite](http://gun.io/w). In
 [Alegreya](http://www.huertatipografica.com.ar/tipografias/alegreya/ejemplos.html) typeface by Juan Pablo del Peral, [light paper fibers](http://subtlepatterns.com/?p=1311) background by Jorge Fuentes.
 
 
-## Remotestorage coming soon!
+## Remotestorage
 
-This is an [unhosted web app](http://unhosted.org), meaning its code is fully client-side, without any server backend you need to trust! Soon we’ll add support for the open [remotestorage](http://remotestorage.io) protocol so you will be able to sync your data across devices & browsers.
+This is an [unhosted web app](http://unhosted.org), meaning its code is fully client-side, without any server backend you need to trust! It also supports the open [remotestorage](http://remotestorage.io) protocol so you can sync your data across devices & browsers.
 
 
 ## License
