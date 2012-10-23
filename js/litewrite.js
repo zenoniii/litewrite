@@ -15,7 +15,7 @@ define(function(require) {
 
 
     remoteStorage.displayWidget('remotestorage-connect');
-    //remoteStorage.util.silenceAllLoggers();
+    remoteStorage.util.silenceAllLoggers();
 
     setOpenDoc();
     setWindowTitle();
