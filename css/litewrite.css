@@ -63,7 +63,8 @@ footer a { display:inline; padding:0; }
 	aside:hover, aside:focus { opacity:0; }
 	aside.visible { display:block; opacity:1; }
 	.add { padding:4px 14px; margin-top:50px; }
-		.add-plus, .add-text { color:#000; opacity:1 !important; position:relative !important; }
+		.add-plus, .add-text { color:#000; opacity:.3 !important; position:relative !important; }
+		.add-plus:active, .add-text:active { opacity:1 !important; }
 		.add-plus { top:0 !important; }
 	.entries a { padding:10px 0 10px 14px; }
 	.menu-button { display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px; }
