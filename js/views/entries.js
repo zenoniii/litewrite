@@ -71,6 +71,8 @@ define(function(require) {
 
     openDoc: function(e) {
       e.preventDefault();
+      $('#menu-button').removeClass('hide');
+      console.log('show menubutton');
 
       settings.set('openDocId', this.$(e.currentTarget).attr('data-id'));
     }

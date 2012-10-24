@@ -34,13 +34,18 @@ define(function(require) {
           this.$aside.removeClass('visible');
         }
       }, this);
+
+      // TODO Should be integrated with the 'events' object but doesn't work.
+      var appView = this;
+      $('#editor').scroll(function(e) { appView.toggleMenuButton(e); });
+      $('#entries').scroll(function(e) { appView.toggleMenuButton(e); });
     },
 
     events: {
       'click #add': 'newDoc',
       'click #aside': 'toggleAside',
       'click #menu-button': 'toggleAside',
-      'scroll #editor': 'toggleMenuButton',
+      'scroll': 'toggleMenuButton',
       'keydown': 'handleKey'
     },
 
@@ -60,13 +65,10 @@ define(function(require) {
     },
 
     toggleMenuButton: function(e) {
-      console.log('scrolling');
-      if($('#editor').scrollTop() > 20) {
+      if($(e.currentTarget).scrollTop() > 20) {
         $('#menu-button').addClass('hide');
-        console.log('hidden');
       } else {
         $('#menu-button').removeClass('hide');
-        console.log('shown');
       }
     },
 
