@@ -28,7 +28,7 @@ aside:hover, aside:focus, aside.visible { opacity:1; }
 aside a, .add {
 	display:block; cursor:pointer; outline:none;
 	color:#444; text-decoration:none;
-	white-space:nowrap; overflow:hidden; text-overflow:hidden;
+	white-space:nowrap; overflow:hidden;
 }
 
 .add { position:relative; display:inline-block; font-weight:normal; color:#999; width:100%; padding:1.5em 1.2em; }
