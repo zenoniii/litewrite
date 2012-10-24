@@ -59,8 +59,9 @@ define(function(require) {
       }
     },
 
-    toggleAside:  function(e) {
+    toggleAside: function(e) {
       e.stopImmediatePropagation();
+      $('#menu-button').removeClass('hide'); // TODO probably better to call the function directly
       this.$aside.toggleClass('visible');
     },
 
