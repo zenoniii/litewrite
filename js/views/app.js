@@ -37,9 +37,10 @@ define(function(require) {
     },
 
     events: {
-      'click #aside': 'toggleAside',
       'click #add': 'newDoc',
+      'click #aside': 'toggleAside',
       'click #menu-button': 'toggleAside',
+      'scroll #editor': 'toggleMenuButton',
       'keydown': 'handleKey'
     },
 
@@ -56,6 +57,17 @@ define(function(require) {
     toggleAside:  function(e) {
       e.stopImmediatePropagation();
       this.$aside.toggleClass('visible');
+    },
+
+    toggleMenuButton: function(e) {
+      console.log('scrolling');
+      if($('#editor').scrollTop() > 20) {
+        $('#menu-button').addClass('hide');
+        console.log('hidden');
+      } else {
+        $('#menu-button').removeClass('hide');
+        console.log('shown');
+      }
     },
 
     handleKey: function(e) {
