@@ -78,12 +78,12 @@ footer a { display:inline; padding:0; }
 }
 
 
-/** Scrolling shadows by @kizmarh and @leaverou
+/** Scrolling shadows by @kizmarh and @leaverou: http://lea.verou.me/2012/04/background-attachment-local/
  *  Only works in browsers supporting background-attachment:local; & CSS gradients
  *  Degrades gracefully */
 .scrollbox {
 	overflow:auto;
-
+	background-color:transparent;
 	background:
 		/* Shadow covers */
 		-webkit-linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
@@ -106,7 +106,6 @@ footer a { display:inline; padding:0; }
 		radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
 		radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
 	background-repeat:no-repeat;
-	background-color:transparent;
 	background-size:100% 40px, 100% 40px, 100% 14px, 100% 14px;
 
 	/* Opera doesn't support this in the shorthand */
