@@ -13,7 +13,8 @@ define(function(require) {
 
     initialize: function() {
       this.template = _.template(entriesTemplate);
-      // this.render();
+
+      docs.deferred.done(_.bind(this.render, this));
 
       docs
         .on('reset', this.render, this)
@@ -24,7 +25,6 @@ define(function(require) {
     },
 
     render: function() {
-      log('entries')
       this.$el.html(
         this.template({
           docs: docs

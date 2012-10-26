@@ -1,7 +1,7 @@
 define(function(require) {
 
   var Backbone = require('backbone');
-
+  var rsSync = require('utils/backbone.remoteStorage-documents');
 
   Doc = Backbone.Model.extend({
 
@@ -12,10 +12,12 @@ define(function(require) {
       lastEdited: undefined
     },
 
+    sync: rsSync,
+
     initialize: function() {
       this
         .on('change:content', this.updateLastEdited)
-	.on('change:content', this.updateTitle);
+        .on('change:content', this.updateTitle);
     },
 
     isEmpty: function() {

@@ -7,32 +7,18 @@ define(function(require) {
   var Store = require('localstorage');
   var Doc = require('models/doc');
   var settings = require('models/settings');
+  var rsSync = require('utils/backbone.remoteStorage-documents');
 
-  var remoteStorageDocuments = require('remotestorage-documents');
-
-  remoteStorage.claimAccess('documents', 'rw');
-
-
-  var escapeRegExp = function(str) {
-    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-  };
-
+  var deferred = $.Deferred();
 
   var Docs = Backbone.Collection.extend({
 
     model: Doc,
 
-    localStorage: remoteStorageDocuments.getBackboneStore('notes'),
+    sync: rsSync,
 
     initialize: function(models) {
-
-      this.fetch({
-        success: _.bind(function() {
-          if (this.isEmpty()) {
-            this.addNew();
-          }
-        }, this)
-      });
+      this.deferred = deferred.promise();
 
       this
         .on('change:content', this.sort)
@@ -41,10 +27,10 @@ define(function(require) {
     },
 
     addNew: function() {
-      this.add(new Doc({
+      this.add({
         id: _.uniqueId(),
         lastEdited: new Date().getTime()
-      }));
+      });
     },
 
     // Sort by 'lastEdited'
@@ -74,39 +60,42 @@ define(function(require) {
     deleteEmpty: function() {
       var previousDoc = this.get(settings.previous('openDocId'));
       if (previousDoc && previousDoc.isEmpty()) {
-        log('here');
         previousDoc.destroy();
       }
     }
 
   });
 
+
+  var escapeRegExp = function(str) {
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+  };
+
+
   var docs = new Docs();
 
 
+  function fetch() {
+    docs.fetch({
+      success: function() {
+        if (docs.isEmpty()) docs.addNew();
+        deferred.resolve();
+      }
+    });
+  }
 
-  var hasConnected = false;
-
-  // TODO: remove this once event handler below is implemented.
   remoteStorage.onWidget('ready', function() {
-    var all = docs.localStorage.findAll();
-    if(all.length > 0) {
-      console.log('ALL', all);
-      docs.reset(all);
-    } else if(docs.length == 0) {
-      docs.addNew();
-    }
+    fetch();
   });
 
   remoteStorage.onWidget('state', function(state) {
-    if(state == 'disconnected') {
+    if (state === 'anonymous') {
+      fetch();
+    } else if(state == 'disconnected') {
       docs.reset().addNew();
     }
   });
 
-  remoteStorage.documents.onChange('notes', function(event) {
-    // TODO: apply update to docs collection
-  });
 
   return docs;
 

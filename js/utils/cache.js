@@ -1,6 +1,11 @@
 define(function(require) {
 
-  var cache = {};
+  var $ = require('jquery');
+
+
+  var cache = {
+    loaded: $.Deferred()
+  };
 
 
   return cache;

@@ -1,5 +1,6 @@
 define(function(require) {
 
+  var $ = require('jquery');
   var Backbone = require('backbone');
   var AppView = require('views/app');
   var docs = require('collections/docs');
@@ -9,16 +10,11 @@ define(function(require) {
 
 
   function litewrite() {
-    if ( _.isUndefined(settings.get('openDocId')) ) {
-      settings.set('openDocId', docs.first().id);
-    }
-
-
     remoteStorage.displayWidget('remotestorage-connect');
     remoteStorage.util.silenceAllLoggers();
 
-    setOpenDoc();
-    setWindowTitle();
+    $.when(settings.deferred, docs.deferred)
+      .done(loadCache);
 
     settings
       .on('change:openDocId', setOpenDoc)
@@ -29,18 +25,28 @@ define(function(require) {
     docs
       .on('change:title', setUrl)
       .on('change:title', setWindowTitle)
-      .on('add', function(doc) {
-        settings.set('openDocId', doc.id);
-      });
+      .on('add', updateOpenDocId);
+
+    cache.loaded.done(setWindowTitle, startHistory);
 
     //Load on DOM-ready
     $(function() {
       new AppView();
-      Backbone.history.start();
     });
 
   }
 
+  function loadCache() {
+    ensureOpenDocId();
+    setOpenDoc();
+    cache.loaded.resolve();
+  }
+
+  function ensureOpenDocId() {
+    if ( _.isUndefined(settings.get('openDocId')) ) {
+      settings.save('openDocId', docs.first().id);
+    }
+  }
 
   function setOpenDoc() {
     cache.openDoc = docs.get( settings.get('openDocId') );
@@ -50,6 +56,14 @@ define(function(require) {
     document.title = (
       cache.openDoc ? cache.openDoc.get('title') : null
     ) || 'Litewrite';
+  }
+
+  function updateOpenDocId(doc) {
+    settings.save('openDocId', doc.id);
+  }
+
+  function startHistory() {
+    Backbone.history.start();
   }
 
   function setUrl() {

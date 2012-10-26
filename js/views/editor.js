@@ -12,19 +12,12 @@ define(function(require) {
     el: '#editor',
 
     initialize: function() {
-
-      this.changeContent();
-
-      settings.on('change:openDocId', this.changeContent, this);
-
-    },
-
-    changeContent: function() {
-      this.render();
-      this.focus();
+      cache.loaded.done(_.bind(this.render, this));
+      settings.on('change:openDocId', this.render, this);
     },
 
     render: function() {
+      this.focus();
       this.$el.html(cache.openDoc.get('content'));
     },
 
