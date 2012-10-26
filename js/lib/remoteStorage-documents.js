@@ -47,7 +47,7 @@ define(function(require) {
         return getContent(id).slice(0, 50);
       }
       function setContent(id, content) {
-        if(content == '') {
+        if(content === '') {
           myBaseClient.remove(listName+'/'+id);
         } else {
           myBaseClient.storeObject('text', listName+'/'+id, {
@@ -78,59 +78,6 @@ define(function(require) {
       };
     }
 
-    function getBackboneStore(listName) {
-
-      myBaseClient.use(listName+'/');
-
-      function absPath(path) {
-        return listName + '/' + path;
-      }
-
-      function storeObject(model) {
-        if(! model.id || (typeof(model.id) === 'number')) {
-          model.set(model.idAttribute, getUuid());
-        }
-
-        myBaseClient.storeObject('text', absPath(model.id), model.attributes);
-
-        return model;
-      }
-
-      function getById(id) {
-        var object = myBaseClient.getObject(absPath(id));
-        object.id = id;
-        return object;
-      }
-
-      return {
-
-        create: function() {
-          return storeObject.apply(this, arguments);
-        },
-
-        update: function() {
-          return storeObject.apply(this, arguments);
-        },
-
-        find: function(model) {
-          return getById(model.id);
-        },
-
-        findAll: function() {
-          var ids = myBaseClient.getListing(absPath(''));
-          models = [];
-          for(var i=0;i<ids.length;i++) {
-            models.push(getById(ids[i]));
-          }
-          return models;
-        },
-
-        destroy: function(model) {
-          return myBaseClient.remove(absPath(model.id));
-        }
-
-      }
-    }
 
     return {
       name: moduleName,
@@ -146,7 +93,6 @@ define(function(require) {
       },
       exports: {
         getPrivateList: getPrivateList,
-        getBackboneStore: getBackboneStore,
         onChange: function(listName, callback) {
           myBaseClient.on('change', function(event) {
             var md = event.relativePath.match(new RegExp('^' + listName + '/(.+)$'));
