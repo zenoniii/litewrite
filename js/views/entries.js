@@ -18,14 +18,13 @@ define(function(require) {
       docs
         .on('reset', this.render, this)
         .on('change:title', this.updateTitle, this)
-        .on('change:content', this.updateColor, this)
         .on('destroy', this.removeItem, this);
 
       settings.on('change:openDocId', this.selectOpenDoc, this);
     },
 
     render: function() {
-      log('render entries!!')
+      log('entries')
       this.$el.html(
         this.template({
           docs: docs
@@ -49,10 +48,6 @@ define(function(require) {
     updateTitle: function(doc) {
       this.$itemById(doc.id).find('a').html( doc.get('title') );
     },
-
-    updateColor: _.throttle(function(doc) {
-      this.$itemById(doc.id).find('a').css('color', doc.get('color'));
-    }, 5000),
 
     removeItem: function(doc) {
       this.$itemById(doc.id).remove();
