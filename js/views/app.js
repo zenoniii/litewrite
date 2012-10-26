@@ -77,14 +77,14 @@ define(function(require) {
     openPreviousDoc: function() {
       var previousDoc = docs.at(docs.indexOf(cache.openDoc) - 1);
       if (previousDoc) {
-        settings.set('openDocId', previousDoc.id);
+        settings.save('openDocId', previousDoc.id);
       }
     },
 
     openNextDoc: function() {
       var nextDoc = docs.at(docs.indexOf(cache.openDoc) + 1);
       if (nextDoc) {
-        settings.set('openDocId', nextDoc.id);
+        settings.save('openDocId', nextDoc.id);
       }
     }
   });
