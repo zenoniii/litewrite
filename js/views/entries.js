@@ -13,7 +13,7 @@ define(function(require) {
 
     initialize: function() {
       this.template = _.template(entriesTemplate);
-      this.render();
+      // this.render();
 
       docs
         .on('reset', this.render, this)
@@ -25,15 +25,16 @@ define(function(require) {
     },
 
     render: function() {
+      log('render entries!!')
       this.$el.html(
         this.template({
           docs: docs
             .filter(function(doc) {
               return !doc.isEmpty();
             }).map(function(doc) {
-	      var res = doc.toJSON();
-	      res.opacity = doc.getOpacity();
-	      return res;
+              var res = doc.toJSON();
+              res.opacity = doc.getOpacity();
+              return res;
             })
         })
       );
@@ -72,7 +73,7 @@ define(function(require) {
     openDoc: function(e) {
       e.preventDefault();
 
-      settings.set('openDocId', this.$(e.currentTarget).attr('data-id'));
+      settings.save('openDocId', this.$(e.currentTarget).attr('data-id'));
     }
 
   });
