@@ -10,12 +10,6 @@ define(function(require) {
 
 
   function litewrite() {
-    remoteStorage.displayWidget('remotestorage-connect');
-    remoteStorage.util.silenceAllLoggers();
-
-    $.when(settings.deferred, docs.deferred)
-      .done(loadCache);
-
     settings
       .on('change:openDocId', setOpenDoc)
       .on('change:openDocId', setWindowTitle)
@@ -27,7 +21,25 @@ define(function(require) {
       .on('change:title', setWindowTitle)
       .on('add', updateOpenDocId);
 
-    cache.loaded.done(setWindowTitle, startHistory);
+    remoteStorage.onWidget('ready', function() {
+      fetch();
+    });
+
+    remoteStorage.onWidget('state', function(state) {
+      if (state === 'anonymous') {
+        fetch();
+      } else if(state == 'disconnected') {
+        docs.reset().addNew();
+      }
+    });
+
+    $.when(settings.deferred, docs.deferred)
+      .done(loadCache);
+
+    cache.loading.done(setWindowTitle, startHistory);
+
+    remoteStorage.displayWidget('remotestorage-connect');
+    remoteStorage.util.silenceAllLoggers();
 
     //Load on DOM-ready
     $(function() {
@@ -39,7 +51,7 @@ define(function(require) {
   function loadCache() {
     ensureOpenDocId();
     setOpenDoc();
-    cache.loaded.resolve();
+    cache.loading.resolve();
   }
 
   function ensureOpenDocId() {
@@ -68,6 +80,15 @@ define(function(require) {
 
   function setUrl() {
     router.navigate(cache.openDoc.get('url'));
+  }
+
+  function fetch() {
+    docs.fetch({
+      success: function() {
+        if (docs.isEmpty()) docs.addNew();
+        docs.deferred.resolve();
+      }
+    });
   }
 
 

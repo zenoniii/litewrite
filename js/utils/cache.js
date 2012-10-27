@@ -4,7 +4,7 @@ define(function(require) {
 
 
   var cache = {
-    loaded: $.Deferred()
+    loading: $.Deferred()
   };
 
 

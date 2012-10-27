@@ -12,7 +12,7 @@ define(function(require) {
     el: '#editor',
 
     initialize: function() {
-      cache.loaded.done(_.bind(this.render, this));
+      cache.loading.done(_.bind(this.render, this));
       settings.on('change:openDocId', this.render, this);
     },
 

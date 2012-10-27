@@ -9,8 +9,6 @@ define(function(require) {
   var settings = require('models/settings');
   var rsSync = require('utils/backbone.remoteStorage-documents');
 
-  var deferred = $.Deferred();
-
   var Docs = Backbone.Collection.extend({
 
     model: Doc,
@@ -18,7 +16,7 @@ define(function(require) {
     sync: rsSync,
 
     initialize: function(models) {
-      this.deferred = deferred.promise();
+      this.deferred = $.Deferred();
 
       this
         .on('change:content', this.sort)
@@ -67,34 +65,12 @@ define(function(require) {
   });
 
 
-  var escapeRegExp = function(str) {
+  function escapeRegExp(str) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
   };
 
 
   var docs = new Docs();
-
-
-  function fetch() {
-    docs.fetch({
-      success: function() {
-        if (docs.isEmpty()) docs.addNew();
-        deferred.resolve();
-      }
-    });
-  }
-
-  remoteStorage.onWidget('ready', function() {
-    fetch();
-  });
-
-  remoteStorage.onWidget('state', function(state) {
-    if (state === 'anonymous') {
-      fetch();
-    } else if(state == 'disconnected') {
-      docs.reset().addNew();
-    }
-  });
 
 
   return docs;
