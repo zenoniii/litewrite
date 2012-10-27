@@ -68,11 +68,24 @@ define(function(require) {
           errorHandlers.push(cb);
         }
       }
+      function set(id, obj) {
+        myBaseClient.storeObject('text', listName+'/'+id, obj);
+      }
+      function get(id) {
+        var obj = myBaseClient.getObject(listName+'/'+id);
+        if(obj) {
+          return obj;
+        } else {
+          return {};
+        }
+      }
       return {
         getIds        : getIds,
         getContent    : getContent,
         getTitle      : getTitle,
         setContent   : setContent,
+        set           : set,
+        get           : get,
         add           : add,
         on            : on
       };

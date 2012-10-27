@@ -27,14 +27,14 @@ define(function(require) {
 
 
   function find(model) {
-    return documents.getContent(model.id);
+    return documents.get(model.id);
   }
 
   function findAll() {
     var ids = documents.getIds();
     var resp = [];
     for (var i = ids.length - 1; i >= 0; i--) {
-      resp.push(documents.getContent(ids[i]));
+      resp.push(documents.get(ids[i]));
     }
     return resp;
   }
@@ -45,7 +45,7 @@ define(function(require) {
   }
 
   function update(model) {
-    documents.setContent(model.id, model.attributes);
+    documents.set(model.id, model.attributes);
     return model;
   }
 
