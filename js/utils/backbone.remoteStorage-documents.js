@@ -40,12 +40,12 @@ define(function(require) {
   }
 
   function create(model) {
-    model.set(model.idAttribute, documents.add(model.toJSON()));
+    model.set(model.idAttribute, documents.add(model.attributes));
     return model;
   }
 
   function update(model) {
-    documents.setContent(model.id, model.toJSON());
+    documents.setContent(model.id, model.attributes);
     return model;
   }
 
