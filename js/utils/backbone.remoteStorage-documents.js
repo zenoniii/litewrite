@@ -2,9 +2,29 @@ define(function(require) {
 
   var remoteStorageDocuments = require('remotestorage-documents');
 
+
   remoteStorage.claimAccess('documents', 'rw');
 
   var documents = remoteStorageDocuments.getPrivateList('notes');
+
+
+  function sync(method, model, options) {
+    var resp;
+
+    switch (method) {
+      case "read":    resp = model.id !== undefined ? find(model) : findAll(); break;
+      case "create":  resp = create(model);                            break;
+      case "update":  resp = update(model);                            break;
+      case "delete":  resp = destroy(model);                           break;
+    }
+
+    if (resp) {
+      options.success(resp);
+    } else {
+      options.error("Record not found");
+    }
+  }
+
 
   function find(model) {
     return documents.getContent(model.id);
@@ -34,22 +54,6 @@ define(function(require) {
     return model;
   }
 
-  function sync(method, model, options) {
-    var resp;
-
-    switch (method) {
-      case "read":    resp = model.id !== undefined ? find(model) : findAll(); break;
-      case "create":  resp = create(model);                            break;
-      case "update":  resp = update(model);                            break;
-      case "delete":  resp = destroy(model);                           break;
-    }
-
-    if (resp) {
-      options.success(resp);
-    } else {
-      options.error("Record not found");
-    }
-  }
 
 
   return sync;
