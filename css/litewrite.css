@@ -57,9 +57,8 @@ footer a { display:inline; padding:0; }
 .menu-button { display:none; position:absolute; left:0; top:0; }
 /* Smartphones (portrait and landscape) ----------- */
 @media (max-width:720px) {
-	aside { font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; display:none; }
-	aside:hover, aside:focus { opacity:0; }
-	aside.visible { display:block; opacity:1; }
+	aside { opacity: 1; font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; margin-top: 100%; -webkit-transition: 0.3s margin-top ease; }
+	aside.visible { margin-top: 0; }
 	.add { padding:4px 1.2em; margin-top:50px; }
 		.add-plus, .add-text { color:#000; opacity:1 !important; position:relative !important; }
 		.add-plus { top:0 !important; }
