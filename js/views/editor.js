@@ -18,7 +18,12 @@ define(function(require) {
 
     render: function() {
       this.focus();
-      this.$el.html(cache.openDoc.get('content'));
+      var content = cache.openDoc.get('content');
+      if (content) {
+        this.$el.html(content);
+      } else {
+        this.$el.text(' ');
+      }
     },
 
     focus: function() {
