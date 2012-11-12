@@ -11,6 +11,7 @@ define(function(require) {
 
 
   var isMac = /Mac/.test(navigator.platform);
+  var isMobile = matchMedia('(max-width:720px)').matches;
 
 
   var AppView = Backbone.View.extend({
@@ -23,11 +24,13 @@ define(function(require) {
 
       this.$aside = this.$('aside');
 
-      setTimeout(_.bind(function() {
-        if ((docs.length > 2)) {
-          this.$aside.removeClass('visible');
-        }
-      }, this), 3000);
+      if (!isMobile) {
+        setTimeout(_.bind(function() {
+          if (docs.length > 2) {
+            this.$aside.removeClass('visible');
+          }
+        }, this), 3000);
+      }
 
       docs.on('add', function() {
         if ((docs.length === 3)) {
