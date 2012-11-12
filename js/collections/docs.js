@@ -19,7 +19,7 @@ define(function(require) {
       this.deferred = $.Deferred();
 
       this
-        .on('change:content', this.sort)
+        .on('change:content', this.ensureOrder)
         .on('change:lastEdited', this.saveWhenIdle)
         .on('change:title', this.updateUrl);
     },
@@ -55,6 +55,10 @@ define(function(require) {
       doc.set('url', url);
     },
 
+    ensureOrder: function() {
+      if (settings.get('openDocId') !== this.first().id) this.sort();
+    },
+
     deleteEmpty: function() {
       var previousDoc = this.get(settings.previous('openDocId'));
       if (previousDoc && previousDoc.isEmpty()) {
@@ -67,7 +71,7 @@ define(function(require) {
 
   function escapeRegExp(str) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-  };
+  }
 
 
   var docs = new Docs();
