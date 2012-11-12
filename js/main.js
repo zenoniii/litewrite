@@ -3,13 +3,13 @@ require.config( {
     'utils/log'
   ],
   paths: {
-    text: 'lib/require.text',
-    jquery: ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min', 'lib/jquery.min'],
-    underscore: 'lib/underscore',
-    backbone: 'lib/backbone',
-    localstorage: 'lib/backbone.localstorage',
-    remotestorage: [/*'http://remotestoragejs.com/build/0.7.0-head/remoteStorage', */'lib/remoteStorage'],
-    'remotestorage-documents': 'lib/remoteStorage-documents'
+    text: 'libs/require.text',
+    jquery: ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min', 'libs/jquery.min'],
+    underscore: 'libs/underscore',
+    backbone: 'libs/backbone',
+    localstorage: 'libs/backbone.localstorage',
+    remotestorage: [/*'http://remotestoragejs.com/build/0.7.0-head/remoteStorage', */'libs/remoteStorage'],
+    'remotestorage-documents': 'libs/remoteStorage-documents'
   },
   baseUrl: 'js'
 });
