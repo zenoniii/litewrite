@@ -16,7 +16,8 @@ module.exports = function(grunt) {
       wrap: true,
       mainConfigFile: 'js/main.js',
       paths: {
-        jquery: 'empty:'
+        jquery: 'empty:',
+        remotestorage: 'empty:'
       },
       stubModules: [
         'utils/log',
