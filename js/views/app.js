@@ -18,27 +18,22 @@ define(function(require) {
       this.editor = new EditorView();
       this.entries = new EntriesView();
 
-      this.$aside = this.$('aside');
 
       if (!cache.isMobile) {
 
         setTimeout(_.bind(function() {
-          if (docs.length > 2 && !cache.openDoc.isEmpty()) {
-            this.$aside.removeClass('visible');
-          }
+          this.aside('hidden');
         }, this), 3000);
 
         docs.on('add', function() {
-          this.$aside.addClass('visible');
+          this.aside('visible')
         }, this);
 
         //hide sidebar when 3 or more docs and the open doc is not empty
         docs.on('change:title', function() {
-          if (docs.length > 2 && !cache.openDoc.isEmpty()) {
             setTimeout(_.bind(function() {
-              this.$aside.removeClass('visible');
-            }, this), 100);
-          }
+              this.aside('hidden');
+            }, this), 1000);
         }, this);
 
       }
@@ -49,12 +44,28 @@ define(function(require) {
       $('#entries').scroll(function(e) { appView.toggleMenuButton(e); });
     },
 
+    aside: (function() {
+      var $aside = this.$('aside');
+      return function(state) {
+        if (!state) {
+          $aside.toggleClass('visible');
+        } else if (state === 'visible') {
+          $aside.addClass('visible');
+        } else if (state === 'hidden') {
+          if (docs.length > 2 && !cache.openDoc.isEmpty()) {
+            $aside.removeClass('visible');
+          }
+        }
+      };
+    })(),
+
     events: {
       'click #add': 'newDoc',
       'click #aside': 'toggleAside',
       'click #menu-button': 'toggleAside',
       'scroll': 'toggleMenuButton',
-      'keydown': 'handleKey'
+      'keydown': 'handleKey',
+      'keyup': 'hideAside'
     },
 
     newDoc: function(e) {
@@ -70,7 +81,7 @@ define(function(require) {
     toggleAside: function(e) {
       e.stopImmediatePropagation();
       $('#menu-button').removeClass('hide'); // TODO probably better to call the function directly
-      this.$aside.toggleClass('visible');
+      this.aside();
     },
 
     toggleMenuButton: function(e) {
@@ -85,6 +96,7 @@ define(function(require) {
       if (e.which === 9) { //tab
         e.preventDefault();
       } else if (cache.isMac ? e.ctrlKey : e.altKey) {
+        this.aside('visible');
         if (e.which === 78) { //n
           this.newDoc(e);
         } else if (e.which === 38) { //up
@@ -95,6 +107,10 @@ define(function(require) {
           return false;
         }
       }
+    },
+
+    hideAside: function(e) {
+      if (e.which === (cache.isMac ? 17 : 18)) this.aside('hidden');
     },
 
     openPreviousDoc: function() {
