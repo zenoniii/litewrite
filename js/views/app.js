@@ -21,18 +21,27 @@ define(function(require) {
       this.$aside = this.$('aside');
 
       if (!cache.isMobile) {
+
         setTimeout(_.bind(function() {
-          if (docs.length > 2) {
+          if (docs.length > 2 && !cache.openDoc.isEmpty()) {
             this.$aside.removeClass('visible');
           }
         }, this), 3000);
-      }
 
-      docs.on('add', function() {
-        if ((docs.length === 3)) {
-          this.$aside.removeClass('visible');
-        }
-      }, this);
+        docs.on('add', function() {
+          this.$aside.addClass('visible');
+        }, this);
+
+        //hide sidebar when 3 or more docs and the open doc is not empty
+        docs.on('change:title', function() {
+          if (docs.length > 2 && !cache.openDoc.isEmpty()) {
+            setTimeout(_.bind(function() {
+              this.$aside.removeClass('visible');
+            }, this), 100);
+          }
+        }, this);
+
+      }
 
       // TODO Should be integrated with the 'events' object but doesn't work.
       var appView = this;
