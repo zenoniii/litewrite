@@ -22,6 +22,7 @@ aside {
 	position:fixed; width:16%; min-width:135px; height:100%;
 	font:90% FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
+	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;
 }
 aside:hover, aside:focus, aside.visible { opacity:1; }
 
@@ -54,7 +55,10 @@ footer a { display:inline; padding:0; }
 ::-moz-selection { background-color:rgba(255,255,0,.3); }
 
 
-.menu-button { display:none; position:absolute; left:0; top:0; }
+.menu-button {
+	display:none; position:absolute; left:0; top:0;
+	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;
+}
 /* Smartphones (portrait and landscape) ----------- */
 @media (max-width:720px) {
 	.editor { padding:15% 5% 5% 0; margin:0 0 0 5%; width:95%; font-size:20px; }
