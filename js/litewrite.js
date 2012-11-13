@@ -21,9 +21,7 @@ define(function(require) {
       .on('change:title', setWindowTitle)
       .on('add', updateOpenDocId);
 
-    remoteStorage.onWidget('ready', function() {
-      fetch();
-    });
+    remoteStorage.onWidget('ready', fetch);
 
     remoteStorage.onWidget('state', function(state) {
       if (state === 'anonymous') {
@@ -83,6 +81,7 @@ define(function(require) {
   }
 
   function fetch() {
+    docs.trigger('fetch');
     docs.fetch({
       success: function() {
         if (docs.isEmpty()) docs.addNew();

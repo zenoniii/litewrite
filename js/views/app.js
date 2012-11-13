@@ -26,7 +26,7 @@ define(function(require) {
         }, this), 3000);
 
         docs.on('add', function() {
-          this.aside('visible')
+          this.aside('visible');
         }, this);
 
         //hide sidebar when 3 or more docs and the open doc is not empty
@@ -34,6 +34,10 @@ define(function(require) {
             setTimeout(_.bind(function() {
               this.aside('hidden');
             }, this), 1000);
+        }, this);
+
+        docs.on('fetch', function() {
+          this.aside('visible');
         }, this);
 
       }
