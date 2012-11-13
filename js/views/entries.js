@@ -46,7 +46,12 @@ define(function(require) {
     },
 
     updateTitle: function(doc) {
-      this.$itemById(doc.id).find('a').html( doc.get('title') );
+      var $item = this.$itemById(doc.id).find('a');
+      if ($item.length && !doc.isEmpty()) {
+        $item.html(doc.get('title'));
+      } else {
+        this.render();
+      }
     },
 
     removeItem: function(doc) {
