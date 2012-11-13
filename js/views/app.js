@@ -10,10 +10,6 @@ define(function(require) {
   var settings = require('models/settings');
 
 
-  var isMac = /Mac/.test(navigator.platform);
-  var isMobile = matchMedia('(max-width:720px)').matches;
-
-
   var AppView = Backbone.View.extend({
 
     el: 'body',
@@ -24,7 +20,7 @@ define(function(require) {
 
       this.$aside = this.$('aside');
 
-      if (!isMobile) {
+      if (!cache.isMobile) {
         setTimeout(_.bind(function() {
           if (docs.length > 2) {
             this.$aside.removeClass('visible');
@@ -79,7 +75,7 @@ define(function(require) {
     handleKey: function(e) {
       if (e.which === 9) { //tab
         e.preventDefault();
-      } else if (isMac ? e.ctrlKey : e.altKey) {
+      } else if (cache.isMac ? e.ctrlKey : e.altKey) {
         if (e.which === 78) { //n
           this.newDoc(e);
         } else if (e.which === 38) { //up

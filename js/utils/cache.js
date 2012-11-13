@@ -4,7 +4,9 @@ define(function(require) {
 
 
   var cache = {
-    loading: $.Deferred()
+    loading: $.Deferred(),
+    isMac: /Mac/.test(navigator.platform),
+    isMobile: matchMedia('(max-width:720px)').matches
   };
 
 
