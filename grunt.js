@@ -5,12 +5,12 @@ module.exports = function(grunt) {
     requirejs: {
       almond: false,
       replaceRequireScript: [{
-        files: ['build/index.html'],
+        files: ['index.html'],
         module: 'main'
       }],
       modules: [{name: 'main'}],
-      dir: 'build/',
-      appDir: '.',
+      dir: 'js',
+      keepBuildDir: true,
       baseUrl: 'js',
       inlineText: true,
       wrap: true,
