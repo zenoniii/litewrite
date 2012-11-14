@@ -19,6 +19,7 @@ define(function(require) {
       this.deferred = $.Deferred();
 
       this
+        .on('all', log)
         .on('change:content', this.ensureOrder)
         .on('change:lastEdited', this.saveWhenIdle)
         .on('change:title', this.updateUrl);
@@ -56,6 +57,7 @@ define(function(require) {
     },
 
     ensureOrder: function() {
+      var openDoc = this.get(settings.get('openDocId'));
       if (settings.get('openDocId') !== this.first().id) this.sort();
     },
 
