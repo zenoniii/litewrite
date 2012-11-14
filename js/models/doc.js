@@ -1,1 +1,55 @@
-define(["require","backbone","utils/backbone.remoteStorage-documents"],function(e){var t=e("backbone"),n=e("utils/backbone.remoteStorage-documents");return Doc=t.Model.extend({defaults:{title:"",url:"",content:"",lastEdited:undefined},sync:n,initialize:function(){this.on("change:content",this.updateLastEdited).on("change:content",this.updateTitle)},isEmpty:function(){return this.get("content").match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/)!==null},updateLastEdited:function(){this.set("lastEdited",(new Date).getTime())},updateTitle:function(){var e=this.get("content").match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*(.*?)(<div>|<\/div>|<br>|$)/)[2].replace(/&nbsp;/gi,"");this.set("title",e)},getOpacity:function(){var e=(new Date).getTime()-this.get("lastEdited"),t=12096e5,n=e>t?.1:Math.round((.1+(t-e)/t*.9)*100)/100;return n}}),Doc})
+define(function(require) {
+
+  var Backbone = require('backbone');
+  var rsSync = require('utils/backbone.remoteStorage-documents');
+
+  Doc = Backbone.Model.extend({
+
+    defaults: {
+      title: '',
+      url: '',
+      content: '',
+      lastEdited: undefined
+    },
+
+    sync: rsSync,
+
+    initialize: function() {
+      this
+        .on('change:content', this.updateLastEdited)
+        .on('change:content', this.updateTitle);
+    },
+
+    isEmpty: function() {
+      //Contenteditable never is really empty
+      return this.get('content').match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/) !== null;
+    },
+
+    updateLastEdited: function() {
+        this.set('lastEdited', new Date().getTime());
+    },
+
+    updateTitle: function() {
+      //Title is the first not empty line of the content
+      var title = this.get('content')
+        .match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*(.*?)(<div>|<\/div>|<br>|$)/)[2]
+        .replace(/&nbsp;/gi,'');
+      this.set('title', title);
+    },
+
+    getOpacity: function() {
+      //Time passed since last this document was edited the last time in milliseconds
+      var diff = (new Date().getTime() - this.get('lastEdited'));
+      //The older the document the smaller the opacity
+      //but the opacity is allway between 0.1 and 1
+      //For documents older than 2 Weeks the opacity won't change anymore
+      var limit = 14 * 86400000;
+      var opacity = diff > limit ? 0.1 : Math.round( (0.1 + ((limit - diff) / limit) * 0.9) * 100 ) / 100;
+      return opacity;
+    }
+
+  });
+
+
+  return Doc;
+});
