@@ -3,7 +3,6 @@ define(function(require) {
   var $ = require('jquery');
   var _ = require('underscore');
   var Backbone = require('backbone');
-  var meld = require('meld');
   var entriesTemplate = require('text!templates/entries.html');
   var docs = require('collections/docs');
   var settings = require('models/settings');
@@ -23,10 +22,6 @@ define(function(require) {
         .on('destroy', this.removeItem, this);
 
       settings.on('change:openDocId', this.selectOpenDoc, this);
-
-      // meld.after(this, 'selectOpenDoc', function(result) {
-      //   console.log('myObject.doSomething returned: ' + result);
-      // })
     },
 
     render: function() {
@@ -69,16 +64,7 @@ define(function(require) {
       }
       this.$selected = this.$itemById( settings.get('openDocId') )
         .addClass('selected');
-
-      // this.scrollTo(this.$selected);
     },
-
-    // scrollTo: function($item) {
-    //     if (!$item.length) return;
-    //     this.$el.animate({
-    //      scrollTop: $item.offset().top
-    //     }, 2000);
-    // },
 
     events: {
       'click .item': 'openDoc'
