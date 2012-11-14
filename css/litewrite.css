@@ -3,10 +3,8 @@ html, body {
 	color:#000;
 	background:#fcfcfc url(../img/lightpaperfibers.png) repeat;
 }
-
 @font-face { font-family:'Alegreya'; font-weight:normal; src:url(Alegreya-Regular.ttf); }
 @font-face { font-family:'Alegreya'; font-weight:bold; src:url(Alegreya-Bold.ttf); }
-
 .editor {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
 	position:absolute; width:84%; height:100%; padding:5% 20% 20% 4%; margin:0 0 0 16%;
@@ -15,8 +13,6 @@ html, body {
 }
 .editor:first-line { font-size:2em; line-height:2.4em; font-weight:bold; }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; font-size:2em; line-height:2.4em; }
-
-
 aside {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
 	position:fixed; width:16%; min-width:135px; height:100%;
@@ -25,41 +21,31 @@ aside {
 	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;
 }
 aside:hover, aside:focus, aside.visible { opacity:1; }
-
 aside a, .add {
 	display:block; cursor:pointer; outline:none;
 	color:#444; text-decoration:none;
 	white-space:nowrap; overflow:hidden;
 }
-
 .add { position:relative; display:inline-block; font-weight:normal; color:#999; width:100%; padding:1.5em 1.2em; }
 .add:hover, .add:focus { color:#000; }
 	.add .add-plus, .add .add-text { position:absolute; -webkit-transition:opacity 200ms; -moz-transition:opacity 200ms; -o-transition:opacity 200ms; transition:opacity 200ms; }
 	.add .add-plus { opacity:1; font-size:160%; top:.51em; } .add:hover .add-plus { opacity:0; }
 	.add .add-text { opacity:0; font-weight:bold; color:#000; } .add:hover .add-text { opacity:1; }
-
 .entries { height:100%; overflow-x:hidden !important; margin:0; padding:0; list-style:none; }
 .entries a { text-overflow:ellipsis; height:1.35em; padding:.5em 0 .5em 1.2em; }
 .entries a:hover, .entries a:focus, .entries .selected { color:#000; font-weight:bold; }
 .entries .item:last-child a { padding-bottom:50px; }
-
 footer { position:absolute; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
-
-
 ::-webkit-scrollbar { width:.2em; }
 ::-webkit-scrollbar-track-piece { background-color:transparent; }
 ::-webkit-scrollbar-thumb { background:rgba(50,50,50,.3); }
-
 ::selection { background-color:rgba(255,255,0,.3); }
 ::-moz-selection { background-color:rgba(255,255,0,.3); }
-
-
 .menu-button {
 	display:none; position:absolute; left:0; top:0;
 	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;
 }
-/* Smartphones (portrait and landscape) ----------- */
 @media (max-width:720px) {
 	.editor { padding:15% 5% 5% 0; margin:0 0 0 5%; width:95%; font-size:20px; }
 	.editor:first-line { font-size:28px; line-height:36px; }
@@ -74,44 +60,37 @@ footer a { display:inline; padding:0; }
 	.menu-button.hide { display:none; }
 	footer { display:none; }
 }
-
 @media (max-width:720px) and (orientation:landscape) {
     .menu-button { display:none; }
     .editor { padding:0% 2% 2% 0; margin:0 0 0 2%; width:98%; }
     .add { margin-top:0; }
 }
-
-
-/** Scrolling shadows by @kizmarh and @leaverou: http://lea.verou.me/2012/04/background-attachment-local/
- *  Only works in browsers supporting background-attachment:local; & CSS gradients
- *  Degrades gracefully */
 .scrollbox {
 	overflow:auto;
 	background-color:transparent;
 	background:
-		/* Shadow covers */
+		
 		-webkit-linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
 		-webkit-linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
-		/* Shadows */
+		
 		-webkit-radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
 		-webkit-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
 	background:
-		/* Shadow covers */
+		
 		-moz-linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
 		-moz-linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
-		/* Shadows */
+		
 		-moz-radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
 		-moz-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
 	background:
-		/* Shadow covers */
+		
 		linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
 		linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
-		/* Shadows */
+		
 		radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
 		radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
 	background-repeat:no-repeat;
 	background-size:100% 40px, 100% 40px, 100% 14px, 100% 14px;
-
-	/* Opera doesn't support this in the shorthand */
+	
 	background-attachment:local, local, scroll, scroll;
 }
