@@ -63,8 +63,8 @@ footer a { display:inline; padding:0; }
 @media (max-width:720px) {
 	.editor { padding:15% 5% 5% 0; margin:0 0 0 5%; width:95%; font-size:20px; }
 	.editor:first-line { font-size:28px; line-height:36px; }
-	aside { opacity: 1; font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; margin-top: 100%; -webkit-transition: 0.3s margin-top ease; }
-	aside.visible { margin-top: 0; }
+	aside { opacity: 1; font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right: 100%; -webkit-transition: 0.3s right ease; }
+	aside.visible { right: 0; }
 	.add { padding:4px 1.2em; margin-top:50px; }
 		.add-plus, .add-text { color:#000; opacity:1 !important; position:relative !important; }
 		.add-plus:active, .add-text:active { opacity:1 !important; }
