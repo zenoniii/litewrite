@@ -2,11 +2,11 @@ define(function(require) {
 
   var remoteStorageDocuments = require('remotestorage-documents');
 
+  var documents;
 
-  remoteStorage.claimAccess('documents', 'rw');
-
-  var documents = remoteStorageDocuments.getPrivateList('notes');
-
+  remoteStorage.claimAccess('documents', 'rw').then(function() {
+    documents = remoteStorageDocuments.getPrivateList('notes');
+  });
 
   function sync(method, model, options) {
     var resp;
