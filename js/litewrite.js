@@ -27,11 +27,7 @@ define(function(require) {
       docs.reset().addNew();
     });
 
-    remoteStorage.onWidget('state', function(state) {
-      if (state === 'initial') {
-        fetch();
-      }
-    });
+    fetch();
 
     $.when(settings.deferred, docs.deferred)
       .done(loadCache);
