@@ -23,11 +23,13 @@ define(function(require) {
 
     remoteStorage.onWidget('ready', fetch);
 
+    remoteStorage.onWidget('disconnect', function() {
+      docs.reset().addNew();
+    });
+
     remoteStorage.onWidget('state', function(state) {
-      if (state === 'anonymous') {
+      if (state === 'initial') {
         fetch();
-      } else if(state == 'disconnected') {
-        docs.reset().addNew();
       }
     });
 
