@@ -24,7 +24,7 @@ define(function(require) {
     },
 
     render: function() {
-      var content = cache.openDoc.get('content');
+      var content = (cache.openDoc && cache.openDoc.get('content'));
       if (content) {
         this.$el.html(content);
       } else {
