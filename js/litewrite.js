@@ -36,7 +36,6 @@ define(function(require) {
 
     remoteStorage.claimAccess('documents', 'rw').then(function() {
       remoteStorage.displayWidget('remotestorage-connect');
-      remoteStorage.util.silenceAllLoggers();
     });
 
     //Load on DOM-ready
