@@ -10,6 +10,27 @@ define(function(require) {
 
 
   function litewrite() {
+
+    var origHash = document.location.hash;
+
+    remoteStorage.onWidget('ready', fetch);
+
+    remoteStorage.onWidget('disconnect', function() {
+      docs.reset().addNew();
+    });
+
+    remoteStorage.claimAccess('documents', 'rw').then(function() {
+      remoteStorage.displayWidget('remotestorage-connect');
+      setTimeout(function() {
+        var md = origHash.match(/access_token=([^&]+)/);
+        if(md && (! remoteStorage.getBearerToken())) {
+          // backbone stole our access token
+          remoteStorage.setBearerToken(md[1]);
+        }
+      }, 0);
+        
+    });
+
     settings
       .on('change:openDocId', setOpenDoc)
       .on('change:openDocId', setWindowTitle)
@@ -21,11 +42,6 @@ define(function(require) {
       .on('change:title', setWindowTitle)
       .on('add', updateOpenDocId);
 
-    remoteStorage.onWidget('ready', fetch);
-
-    remoteStorage.onWidget('disconnect', function() {
-      docs.reset().addNew();
-    });
 
     fetch();
 
@@ -33,10 +49,6 @@ define(function(require) {
       .done(loadCache);
 
     cache.loading.done(setWindowTitle, startHistory);
-
-    remoteStorage.claimAccess('documents', 'rw').then(function() {
-      remoteStorage.displayWidget('remotestorage-connect');
-    });
 
     //Load on DOM-ready
     $(function() {
