@@ -25,6 +25,24 @@ module.exports = function(grunt) {
       ]
     },
 
+    clean: {
+      build: {
+        dirs: [
+          'js/collections',
+          'js/models',
+          'js/templates',
+          'js/utils',
+          'js/views'
+        ],
+        files: [
+          'js/build.txt',
+          'js/litewrite.js',
+          './grunt.js',
+          'grunt'
+        ]
+      }
+    },
+
     watch: {
         files: [],
         tasks: ''
@@ -33,9 +51,9 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-requirejs');
+  grunt.loadNpmTasks('grunt-cleanx');
 
-  grunt.registerTask('build', 'requirejs');
-  grunt.registerTask('b', 'requirejs');
+  grunt.registerTask('build', 'requirejs clean');
 
   grunt.registerTask('default', 'server watch');
 

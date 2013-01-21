@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "grunt": ">=0.3.1",
-    "grunt-requirejs": ">=0.2.9"
+    "grunt-requirejs": "0.2.x",
+    "grunt-cleanx": "0.5.x"
   }
 }
