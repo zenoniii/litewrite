@@ -48,7 +48,7 @@ define(function(require) {
     updateTitle: function(doc) {
       var $item = this.$itemById(doc.id).find('a');
       if ($item.length && !doc.isEmpty()) {
-        $item.html(doc.get('title'));
+        $item.text(doc.get('title'));
       } else {
         this.render();
       }
@@ -64,6 +64,9 @@ define(function(require) {
       }
       this.$selected = this.$itemById( settings.get('openDocId') )
         .addClass('selected');
+
+      //scroll list to selected element
+      this.$el.scrollTop( this.$selected.position().top - 15 );
     },
 
     events: {
