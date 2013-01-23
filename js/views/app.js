@@ -10,6 +10,10 @@ define(function(require) {
   var settings = require('models/settings');
 
 
+  var noDocs = function() {
+    return docs.length < 2 && cache.openDoc.isEmpty();
+  };
+
   var AppView = Backbone.View.extend({
 
     el: 'body',
@@ -20,20 +24,39 @@ define(function(require) {
 
       this.$menuButton = $('#menu-button');
 
-      if (!cache.isMobile) {
+
+      if (cache.isMobile) {
+
+        cache.loading.done(_.bind(function() {
+          //only one doc and it is empty
+          if ( noDocs() ) {
+            this.$menuButton.fadeOut();
+          } else {
+            this.aside('visible');
+          }
+        }, this));
+
+      } else {
+
+        this.aside('visible');
 
         setTimeout(_.bind(function() {
           this.aside('hidden');
         }, this), 3000);
 
-        //hide sidebar when 3 or more docs and the open doc is not empty
-        docs.on('change:title', function() {
-            setTimeout(_.bind(function() {
-              this.aside('hidden');
-            }, this), 1000);
-        }, this);
-
       }
+
+
+      docs.on('change:title', function() {
+          setTimeout(_.bind(function() {
+            if (cache.isMobile) {
+              this.$menuButton[noDocs() ? 'fadeOut' : 'fadeIn']();
+            } else {
+              this.aside('hidden');
+            }
+          }, this), 1000);
+      }, this);
+
 
       var showAside = function() {
         if (!cache.isMobile) this.aside('visible');
@@ -55,6 +78,7 @@ define(function(require) {
         } else if (state === 'visible') {
           $aside.addClass('visible');
         } else if (state === 'hidden') {
+          //hide sidebar when 3 or more docs and the open doc is not empty
           if (docs.length > 2 && !cache.openDoc.isEmpty()) {
             $aside.removeClass('visible');
           }
