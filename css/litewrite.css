@@ -115,24 +115,15 @@ footer a { display:inline; padding:0; }
 
 
 @media print {
-    .aside, .menu-button, .entries {
-        opacity: 0;
-        height: auto;
-        overflow: visible;
-    }
-    body {
-        height: auto;
-        position: static;
-    }
-    .editor {
-        display: block;
-        margin: 0;
-        padding: 0;
-        height: auto;
-        width: auto;
-        position: static;
-    }
-    #remotestorage-connect {
-    	display: none;
-    }
+	.aside, .menu-button, #remotestorage-connect {
+		opacity: 0;
+	}
+
+	body, .editor {
+		margin: 0;
+		padding: 10px;
+		height: auto;
+		width: auto;
+		position: static;
+	}
 }
