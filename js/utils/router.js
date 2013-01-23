@@ -26,7 +26,13 @@ define(function(require) {
       } else {
         settings.set('openDocId', doc.id);
       }
+    },
+
+    setUrl: function() {
+      this.navigate('!/' + cache.openDoc.get('url'));
     }
+
+
   });
 
   return new Router();
