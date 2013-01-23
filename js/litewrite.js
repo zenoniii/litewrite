@@ -28,7 +28,7 @@ define(function(require) {
           remoteStorage.setBearerToken(md[1]);
         }
       }, 0);
-        
+
     });
 
     settings
@@ -88,7 +88,7 @@ define(function(require) {
   }
 
   function setUrl() {
-    router.navigate(cache.openDoc.get('url'));
+    router.navigate('!/' + cache.openDoc.get('url'));
   }
 
   function fetch() {
