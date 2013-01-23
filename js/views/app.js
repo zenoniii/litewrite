@@ -82,13 +82,13 @@ define(function(require) {
 
     toggleAside: function(e) {
       e.stopImmediatePropagation();
-      this.$menuButton.removeClass('hide'); // TODO probably better to call the function directly
+      this.$menuButton.fadeIn(); // TODO probably better to call the function directly
       this.aside();
     },
 
     toggleMenuButton: function(e) {
       var top = $(e.currentTarget).scrollTop();
-      this.$menuButton[top > 20 ? 'addClass' : 'removeClass' ]('hide');
+      this.$menuButton[top > 20 ? 'fadeOut' : 'fadeIn' ]();
     },
 
     handleKey: function(e) {
