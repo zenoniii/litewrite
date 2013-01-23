@@ -112,3 +112,27 @@ footer a { display:inline; padding:0; }
 	/* Opera doesn't support this in the shorthand */
 	background-attachment:local, local, scroll, scroll;
 }
+
+
+@media print {
+    .aside, .menu-button, .entries {
+        opacity: 0;
+        height: auto;
+        overflow: visible;
+    }
+    body {
+        height: auto;
+        position: static;
+    }
+    .editor {
+        display: block;
+        margin: 0;
+        padding: 0;
+        height: auto;
+        width: auto;
+        position: static;
+    }
+    #remotestorage-connect {
+    	display: none;
+    }
+}
