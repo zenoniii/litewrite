@@ -26,10 +26,6 @@ define(function(require) {
           this.aside('hidden');
         }, this), 3000);
 
-        docs.on('add', function() {
-          this.aside('visible');
-        }, this);
-
         //hide sidebar when 3 or more docs and the open doc is not empty
         docs.on('change:title', function() {
             setTimeout(_.bind(function() {
@@ -37,11 +33,14 @@ define(function(require) {
             }, this), 1000);
         }, this);
 
-        docs.on('fetch', function() {
-          this.aside('visible');
-        }, this);
-
       }
+
+      var showAside = function() {
+        if (!cache.isMobile) this.aside('visible');
+      };
+      docs.on('add', showAside, this);
+      docs.on('fetch', showAside, this);
+
 
       this.editor.$el.scroll(_.bind(this.toggleMenuButton, this));
       this.entries.$el.scroll(_.bind(this.toggleMenuButton, this));

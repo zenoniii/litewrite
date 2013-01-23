@@ -12,13 +12,6 @@ define(function(require) {
     el: '#editor',
 
     initialize: function() {
-      if (!cache.isMobile) {
-        _.around(this, 'render', function(render) {
-          render();
-          this.focus();
-        }, this);
-      }
-
       cache.loading.done(_.bind(this.render, this));
       settings.on('change:openDocId', this.render, this);
     },
@@ -30,6 +23,7 @@ define(function(require) {
       } else {
         this.$el.text(' ');
       }
+      if (!cache.isMobile) this.focus();
     },
 
     focus: function() {
