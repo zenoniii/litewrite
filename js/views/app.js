@@ -18,6 +18,7 @@ define(function(require) {
       this.editor = new EditorView();
       this.entries = new EntriesView();
 
+      this.$menuButton = $('#menu-button');
 
       if (!cache.isMobile) {
 
@@ -42,10 +43,9 @@ define(function(require) {
 
       }
 
-      // TODO Should be integrated with the 'events' object but doesn't work.
-      var appView = this;
-      $('#editor').scroll(function(e) { appView.toggleMenuButton(e); });
-      $('#entries').scroll(function(e) { appView.toggleMenuButton(e); });
+      this.editor.$el.scroll(_.bind(this.toggleMenuButton, this));
+      this.entries.$el.scroll(_.bind(this.toggleMenuButton, this));
+
     },
 
     aside: (function() {
@@ -67,7 +67,6 @@ define(function(require) {
       'click #add': 'newDoc',
       'click #aside': 'toggleAside',
       'click #menu-button': 'toggleAside',
-      'scroll': 'toggleMenuButton',
       'keydown': 'handleKey',
       'keyup': 'hideAside'
     },
@@ -84,22 +83,19 @@ define(function(require) {
 
     toggleAside: function(e) {
       e.stopImmediatePropagation();
-      $('#menu-button').removeClass('hide'); // TODO probably better to call the function directly
+      this.$menuButton.removeClass('hide'); // TODO probably better to call the function directly
       this.aside();
     },
 
     toggleMenuButton: function(e) {
-      if($(e.currentTarget).scrollTop() > 20) {
-        $('#menu-button').addClass('hide');
-      } else {
-        $('#menu-button').removeClass('hide');
-      }
+      var top = $(e.currentTarget).scrollTop();
+      this.$menuButton[top > 20 ? 'addClass' : 'removeClass' ]('hide');
     },
 
     handleKey: function(e) {
       if (e.which === 9) { //tab
         e.preventDefault();
-      } else if (cache.isMac ? e.ctrlKey : e.altKey) {
+      } else if (e[cache.modKey.name]) {
         this.aside('visible');
         if (e.which === 78) { //n
           this.newDoc(e);
@@ -114,7 +110,7 @@ define(function(require) {
     },
 
     hideAside: function(e) {
-      if (e.which === (cache.isMac ? 17 : 18)) this.aside('hidden');
+      if (e.which === (cache.modKey.code)) this.aside('hidden');
     },
 
     openPreviousDoc: function() {
