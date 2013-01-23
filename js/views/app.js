@@ -81,9 +81,11 @@ define(function(require) {
     },
 
     toggleAside: function(e) {
-      e.stopImmediatePropagation();
-      this.$menuButton.fadeIn(); // TODO probably better to call the function directly
-      this.aside();
+      if (cache.isMobile) {
+        e.stopImmediatePropagation();
+        this.$menuButton.fadeIn();
+        this.aside();
+      }
     },
 
     toggleMenuButton: function(e) {
