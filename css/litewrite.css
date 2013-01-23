@@ -13,7 +13,7 @@ html, body {
 	font:normal 1.7em/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none; resize:none;
 }
-[contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; font-size:2em; line-height:2.4em; }
+[contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
 
 
 aside {
