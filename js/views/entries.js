@@ -66,7 +66,10 @@ define(function(require) {
         .addClass('selected');
 
       //scroll list to selected element
-      this.$el.scrollTop( this.$selected.position().top - 15 );
+      var position = this.$selected.position();
+      if (position) {
+        this.$el.scrollTop( position.top - 15 );
+      }
     },
 
     events: {
