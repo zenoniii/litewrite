@@ -113,8 +113,10 @@ define(function(require) {
     },
 
     toggleMenuButton: function(e) {
-      var top = $(e.currentTarget).scrollTop();
-      this.$menuButton[top > 20 ? 'fadeOut' : 'fadeIn' ]();
+      if (cache.isMobile) {
+        var top = $(e.currentTarget).scrollTop();
+        this.$menuButton[top > 20 ? 'fadeOut' : 'fadeIn' ]();
+      }
     },
 
     handleKey: function(e) {
