@@ -10,7 +10,7 @@ define(function(require) {
   var Router = Backbone.Router.extend({
     routes: {
       '': 'openLastEdited',
-      '!/:url': 'openDoc'
+      '!:url': 'openDoc'
     },
 
     openLastEdited: function() {
@@ -29,7 +29,7 @@ define(function(require) {
     },
 
     setUrl: function() {
-      this.navigate('!/' + cache.openDoc.get('url'));
+      this.navigate('!' + cache.openDoc.get('url'));
     }
 
 
