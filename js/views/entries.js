@@ -15,7 +15,7 @@ define(function(require) {
       this.template = _.template(entriesTemplate);
 
       // TODO: update height on resize
-      this.height = this.$el.height() - 50;
+      this.height = this.$el.height();
 
       docs.deferred.done(_.bind(this.render, this));
 
@@ -86,7 +86,7 @@ define(function(require) {
     openDoc: function(e) {
       e.preventDefault();
 
-      $('#menu-button').removeClass('hide'); // TODO probably better to call the function directly
+      $('#menu-button').removeClass('hide');
       settings.save('openDocId', this.$(e.currentTarget).attr('data-id'));
     }
 
