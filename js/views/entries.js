@@ -15,7 +15,7 @@ define(function(require) {
       this.template = _.template(entriesTemplate);
 
       // TODO: update height on resize
-      this.height = this.$el.height();
+      this.height = this.$el.height() - 50;
 
       docs.deferred.done(_.bind(this.render, this));
 
@@ -74,6 +74,7 @@ define(function(require) {
       var position = this.$selected.position();
       if (!position) return;
       var top = position.top;
+      console.log('height: ', this.height, 'top: ', top)
       if (top < 0 || top > this.height) {
         this.$el.scrollTop( top - 15 );
       }
