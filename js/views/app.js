@@ -97,11 +97,7 @@ define(function(require) {
     newDoc: function(e) {
       e.preventDefault();
 
-      if (!cache.openDoc.isEmpty()) {
-        docs.addNew();
-      } else {
-        this.editor.focus();
-      }
+      docs.addNew();
     },
 
     toggleAside: function(e) {

@@ -21,6 +21,7 @@ define(function(require) {
 
       docs
         .on('reset', this.render, this)
+        .on('add', this.render, this)
         .on('change:title', this.updateTitle, this)
         .on('destroy', this.removeItem, this);
 
@@ -31,9 +32,7 @@ define(function(require) {
       this.$el.html(
         this.template({
           docs: docs
-            .filter(function(doc) {
-              return !doc.isEmpty();
-            }).map(function(doc) {
+            .map(function(doc) {
               var res = doc.toJSON();
               res.opacity = doc.getOpacity();
               return res;
