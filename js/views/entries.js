@@ -91,9 +91,7 @@ define(function(require) {
       this.query = $(e.target).val();
       this.render();
       // TODO: no need to focus as soon as #118 is implemented
-      setTimeout(_.bind(function() {
-        this.$('#search').focus();
-      }, this), 0);
+      this.$('#search').focus();
     }
 
   });
