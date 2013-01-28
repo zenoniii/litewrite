@@ -74,6 +74,10 @@ define(function(require) {
       }
     },
 
+    focusSearch: function() {
+      this.$('#search').focus();
+    },
+
     events: {
       'click .item': 'openDoc',
       // TODO: use keyup to automatically search while typing as soon as #118 is implemented
@@ -91,7 +95,7 @@ define(function(require) {
       this.query = $(e.target).val();
       this.render();
       // TODO: no need to focus as soon as #118 is implemented
-      this.$('#search').focus();
+      this.focusSearch();
     }
 
   });
