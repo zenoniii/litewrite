@@ -14,6 +14,9 @@ define(function(require) {
     initialize: function() {
       this.template = _.template(entriesTemplate);
 
+      // TODO: update height on resize
+      this.height = this.$el.height() - 50;
+
       docs.deferred.done(_.bind(this.render, this));
 
       docs
@@ -65,10 +68,15 @@ define(function(require) {
       this.$selected = this.$itemById( settings.get('openDocId') )
         .addClass('selected');
 
-      //scroll list to selected element
+      this.scrollToCurrentDoc();
+    },
+
+    scrollToCurrentDoc: function() {
       var position = this.$selected.position();
-      if (position) {
-        this.$el.scrollTop( position.top - 15 );
+      if (!position) return;
+      var top = position.top;
+      if (top < 0 || top > this.height) {
+        this.$el.scrollTop( top - 15 );
       }
     },
 
