@@ -1,6 +1,5 @@
 require.config( {
   deps: [
-    'utils/log',
     'libs/matchMedia'
   ],
   paths: {
