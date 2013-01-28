@@ -64,6 +64,17 @@ define(function(require) {
       if (previousDoc && previousDoc.isEmpty()) {
         previousDoc.destroy();
       }
+    },
+
+    prepare: function(query) {
+      return this
+        .filter(function(doc) {
+          return !doc.isEmpty() && doc.get('title').match(query) !== null;
+        }).map(function(doc) {
+          var res = doc.toJSON();
+          res.opacity = doc.getOpacity();
+          return res;
+        });
     }
 
   });
