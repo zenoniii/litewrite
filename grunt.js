@@ -20,7 +20,6 @@ module.exports = function(grunt) {
         remotestorage: 'empty:'
       },
       stubModules: [
-        'utils/log',
         'text'
       ]
     },
