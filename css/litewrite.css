@@ -127,3 +127,12 @@ footer a { display:inline; padding:0; }
 		position: static;
 	}
 }
+
+
+/**
+ * customization of the remotestorage widget
+**/
+
+#remotestorage-widget {
+	right: 20px !important;
+}
