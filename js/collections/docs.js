@@ -25,6 +25,7 @@ define(function(require) {
     },
 
     addNew: function() {
+      this.deleteEmpty();
       this.add({
         id: _.uniqueId(),
         lastEdited: new Date().getTime()

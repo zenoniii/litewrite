@@ -35,7 +35,6 @@ define(function(require) {
       .on('change:openDocId', setOpenDoc)
       .on('change:openDocId', setWindowTitle)
       .on('change:openDocId', router.setUrl, router)
-      .on('change:openDocId', docs.deleteEmpty, docs);
 
     docs
       .on('change:title', router.setUrl, router)

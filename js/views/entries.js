@@ -74,7 +74,6 @@ define(function(require) {
       var position = this.$selected.position();
       if (!position) return;
       var top = position.top;
-      console.log('height: ', this.height, 'top: ', top)
       if (top < 0 || top > this.height) {
         this.$el.scrollTop( top - 15 );
       }
