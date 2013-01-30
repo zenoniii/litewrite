@@ -19,7 +19,7 @@
    space="preserve"
    inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="litewrite-touch.svg"
-   inkscape:export-filename="litewrite-touch.png"
+   inkscape:export-filename="litewrite-light.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <metadata
@@ -35,7 +35,20 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs3057" />
+     id="defs3057">
+    <filter
+       inkscape:collect="always"
+       id="filter3818"
+       x="-0.12"
+       width="1.24"
+       y="-0.12"
+       height="1.24">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.8888889"
+         id="feGaussianBlur3820" />
+    </filter>
+  </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -43,7 +56,7 @@
      objecttolerance="10"
      gridtolerance="10"
      guidetolerance="10"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1280"
      inkscape:window-height="773"
@@ -74,5 +87,5 @@
      inkscape:connector-curvature="0"
      d="m 49.999999,11.111111 c -21.442554,0 -38.888888,17.446338 -38.888888,38.888892 0,21.444891 17.446334,38.888885 38.888888,38.888885 21.444892,0 38.88889,-17.443994 38.88889,-38.888885 0,-21.442554 -17.443998,-38.888892 -38.88889,-38.888892 z m 0,9.722222 c 16.083666,0 29.166666,13.084751 29.166666,29.16667 0,16.083662 -13.083,29.166669 -29.166666,29.166669 -16.081917,0 -29.166666,-13.083 -29.166666,-29.166669 0,-16.081913 13.084749,-29.166669 29.166666,-29.166669 z"
      id="path3053-4"
-     style="fill:#000000" />
+     style="fill:#ffffff" />
 </svg>
