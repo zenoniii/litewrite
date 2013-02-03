@@ -21,7 +21,7 @@ aside {
 	position:fixed; width:16%; min-width:135px; height:100%;
 	font:90% FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
-	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;
+	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
 }
 aside:hover, aside:focus, aside.visible { opacity:1; }
 
@@ -56,13 +56,13 @@ footer a { display:inline; padding:0; }
 
 .menu-button {
 	display:none; position:absolute; left:0; top:0;
-	-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;
+	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
 }
 /* Smartphones (portrait and landscape) ----------- */
 @media (max-width:720px) {
 	.editor { padding:15% 5% 5% 0; margin:0 0 0 5%; width:95%; font-size:20px; }
-	aside { opacity: 1; font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right: 100%; -webkit-transition: 0.3s right ease; }
-	aside.visible { right: 0; }
+	aside { opacity:1; font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right:100%; -webkit-transition:0.3s right ease; }
+	aside.visible { right:0; }
 	.add { padding:4px 1.2em; margin-top:50px; }
 		.add-plus, .add-text { color:#000; opacity:1 !important; position:relative !important; }
 		.add-plus:active, .add-text:active { opacity:1 !important; }
@@ -73,13 +73,13 @@ footer a { display:inline; padding:0; }
 }
 
 @media (max-width:720px) and (orientation:landscape) {
-    .menu-button { display:none; }
-    .editor { padding:0% 2% 2% 0; margin:0 0 0 2%; width:98%; }
-    .add { margin-top:0; }
+	.menu-button { display:none; }
+	.editor { padding:0% 2% 2% 0; margin:0 0 0 2%; width:98%; }
+	.add { margin-top:0; }
 }
 
 
-/** Scrolling shadows by @kizmarh and @leaverou: http://lea.verou.me/2012/04/background-attachment-local/
+/** Scrolling shadows by @kizmarh and @leaverou:http://lea.verou.me/2012/04/background-attachment-local/
  *  Only works in browsers supporting background-attachment:local; & CSS gradients
  *  Degrades gracefully */
 .scrollbox {
@@ -121,19 +121,14 @@ footer a { display:inline; padding:0; }
 	}
 
 	body, .editor {
-		margin: 0;
-		padding: 10px;
-		height: auto;
-		width: auto;
-		position: static;
+		margin:0;
+		padding:10px;
+		height:auto;
+		width:auto;
+		position:static;
 	}
 }
 
 
-/**
- * customization of the remotestorage widget
-**/
-
-#remotestorage-widget {
-	right: 20px !important;
-}
+/* Customization of remotestorage widget */
+#remotestorage-widget { right:20px !important; }
