@@ -115,7 +115,7 @@ footer a { display:inline; padding:0; }
 
 
 @media print {
-	 .entries, .menu-button, footer, #remotestorage-connect {
+	.entries, .menu-button, footer, #remotestorage-connect {
 		display:none;
 	}
 
