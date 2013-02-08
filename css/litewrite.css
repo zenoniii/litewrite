@@ -10,7 +10,7 @@ html, body {
 .editor {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
 	position:absolute; width:84%; height:100%; padding:5% 20% 20% 4%; margin:0 0 0 16%;
-	font:normal 1.7em/150% 'Alegreya',Georgia,serif;
+	font:normal 28px/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none; resize:none;
 }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
