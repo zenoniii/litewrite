@@ -10,6 +10,7 @@ define(function(require) {
   var Router = Backbone.Router.extend({
     routes: {
       '': 'openLastEdited',
+      '!': 'openLastEdited',
       '!:url': 'openDoc'
     },
 
