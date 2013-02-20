@@ -6,7 +6,7 @@ define(function(require) {
   Doc = Backbone.Model.extend({
 
     defaults: {
-      title: 'New document',
+      title: '',
       url: '',
       content: '',
       lastEdited: undefined
@@ -34,7 +34,7 @@ define(function(require) {
       var title = this.get('content')
         .match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*([^<]{0,40}).*?(<div>|<\/div>|<br>|$)/)[2]
         .replace(/&nbsp;/gi,'');
-      this.set('title', title || this.defaults.title);
+      this.set('title', title);
     },
 
     getOpacity: function() {

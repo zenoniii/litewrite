@@ -32,7 +32,9 @@ define(function(require) {
       this.$el.html(
         this.template({
           docs: docs
-            .map(function(doc) {
+            .filter(function(doc) {
+              return !doc.isEmpty();
+            }).map(function(doc) {
               var res = doc.toJSON();
               res.opacity = doc.getOpacity();
               return res;
