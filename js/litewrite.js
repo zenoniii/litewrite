@@ -7,6 +7,7 @@ define(function(require) {
   var cache = require('utils/cache');
   var settings = require('models/settings');
   var router = require('utils/router');
+  var remoteStorageDocuments = require('remotestorage-documents');
 
 
   function litewrite() {
@@ -21,6 +22,9 @@ define(function(require) {
 
     remoteStorage.claimAccess('documents', 'rw').then(function() {
       remoteStorage.displayWidget('remotestorage-connect');
+
+      remoteStorageDocuments.onChange('notes', fetch);
+
       setTimeout(function() {
         var md = origHash.match(/access_token=([^&]+)/);
         if(md && (! remoteStorage.getBearerToken())) {
