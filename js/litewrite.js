@@ -39,6 +39,7 @@ define(function(require) {
       .on('change:openDocId', setOpenDoc)
       .on('change:openDocId', setWindowTitle)
       .on('change:openDocId', router.setUrl, router)
+      .on('change:openDocId', docs.deleteEmpty, docs);
 
     docs
       .on('change:title', router.setUrl, router)
@@ -93,9 +94,9 @@ define(function(require) {
 
   function fetch() {
     console.log('fetch triggered');
-    docs.trigger('fetch');
     docs.fetch({
       success: function() {
+        docs.trigger('fetch');
         if (docs.isEmpty()) docs.addNew();
         docs.deferred.resolve();
       }
