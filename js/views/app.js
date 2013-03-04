@@ -47,6 +47,9 @@ define(function(require) {
       }
 
 
+      docs.on('fetch', this.editor.render, this.editor);
+
+
       docs.on('change:title', function() {
           setTimeout(_.bind(function() {
             if (cache.isMobile) {

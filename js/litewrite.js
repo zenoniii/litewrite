@@ -93,7 +93,6 @@ define(function(require) {
 
 
   function fetch() {
-    console.log('fetch triggered');
     docs.fetch({
       success: function() {
         docs.trigger('fetch');
