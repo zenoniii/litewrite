@@ -96,6 +96,7 @@ define(function(require) {
     docs.fetch({
       success: function() {
         docs.trigger('fetch');
+        setOpenDoc();
         if (docs.isEmpty()) docs.addNew();
         docs.deferred.resolve();
       }

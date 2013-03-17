@@ -19,7 +19,9 @@ define(function(require) {
     render: function() {
       var content = (cache.openDoc && cache.openDoc.get('content'));
       if (content) {
-        this.$el.html(content);
+        if (content !== this.$el.html()) {
+          this.$el.html(content);
+        }
       } else {
         this.$el.text(' ');
       }
