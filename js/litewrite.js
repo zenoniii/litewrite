@@ -24,7 +24,7 @@ define(function(require) {
       remoteStorage.displayWidget('remotestorage-connect');
 
       remoteStorageDocuments.onChange('notes', function(event) {
-        if(event.origin === 'remote') {
+        if(event.origin !== 'window') {
           fetch();
         }
       });
