@@ -7,8 +7,9 @@
     "url": "git://github.com/litewrite/litewrite.git"
   },
   "devDependencies": {
-    "grunt": ">=0.3.1",
-    "grunt-requirejs": "0.2.x",
-    "grunt-cleanx": "0.5.x"
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-requirejs": "~0.4.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.2.0"
   }
 }

@@ -7,12 +7,13 @@ Play with the [development version](http://litewrite.github.com/litewrite), chec
 
 1. git clone http://github.com/litewrite/litewrite
 2. Install [node.js](http://nodejs.org/#download)
-3. Run `sudo npm install` to install the dependencies
-4. `./grunt` to start a web server at [http://localhost:8000](http://localhost:8000)
+3. Install grunt gobally via (`sudo `)`npm install -g grunt-cli`
+4. Run `npm install` to install the development dependencies
+5. `grunt` to start a web server at [http://localhost:8000](http://localhost:8000)
 
 ### Building the production version
 
-Run `./grunt build`. But keep attention because it overwrites the existing files.
+Run `grunt build`. But keep attention because it overwrites the existing files.
 
 
 ## Thanks
