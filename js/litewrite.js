@@ -21,6 +21,7 @@ define(function(require) {
     });
 
     remoteStorage.claimAccess('documents', 'rw').then(function() {
+      remoteStorage.documents.init();
       remoteStorage.displayWidget('remotestorage-connect');
 
       remoteStorageDocuments.onChange('notes', function(event) {
