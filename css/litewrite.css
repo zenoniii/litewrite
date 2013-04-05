@@ -13,6 +13,7 @@ html, body {
 	font:normal 28px/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none; resize:none;
 	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
+	word-wrap:break-word; /* prevent scrolling for long words or links without whitespace */
 }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
 
@@ -63,15 +64,46 @@ footer a { display:inline; padding:0; }
 }
 /* Smartphones (portrait and landscape) ----------- */
 @media (max-width:720px) {
-	.editor { padding:15% 5% 5% 0; margin:0 0 0 5%; width:95%; font-size:20px; }
-	aside { opacity:1; font-size:24px; width:100%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right:100%; -webkit-transition:0.3s right ease; }
-	aside.visible { right:0; }
-	.add { padding:4px 1.2em; margin-top:50px; }
+	.editor {
+		padding:15% 5% 5% 0; margin:0 0 0 5%; width:100%; font-size:20px;
+		left:0;
+		-webkit-transition:0.3s left ease; -moz-transition:0.3s left ease; transition:0.3s left ease;
+	}
+		.visible .editor { left:85%; }
+
+	aside {
+		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right:100%;
+		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
+	}
+		.visible aside { right:15%; }
+
+	.add { padding:4px .5em; }
 		.add-plus, .add-text { color:#000; opacity:1 !important; position:relative !important; }
 		.add-plus:active, .add-text:active { opacity:1 !important; }
 		.add-plus { top:0 !important; }
+
 	.entries a { padding:10px 0 10px 14px; }
-	.menu-button { display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px; }
+	.entries a:hover, .entries a:focus {
+		font-weight:normal; /* prevent bold-flickering when scrolling on mobile */
+	}
+
+	.menu-button {
+		position:relative; display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px;
+		left:0;
+		-webkit-transition:0.3s left ease; -moz-transition:0.3s left ease; transition:0.3s left ease;
+	}
+		.visible .menu-button {
+			left:85%;
+			/* expand clickable area to cover document side, prevent selecting of document when in menu */
+			padding-bottom:150%; padding-right:30px;
+		}
+
+	#remotestorage-connect {
+		position:relative; right:-10px; top:-2px;
+		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
+	}
+		.visible #remotestorage-connect { right:-100%; }
+
 	footer { display:none; }
 }
 

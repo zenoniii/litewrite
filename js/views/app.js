@@ -69,12 +69,11 @@ define(function(require) {
 
 
       this.editor.$el.scroll(_.bind(this.toggleHeader, this));
-      this.entries.$el.scroll(_.bind(this.toggleHeader, this));
 
     },
 
     aside: (function() {
-      var $aside = this.$('aside');
+      var $aside = $('body');
       return function(state) {
         if (!state) {
           $aside.toggleClass('visible');
