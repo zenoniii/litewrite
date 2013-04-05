@@ -14,9 +14,9 @@ define(function(require) {
 
     var origHash = document.location.hash;
 
-    remoteStorage.onWidget('ready', fetch);
+    remoteStorage.on('ready', fetch);
 
-    remoteStorage.onWidget('disconnect', function() {
+    remoteStorage.on('disconnect', function() {
       docs.reset().addNew();
     });
 
