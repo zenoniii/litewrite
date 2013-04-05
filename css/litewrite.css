@@ -12,6 +12,7 @@ html, body {
 	position:absolute; width:84%; height:100%; padding:5% 20% 20% 4%; margin:0 0 0 16%;
 	font:normal 28px/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none; resize:none;
+	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
 }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
 
@@ -21,7 +22,9 @@ aside {
 	position:fixed; width:16%; min-width:135px; height:100%;
 	font:90% FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
+	overflow-y:auto; overflow-x:hidden; /* prevent horizontal scrolling */
 	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
+	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
 }
 aside:hover, aside:focus, aside.visible { opacity:1; }
 
