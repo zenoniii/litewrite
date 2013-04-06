@@ -120,7 +120,7 @@ footer a { display:inline; padding:0; }
 
 @media (max-width:720px) and (orientation:landscape) {
 	.menu-button { display:none; }
-	.editor { padding:0% 2% 2% 0; margin:0 0 0 2%; width:98%; }
+	.editor { padding:8% 2% 2% 0; margin:0 0 0 2%; width:98%; }
 	.add { margin-top:0; }
 }
 
