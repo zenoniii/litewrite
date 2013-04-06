@@ -27,7 +27,7 @@ aside {
 	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
 	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
 }
-aside:hover, aside:focus, aside.visible { opacity:1; }
+aside:hover, aside:focus, .visible aside { opacity:1; }
 
 aside a, .add {
 	display:block; cursor:pointer; outline:none;
