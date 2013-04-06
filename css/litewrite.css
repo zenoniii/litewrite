@@ -71,9 +71,9 @@ footer a { display:inline; padding:0; }
 	.editor {
 		padding:15% 5% 5% 0; margin:0 0 0 5%; width:100%; font-size:20px;
 		left:0;
-		-webkit-transition:0.3s left ease; -moz-transition:0.3s left ease; transition:0.3s left ease;
+		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
-		.visible .editor { left:85%; }
+		.visible .editor { left:85%; opacity:.2; }
 
 	aside {
 		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right:100%;
@@ -94,12 +94,13 @@ footer a { display:inline; padding:0; }
 	.menu-button {
 		position:relative; display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px;
 		left:0;
-		-webkit-transition:0.3s left ease; -moz-transition:0.3s left ease; transition:0.3s left ease;
+		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
 		.visible .menu-button {
 			left:85%;
 			/* expand clickable area to cover document side, prevent selecting of document when in menu */
 			padding-bottom:150%; padding-right:30px;
+			opacity:.2;
 		}
 
 	#remotestorage-connect {
