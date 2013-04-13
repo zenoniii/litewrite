@@ -7,7 +7,7 @@ html, body {
 @font-face { font-family:'Alegreya'; font-weight:normal; src:url(Alegreya-Regular.ttf); }
 @font-face { font-family:'Alegreya'; font-weight:bold; src:url(Alegreya-Bold.ttf); }
 
-body>.scrollbox{width:84%;}
+body>.scrollbox{width:84%; position: fixed;}
 .editor {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
 	padding:5% 20% 20% 4%; min-height: 100%;
@@ -82,7 +82,8 @@ footer a { display:inline; padding:0; }
 		left:0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
-		.visible .editor { left:85%; opacity:.2; }
+		body.visible>.scrollbox { left:85%; opacity:.2; }
+		visible>editor { width: 15%; }
 
 	aside {
 		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/lightpaperfibers.png) repeat; right:100%;
@@ -101,7 +102,7 @@ footer a { display:inline; padding:0; }
 	}
 
 	.menu-button {
-		position:relative; display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px;
+		position:absolute; display:block; padding:14px; cursor:pointer; font-weight:bold; font-size:22px;
 		left:0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
@@ -110,13 +111,14 @@ footer a { display:inline; padding:0; }
 			/* expand clickable area to cover document side, prevent selecting of document when in menu */
 			padding-bottom:150%; padding-right:30px;
 			opacity:.2;
+			position: fixed;
 		}
 
 	#remotestorage-connect {
 		position:relative; /*right:-10px;*/ top:-2px;
 		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
 	}
-		.visible #remotestorage-connect { right:-100%; }
+		.visible #remotestorage-connect { display: none; }
 
 	footer { display:none; }
 }
@@ -131,7 +133,7 @@ footer a { display:inline; padding:0; }
  *  Only works in browsers supporting background-attachment:local; & CSS gradients
  *  Degrades gracefully */
 .scrollbox {
-	position:absolute; margin:0 0 0 16%;  max-height:100%;
+	margin:0 0 0 16%;  max-height:100%;
 	overflow:auto;
 	background-color:transparent;
 	background:
