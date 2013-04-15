@@ -82,7 +82,6 @@ footer a { display:inline; padding:0; }
 		left:0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
-		body.visible>.scrollbox { width: 15%  }
 		.visible .editor { position: fixed; left: 85%; opacity:.2; overflow: hidden; }
 
 	aside {
@@ -109,9 +108,10 @@ footer a { display:inline; padding:0; }
 		.visible .menu-button {
 			left:85%;
 			/* expand clickable area to cover document side, prevent selecting of document when in menu */
-			padding-bottom:150%; padding-right:30px;
+			padding-bottom:150%; padding-right:30%;
 			opacity:.2;
 			position: fixed;
+			z-index: 1;
 		}
 
 	#remotestorage-connect {
