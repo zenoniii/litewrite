@@ -118,7 +118,7 @@ footer a { display:inline; padding:0; }
 		position:relative; right:1px; top:-2px;
 		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
 	}
-		.visible #remotestorage-connect { right: -300% }
+		.visible #remotestorage-connect { right: -100%; overflow: hidden;}
 
 	footer { display:none; }
 }
