@@ -10,7 +10,7 @@ html, body {
 body>.scrollbox{width:84%; position: fixed;}
 .editor {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
-	position: absolute; padding:3.5% 20% 20% 4%; margin: 0;
+	position: absolute; padding:3.5% 20% 20% 4%; margin: 0; width: 100%;
 	font:normal 28px/150% 'Alegreya',Georgia,serif;
 	outline:none; overflow:auto; border:none;
 	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
