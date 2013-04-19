@@ -1,5 +1,5 @@
 html, body {
-	margin:0; padding:0;
+	margin:0; padding:0; overflow: hidden;
 	color:#000;
 	background:#fcfcfc url(../img/noise.png) repeat;
 }
@@ -76,13 +76,16 @@ footer a { display:inline; padding:0; }
 }
 /* Smartphones (portrait and landscape) ----------- */
 @media (max-width:720px) {
-	body>.scrollbox{width:100%; margin: 0; overflow-x: hidden;}
-	.editor {
-		top: 50px; padding: 0 14px 50px; font-size:20px;
-		left:0;
+	body>.scrollbox{
+		position: absolute; width:100%; margin: 0;
+		overflow-x: hidden;
+		left: 0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
-		.visible .editor { position: fixed; left: 85%; opacity:.2; overflow: hidden; }
+	.editor {
+		top: 50px; padding: 0 14px 50px; font-size:20px;
+	}
+		.visible>.scrollbox { position: fixed; left: 85%; opacity:.2; }
 
 	aside {
 		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/noise.png) repeat; right:100%;
@@ -106,19 +109,14 @@ footer a { display:inline; padding:0; }
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
 		.visible .menu-button {
-			left:85%;
 			/* expand clickable area to cover document side, prevent selecting of document when in menu */
 			padding-bottom:150%; padding-right:30%;
-			opacity:.2;
-			position: fixed;
 			z-index: 1;
 		}
 
 	#remotestorage-connect {
 		position:relative; right:1px; top:-2px;
-		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
 	}
-		.visible #remotestorage-connect { right: -100%; overflow: hidden;}
 
 	footer { display:none; }
 }
@@ -134,6 +132,7 @@ footer a { display:inline; padding:0; }
  *  Degrades gracefully */
 .scrollbox {
 	margin:0 0 0 16%; height:100%;
+	-webkit-overflow-scrolling:touch;
 	overflow:auto;
 	background-color:transparent;
 	background:
