@@ -10,9 +10,9 @@ define(function(require) {
   var settings = require('models/settings');
 
 
-  var noDocs = function() {
+  function noDocs() {
     return docs.length < 2 && cache.openDoc.isEmpty();
-  };
+  }
 
   var AppView = Backbone.View.extend({
 
