@@ -127,43 +127,6 @@ footer a { display:inline; padding:0; }
 }
 
 
-/** Scrolling shadows by @kizmarh and @leaverou:http://lea.verou.me/2012/04/background-attachment-local/
- *  Only works in browsers supporting background-attachment:local; & CSS gradients
- *  Degrades gracefully */
-.scrollbox {
-	margin:0 0 0 16%; height:100%;
-	-webkit-overflow-scrolling:touch;
-	overflow:auto;
-	background-color:transparent;
-	background:
-		/* Shadow covers */
-		-webkit-linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
-		-webkit-linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
-		/* Shadows */
-		-webkit-radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-		-webkit-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-	background:
-		/* Shadow covers */
-		-moz-linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
-		-moz-linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
-		/* Shadows */
-		-moz-radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-		-moz-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-	background:
-		/* Shadow covers */
-		linear-gradient(#fcfcfc 30%, rgba(255,255,255,0)),
-		linear-gradient(rgba(255,255,255,0), #fcfcfc 70%) 0 100%,
-		/* Shadows */
-		radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-		radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-	background-repeat:no-repeat;
-	background-size:100% 40px, 100% 40px, 100% 14px, 100% 14px;
-
-	/* Opera doesn't support this in the shorthand */
-	background-attachment:local, local, scroll, scroll;
-}
-
-
 @media print {
 	.entries, .menu-button, footer, #remotestorage-connect {
 		display:none;
