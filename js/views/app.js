@@ -67,9 +67,6 @@ define(function(require) {
       docs.on('add', showAside, this);
       docs.on('fetch', showAside, this);
 
-
-      this.editor.$el.scroll(_.bind(this.toggleHeader, this));
-
     },
 
     aside: (function() {
@@ -112,14 +109,6 @@ define(function(require) {
         e.stopImmediatePropagation();
         this.$menuButton.fadeIn();
         this.aside();
-      }
-    },
-
-    toggleHeader: function(e) {
-      if (cache.isMobile) {
-        var top = $(e.currentTarget).scrollTop();
-        this.$menuButton[top > 20 ? 'fadeOut' : 'fadeIn' ]();
-        $('#remotestorage-connect')[top > 20 ? 'fadeOut' : 'fadeIn' ]();
       }
     },
 
