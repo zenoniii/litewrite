@@ -8,6 +8,7 @@ define(function(require) {
 
 
   var Router = Backbone.Router.extend({
+    //use ! for urls to not conflict with remotestorage's #access_token parameter
     routes: {
       '': 'openLastEdited',
       '!': 'openLastEdited',
