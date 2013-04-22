@@ -17,7 +17,7 @@ define(function(require) {
       // TODO: update height on resize
       this.height = this.$el.height() - 50;
 
-      docs.deferred.done(_.bind(this.render, this));
+      docs.loading.done(_.bind(this.render, this));
 
       docs
         .on('reset', this.render, this)

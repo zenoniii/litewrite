@@ -16,7 +16,7 @@ define(function(require) {
     sync: rsSync,
 
     initialize: function(models) {
-      this.deferred = $.Deferred();
+      this.loading = $.Deferred();
 
       this
         .on('change:content', this.ensureOrder)

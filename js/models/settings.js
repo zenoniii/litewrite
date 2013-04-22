@@ -5,7 +5,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var Store = require('localstorage');
 
-  var deferred = $.Deferred();
+  var loading = $.Deferred();
 
   var Settings = Backbone.Model.extend({
 
@@ -17,7 +17,7 @@ define(function(require) {
     localStorage: new Store('appSettings'),
 
     initialize: function() {
-      this.deferred = deferred.promise();
+      this.loading = loading.promise();
       this.fetch({
         success: resolve,
         error: resolve
@@ -27,7 +27,7 @@ define(function(require) {
   });
 
   function resolve() {
-    deferred.resolve();
+    loading.resolve();
   }
   return new Settings();
 });

@@ -54,7 +54,7 @@ define(function(require) {
 
     fetch();
 
-    $.when(settings.deferred, docs.deferred)
+    $.when(settings.loading, docs.loading)
       .done(loadCache);
 
     cache.loading.done(setWindowTitle, startHistory);
@@ -104,7 +104,7 @@ define(function(require) {
         docs.trigger('fetch');
         setOpenDoc();
         if (docs.isEmpty()) docs.addNew();
-        docs.deferred.resolve();
+        docs.loading.resolve();
       }
     });
   }
