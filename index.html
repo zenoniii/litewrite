@@ -11,7 +11,12 @@
 </head>
 <body>
 	<div class="scrollbox">
-		<div id="menu-button" class="menu-button">☰</div>
+		<div id="menu-button" class="menu-button">
+			<!-- menu button as svg to make sure it runs everywhere -->
+			<svg height="15" width="15">
+				<path d="m0 0v3h15v-3h-15zm0 6v3h15v-3h-15zm0 6v3h15v-3h-15z"/>
+			</svg>
+		</div>
 		<div id="remotestorage-connect"></div>
 		<div id="editor" data-placeholder="Write …" class="editor" contenteditable></div>
 	</div>
