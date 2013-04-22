@@ -69,6 +69,13 @@ footer { position:absolute; bottom:0; padding:1em 2em; font-size:.7em; white-spa
 footer a { display:inline; padding:0; }
 
 
+#remotestorage-connect {
+	position: fixed;
+	top: 0;
+	right: 15px;
+}
+
+
 ::-webkit-scrollbar { width:.2em; }
 ::-webkit-scrollbar-track-piece { background-color:transparent; }
 ::-webkit-scrollbar-thumb { background:rgba(50,50,50,.3); }
@@ -148,7 +155,3 @@ footer a { display:inline; padding:0; }
 		position:static;
 	}
 }
-
-
-/* Customization of remotestorage widget */
-#remotestorage-widget { right:20px !important; }
