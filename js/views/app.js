@@ -22,15 +22,12 @@ define(function(require) {
       this.editor = new EditorView();
       this.entries = new EntriesView();
 
-      this.$menuButton = $('#menu-button');
-
 
       if (cache.isMobile) {
 
         cache.loading.done(_.bind(function() {
           //only one doc and it is empty
           if ( noDocs() ) {
-            this.$menuButton.fadeOut();
           } else {
             this.aside('visible');
           }
@@ -53,7 +50,6 @@ define(function(require) {
       docs.on('change:title', function() {
           setTimeout(_.bind(function() {
             if (cache.isMobile) {
-              this.$menuButton[noDocs() ? 'fadeOut' : 'fadeIn']();
             } else {
               this.aside('hidden');
             }
@@ -107,7 +103,6 @@ define(function(require) {
     toggleAside: function(e) {
       if (cache.isMobile) {
         e.stopImmediatePropagation();
-        this.$menuButton.fadeIn();
         this.aside();
       }
     },
