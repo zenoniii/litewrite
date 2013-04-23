@@ -89,7 +89,10 @@ footer a { display:inline; padding:0; }
 	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
 	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
 }
+
 /* Smartphones (portrait and landscape) ----------- */
+
+/* keep in sync with value in utils/cache.js */
 @media (max-width:720px) {
 	body>.scrollbox{
 		position: absolute; width:100%; margin: 0;
@@ -136,6 +139,7 @@ footer a { display:inline; padding:0; }
 	footer { display:none; }
 }
 
+/* keep in sync with value in utils/cache.js */
 @media (max-width:720px) and (orientation:landscape) {
 	.menu-button { display:none; }
 	.add { margin-top:0; }
