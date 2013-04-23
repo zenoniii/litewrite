@@ -10,7 +10,7 @@ define(function(require) {
   var settings = require('models/settings');
 
 
-  function noDocs() {
+  function haDocs() {
     return docs.length < 2 && cache.openDoc.isEmpty();
   }
 
@@ -27,10 +27,7 @@ define(function(require) {
 
         cache.loading.done(_.bind(function() {
           //only one doc and it is empty
-          if ( noDocs() ) {
-          } else {
-            this.aside('visible');
-          }
+          if (haDocs()) this.aside('visible');
         }, this));
 
       } else {
@@ -49,10 +46,7 @@ define(function(require) {
 
       docs.on('change:title', function() {
           setTimeout(_.bind(function() {
-            if (cache.isMobile) {
-            } else {
-              this.aside('hidden');
-            }
+            if (!cache.isMobile) this.aside('hidden');
           }, this), 1000);
       }, this);
 
