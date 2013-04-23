@@ -4,7 +4,7 @@ require.config( {
   ],
   paths: {
     text: 'libs/require.text',
-    jquery: ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min', 'libs/jquery.min'],
+    jquery: 'libs/jquery.min',
     underscore: 'libs/underscore',
     backbone: 'libs/backbone',
     localstorage: 'libs/backbone.localstorage',
