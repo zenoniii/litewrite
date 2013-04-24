@@ -139,12 +139,6 @@ footer a { display:inline; padding:0; }
 	footer { display:none; }
 }
 
-/* keep in sync with value in utils/cache.js */
-@media (max-width:720px) and (orientation:landscape) {
-	.menu-button { display:none; }
-	.add { margin-top:0; }
-}
-
 
 @media print {
 	.entries, .menu-button, footer, #remotestorage-connect {
