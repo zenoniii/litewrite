@@ -10,10 +10,6 @@ define(function(require) {
   var settings = require('models/settings');
 
 
-  function haDocs() {
-    return docs.length < 2 && cache.openDoc.isEmpty();
-  }
-
   var AppView = Backbone.View.extend({
 
     el: 'body',
@@ -26,8 +22,10 @@ define(function(require) {
       if (cache.isMobile) {
 
         cache.loading.done(_.bind(function() {
-          //only one doc and it is empty
-          if (haDocs()) this.aside('visible');
+          //more than one doc and open doc not empty
+          if ( docs.length > 1 && !cache.openDoc.isEmpty() ) {
+            this.aside('visible');
+          }
         }, this));
 
       } else {
