@@ -31,14 +31,8 @@ define(function(require) {
     render: function() {
       this.$el.html(
         this.template({
-          docs: docs
-            .filter(function(doc) {
-              return !doc.isEmpty();
-            }).map(function(doc) {
-              var res = doc.toJSON();
-              res.opacity = doc.getOpacity();
-              return res;
-            })
+          query: this.query || '',
+          docs: docs.prepare(this.query)
         })
       );
 
@@ -81,13 +75,26 @@ define(function(require) {
       }
     },
 
+    focusSearch: function() {
+      this.$('#search').focus();
+    },
+
     events: {
-      'click .item': 'openDoc'
+      'click .item': 'openDoc',
+      // TODO: use keyup to automatically search while typing as soon as #118 is implemented
+      'change #search': 'search'
     },
 
     openDoc: function(e) {
       e.preventDefault();
       settings.save('openDocId', this.$(e.currentTarget).attr('data-id'));
+    },
+
+    search: function(e) {
+      this.query = $(e.target).val();
+      this.render();
+      // TODO: no need to focus as soon as #118 is implemented
+      this.focusSearch();
     }
 
   });
