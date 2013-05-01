@@ -41,7 +41,7 @@ define(function(require) {
     });
 
     settings
-      .on('change:openDocId', setOpenDoc)
+      .on('change:openDocId', saveDocAndChange)
       .on('change:openDocId', setWindowTitle)
       .on('change:openDocId', router.setUrl, router)
       .on('change:openDocId', docs.deleteEmpty, docs);
@@ -77,6 +77,11 @@ define(function(require) {
     if ( _.isUndefined(settings.get('openDocId')) ) {
       settings.save('openDocId', docs.first().id);
     }
+  }
+
+  function saveDocAndChange() {
+    cache.openDoc.save();
+    setOpenDoc();
   }
 
   function setOpenDoc() {
