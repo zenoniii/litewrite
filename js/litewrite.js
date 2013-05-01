@@ -80,7 +80,7 @@ define(function(require) {
   }
 
   function saveDocAndChange() {
-    cache.openDoc.save();
+    if (cache.openDoc) cache.openDoc.save();
     setOpenDoc();
   }
 
