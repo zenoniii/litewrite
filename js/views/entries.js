@@ -28,10 +28,10 @@ define(function(require) {
       settings.on('change:openDocId', this.selectOpenDoc, this);
     },
 
-    render: function(query) {
+    render: function(options) {
       this.$el.html(
         this.template({
-          docs: docs.prepare(query)
+          docs: docs.prepare(options && options.query)
         })
       );
 

@@ -69,8 +69,8 @@ define(function(require) {
     prepare: function(query) {
       return this
         .filter(function(doc) {
-          var search = new RegExp(query, 'i');
-          return !doc.isEmpty() && search.test( doc.get('title') );
+          var match = query ? new RegExp(escapeRegExp(query), 'i').test( doc.get('title') ) : true;
+          return !doc.isEmpty() && match;
         }).map(function(doc) {
           var res = doc.toJSON();
           res.opacity = doc.getOpacity();

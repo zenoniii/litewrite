@@ -146,7 +146,7 @@ define(function(require) {
 
     search: function(e) {
       var query = this.$search.val();
-      this.entries.render(query);
+      this.entries.render({ query: query });
     },
 
     showAside: function () {
