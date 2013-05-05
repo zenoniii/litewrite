@@ -84,9 +84,10 @@ define(function(require) {
       'click #aside': 'toggleAside',
       'click #menu-button': 'toggleAside',
       'keydown': 'handleKey',
-      'keyup': 'hideAside',
+      'keyup #editor': 'hideAside',
       'search #search': 'search',
-      'keyup #search': 'search'
+      'keyup #search': 'search',
+      'focus #search': 'showAside'
     },
 
     newDoc: function(e) {
@@ -146,6 +147,10 @@ define(function(require) {
     search: function(e) {
       var query = this.$search.val();
       this.entries.render(query);
+    },
+
+    showAside: function () {
+      this.aside('visible');
     }
 
   });
