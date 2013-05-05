@@ -18,6 +18,8 @@ define(function(require) {
       this.editor = new EditorView();
       this.entries = new EntriesView();
 
+      this.$search = this.$('#search');
+
 
       if (cache.isMobile) {
 
@@ -73,12 +75,17 @@ define(function(require) {
       };
     })(),
 
+    focusSearch: function() {
+      this.$search.focus();
+    },
+
     events: {
       'click #add': 'newDoc',
       'click #aside': 'toggleAside',
       'click #menu-button': 'toggleAside',
       'keydown': 'handleKey',
-      'keyup': 'hideAside'
+      'keyup': 'hideAside',
+      'keyup #search': 'search'
     },
 
     newDoc: function(e) {
@@ -113,7 +120,7 @@ define(function(require) {
           this.openNextDoc();
           return false;
         } else if (e.which === 70) // f
-          this.entries.focusSearch();
+          this.focusSearch();
       }
     },
 
@@ -133,7 +140,14 @@ define(function(require) {
       if (nextDoc) {
         settings.save('openDocId', nextDoc.id);
       }
+    },
+
+    search: function(e) {
+      var query = this.$search.val();
+      console.log('search: ', query)
+      this.entries.render(query);
     }
+
   });
 
 
