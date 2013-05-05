@@ -69,7 +69,9 @@ define(function(require) {
     prepare: function(query) {
       return this
         .filter(function(doc) {
-          return !doc.isEmpty() && doc.get('title').match(query) !== null;
+          var search = new RegExp(query, 'i');
+          console.log( doc.get('title') ,search.test( doc.get('title') ))
+          return !doc.isEmpty() && search.test( doc.get('title') );
         }).map(function(doc) {
           var res = doc.toJSON();
           res.opacity = doc.getOpacity();
