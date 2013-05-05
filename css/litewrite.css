@@ -73,6 +73,7 @@ footer a { display:inline; padding:0; }
 	position: fixed;
 	top: 0;
 	right: 15px;
+	z-index: 1;
 }
 
 

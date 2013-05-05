@@ -112,7 +112,8 @@ define(function(require) {
         } else if (e.which === 40) { //down
           this.openNextDoc();
           return false;
-        }
+        } else if (e.which === 70) // f
+          this.entries.focusSearch();
       }
     },
 
