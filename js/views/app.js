@@ -85,6 +85,7 @@ define(function(require) {
       'click #menu-button': 'toggleAside',
       'keydown': 'handleKey',
       'keyup': 'hideAside',
+      'search #search': 'search',
       'keyup #search': 'search'
     },
 

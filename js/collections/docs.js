@@ -70,7 +70,6 @@ define(function(require) {
       return this
         .filter(function(doc) {
           var search = new RegExp(query, 'i');
-          console.log( doc.get('title') ,search.test( doc.get('title') ))
           return !doc.isEmpty() && search.test( doc.get('title') );
         }).map(function(doc) {
           var res = doc.toJSON();
