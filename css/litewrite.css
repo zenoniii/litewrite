@@ -133,7 +133,7 @@ footer a { display:inline; padding:0; }
 		.visible aside { right:15%; }
 
 	.add { padding:4px .5em; }
-		.add-plus, .add-text { color:#000; opacity:1 !important; position:relative !important; }
+		.add-plus, .add-text { opacity:1 !important; position:relative !important; }
 		.add-plus:active, .add-text:active { opacity:1 !important; }
 		.add-plus { top:0 !important; }
 
