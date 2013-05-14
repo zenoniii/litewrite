@@ -37,7 +37,6 @@ aside {
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 	overflow:hidden; /* prevent scrolling, done in .entries */
 	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
-	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
 	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
 }
 aside:hover, aside:focus, .visible aside { opacity:1; }
@@ -72,8 +71,12 @@ aside a, .add {
 	margin:0;
 	padding:0;
 	padding-top: 35px;
-	overflow-y:auto; overflow-x:hidden; /* prevent horizontal scrolling */
+	overflow: hidden; /* prevent horizontal scrolling */
+	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
 	list-style:none;
+}
+.entries:hover, .entries:focus {
+	overflow-y: auto; /* show scrollbar only on hover */
 }
 .entries a {
 	text-overflow:ellipsis; height:1.35em; padding:.5em 0 .5em 1.2em;
@@ -134,6 +137,9 @@ footer a { display:inline; padding:0; }
 		.add-plus:active, .add-text:active { opacity:1 !important; }
 		.add-plus { top:0 !important; }
 
+	.entries {
+		overflow-y: auto; /* always show scrollbar on mobile to prevent scroll issues */
+	}
 	.entries a { padding:10px 0 10px 14px; }
 	.entries a:hover, .entries a:focus {
 		font-weight:normal; /* prevent bold-flickering when scrolling on mobile */
