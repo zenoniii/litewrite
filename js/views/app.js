@@ -87,7 +87,8 @@ define(function(require) {
       'keyup #editor': 'hideAside',
       'search #search': 'search',
       'keyup #search': 'search',
-      'focus #search': 'showAside'
+      'focus #search': 'showAside',
+      'blur #search': 'hideAside'
     },
 
     newDoc: function(e) {
@@ -127,7 +128,7 @@ define(function(require) {
     },
 
     hideAside: function(e) {
-      if (e.which === (cache.modKey.code)) this.aside('hidden');
+      if (e.which === (cache.modKey.code) || e.which === 0) this.aside('hidden');
     },
 
     openPreviousDoc: function() {
