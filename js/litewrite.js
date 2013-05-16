@@ -1,6 +1,7 @@
 define(function(require) {
 
   var $ = require('jquery');
+  var _ = require('underscore');
   var Backbone = require('backbone');
   var AppView = require('views/app');
   var docs = require('collections/docs');
@@ -103,7 +104,7 @@ define(function(require) {
   }
 
 
-  function fetch() {
+  fetch = _.debounce(function() {
     docs.fetch({
       success: function() {
         docs.trigger('fetch');
@@ -112,7 +113,7 @@ define(function(require) {
         docs.loading.resolve();
       }
     });
-  }
+  }, 300);
 
 
   return litewrite;

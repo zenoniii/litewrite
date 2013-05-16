@@ -21,11 +21,11 @@ define(function(require) {
       if (content) {
         if (content !== this.$el.html()) {
           this.$el.html(content);
+          if (!cache.isMobile) this.focus();
         }
       } else {
         this.$el.text(' ');
       }
-      if (!cache.isMobile) this.focus();
     },
 
     focus: function() {
