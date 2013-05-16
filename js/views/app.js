@@ -81,7 +81,7 @@ define(function(require) {
 
     events: {
       'click #add': 'newDoc',
-      'click #aside': 'toggleAside',
+      'click #entries': 'toggleAside',
       'click #menu-button': 'toggleAside',
       'keydown': 'handleKey',
       'keyup #editor': 'hideAside',
@@ -103,6 +103,7 @@ define(function(require) {
     },
 
     toggleAside: function(e) {
+      console.log('toggleAside ')
       if (cache.isMobile) {
         e.stopImmediatePropagation();
         this.aside();
