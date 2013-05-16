@@ -88,7 +88,7 @@ define(function(require) {
       'search #search': 'search',
       'keyup #search': 'search',
       'focus #search': 'showAside',
-      'blur #search': 'hideAside'
+      'blur #search': 'hideAsideOnDesktop'
     },
 
     newDoc: function(e) {
@@ -128,7 +128,7 @@ define(function(require) {
     },
 
     hideAside: function(e) {
-      if (e.which === (cache.modKey.code) || e.which === 0) this.aside('hidden');
+      if (e.which === (cache.modKey.code)) this.aside('hidden');
     },
 
     openPreviousDoc: function() {
@@ -150,8 +150,12 @@ define(function(require) {
       this.entries.render({ query: query });
     },
 
-    showAside: function () {
+    showAside: function() {
       this.aside('visible');
+    },
+
+    hideAsideOnDesktop: function() {
+      if (!cache.isMobile) this.aside('hidden');
     }
 
   });
