@@ -1,10 +1,12 @@
 define(function(require) {
 
   var Backbone = require('backbone');
-  var mediator = require('mediator');
-
 
   var SearchView = Backbone.View.extend({
+
+    initialize: function(options) {
+      this.mediator = options.mediator;
+    },
 
     el: '#search',
 
@@ -17,7 +19,7 @@ define(function(require) {
 
     search: function() {
       var query = this.$el.val();
-      mediator.trigger('find', query);
+      this.mediator.trigger('find', query);
     },
 
     focus: function() {
@@ -25,11 +27,11 @@ define(function(require) {
     },
 
     show: function() {
-      mediator.trigger('search:focus');
+      this.mediator.trigger('search:focus');
     },
 
     hide: function() {
-      mediator.trigger('search:blur');
+      this.mediator.trigger('search:blur');
     }
 
   });

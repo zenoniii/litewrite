@@ -19,7 +19,7 @@ define(function(require) {
     initialize: function() {
       this.editor = new EditorView();
       this.entries = new EntriesView();
-      this.search = new SearchView();
+      this.search = new SearchView({ mediator: mediator });
 
 
       if (cache.isMobile) {
