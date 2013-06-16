@@ -1,3 +1,7 @@
+var livereload = require('connect-livereload');
+var connect = require('connect');
+
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -44,18 +48,32 @@ module.exports = function(grunt) {
    connect: {
       server: {
         options: {
-          keepalive: true
+          middleware: function(connect, options) {
+            return [
+              livereload(),
+              connect.static(options.base),
+              connect.directory(options.base)
+            ];
+          }
         }
       }
+    },
+
+    watch: {
+      options: {
+        livereload: true
+      },
+      files: ['*', '*/*']
     }
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('build', ['requirejs', 'clean']);
-
-  grunt.registerTask('default', 'connect');
+  grunt.registerTask('default', ['connect', 'watch']);
 
 };
