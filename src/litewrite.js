@@ -34,11 +34,8 @@ define(function(require) {
 
     cache.loading.done(setWindowTitle, startHistory);
 
-    //Load on DOM-ready
-    $(function() {
-      new AppView();
-      new FastClick(document.body);
-    });
+    new AppView();
+    new FastClick(document.body);
 
   }
 
