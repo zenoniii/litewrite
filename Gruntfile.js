@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         options: {
           name: '../lib/almond',
           include: 'main',
-          out: 'src/main.js',
+          out: 'main.js',
           baseUrl: 'src',
           keepBuildDir: true,
           inlineText: true,
@@ -28,14 +28,8 @@ module.exports = function(grunt) {
 
     clean: {
       build: [
-        'src/collections',
-        'src/models',
-        'src/templates',
-        'src/utils',
-        'src/views',
-        'src/build.txt',
-        'src/litewrite.js',
         'Gruntfile.js',
+        'src',
         'lib',
         'node_modules'
       ]
@@ -72,7 +66,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('replaceRequireHtml', 'include src/main in index.html instead of lib/require.', function () {
     var input = fs.readFileSync('index.html', { encoding: 'utf8' });
-    var output = input.replace('lib/require.js" data-main="src/main', 'src/main.js');
+    var output = input.replace('lib/require.js" data-main="src/main', 'main.js');
     fs.writeFileSync('index.html', output);
   });
 
