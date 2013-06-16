@@ -13,6 +13,36 @@ define(function(require) {
 
   function litewrite() {
 
+    initRemotestorage();
+
+    settings
+      .on('change:openDocId', saveDocAndChange)
+      .on('change:openDocId', setWindowTitle)
+      .on('change:openDocId', router.setUrl, router)
+      .on('change:openDocId', docs.deleteEmpty, docs);
+
+    docs
+      .on('change:title', router.setUrl, router)
+      .on('change:title', setWindowTitle)
+      .on('add', updateOpenDocId);
+
+
+    fetch();
+
+    $.when(settings.loading, docs.loading)
+      .done(loadCache);
+
+    cache.loading.done(setWindowTitle, startHistory);
+
+    //Load on DOM-ready
+    $(function() {
+      new AppView();
+      new FastClick(document.body);
+    });
+
+  }
+
+  function initRemotestorage() {
     var origHash = document.location.hash;
 
     remoteStorage.on('ready', fetch);
@@ -40,32 +70,6 @@ define(function(require) {
       }, 0);
 
     });
-
-    settings
-      .on('change:openDocId', saveDocAndChange)
-      .on('change:openDocId', setWindowTitle)
-      .on('change:openDocId', router.setUrl, router)
-      .on('change:openDocId', docs.deleteEmpty, docs);
-
-    docs
-      .on('change:title', router.setUrl, router)
-      .on('change:title', setWindowTitle)
-      .on('add', updateOpenDocId);
-
-
-    fetch();
-
-    $.when(settings.loading, docs.loading)
-      .done(loadCache);
-
-    cache.loading.done(setWindowTitle, startHistory);
-
-    //Load on DOM-ready
-    $(function() {
-      new AppView();
-      new FastClick(document.body);
-    });
-
   }
 
   function loadCache() {
