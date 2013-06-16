@@ -11,12 +11,12 @@ module.exports = function(grunt) {
             module: 'main'
           }],
           modules: [{name: 'main'}],
-          dir: 'js',
+          dir: 'src',
           keepBuildDir: true,
-          baseUrl: 'js',
+          baseUrl: 'src',
           inlineText: true,
           wrap: true,
-          mainConfigFile: 'js/main.js',
+          mainConfigFile: 'src/main.js',
           paths: {
             jquery: 'empty:',
             remotestorage: 'empty:'
@@ -30,13 +30,13 @@ module.exports = function(grunt) {
 
     clean: {
       build: [
-        'js/collections',
-        'js/models',
-        'js/templates',
-        'js/utils',
-        'js/views',
-        'js/build.txt',
-        'js/litewrite.js',
+        'src/collections',
+        'src/models',
+        'src/templates',
+        'src/utils',
+        'src/views',
+        'src/build.txt',
+        'src/litewrite.js',
         'Gruntfile.js'
       ]
     },
