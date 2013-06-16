@@ -11,7 +11,12 @@ require.config( {
     remotestorage: '../lib/remotestorage.min',
     'remotestorage-documents': '../lib/remotestorage-documents'
   },
-  baseUrl: 'src'
+  baseUrl: 'src',
+  shim: {
+    underscore: {
+      exports: '_'
+    }
+  }
 });
 
 require(['litewrite', '../lib/fastclick'], function(litewrite) {
