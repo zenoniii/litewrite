@@ -41,7 +41,20 @@ module.exports = function(grunt) {
         'src/views',
         'src/build.txt',
         'src/litewrite.js',
-        'Gruntfile.js'
+        'Gruntfile.js',
+        'lib/backbone.js',
+        'lib/backbone.localstorage.js',
+        'lib/fastclick.js',
+        'lib/matchMedia.js',
+        'lib/remotestorage-documents.js',
+        'lib/require.text.js',
+        'lib/underscore.js',
+        'src/backbone.js',
+        'src/localstorage.js',
+        'src/remotestorage-documents.js',
+        'src/text.js',
+        'src/underscore.js',
+        'node_modules'
       ]
     },
 
