@@ -39,7 +39,7 @@ aside {
 	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
 	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
 }
-aside:hover, aside:focus, .visible aside { opacity:1; }
+aside:hover, aside:focus, .show-aside aside { opacity:1; }
 
 #search {
 	z-index: 100;
@@ -123,13 +123,13 @@ footer a { display:inline; padding:0; }
 	.editor {
 		top: 50px; padding: 0 14px 50px; font-size:20px;
 	}
-		.visible>.scrollbox { position: fixed; left: 85%; opacity:.2; }
+		.show-aside>.scrollbox { position: fixed; left: 85%; opacity:.2; }
 
 	aside {
 		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/noise.png) repeat; right:100%;
 		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
 	}
-		.visible aside { right:15%; }
+		.show-aside aside { right:15%; }
 
 	.add { padding:4px .5em; }
 		.add-plus, .add-text { opacity:1 !important; position:relative !important; }
@@ -149,7 +149,7 @@ footer a { display:inline; padding:0; }
 		left:0;
 		-webkit-transition:all .3s ease; -moz-transition:all .3s ease; transition:all .3s ease;
 	}
-		.visible .menu-button {
+		.show-aside .menu-button {
 			/* expand clickable area to cover document side, prevent selecting of document when in menu */
 			padding-bottom:150%; padding-right:30%;
 			z-index: 1;

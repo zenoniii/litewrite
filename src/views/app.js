@@ -5,9 +5,11 @@ define(function(require) {
   var Backbone = require('backbone');
   var EntriesView = require('views/entries');
   var EditorView = require('views/editor');
+  var SearchView = require('views/search');
   var docs = require('collections/docs');
   var cache = require('utils/cache');
   var settings = require('models/settings');
+  var mediator = require('mediator');
 
 
   var AppView = Backbone.View.extend({
@@ -17,8 +19,7 @@ define(function(require) {
     initialize: function() {
       this.editor = new EditorView();
       this.entries = new EntriesView();
-
-      this.$search = this.$('#search');
+      this.search = new SearchView();
 
 
       if (cache.isMobile) {
@@ -26,16 +27,16 @@ define(function(require) {
         cache.loading.done(_.bind(function() {
           //more than one doc and open doc not empty
           if ( docs.length > 1 && !cache.openDoc.isEmpty() ) {
-            this.aside('visible');
+            this.showAside();
           }
         }, this));
 
       } else {
 
-        this.aside('visible');
+        this.showAside();
 
         setTimeout(_.bind(function() {
-          this.aside('hidden');
+          this.hideAside();
         }, this), 3000);
 
       }
@@ -46,49 +47,50 @@ define(function(require) {
 
       docs.on('change:title', function() {
           setTimeout(_.bind(function() {
-            if (!cache.isMobile) this.aside('hidden');
+            if (!cache.isMobile) this.hideAside();
           }, this), 1000);
       }, this);
 
 
-      var showAside = function() {
-        if (!cache.isMobile) this.aside('visible');
+      var showAsideOnDesktop = function() {
+        if (!cache.isMobile) this.showAside();
       };
-      docs.on('add', showAside, this);
-      docs.on('fetch', showAside, this);
+      docs.on('add', showAsideOnDesktop, this);
+      docs.on('fetch', showAsideOnDesktop, this);
+
+
+      mediator
+        .on('find', function(query) {
+          this.entries.render({ query: query });
+        }, this)
+        .on('search:focus', this.showAside, this)
+        .on('search:blur', function() {
+          if (!cache.isMobile) this.hideAside();
+        }, this);
 
     },
 
-    aside: (function() {
-      var $aside = $('body');
-      return function(state) {
-        if (!state) {
-          $aside.toggleClass('visible');
-        } else if (state === 'visible') {
-          $aside.addClass('visible');
-        } else if (state === 'hidden') {
-          //hide sidebar when 3 or more docs and the open doc is not empty
-          if (docs.length > 2 && !cache.openDoc.isEmpty()) {
-            $aside.removeClass('visible');
-          }
-        }
-      };
-    })(),
+    showAside: function() {
+      this.$el.addClass('show-aside');
+    },
 
-    focusSearch: function() {
-      this.$search.focus();
+    hideAside: function() {
+      //hide sidebar when 3 or more docs and the open doc is not empty
+      if (docs.length > 2 && !cache.openDoc.isEmpty()) {
+        this.$el.removeClass('show-aside');
+      }
+    },
+
+    toggleAside: function() {
+      this.$el.toggleClass('show-aside');
     },
 
     events: {
       'click #add': 'newDoc',
-      'click #entries': 'toggleAside',
-      'click #menu-button': 'toggleAside',
+      'click #entries': 'toggleAsideOnMobile',
+      'click #menu-button': 'toggleAsideOnMobile',
       'keydown': 'handleKey',
-      'keyup #editor': 'hideAside',
-      'search #search': 'search',
-      'keyup #search': 'search',
-      'focus #search': 'showAside',
-      'blur #search': 'hideAsideOnDesktop'
+      'keyup #editor': 'hideAsideOnKey'
     },
 
     newDoc: function(e) {
@@ -102,11 +104,10 @@ define(function(require) {
 
     },
 
-    toggleAside: function(e) {
-      console.log('toggleAside ')
+    toggleAsideOnMobile: function(e) {
       if (cache.isMobile) {
         e.stopImmediatePropagation();
-        this.aside();
+        this.toggleAside();
       }
     },
 
@@ -114,7 +115,7 @@ define(function(require) {
       if (e.which === 9) { //tab
         e.preventDefault();
       } else if (e[cache.modKey.name]) {
-        this.aside('visible');
+        this.showAside();
         if (e.which === 78) { //n
           this.newDoc(e);
         } else if (e.which === 38) { //up
@@ -124,12 +125,12 @@ define(function(require) {
           this.openNextDoc();
           return false;
         } else if (e.which === 70) // f
-          this.focusSearch();
+          this.search.focus();
       }
     },
 
-    hideAside: function(e) {
-      if (e.which === (cache.modKey.code)) this.aside('hidden');
+    hideAsideOnKey: function(e) {
+      if (e.which === (cache.modKey.code)) this.hideAside();
     },
 
     openPreviousDoc: function() {
@@ -144,19 +145,6 @@ define(function(require) {
       if (nextDoc) {
         settings.save('openDocId', nextDoc.id);
       }
-    },
-
-    search: function(e) {
-      var query = this.$search.val();
-      this.entries.render({ query: query });
-    },
-
-    showAside: function() {
-      this.aside('visible');
-    },
-
-    hideAsideOnDesktop: function() {
-      if (!cache.isMobile) this.aside('hidden');
     }
 
   });

@@ -39,6 +39,7 @@ define(function(require) {
 
   }
 
+
   function initRemotestorage() {
     var origHash = document.location.hash;
 
