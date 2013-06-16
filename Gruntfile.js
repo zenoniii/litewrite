@@ -1,3 +1,4 @@
+var fs = require('fs');
 var livereload = require('connect-livereload');
 var connect = require('connect');
 
@@ -9,22 +10,15 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          almond: false,
-          replaceRequireScript: [{
-            files: ['index.html'],
-            module: 'main'
-          }],
-          modules: [{name: 'main'}],
-          dir: 'src',
-          keepBuildDir: true,
+          name: '../lib/almond',
+          include: 'main',
+          out: 'src/main.js',
           baseUrl: 'src',
+          keepBuildDir: true,
           inlineText: true,
           wrap: true,
+          insertRequire: ['main'],
           mainConfigFile: 'src/main.js',
-          paths: {
-            jquery: 'empty:',
-            remotestorage: 'empty:'
-          },
           stubModules: [
             'text'
           ]
@@ -42,18 +36,7 @@ module.exports = function(grunt) {
         'src/build.txt',
         'src/litewrite.js',
         'Gruntfile.js',
-        'lib/backbone.js',
-        'lib/backbone.localstorage.js',
-        'lib/fastclick.js',
-        'lib/matchMedia.js',
-        'lib/remotestorage-documents.js',
-        'lib/require.text.js',
-        'lib/underscore.js',
-        'src/backbone.js',
-        'src/localstorage.js',
-        'src/remotestorage-documents.js',
-        'src/text.js',
-        'src/underscore.js',
+        'lib',
         'node_modules'
       ]
     },
@@ -86,7 +69,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('build', ['requirejs', 'clean']);
+
+  grunt.registerTask('replaceRequireHtml', 'include src/main in index.html instead of lib/require.', function () {
+    var input = fs.readFileSync('index.html', { encoding: 'utf8' });
+    var output = input.replace('lib/require.js" data-main="src/main', 'src/main.js');
+    fs.writeFileSync('index.html', output);
+  });
+
+
+  grunt.registerTask('build', ['requirejs', 'replaceRequireHtml', 'clean']);
   grunt.registerTask('default', ['connect', 'watch']);
 
 };
