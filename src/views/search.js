@@ -4,8 +4,7 @@ define(function(require) {
 
   var SearchView = Backbone.View.extend({
 
-    initialize: function(options) {
-      this.mediator = options.mediator;
+    initialize: function() {
     },
 
     el: '#search',
@@ -19,7 +18,7 @@ define(function(require) {
 
     search: function() {
       var query = this.$el.val();
-      this.mediator.trigger('find', query);
+      this.trigger('find', query);
     },
 
     focus: function() {
@@ -27,11 +26,11 @@ define(function(require) {
     },
 
     show: function() {
-      this.mediator.trigger('search:focus');
+      this.trigger('search:focus');
     },
 
     hide: function() {
-      this.mediator.trigger('search:blur');
+      this.trigger('search:blur');
     }
 
   });

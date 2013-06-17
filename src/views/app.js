@@ -9,7 +9,6 @@ define(function(require) {
   var docs = require('collections/docs');
   var cache = require('utils/cache');
   var settings = require('models/settings');
-  var mediator = require('mediator');
 
 
   var AppView = Backbone.View.extend({
@@ -19,7 +18,7 @@ define(function(require) {
     initialize: function() {
       this.editor = new EditorView();
       this.entries = new EntriesView();
-      this.search = new SearchView({ mediator: mediator });
+      this.search = new SearchView();
 
 
       if (cache.isMobile) {
@@ -59,7 +58,7 @@ define(function(require) {
       docs.on('fetch', showAsideOnDesktop, this);
 
 
-      mediator
+      this.search
         .on('find', function(query) {
           this.entries.render({ query: query });
         }, this)
