@@ -6,6 +6,7 @@ define(function(require) {
   var entriesTemplate = require('text!templates/entries.html');
   var docs = require('collections/docs');
   var settings = require('models/settings');
+  var cache = require('utils/cache');
 
   var EntriesView = Backbone.View.extend({
 
@@ -75,7 +76,15 @@ define(function(require) {
     },
 
     events: {
+      'click': 'tabOnMobile',
       'click .item': 'openDoc'
+    },
+
+    tabOnMobile: function(e) {
+      if (cache.isMobile) {
+        e.stopImmediatePropagation();
+        this.trigger('tab');
+      }
     },
 
     openDoc: function(e) {

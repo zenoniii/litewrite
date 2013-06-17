@@ -5,6 +5,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var EntriesView = require('views/entries');
   var EditorView = require('views/editor');
+  var AsideView = require('views/aside');
   var SearchView = require('views/search');
   var docs = require('collections/docs');
   var cache = require('utils/cache');
@@ -19,74 +20,26 @@ define(function(require) {
       this.editor = new EditorView();
       this.entries = new EntriesView();
       this.search = new SearchView();
-
-
-      if (cache.isMobile) {
-
-        cache.loading.done(_.bind(function() {
-          //more than one doc and open doc not empty
-          if ( docs.length > 1 && !cache.openDoc.isEmpty() ) {
-            this.showAside();
-          }
-        }, this));
-
-      } else {
-
-        this.showAside();
-
-        setTimeout(_.bind(function() {
-          this.hideAside();
-        }, this), 3000);
-
-      }
+      this.aside = new AsideView();
 
 
       docs.on('fetch', this.editor.render, this.editor);
-
-
-      docs.on('change:title', function() {
-          setTimeout(_.bind(function() {
-            if (!cache.isMobile) this.hideAside();
-          }, this), 1000);
-      }, this);
-
-
-      var showAsideOnDesktop = function() {
-        if (!cache.isMobile) this.showAside();
-      };
-      docs.on('add', showAsideOnDesktop, this);
-      docs.on('fetch', showAsideOnDesktop, this);
-
 
       this.search
         .on('find', function(query) {
           this.entries.render({ query: query });
         }, this)
-        .on('search:focus', this.showAside, this)
+        .on('search:focus', this.aside.show, this.aside)
         .on('search:blur', function() {
-          if (!cache.isMobile) this.hideAside();
+          if (!cache.isMobile) this.aside.hide();
         }, this);
 
-    },
+      this.entries.on('tab', this.aside.toggle, this.aside);
 
-    showAside: function() {
-      this.$el.addClass('show-aside');
-    },
-
-    hideAside: function() {
-      //hide sidebar when 3 or more docs and the open doc is not empty
-      if (docs.length > 2 && !cache.openDoc.isEmpty()) {
-        this.$el.removeClass('show-aside');
-      }
-    },
-
-    toggleAside: function() {
-      this.$el.toggleClass('show-aside');
     },
 
     events: {
       'click #add': 'newDoc',
-      'click #entries': 'toggleAsideOnMobile',
       'click #menu-button': 'toggleAsideOnMobile',
       'keydown': 'handleKey',
       'keyup #editor': 'hideAsideOnKey'
@@ -106,7 +59,7 @@ define(function(require) {
     toggleAsideOnMobile: function(e) {
       if (cache.isMobile) {
         e.stopImmediatePropagation();
-        this.toggleAside();
+        this.aside.toggle();
       }
     },
 
@@ -114,7 +67,7 @@ define(function(require) {
       if (e.which === 9) { //tab
         e.preventDefault();
       } else if (e[cache.modKey.name]) {
-        this.showAside();
+        this.aside.show();
         if (e.which === 78) { //n
           this.newDoc(e);
         } else if (e.which === 38) { //up
@@ -129,7 +82,7 @@ define(function(require) {
     },
 
     hideAsideOnKey: function(e) {
-      if (e.which === (cache.modKey.code)) this.hideAside();
+      if (e.which === (cache.modKey.code)) this.aside.hide();
     },
 
     openPreviousDoc: function() {

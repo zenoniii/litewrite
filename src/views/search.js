@@ -2,6 +2,7 @@ define(function(require) {
 
   var Backbone = require('backbone');
 
+
   var SearchView = Backbone.View.extend({
 
     initialize: function() {
