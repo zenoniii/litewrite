@@ -7,7 +7,7 @@ define(function(require) {
 
     defaults: {
       title: '',
-      url: '',
+      uri: '',
       content: '',
       lastEdited: undefined
     },

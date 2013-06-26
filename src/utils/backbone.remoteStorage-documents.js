@@ -31,7 +31,7 @@ define(function(require) {
       then(function(objMap) {
         var list = [];
         for(var key in objMap) {
-	  list.push(objMap[key]);
+          list.push(objMap[key]);
         }
         return list;
       });
@@ -41,7 +41,7 @@ define(function(require) {
     return documents.add(model.attributes).
       then(function(id) {
         model.set(model.idAttribute, id);
-	return model;
+        return model;
       });
   }
 

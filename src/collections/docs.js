@@ -21,7 +21,7 @@ define(function(require) {
       this
         .on('change:content', this.ensureOrder)
         .on('change:lastEdited', this.saveWhenIdle)
-        .on('change:title', this.updateUrl);
+        .on('change:title', this.updateUri);
     },
 
     addNew: function() {
@@ -42,7 +42,7 @@ define(function(require) {
       this.saveTimeout = setTimeout(_.bind(doc.save, doc), 1000);
     },
 
-    updateUrl: function(doc) {
+    updateUri: function(doc) {
       var url = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
       if (url.length < 1) {
         doc.set('url', '');
