@@ -12,26 +12,27 @@ define(function(require) {
     routes: {
       '': 'openLastEdited',
       '!': 'openLastEdited',
-      '!:url': 'openDoc'
+      '!:uri': 'openDoc'
+      // TODO: route for not found on / not only on /!
     },
 
     openLastEdited: function() {
-      this.navigate(cache.openDoc.get('url'), { trigger: true, replace: true });
+      this.navigate(cache.openDoc.get('uri'), { trigger: true, replace: true });
     },
 
-    openDoc: function(url) {
+    openDoc: function(uri) {
       var doc = docs.find(function(doc) {
-        return doc.get('url') === url;
+        return doc.get('uri') === uri;
       }, this);
       if ( _.isUndefined(doc) ) {
         this.navigate('', { trigger: true, replace: true });
       } else {
-        settings.set('openDocId', doc.id);
+        settings.save('openDocId', doc.id);
       }
     },
 
     setUrl: function() {
-      this.navigate('!' + cache.openDoc.get('url'));
+      this.navigate('!' + cache.openDoc.get('uri'));
     }
 
 

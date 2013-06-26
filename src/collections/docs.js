@@ -43,16 +43,16 @@ define(function(require) {
     },
 
     updateUri: function(doc) {
-      var url = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
-      if (url.length < 1) {
-        doc.set('url', '');
+      var uri = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
+      if (uri.length < 1) {
+        doc.set('uri', '');
         return;
       }
       var len = this.filter(function(doc) {
-        return new RegExp('^' + escapeRegExp(url) + '(-[0-9]|$)').test(doc.get('url'));
+        return new RegExp('^' + escapeRegExp(uri) + '(-[0-9]|$)').test(doc.get('uri'));
       }).length;
-      url = len < 1 ? url : url + '-' + len;
-      doc.set('url', url);
+      uri = len < 1 ? uri : uri + '-' + len;
+      doc.set('uri', uri);
     },
 
     ensureOrder: function() {
