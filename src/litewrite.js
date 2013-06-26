@@ -109,10 +109,10 @@ define(function(require) {
   fetch = _.debounce(function() {
     docs.fetch({
       success: function() {
-        docs.trigger('fetch');
         setOpenDoc();
         if (docs.isEmpty()) docs.addNew();
         docs.loading.resolve();
+        docs.trigger('fetch');
       }
     });
   }, 300);

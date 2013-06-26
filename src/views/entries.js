@@ -18,9 +18,8 @@ define(function(require) {
       // TODO: update height on resize
       this.height = this.$el.height() - 50;
 
-      docs.loading.done(_.bind(this.render, this));
-
       docs
+        .on('fetch', function ready() { this.render(); docs.off('fetch', ready); }, this) // TODO: could use once here
         .on('reset', this.render, this)
         .on('add', this.render, this)
         .on('change:title', this.updateTitle, this)
