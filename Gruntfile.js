@@ -30,8 +30,7 @@ module.exports = function(grunt) {
       build: [
         'Gruntfile.js',
         'src',
-        'lib',
-        'node_modules'
+        'lib'
       ]
     },
 
