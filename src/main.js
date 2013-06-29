@@ -1,7 +1,6 @@
 require.config( {
   deps: [
-    '../lib/matchMedia',
-    'litewrite'
+    '../lib/matchMedia'
   ],
   paths: {
     text: '../lib/require.text',
@@ -23,3 +22,5 @@ require.config( {
     }
   }
 });
+
+require(['litewrite']);
