@@ -11,14 +11,14 @@ module.exports = function(grunt) {
       compile: {
         options: {
           name: '../lib/almond',
-          include: 'main',
-          out: 'main.js',
+          include: 'config',
+          out: 'litewrite.js',
           baseUrl: 'src',
           keepBuildDir: true,
           inlineText: true,
           wrap: true,
-          insertRequire: ['main'],
-          mainConfigFile: 'src/main.js',
+          insertRequire: ['config'],
+          mainConfigFile: 'src/config.js',
           stubModules: [
             'text'
           ]
@@ -63,9 +63,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
 
-  grunt.registerTask('replaceRequireHtml', 'include src/main in index.html instead of lib/require.', function () {
+  grunt.registerTask('replaceRequireHtml', 'include litewrite.js in index.html instead of lib/require.', function () {
     var input = fs.readFileSync('index.html', { encoding: 'utf8' });
-    var output = input.replace('lib/require.js" data-main="src/main', 'main.js');
+    var output = input.replace('lib/require.js" data-main="src/config', 'litewrite.js');
     fs.writeFileSync('index.html', output);
   });
 
