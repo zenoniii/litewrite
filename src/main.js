@@ -1,6 +1,7 @@
 require.config( {
   deps: [
-    '../lib/matchMedia'
+    '../lib/matchMedia',
+    'litewrite'
   ],
   paths: {
     text: '../lib/require.text',
@@ -21,8 +22,4 @@ require.config( {
       exports: 'Backbone'
     }
   }
-});
-
-require(['litewrite', '../lib/fastclick'], function(litewrite) {
-  litewrite();
 });

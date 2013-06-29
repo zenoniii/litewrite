@@ -8,6 +8,7 @@ define(function(require) {
   var cache = require('utils/cache');
   var settings = require('models/settings');
   var router = require('utils/router');
+  var FastClick = require('../lib/fastclick');
 
 
   function litewrite() {
@@ -56,5 +57,7 @@ define(function(require) {
   }
 
 
-  return litewrite;
+
+  litewrite();
+
 });
