@@ -8,12 +8,9 @@ define(function(require) {
   var cache = require('utils/cache');
   var settings = require('models/settings');
   var router = require('utils/router');
-  var remoteStorageDocuments = require('remotestorage-documents');
 
 
   function litewrite() {
-
-    initRemotestorage();
 
     settings
       .on('change:openDocId', saveDocAndChange)
@@ -26,9 +23,6 @@ define(function(require) {
       .on('change:title', setWindowTitle)
       .on('add', updateOpenDocId);
 
-
-    fetch();
-
     $.when(settings.loading, docs.loading)
       .done(loadCache);
 
@@ -40,35 +34,6 @@ define(function(require) {
   }
 
 
-  function initRemotestorage() {
-    var origHash = document.location.hash;
-
-    remoteStorage.on('ready', fetch);
-
-    remoteStorage.on('disconnect', function() {
-      docs.reset().addNew();
-    });
-
-    remoteStorage.claimAccess('documents', 'rw').then(function() {
-      remoteStorage.documents.init();
-      remoteStorage.displayWidget('remotestorage-connect');
-
-      remoteStorageDocuments.onChange('notes', function(event) {
-        if(event.origin !== 'window') {
-          fetch();
-        }
-      });
-
-      setTimeout(function() {
-        var md = origHash.match(/access_token=([^&]+)/);
-        if(md && (! remoteStorage.getBearerToken())) {
-          // backbone stole our access token
-          remoteStorage.setBearerToken(md[1]);
-        }
-      }, 0);
-
-    });
-  }
 
   function loadCache() {
     ensureOpenDocId();
@@ -88,6 +53,7 @@ define(function(require) {
   }
 
   function setOpenDoc() {
+    console.log('set open doc');
     cache.openDoc = docs.get( settings.get('openDocId') );
   }
 
@@ -104,18 +70,6 @@ define(function(require) {
   function startHistory() {
     Backbone.history.start();
   }
-
-
-  fetch = _.debounce(function() {
-    docs.fetch({
-      success: function() {
-        setOpenDoc();
-        if (docs.isEmpty()) docs.addNew();
-        docs.loading.resolve();
-        docs.trigger('fetch');
-      }
-    });
-  }, 300);
 
 
   return litewrite;

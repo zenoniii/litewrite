@@ -7,6 +7,7 @@ define(function(require) {
   var Store = require('localstorage');
   var Doc = require('models/doc');
   var settings = require('models/settings');
+  var remoteStorageDocuments = require('remotestorage-documents');
   var rsSync = require('utils/backbone.remoteStorage-documents');
 
   var Docs = Backbone.Collection.extend({
@@ -22,6 +23,10 @@ define(function(require) {
         .on('change:content', this.ensureOrder)
         .on('change:lastEdited', this.saveWhenIdle)
         .on('change:title', this.updateUri);
+
+      this.initRemotestorage();
+      this.fetch();
+
     },
 
     addNew: function() {
@@ -76,6 +81,47 @@ define(function(require) {
           res.opacity = doc.getOpacity();
           return res;
         });
+    },
+
+    fetch: _.debounce(function() {
+      Backbone.Collection.prototype.fetch.call(this, {
+        success: _.bind(function() {
+          if (this.isEmpty()) this.addNew();
+          this.loading.resolve();
+          this.trigger('fetch');
+        }, this)
+      });
+    }, 300),
+
+    initRemotestorage: function() {
+      var docs = this;
+      var origHash = document.location.hash;
+
+      remoteStorage.on('ready', _.bind(docs.fetch, docs));
+
+      remoteStorage.on('disconnect', function() {
+        docs.reset().addNew();
+      });
+
+      remoteStorage.claimAccess('documents', 'rw').then(function() {
+        remoteStorage.documents.init();
+        remoteStorage.displayWidget('remotestorage-connect');
+
+        remoteStorageDocuments.onChange('notes', function(event) {
+          if(event.origin !== 'window') {
+            docs.fetch();
+          }
+        });
+
+        setTimeout(function() {
+          var md = origHash.match(/access_token=([^&]+)/);
+          if(md && (! remoteStorage.getBearerToken())) {
+            // backbone stole our access token
+            remoteStorage.setBearerToken(md[1]);
+          }
+        }, 0);
+
+      });
     }
 
   });
