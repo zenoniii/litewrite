@@ -64,13 +64,6 @@ define(function(require) {
       if (settings.get('openDocId') !== this.first().id) this.sort();
     },
 
-    deleteEmpty: function() {
-      var previousDoc = this.get(settings.previous('openDocId'));
-      if (previousDoc && previousDoc.isEmpty()) {
-        previousDoc.destroy();
-      }
-    },
-
     prepare: function(query) {
       return this
         .filter(function(doc) {

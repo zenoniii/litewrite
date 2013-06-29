@@ -13,19 +13,17 @@ define(function(require) {
   function litewrite() {
 
     settings
-      .on('change:openDocId', saveDocAndChange)
+      .on('change:openDocId', changeDoc)
       .on('change:openDocId', setWindowTitle)
       .on('change:openDocId', router.setUrl, router)
       .on('change:openDocId', docs.deleteEmpty, docs);
 
     docs
-      .on('change:title', router.setUrl, router)
       .on('change:title', setWindowTitle)
+      .on('change:uri', router.setUrl, router)
       .on('add', updateOpenDocId);
 
-    $.when(settings.loading, docs.loading)
-      .done(loadCache);
-
+    $.when(settings.loading, docs.loading).done(loadCache);
     cache.loading.done(setWindowTitle, startHistory);
 
     new AppView();
@@ -34,33 +32,19 @@ define(function(require) {
   }
 
 
-
   function loadCache() {
-    ensureOpenDocId();
-    setOpenDoc();
+    changeDoc();
     cache.loading.resolve();
   }
 
-  function ensureOpenDocId() {
-    if ( _.isUndefined(settings.get('openDocId')) ) {
-      settings.save('openDocId', docs.first().id);
-    }
-  }
-
-  function saveDocAndChange() {
-    if (cache.openDoc) cache.openDoc.save();
-    setOpenDoc();
-  }
-
-  function setOpenDoc() {
-    console.log('set open doc');
-    cache.openDoc = docs.get( settings.get('openDocId') );
+  function changeDoc() {
+    var previous = cache.openDoc;
+    if (previous) previous.isEmpty() ? previous.destroy() : previous.save();
+    cache.openDoc = docs.get( settings.get('openDocId') ) || docs.first();
   }
 
   function setWindowTitle() {
-    document.title = (
-      cache.openDoc ? cache.openDoc.get('title') : null
-    ) || 'Litewrite';
+    document.title = cache.openDoc.get('title') || 'Litewrite';
   }
 
   function updateOpenDocId(doc) {
