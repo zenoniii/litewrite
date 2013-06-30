@@ -4,7 +4,6 @@ define(function(require) {
   var _ = require('underscore');
   var Backbone = require('backbone');
   var Doc = require('models/doc');
-  var settings = require('models/settings');
   var remoteStorageDocuments = require('remotestorage-documents');
   var rsSync = require('utils/backbone.remoteStorage-documents');
 
@@ -14,7 +13,8 @@ define(function(require) {
 
     sync: rsSync,
 
-    initialize: function(models) {
+    initialize: function(models, options) {
+      this.settings = options.settings;
       this.loading = $.Deferred();
 
       this
@@ -59,7 +59,7 @@ define(function(require) {
     },
 
     ensureOrder: function() {
-      if (settings.get('openDocId') !== this.first().id) this.sort();
+      if (this.settings.get('openDocId') !== this.first().id) this.sort();
     },
 
     prepare: function(query) {
