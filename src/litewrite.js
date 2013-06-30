@@ -14,23 +14,22 @@ define(function(require) {
 
     this.state = new State();
 
-    this.doc = new Doc()
+    this.doc = new Doc();
+    this.doc
+      .on('change:content', this.doc.updateLastEdited)
+      .on('change:content', this.doc.updateTitle)
       .on('change:id', this.updateState, this)
       .on('change:id', this.handlePrevious, this)
-      .on('change:id', setUrl)
       .on('change:title', setWindowTitle)
+      .on('change:title', this.updateUri, this)
+      .on('change:uri', setUrl)
       .on('change', this.updateDocs, this);
 
     this.docs = new Docs()
-      .on('add', this.open, this)
-      .on('change:uri', setUrl);
+      .on('add', this.open, this);
 
     this.state.fetch();
     this.docs.fetch();
-
-    this.state.loading.done(_.bind(function () {
-      this.state.on('change:openDocId', this.docs.ensureOrder, this.docs);
-    }, this));
 
     $.when( this.state.loading, this.docs.loading )
       .done( _.bind(this.loadCache, this) );
@@ -63,6 +62,16 @@ define(function(require) {
 
     updateState: function(doc) {
       this.state.save('openDocId', doc.id);
+    },
+
+    updateUri: function(doc) {
+      var uri = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
+      if (uri.length < 1) return doc.set('uri', '');
+      var len = this.docs.filter(function(doc) {
+        return new RegExp('^' + escapeRegExp(uri) + '(-[0-9]|$)').test(doc.get('uri'));
+      }).length;
+      uri = len < 1 ? uri : uri + '-' + len;
+      doc.set('uri', uri);
     }
 
   });
@@ -75,6 +84,13 @@ define(function(require) {
 
   function setUrl(doc) {
     Backbone.history.navigate('!' + doc.get('uri'));
+  }
+
+  // see link for more info:
+  // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
+  function escapeRegExp(str) {
+    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
   }
 
 

@@ -14,19 +14,13 @@ define(function(require) {
 
     sync: rsSync,
 
-    initialize: function() {
-      this
-        .on('change:content', this.updateLastEdited)
-        .on('change:content', this.updateTitle);
-    },
-
     isEmpty: function() {
       //Contenteditable never is really empty
       return this.get('content').match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/) !== null;
     },
 
-    updateLastEdited: function() {
-        this.set('lastEdited', new Date().getTime());
+    updateLastEdited: function(doc, val, event) {
+      if (!event.changes.id) this.set('lastEdited', new Date().getTime());
     },
 
     updateTitle: function() {

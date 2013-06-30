@@ -22,12 +22,14 @@ define(function(require) {
         .on('reset', this.render, this)
         .on('add', this.render, this)
         .on('change:title', this.updateTitle, this)
+        .on('change:lastEdited', this.moveItem, this)
         .on('destroy', this.removeItem, this);
 
       this.app.doc.on('change:id', this.selectDoc, this);
     },
 
     render: function(options) {
+      console.log('render');
       this.$el.html(
         this.template({
           docs: this.collection.prepare(options && options.query)
@@ -50,8 +52,12 @@ define(function(require) {
       }
     },
 
+    moveItem: function(doc) {
+      this.$el.prepend( this.removeItem(doc) );
+    },
+
     removeItem: function(doc) {
-      this.find(doc.id).remove();
+      return this.find(doc.id).remove();
     },
 
     selectDoc: function() {

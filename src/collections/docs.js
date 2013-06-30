@@ -17,8 +17,7 @@ define(function(require) {
       this.loading = $.Deferred();
 
       this
-        .on('change:lastEdited', this.saveWhenIdle)
-        .on('change:title', this.updateUri);
+        .on('change:lastEdited', this.saveWhenIdle);
 
       this.initRemotestorage();
 
@@ -41,23 +40,6 @@ define(function(require) {
     saveWhenIdle: function(doc) {
       clearTimeout(this.saveTimeout);
       this.saveTimeout = setTimeout(_.bind(doc.save, doc), 1000);
-    },
-
-    updateUri: function(doc) {
-      var uri = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
-      if (uri.length < 1) {
-        doc.set('uri', '');
-        return;
-      }
-      var len = this.filter(function(doc) {
-        return new RegExp('^' + escapeRegExp(uri) + '(-[0-9]|$)').test(doc.get('uri'));
-      }).length;
-      uri = len < 1 ? uri : uri + '-' + len;
-      doc.set('uri', uri);
-    },
-
-    ensureOrder: function(state, id) {
-      if (id !== this.first().id) this.sort();
     },
 
     prepare: function(query) {
@@ -122,15 +104,6 @@ define(function(require) {
     }
 
   });
-
-
-  // see link for more info:
-  // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
-  function escapeRegExp(str) {
-    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-
-  }
-
 
 
   return Docs;
