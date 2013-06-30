@@ -31,7 +31,8 @@ define(function(require) {
       'keyup': 'updateOpenDoc'
     },
 
-    updateOpenDoc: function() {
+    updateOpenDoc: function(e) {
+      if (e.which === (cache.modKey.code)) this.trigger('modKey');
       this.app.doc.set( 'content', this.$el.html() );
     }
 

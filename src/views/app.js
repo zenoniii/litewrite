@@ -32,14 +32,14 @@ define(function(require) {
         }, this);
 
       this.entries.on('tab', this.aside.toggle, this.aside);
+      this.editor.on('modKey', this.aside.hide, this.aside);
 
     },
 
     events: {
       'click #add': 'newDoc',
       'click #menu-button': 'toggleAsideOnMobile',
-      'keydown': 'handleKey',
-      'keyup #editor': 'hideAsideOnKey'
+      'keydown': 'handleKey'
     },
 
     newDoc: function(e) {
@@ -78,22 +78,13 @@ define(function(require) {
       }
     },
 
-    hideAsideOnKey: function(e) {
-      if (e.which === (cache.modKey.code)) this.aside.hide();
-    },
-
     previous: function() {
-      this.openRelativeToIndex(-1);
+      var doc = this.collection.before(this.app.doc.id);
+      if (doc) this.app.open(doc);
     },
 
     next: function() {
-      this.openRelativeToIndex(1);
-    },
-
-    openRelativeToIndex: function(add) {
-      var old = this.collection.get(this.app.doc.id);
-      var index = this.collection.indexOf(old) + add;
-      var doc = this.collection.at(index);
+      var doc = this.collection.after(this.app.doc.id);
       if (doc) this.app.open(doc);
     }
 

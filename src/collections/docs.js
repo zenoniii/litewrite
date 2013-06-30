@@ -82,6 +82,14 @@ define(function(require) {
       });
     }, 300),
 
+    before: function(id) {
+      return this.at( this.indexOf( this.get(id) ) - 1);
+    },
+
+    after: function(id) {
+      return this.at( this.indexOf( this.get(id) ) + 1);
+    },
+
     initRemotestorage: function() {
       var docs = this;
       var origHash = document.location.hash;
