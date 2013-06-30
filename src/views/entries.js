@@ -3,7 +3,7 @@ define(function(require) {
   var _ = require('underscore');
   var Backbone = require('backbone');
   var entriesTemplate = require('text!templates/entries.html');
-  var cache = require('utils/cache');
+  var utils = require('utils');
 
 
   var EntriesView = Backbone.View.extend({
@@ -94,7 +94,7 @@ define(function(require) {
     },
 
     tabOnMobile: function(e) {
-      if (cache.isMobile) {
+      if (utils.isMobile) {
         e.stopImmediatePropagation();
         this.trigger('tab');
       }

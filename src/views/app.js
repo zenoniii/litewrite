@@ -5,7 +5,7 @@ define(function(require) {
   var EditorView = require('views/editor');
   var AsideView = require('views/aside');
   var SearchView = require('views/search');
-  var cache = require('utils/cache');
+  var utils = require('utils');
 
 
   var AppView = Backbone.View.extend({
@@ -28,7 +28,7 @@ define(function(require) {
         }, this)
         .on('focus', this.aside.show, this.aside)
         .on('blur', function() {
-          if (!cache.isMobile) this.aside.hide();
+          if (!utils.isMobile) this.aside.hide();
         }, this);
 
       this.entries.on('tab', this.aside.toggle, this.aside);
@@ -54,7 +54,7 @@ define(function(require) {
     },
 
     toggleAsideOnMobile: function(e) {
-      if (cache.isMobile) {
+      if (utils.isMobile) {
         e.stopImmediatePropagation();
         this.aside.toggle();
       }
@@ -63,7 +63,7 @@ define(function(require) {
     handleKey: function(e) {
       if (e.which === 9) { //tab
         e.preventDefault();
-      } else if (e[cache.modKey.name]) {
+      } else if (e[utils.modKey.name]) {
         this.aside.show();
         if (e.which === 78) { //n
           this.newDoc(e);

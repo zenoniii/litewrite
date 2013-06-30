@@ -32,7 +32,7 @@ define(function(require) {
     this.docs.fetch();
 
     $.when( this.state.loading, this.docs.loading )
-      .done( _.bind(this.loadCache, this) );
+      .done( _.bind(this.loadDoc, this) );
 
     new AppView({ app: this, collection: this.docs });
     new FastClick(document.body);
@@ -41,7 +41,7 @@ define(function(require) {
 
   _.extend(Litewrite.prototype, Backbone.Events, {
 
-    loadCache: function() {
+    loadDoc: function() {
       this.open( this.state.get('openDocId') );
       this.trigger('ready');
     },

@@ -2,7 +2,7 @@ define(function(require) {
 
   var $ = require('jquery');
   var Backbone = require('backbone');
-  var cache = require('utils/cache');
+  var utils = require('utils');
 
 
   var EditorView = Backbone.View.extend({
@@ -20,7 +20,7 @@ define(function(require) {
       if (!content) return this.$el.text(' ');
       if (content === this.$el.html()) return;
       this.$el.html(content);
-      if (!cache.isMobile) this.focus();
+      if (!utils.isMobile) this.focus();
     },
 
     focus: function() {
@@ -32,7 +32,7 @@ define(function(require) {
     },
 
     updateOpenDoc: function(e) {
-      if (e.which === (cache.modKey.code)) this.trigger('modKey');
+      if (e.which === (utils.modKey.code)) this.trigger('modKey');
       this.app.doc.set( 'content', this.$el.html() );
     }
 

@@ -2,7 +2,7 @@ define(function(require) {
 
   var _ = require('underscore');
   var Backbone = require('backbone');
-  var cache = require('utils/cache');
+  var utils = require('utils');
 
 
   var AsideView = Backbone.View.extend({
@@ -13,7 +13,7 @@ define(function(require) {
       this.app = options.app;
       // TODO: add this: this.entries = new EntriesView();
 
-      if (cache.isMobile) {
+      if (utils.isMobile) {
 
         thi.app.on('ready', function() {
           // more than one doc and open doc not empty
@@ -35,13 +35,13 @@ define(function(require) {
 
       this.app.doc.on('change:title', function() {
           setTimeout(_.bind(function() {
-            if (!cache.isMobile) this.hide();
+            if (!utils.isMobile) this.hide();
           }, this), 1000);
       }, this);
 
 
       function showOnDesktop() {
-        if (!cache.isMobile) this.show();
+        if (!utils.isMobile) this.show();
       }
       this.collection.on('add', showOnDesktop, this);
       this.collection.on('fetch', showOnDesktop, this);
