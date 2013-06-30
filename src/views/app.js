@@ -45,12 +45,8 @@ define(function(require) {
     newDoc: function(e) {
       e.preventDefault();
 
-      if (!this.app.doc.isEmpty()) {
-        this.collection.addNew();
-      } else {
-        this.editor.focus();
-      }
-
+      if (this.app.doc.isEmpty()) return this.editor.focus();
+      this.collection.addNew();
     },
 
     toggleAsideOnMobile: function(e) {

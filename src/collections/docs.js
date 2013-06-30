@@ -25,7 +25,7 @@ define(function(require) {
 
     addNew: function() {
       this.add({
-        id: _.uniqueId(),
+        id: Math.round(Math.random()*10000000000000),
         lastEdited: new Date().getTime()
       });
     },
