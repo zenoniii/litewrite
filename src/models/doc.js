@@ -1,7 +1,7 @@
 define(function(require) {
 
   var Backbone = require('backbone');
-  var rsSync = require('utils/backbone.remoteStorage-documents');
+  var rsSync = require('rs-adapter');
 
   Doc = Backbone.Model.extend({
 

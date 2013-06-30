@@ -10,7 +10,8 @@ require.config( {
     backbone: '../lib/backbone',
     localstorage: '../lib/backbone.localstorage',
     remotestorage: '../lib/remotestorage.min',
-    'remotestorage-documents': '../lib/remotestorage-documents'
+    'remotestorage-documents': '../lib/remotestorage-documents',
+    'rs-adapter': '../lib/backbone.remoteStorage-documents'
   },
   baseUrl: 'src',
   shim: {
