@@ -1,4 +1,4 @@
-require(['litewrite', 'utils/router'], function(Litewrite, Router) {
+require(['litewrite', 'router'], function(Litewrite, Router) {
 
 
   var litewrite = new Litewrite()
