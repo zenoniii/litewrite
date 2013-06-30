@@ -15,7 +15,7 @@ define(function(require) {
 
       if (utils.isMobile) {
 
-        thi.app.on('ready', function() {
+        this.app.on('ready', function() {
           // more than one doc and open doc not empty
           if ( this.collection.length > 1 && !this.app.doc.isEmpty() ) {
             this.show();
