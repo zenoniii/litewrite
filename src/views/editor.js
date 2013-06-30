@@ -1,9 +1,7 @@
 define(function(require) {
 
   var $ = require('jquery');
-  var _ = require('underscore');
   var Backbone = require('backbone');
-  var settings = require('models/settings');
   var cache = require('utils/cache');
 
 
@@ -11,21 +9,18 @@ define(function(require) {
 
     el: '#editor',
 
-    initialize: function() {
-      cache.loading.done(_.bind(this.render, this));
-      settings.on('change:openDocId', this.render, this);
+    initialize: function(options) {
+      this.app = options.app;
+      this.app.on('ready', this.render, this);
+      this.app.doc.on('change:id', this.render, this);
     },
 
     render: function() {
-      var content = (cache.openDoc && cache.openDoc.get('content'));
-      if (content) {
-        if (content !== this.$el.html()) {
-          this.$el.html(content);
-          if (!cache.isMobile) this.focus();
-        }
-      } else {
-        this.$el.text(' ');
-      }
+      var content = this.app.doc.get('content');
+      if (!content) return this.$el.text(' ');
+      if (content === this.$el.html()) return;
+      this.$el.html(content);
+      if (!cache.isMobile) this.focus();
     },
 
     focus: function() {
@@ -37,7 +32,7 @@ define(function(require) {
     },
 
     updateOpenDoc: function() {
-      cache.openDoc.set( 'content', this.$el.html() );
+      this.app.doc.set( 'content', this.$el.html() );
     }
 
   });

@@ -4,7 +4,6 @@ define(function(require) {
   var $ = require('jquery');
   var _ = require('underscore');
   var Backbone = require('backbone');
-  var Store = require('localstorage');
   var Doc = require('models/doc');
   var settings = require('models/settings');
   var remoteStorageDocuments = require('remotestorage-documents');

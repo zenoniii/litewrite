@@ -5,16 +5,13 @@ define(function(require) {
 
   var SearchView = Backbone.View.extend({
 
-    initialize: function() {
-    },
-
     el: '#search',
 
     events: {
       'search': 'search',
       'keyup': 'search',
-      'focus': 'show',
-      'blur': 'hide'
+      'focus': 'triggerFocus',
+      'blur': 'triggerBlur'
     },
 
     search: function() {
@@ -26,12 +23,12 @@ define(function(require) {
       this.$el.focus();
     },
 
-    show: function() {
-      this.trigger('search:focus');
+    triggerFocus: function() {
+      this.trigger('focus');
     },
 
-    hide: function() {
-      this.trigger('search:blur');
+    triggerBlur: function() {
+      this.trigger('blur');
     }
 
   });

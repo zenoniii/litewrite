@@ -1,9 +1,7 @@
 define(function(require) {
 
-  var $ = require('jquery');
   var _ = require('underscore');
   var Backbone = require('backbone');
-  var EntriesView = require('views/entries');
   var docs = require('collections/docs');
   var cache = require('utils/cache');
 
@@ -12,17 +10,18 @@ define(function(require) {
 
     el: 'body',
 
-    initialize: function() {
-      // this.entries = new EntriesView();
+    initialize: function(options) {
+      this.app = options.app;
+      // TODO: add this: this.entries = new EntriesView();
 
       if (cache.isMobile) {
 
-        cache.loading.done(_.bind(function() {
+        thi.app.on('ready', function() {
           // more than one doc and open doc not empty
-          if ( docs.length > 1 && !cache.openDoc.isEmpty() ) {
+          if ( docs.length > 1 && !this.app.doc.isEmpty() ) {
             this.show();
           }
-        }, this));
+        }, this);
 
       } else {
 
@@ -35,7 +34,7 @@ define(function(require) {
       }
 
 
-      docs.on('change:title', function() {
+      this.app.doc.on('change:title', function() {
           setTimeout(_.bind(function() {
             if (!cache.isMobile) this.hide();
           }, this), 1000);
@@ -56,7 +55,7 @@ define(function(require) {
 
     hide: function() {
       //hide sidebar when 3 or more docs and the open doc is not empty
-      if (docs.length > 2 && !cache.openDoc.isEmpty()) {
+      if (docs.length > 2 && !this.app.doc.isEmpty()) {
         this.$el.removeClass('show-aside');
       }
     },
