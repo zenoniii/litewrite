@@ -11,35 +11,39 @@ define(function(require) {
 
 
   function Litewrite() {
-
-    this.state = new State();
-
-    this.doc = new Doc();
-    this.doc
-      .on('change:content', this.doc.updateLastEdited)
-      .on('change:content', this.doc.updateTitle)
-      .on('change:id', this.updateState, this)
-      .on('change:id', this.handlePrevious, this)
-      .on('change:title', setWindowTitle)
-      .on('change:title', this.updateUri, this)
-      .on('change:uri', setUrl)
-      .on('change', this.updateDocs, this);
-
-    this.docs = new Docs()
-      .on('add', this.open, this);
-
-    this.state.fetch();
-    this.docs.fetch();
-
-    $.when( this.state.loading, this.docs.loading )
-      .done( _.bind(this.loadDoc, this) );
-
-    new AppView({ app: this, collection: this.docs });
-    new FastClick(document.body);
-
+    this.initialize.apply(this, arguments);
   }
 
   _.extend(Litewrite.prototype, Backbone.Events, {
+
+    initialize: function() {
+
+      this.state = new State();
+
+      this.doc = new Doc();
+      this.doc
+        .on('change:content', this.doc.updateLastEdited)
+        .on('change:content', this.doc.updateTitle)
+        .on('change:id', this.updateState, this)
+        .on('change:id', this.handlePrevious, this)
+        .on('change:title', this.setWindowTitle)
+        .on('change:title', this.updateUri, this)
+        .on('change:uri', this.setUrl)
+        .on('change', this.updateDocs, this);
+
+      this.docs = new Docs()
+        .on('add', this.open, this);
+
+      this.state.fetch();
+      this.docs.fetch();
+
+      $.when( this.state.loading, this.docs.loading )
+        .done( _.bind(this.loadDoc, this) );
+
+      new AppView({ app: this, collection: this.docs });
+      new FastClick(document.body);
+
+    },
 
     loadDoc: function() {
       this.open( this.state.get('openDocId') );
@@ -72,19 +76,20 @@ define(function(require) {
       }).length;
       uri = len < 1 ? uri : uri + '-' + len;
       doc.set('uri', uri);
+    },
+
+    setWindowTitle: function(doc) {
+      document.title = doc.get('title') || 'Litewrite';
+    },
+
+    setUrl: function(doc) {
+      Backbone.history.navigate('!' + doc.get('uri'));
     }
 
   });
 
 
 
-  function setWindowTitle(doc) {
-    document.title = doc.get('title') || 'Litewrite';
-  }
-
-  function setUrl(doc) {
-    Backbone.history.navigate('!' + doc.get('uri'));
-  }
 
   // see link for more info:
   // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711

@@ -24,7 +24,7 @@ define(function(require) {
     },
 
     updateTitle: function() {
-      //Title consists of the first 40 charackters of the first not empty line
+      //Title consists of the first 40 characters of the first not empty line
       var title = this.get('content')
         .match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*([^<]{0,40}).*?(<div>|<\/div>|<br>|$)/)[2]
         .replace(/&nbsp;/gi,'');
