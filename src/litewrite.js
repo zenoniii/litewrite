@@ -21,13 +21,16 @@ define(function(require) {
       .on('change:title', setWindowTitle)
       .on('change', this.updateDocs, this);
 
-    this.docs = new Docs(undefined, { settings: this.settings })
+    this.docs = new Docs()
       .on('add', this.open, this)
       .on('change:uri', setUrl);
 
     this.settings.fetch();
     this.docs.fetch();
 
+    this.settings.loading.done(_.bind(function () {
+      this.settings.on('change:openDocId', this.docs.ensureOrder, this.docs);
+    }, this));
 
     $.when( this.settings.loading, this.docs.loading )
       .done( _.bind(this.loadCache, this) );

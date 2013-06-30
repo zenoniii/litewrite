@@ -14,11 +14,9 @@ define(function(require) {
     sync: rsSync,
 
     initialize: function(models, options) {
-      this.settings = options.settings;
       this.loading = $.Deferred();
 
       this
-        .on('change:content', this.ensureOrder)
         .on('change:lastEdited', this.saveWhenIdle)
         .on('change:title', this.updateUri);
 
@@ -33,6 +31,7 @@ define(function(require) {
       });
     },
 
+    // TODO: backbone 1.0 - use string as comparator
     // Sort by 'lastEdited'
     comparator: function(first, second) {
       return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
@@ -57,8 +56,8 @@ define(function(require) {
       doc.set('uri', uri);
     },
 
-    ensureOrder: function() {
-      if (this.settings.get('openDocId') !== this.first().id) this.sort();
+    ensureOrder: function(settings, id) {
+      if (id !== this.first().id) this.sort();
     },
 
     prepare: function(query) {
