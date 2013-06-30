@@ -42,18 +42,6 @@ define(function(require) {
       this.saveTimeout = setTimeout(_.bind(doc.save, doc), 1000);
     },
 
-    prepare: function(query) {
-      return this
-        .filter(function(doc) {
-          var match = query ? new RegExp(escapeRegExp(query), 'i').test( doc.get('title') ) : true;
-          return !doc.isEmpty() && match;
-        }).map(function(doc) {
-          var res = doc.toJSON();
-          res.opacity = doc.getOpacity();
-          return res;
-        });
-    },
-
     fetch: _.debounce(function() {
       Backbone.Collection.prototype.fetch.call(this, {
         success: _.bind(function() {

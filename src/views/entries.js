@@ -28,14 +28,23 @@ define(function(require) {
       this.app.doc.on('change:id', this.selectDoc, this);
     },
 
-    render: function(options) {
-      console.log('render');
-      this.$el.html(
-        this.template({
-          docs: this.collection.prepare(options && options.query)
-        })
-      );
+    serialize: function(options) {
+      var query = options && options.query;
+      var docs = this.collection
+        .filter(function(doc) {
+          var match = query ? new RegExp(escapeRegExp(query), 'i').test( doc.get('title') ) : true;
+          return !doc.isEmpty() && match;
+        }).map(function(doc) {
+          var res = doc.toJSON();
+          res.opacity = doc.getOpacity();
+          return res;
+        });
 
+      return { docs: docs };
+    },
+
+    render: function(options) {
+      this.$el.html( this.template( this.serialize(options) ) );
       this.selectDoc();
     },
 
@@ -98,6 +107,15 @@ define(function(require) {
     }
 
   });
+
+
+  // see link for more info:
+  // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
+  function escapeRegExp(str) {
+    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+  }
+
 
 
   return EntriesView;
