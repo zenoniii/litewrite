@@ -1,10 +1,16 @@
 define(function(require) {
 
 
-  var utils = {
-    isMac: /Mac/.test(navigator.platform),
-    isMobile: matchMedia('(max-width:720px)').matches
-  };
+  var utils = {};
+
+
+  utils.isMac = /Mac/.test(navigator.platform);
+
+  utils.isMobile = matchMedia('(max-width:720px)').matches;
+
+  // for more info:
+  // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
+  utils.escapeRegExp = function(str) { return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); };
 
   utils.modKey = utils.isMac ? { name: 'ctrlKey', code: 17 } : { name: 'altKey', code: 18 };
 

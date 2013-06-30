@@ -32,7 +32,7 @@ define(function(require) {
       var query = options && options.query;
       var docs = this.collection
         .filter(function(doc) {
-          var match = query ? new RegExp(escapeRegExp(query), 'i').test( doc.get('title') ) : true;
+          var match = query ? new RegExp(utils.escapeRegExp(query), 'i').test( doc.get('title') ) : true;
           return !doc.isEmpty() && match;
         }).map(function(doc) {
           var res = doc.toJSON();

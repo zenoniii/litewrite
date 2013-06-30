@@ -8,6 +8,7 @@ define(function(require) {
   var Docs = require('collections/docs');
   var State = require('models/state');
   var FastClick = require('../lib/fastclick');
+  var utils = require('utils');
 
 
   function Litewrite() {
@@ -72,7 +73,7 @@ define(function(require) {
       var uri = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
       if (uri.length < 1) return doc.set('uri', '');
       var len = this.docs.filter(function(doc) {
-        return new RegExp('^' + escapeRegExp(uri) + '(-[0-9]|$)').test(doc.get('uri'));
+        return new RegExp('^' + utils.escapeRegExp(uri) + '(-[0-9]|$)').test(doc.get('uri'));
       }).length;
       uri = len < 1 ? uri : uri + '-' + len;
       doc.set('uri', uri);
@@ -87,16 +88,6 @@ define(function(require) {
     }
 
   });
-
-
-
-
-  // see link for more info:
-  // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
-  function escapeRegExp(str) {
-    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-
-  }
 
 
 
