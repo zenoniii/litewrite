@@ -1,7 +1,6 @@
 define(function(require) {
 
   var Backbone = require('backbone');
-  var docs = require('collections/docs');
 
 
   var Router = Backbone.Router.extend({
@@ -23,7 +22,7 @@ define(function(require) {
     },
 
     open: function(uri) {
-      var doc = docs.where({ uri: uri })[0]; // TODO: backbone 1.0 - use findWhere
+      var doc = this.app.docs.where({ uri: uri })[0]; // TODO: backbone 1.0 - use findWhere
       if (!doc) return this.navigate('', { trigger: true, replace: true });
       this.app.open(doc);
     }

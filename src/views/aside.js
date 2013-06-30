@@ -2,7 +2,6 @@ define(function(require) {
 
   var _ = require('underscore');
   var Backbone = require('backbone');
-  var docs = require('collections/docs');
   var cache = require('utils/cache');
 
 
@@ -18,7 +17,7 @@ define(function(require) {
 
         thi.app.on('ready', function() {
           // more than one doc and open doc not empty
-          if ( docs.length > 1 && !this.app.doc.isEmpty() ) {
+          if ( this.collection.length > 1 && !this.app.doc.isEmpty() ) {
             this.show();
           }
         }, this);
@@ -44,8 +43,8 @@ define(function(require) {
       function showOnDesktop() {
         if (!cache.isMobile) this.show();
       }
-      docs.on('add', showOnDesktop, this);
-      docs.on('fetch', showOnDesktop, this);
+      this.collection.on('add', showOnDesktop, this);
+      this.collection.on('fetch', showOnDesktop, this);
 
     },
 
@@ -55,7 +54,7 @@ define(function(require) {
 
     hide: function() {
       //hide sidebar when 3 or more docs and the open doc is not empty
-      if (docs.length > 2 && !this.app.doc.isEmpty()) {
+      if (this.collection.length > 2 && !this.app.doc.isEmpty()) {
         this.$el.removeClass('show-aside');
       }
     },

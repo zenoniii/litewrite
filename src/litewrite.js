@@ -5,7 +5,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var AppView = require('views/app');
   var Doc = require('models/doc');
-  var docs = require('collections/docs');
+  var Docs = require('collections/docs');
   var settings = require('models/settings');
   var FastClick = require('../lib/fastclick');
 
@@ -14,19 +14,19 @@ define(function(require) {
 
     this.doc = new Doc()
       .on('change:id', updateSettingsDocId)
-      .on('change:id', handlePrevious)
+      .on('change:id', this.handlePrevious, this)
       .on('change:id', setUrl)
       .on('change:title', setWindowTitle)
-      .on('change', updateDocs);
+      .on('change', this.updateDocs, this);
 
-    docs
+    this.docs = new Docs()
       .on('add', this.open, this)
       .on('change:uri', setUrl);
 
-    $.when(settings.loading, docs.loading)
+    $.when( settings.loading, this.docs.loading )
       .done( _.bind(this.loadCache, this) );
 
-    new AppView({ app: this });
+    new AppView({ app: this, collection: this.docs });
     new FastClick(document.body);
 
   }
@@ -39,17 +39,22 @@ define(function(require) {
     },
 
     open: function(doc) {
-      if (!doc.toJSON) doc = docs.get(doc) || docs.first();
+      if (!doc.toJSON) doc = this.docs.get(doc) || this.docs.first();
       this.doc.set( doc.toJSON() );
+    },
+
+    handlePrevious: function(doc) {
+      var previous = this.docs.get( doc.previous('id') );
+      if (previous) previous.isEmpty() ? previous.destroy() : previous.save();
+    },
+
+    updateDocs: function(doc) {
+      this.docs.get(doc.id).set( doc.toJSON() ); // TODO: backbone 1.0 - docs.set( doc.toJSON() )
     }
 
   });
 
 
-  function handlePrevious(doc) {
-    var previous = docs.get( doc.previous('id') );
-    if (previous) previous.isEmpty() ? previous.destroy() : previous.save();
-  }
 
   function setWindowTitle(doc) {
     document.title = doc.get('title') || 'Litewrite';
@@ -61,10 +66,6 @@ define(function(require) {
 
   function setUrl(doc) {
     Backbone.history.navigate('!' + doc.get('uri'));
-  }
-
-  function updateDocs(doc) {
-    docs.get(doc.id).set( doc.toJSON() ); // TODO: backbone 1.0 - docs.set( doc.toJSON() )
   }
 
 

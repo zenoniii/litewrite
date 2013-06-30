@@ -1,4 +1,3 @@
-//Module is a Singelton
 define(function(require) {
 
   var $ = require('jquery');
@@ -127,9 +126,7 @@ define(function(require) {
   }
 
 
-  var docs = new Docs();
 
-
-  return docs;
+  return Docs;
 
 });

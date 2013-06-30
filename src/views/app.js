@@ -5,7 +5,6 @@ define(function(require) {
   var EditorView = require('views/editor');
   var AsideView = require('views/aside');
   var SearchView = require('views/search');
-  var docs = require('collections/docs');
   var cache = require('utils/cache');
 
 
@@ -16,12 +15,12 @@ define(function(require) {
     initialize: function(options) {
       this.app = options.app;
       this.editor = new EditorView({ app: this.app });
-      this.entries = new EntriesView({ app: this.app });
+      this.entries = new EntriesView({ app: this.app, collection: this.collection });
       this.search = new SearchView();
-      this.aside = new AsideView({ app: this.app });
+      this.aside = new AsideView({ app: this.app, collection: this.collection });
 
 
-      docs.on('fetch', this.editor.render, this.editor);
+      this.collection.on('fetch', this.editor.render, this.editor);
 
       this.search
         .on('find', function(query) {
@@ -47,7 +46,7 @@ define(function(require) {
       e.preventDefault();
 
       if (!this.app.doc.isEmpty()) {
-        docs.addNew();
+        this.collection.addNew();
       } else {
         this.editor.focus();
       }
@@ -84,14 +83,18 @@ define(function(require) {
     },
 
     previous: function() {
-      var previous = docs.at(docs.indexOf( docs.get(this.app.doc.id) ) - 1);
-      if (previous) this.app.open(previous);
+      this.openRelativeToIndex(-1);
     },
 
     next: function() {
-      console.log(docs.indexOf( docs.get(this.app.doc.id) ) + 1);
-      var next = docs.at(docs.indexOf( docs.get(this.app.doc.id) ) + 1);
-      if (next) this.app.open(next);
+      this.openRelativeToIndex(1);
+    },
+
+    openRelativeToIndex: function(add) {
+      var old = this.collection.get(this.app.doc.id);
+      var index = this.collection.indexOf(old) + add;
+      var doc = this.collection.at(index);
+      if (doc) this.app.open(doc);
     }
 
   });

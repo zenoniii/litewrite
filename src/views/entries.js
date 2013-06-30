@@ -3,7 +3,6 @@ define(function(require) {
   var _ = require('underscore');
   var Backbone = require('backbone');
   var entriesTemplate = require('text!templates/entries.html');
-  var docs = require('collections/docs');
   var cache = require('utils/cache');
 
 
@@ -18,8 +17,8 @@ define(function(require) {
       // TODO: update height on resize
       this.height = this.$el.height() - 50;
 
-      docs
-        .on('fetch', function ready() { this.render(); docs.off('fetch', ready); }, this) // TODO: backbone 1.0 - use once()
+      this.collection
+        .on('fetch', function ready() { this.render(); this.collection.off('fetch', ready); }, this) // TODO: backbone 1.0 - use once()
         .on('reset', this.render, this)
         .on('add', this.render, this)
         .on('change:title', this.updateTitle, this)
@@ -31,7 +30,7 @@ define(function(require) {
     render: function(options) {
       this.$el.html(
         this.template({
-          docs: docs.prepare(options && options.query)
+          docs: this.collection.prepare(options && options.query)
         })
       );
 
