@@ -23,7 +23,6 @@ define(function(require) {
         .on('change:title', this.updateUri);
 
       this.initRemotestorage();
-      this.fetch();
 
     },
 

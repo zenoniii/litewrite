@@ -25,6 +25,9 @@ define(function(require) {
       .on('add', this.open, this)
       .on('change:uri', setUrl);
 
+    this.settings.fetch();
+    this.docs.fetch();
+
 
     $.when( this.settings.loading, this.docs.loading )
       .done( _.bind(this.loadCache, this) );

@@ -15,8 +15,10 @@ define(function(require) {
 
     initialize: function() {
       this.loading = $.Deferred();
+    },
 
-      this.fetch({
+    fetch: function() {
+      Backbone.Model.prototype.fetch.call(this, {
         success: this.loading.resolve,
         error: this.loading.resolve
       });
