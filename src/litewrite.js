@@ -6,16 +6,16 @@ define(function(require) {
   var AppView = require('views/app');
   var Doc = require('models/doc');
   var Docs = require('collections/docs');
-  var Settings = require('models/settings');
+  var State = require('models/state');
   var FastClick = require('../lib/fastclick');
 
 
   function Litewrite() {
 
-    this.settings = new Settings();
+    this.state = new State();
 
     this.doc = new Doc()
-      .on('change:id', this.updateSettingsDocId, this)
+      .on('change:id', this.updateState, this)
       .on('change:id', this.handlePrevious, this)
       .on('change:id', setUrl)
       .on('change:title', setWindowTitle)
@@ -25,14 +25,14 @@ define(function(require) {
       .on('add', this.open, this)
       .on('change:uri', setUrl);
 
-    this.settings.fetch();
+    this.state.fetch();
     this.docs.fetch();
 
-    this.settings.loading.done(_.bind(function () {
-      this.settings.on('change:openDocId', this.docs.ensureOrder, this.docs);
+    this.state.loading.done(_.bind(function () {
+      this.state.on('change:openDocId', this.docs.ensureOrder, this.docs);
     }, this));
 
-    $.when( this.settings.loading, this.docs.loading )
+    $.when( this.state.loading, this.docs.loading )
       .done( _.bind(this.loadCache, this) );
 
     new AppView({ app: this, collection: this.docs });
@@ -43,7 +43,7 @@ define(function(require) {
   _.extend(Litewrite.prototype, Backbone.Events, {
 
     loadCache: function() {
-      this.open( this.settings.get('openDocId') );
+      this.open( this.state.get('openDocId') );
       this.trigger('ready');
     },
 
@@ -61,8 +61,8 @@ define(function(require) {
       this.docs.get(doc.id).set( doc.toJSON() ); // TODO: backbone 1.0 - docs.set( doc.toJSON() )
     },
 
-    updateSettingsDocId: function(doc) {
-      this.settings.save('openDocId', doc.id);
+    updateState: function(doc) {
+      this.state.save('openDocId', doc.id);
     }
 
   });

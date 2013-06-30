@@ -56,7 +56,7 @@ define(function(require) {
       doc.set('uri', uri);
     },
 
-    ensureOrder: function(settings, id) {
+    ensureOrder: function(state, id) {
       if (id !== this.first().id) this.sort();
     },
 

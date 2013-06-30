@@ -4,14 +4,14 @@ define(function(require) {
   var Backbone = require('backbone');
   var Store = require('localstorage');
 
-  var Settings = Backbone.Model.extend({
+  var State = Backbone.Model.extend({
 
     defaults: {
       id: 0,
       openDocId: undefined
     },
 
-    localStorage: new Store('appSettings'),
+    localStorage: new Store('litewriteState'),
 
     initialize: function() {
       this.loading = $.Deferred();
@@ -28,5 +28,5 @@ define(function(require) {
 
 
 
-  return Settings;
+  return State;
 });
