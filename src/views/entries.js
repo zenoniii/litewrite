@@ -94,10 +94,9 @@ define(function(require) {
     },
 
     tabOnMobile: function(e) {
-      if (utils.isMobile) {
-        e.stopImmediatePropagation();
-        this.trigger('tab');
-      }
+      if (utils.isDesktop) return;
+      e.stopImmediatePropagation();
+      this.trigger('tab');
     },
 
     openDoc: function(e) {

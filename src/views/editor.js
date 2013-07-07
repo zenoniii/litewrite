@@ -20,7 +20,7 @@ define(function(require) {
       if (!content) return this.$el.text(' ');
       if ( content === this.$el.html() ) return;
       this.$el.html(content);
-      if (!utils.isMobile) this.focus();
+      if (utils.isDesktop) this.focus();
     },
 
     focus: function() {

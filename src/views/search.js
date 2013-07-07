@@ -16,7 +16,7 @@ define(function(require) {
 
     search: function() {
       var query = this.$el.val();
-      this.trigger('find', query);
+      this.trigger( 'find', { query: query } );
     },
 
     focus: function() {

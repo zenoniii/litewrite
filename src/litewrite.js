@@ -18,9 +18,10 @@ define(function(require) {
 
     initialize: function() {
 
-      this.state = new State();
-
+      var state = this.state = new State();
       var doc = this.doc = new Doc();
+      var docs = this.docs = new Docs();
+
       doc
         .on( 'change:content', doc.updateLastEdited )
         .on( 'change:content', doc.updateTitle )
@@ -31,13 +32,13 @@ define(function(require) {
         .on( 'change:uri', this.setUrl )
         .on( 'change', this.updateDocs, this );
 
-      var docs = this.docs = new Docs()
+      docs
         .on( 'add', this.open, this );
 
-      this.state.fetch();
+      state.fetch();
       docs.fetch();
 
-      $.when( this.state.loading, docs.loading )
+      $.when( state.loading, docs.loading )
         .done( _.bind(this.loadDoc, this) );
 
       new AppView({ app: this, collection: docs });

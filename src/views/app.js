@@ -25,13 +25,9 @@ define(function(require) {
       this.collection.on( 'fetch', this.editor.render, this.editor );
 
       this.search
-        .on('find', function(query) {
-          this.entries.render({ query: query });
-        }, this)
+        .on('find', this.entries.render, this.entries)
         .on('focus', this.aside.show, this.aside)
-        .on('blur', function() {
-          if (!utils.isMobile) this.aside.hide();
-        }, this);
+        .on('blur', this.aside.desktopHide, this.aside);
 
       this.entries.on( 'tab', this.aside.toggle, this.aside );
       this.editor.on( 'modKey', this.aside.hide, this.aside );
@@ -52,10 +48,9 @@ define(function(require) {
     },
 
     toggleAsideOnMobile: function(e) {
-      if (utils.isMobile) {
-        e.stopImmediatePropagation();
-        this.aside.toggle();
-      }
+      if (utils.isDesktop) return;
+      e.stopImmediatePropagation();
+      this.aside.toggle();
     },
 
     handleKey: function(e) {

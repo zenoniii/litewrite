@@ -13,22 +13,12 @@ define(function(require) {
       this.app = options.app;
       // TODO: add this: this.entries = new EntriesView();
 
-      if (utils.isMobile) {
-
-        this.app.on('ready', function() {
-          // more than one doc and open doc not empty
-          if ( this.collection.length > 1 && !this.app.doc.isEmpty() ) {
-            this.show();
-          }
-        }, this);
-
-      } else {
-
+      this.app.on('ready', function() {
+        // if only one doc or open doc empty return
+        if ( this.collection.length < 2 || this.app.doc.isEmpty() ) return;
         this.show();
-        _.delay(_.bind(this.hide, this), 3000);
-
-      }
-
+        if (utils.isDesktop) _.delay(_.bind(this.hide, this), 3000);
+      }, this);
 
       this.app.doc.on( 'change:title', this.desktopHide, this );
 
@@ -54,13 +44,11 @@ define(function(require) {
     },
 
     desktopShow: function() {
-      if (!utils.isMobile) this.show();
+      if (utils.isDesktop) this.show();
     },
 
     desktopHide: function() {
-      _.delay(function(aside) {
-        if (!utils.isMobile) aside.hide();
-      }, 1000, this);
+      if (utils.isDesktop) _.delay( _.bind(this.hide, this), 1000 );
     }
 
   });
