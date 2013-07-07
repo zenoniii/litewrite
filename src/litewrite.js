@@ -65,6 +65,12 @@ define(function(require) {
       this.state.save( 'openDocId', doc.id );
     },
 
+    // TODO: uris aren't unique right now:
+    // * create 'doc', 'doc-2', 'doc-3'
+    // * delete 'doc-2'
+    // * create a new document with title 'doc'
+    // * litewrite counts 3 docs ('doc', 'doc-3' and the new one)
+    // * new name is 'doc-3' again
     updateUri: function(doc) {
       var uri = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
       if (uri.length < 1) return doc.set('uri', '');

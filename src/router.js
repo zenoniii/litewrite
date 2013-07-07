@@ -11,19 +11,17 @@ define(function(require) {
 
     // use ! for urls to not conflict with remotestorage's #access_token parameter
     routes: {
-      '': 'openLastEdited',
-      '!': 'openLastEdited',
-      '!:uri': 'open'
-      // TODO: route for not found on / not only on /!
+      '!:uri': 'open',
+      '*404': 'lastEdited'
     },
 
-    openLastEdited: function() {
-      this.go( this.app.doc.get('uri') );
+    lastEdited: function() {
+      this.go( '!' + this.app.doc.get('uri') );
     },
 
     open: function(uri) {
       var doc = this.app.docs.where({ uri: uri })[0]; // TODO: backbone 1.0 - use findWhere
-      if (!doc) return this.go('');
+      if (!doc) return this.lastEdited();
       this.app.open(doc);
     },
 
