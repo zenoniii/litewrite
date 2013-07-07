@@ -35,11 +35,8 @@ define(function(require) {
       docs
         .on( 'add', this.open, this );
 
-      state.fetch();
-      docs.fetch();
-
-      $.when( state.loading, docs.loading )
-        .done( _.bind(this.loadDoc, this) );
+      $.when( state.fetch(), docs.fetch() )
+        .then( _.bind(this.loadDoc, this) );
 
       new AppView({ app: this, collection: docs });
       new FastClick( document.body );

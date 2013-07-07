@@ -15,7 +15,6 @@ define(function(require) {
     sync: rsSync,
 
     initialize: function(models, options) {
-      this.loading = $.Deferred();
 
       this
         .on('change:lastEdited', this.saveWhenIdle);
@@ -44,14 +43,13 @@ define(function(require) {
     },
 
     fetch: _.debounce(function() {
-      Backbone.Collection.prototype.fetch.call(this, {
+      return Backbone.Collection.prototype.fetch.call(this, {
         success: _.bind(function() {
           if (this.isEmpty()) this.addNew();
-          this.loading.resolve();
-          this.trigger('fetch');
+          this.trigger('fetch'); // TODO: backbone 1.0 - this can be removed
         }, this)
       });
-    }, 300),
+    }, 300, true),
 
     before: function(id) {
       return this.at( this.indexOf( this.get(id) ) - 1 );
