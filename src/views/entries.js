@@ -12,20 +12,22 @@ define(function(require) {
 
     initialize: function(options) {
 
+      _.bindAll(this);
+
       this.app = options.app;
       this.template = _.template(entriesTemplate);
 
       this.collection
         .on('fetch', function ready() { this.render(); this.collection.off('fetch', ready); }, this) // TODO: backbone 1.0 - redundant
-        .on('reset', this.render, this) // TODO: backbone 1.0 - use sort event
-        .on('add', this.render, this)
-        .on('change:title', this.update, this)
-        .on('change:lastEdited', this.moveItem, this)
-        .on('destroy', this.removeItem, this);
+        .on('reset', this.render) // TODO: backbone 1.0 - use sort event
+        .on('add', this.render)
+        .on('change:title', this.update)
+        .on('change:lastEdited', this.moveItem)
+        .on('destroy', this.removeItem);
 
-      this.app.doc.on('change:id', this.selectDoc, this);
+      this.app.doc.on('change:id', this.selectDoc);
 
-      this.app.state.on('change:query', this.render, this);
+      this.app.state.on('change:query', this.render);
 
     },
 

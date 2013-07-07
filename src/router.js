@@ -9,8 +9,8 @@ define(function(require) {
       this.app = options.app;
     },
 
-    // use ! for urls to not conflict with remotestorage's #access_token parameter
     routes: {
+      // use ! for urls to not conflict with remotestorage's #access_token parameter
       '!:uri': 'open',
       '*404': 'lastEdited'
     },

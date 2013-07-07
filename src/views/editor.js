@@ -1,5 +1,6 @@
 define(function(require) {
 
+  var _ = require('underscore');
   var $ = require('jquery');
   var Backbone = require('backbone');
   var utils = require('utils');
@@ -10,9 +11,14 @@ define(function(require) {
     el: '#editor',
 
     initialize: function(options) {
+
+      _.bindAll(this);
+
       this.app = options.app;
-      this.app.on( 'ready', this.render, this );
-      this.app.doc.on( 'change:id', this.render, this );
+
+      this.app.on('ready', this.render);
+      this.app.doc.on('change:id', this.render);
+
     },
 
     render: function() {

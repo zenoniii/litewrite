@@ -11,19 +11,16 @@ define(function(require) {
 
     initialize: function(options) {
 
+      _.bindAll(this);
+
       this.app = options.app;
 
-      this.app.on('ready', function() {
-        // if only one doc or open doc empty return
-        if ( this.collection.length < 2 || this.app.doc.isEmpty() ) return;
-        this.show();
-        if (utils.isDesktop) _.delay(_.bind(this.hide, this), 3000);
-      }, this);
+      this.app.on('ready', this.showOrHide);
 
       this.collection
-        .on( 'add', this.desktopShow, this )
-        .on( 'change', this.desktopHide, this )
-        .on( 'fetch', this.desktopShow, this );
+        .on( 'add', this.desktopShow)
+        .on( 'change', this.desktopHide)
+        .on( 'fetch', this.desktopShow);
 
     },
 
@@ -47,8 +44,16 @@ define(function(require) {
     },
 
     desktopHide: function() {
-      if (utils.isDesktop) _.delay( _.bind(this.hide, this), 1000 );
+      if (utils.isDesktop) _.delay( this.hide, 1000 );
+    },
+
+    showOrHide: function() {
+      // if only one doc or open doc empty return
+      if ( this.collection.length < 2 || this.app.doc.isEmpty() ) return;
+      this.show();
+      if (utils.isDesktop) _.delay(this.hide, 3000);
     }
+
 
   });
 

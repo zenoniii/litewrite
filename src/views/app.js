@@ -22,15 +22,15 @@ define(function(require) {
       this.aside = new AsideView({ app: this.app, collection: this.collection });
 
 
-      this.collection.on( 'fetch', this.editor.render, this.editor );
+      this.collection.on('fetch', this.editor.render);
 
       this.search
-        .on('focus', this.aside.show, this.aside)
-        .on('blur', this.aside.desktopHide, this.aside);
+        .on('focus', this.aside.show)
+        .on('blur', this.aside.desktopHide);
 
-      this.editor.on( 'modKey', this.aside.hide, this.aside );
+      this.editor.on('modKey', this.aside.hide);
 
-      this.entries.on( 'open', this.aside.toggle, this.aside );
+      this.entries.on('open', this.aside.toggle);
 
     },
 

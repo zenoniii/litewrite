@@ -17,26 +17,27 @@ define(function(require) {
 
     initialize: function() {
 
+      _.bindAll(this);
+
       var state = this.state = new State();
       var doc = this.doc = new Doc();
       var docs = this.docs = new Docs();
 
       doc
-        .on( 'change:content', doc.updateLastEdited )
-        .on( 'change:content', doc.updateTitle )
-        .on( 'change:id', this.updateState, this )
-        .on( 'change:id', this.handlePrevious, this )
-        .on( 'change:title', this.setWindowTitle )
-        .on( 'change:title', this.updateUri, this )
-        .on( 'change:uri', this.setUrl )
-        .on( 'change', this.updateDocs, this );
+        .on('change:content', doc.updateLastEdited)
+        .on('change:content', doc.updateTitle)
+        .on('change:id', this.updateState)
+        .on('change:id', this.handlePrevious)
+        .on('change:title', this.setWindowTitle)
+        .on('change:title', this.updateUri)
+        .on('change:uri', this.setUrl)
+        .on('change', this.updateDocs);
 
       docs
-        .on( 'add', this.open, this )
-        .on( 'fetch', this.setDoc, this )
+        .on('add', this.open)
+        .on('fetch', this.setDoc);
 
-      $.when( state.fetch(), docs.fetch() )
-        .then( _.bind(this.loadDoc, this) );
+      $.when( state.fetch(), docs.fetch() ).then( this.loadDoc );
 
       new AppView({ app: this, collection: docs });
 

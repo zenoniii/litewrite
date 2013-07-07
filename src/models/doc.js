@@ -1,10 +1,15 @@
 define(function(require) {
 
+  var _ = require('underscore');
   var Backbone = require('backbone');
   var rsSync = require('rs-adapter');
 
 
   var Doc = Backbone.Model.extend({
+
+    initialize: function () {
+      _.bindAll(this);
+    },
 
     defaults: {
       title: '',

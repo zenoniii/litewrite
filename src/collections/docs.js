@@ -16,8 +16,10 @@ define(function(require) {
 
     initialize: function(models, options) {
 
+      _.bindAll(this);
+
       this
-        .on('change:lastEdited', this.sort, this)
+        .on('change:lastEdited', this.sort)
         .on('change:lastEdited', this.saveWhenIdle);
 
       this.initRemotestorage();
@@ -26,7 +28,8 @@ define(function(require) {
 
     addNew: function() {
       this.add({
-        id: Math.round(Math.random()*10000000000000),
+        // TODO: remotestorage should create id
+        id: Math.round( Math.random() * 10000000000000 ),
         lastEdited: new Date().getTime()
       });
     },
@@ -40,17 +43,19 @@ define(function(require) {
     saveTimeout: undefined,
     saveWhenIdle: function(doc) {
       clearTimeout(this.saveTimeout);
-      this.saveTimeout = setTimeout(_.bind(doc.save, doc), 1000);
+      this.saveTimeout = setTimeout(doc.save, 1000);
     },
 
     fetch: _.debounce(function() {
       return Backbone.Collection.prototype.fetch.call(this, {
-        success: _.bind(function() {
-          if (this.isEmpty()) this.addNew();
-          this.trigger('fetch'); // TODO: backbone 1.0 - this can be removed
-        }, this)
+        success: this.handleFetch
       });
     }, 300, true),
+
+    handleFetch: function () {
+      if (this.isEmpty()) this.addNew();
+      this.trigger('fetch'); // TODO: backbone 1.0 - this can be removed
+    },
 
     before: function(id) {
       return this.at( this.indexOf( this.get(id) ) - 1 );
@@ -62,9 +67,10 @@ define(function(require) {
 
     initRemotestorage: function() {
       var docs = this;
+
       var origHash = document.location.hash;
 
-      remoteStorage.on('ready', _.bind(docs.fetch, docs));
+      remoteStorage.on('ready', docs.fetch);
 
       remoteStorage.on('disconnect', function() {
         docs.reset().addNew();
@@ -74,21 +80,21 @@ define(function(require) {
         remoteStorage.documents.init();
         remoteStorage.displayWidget('remotestorage-connect');
 
-        remoteStorageDocuments.onChange('notes', function(event) {
-          if(event.origin !== 'window') {
-            docs.fetch();
-          }
-        });
+        remoteStorageDocuments.onChange('notes', docs.rsChange);
 
         setTimeout(function() {
           var md = origHash.match(/access_token=([^&]+)/);
-          if(md && (! remoteStorage.getBearerToken())) {
+          if ( md && (! remoteStorage.getBearerToken()) ) {
             // backbone stole our access token
             remoteStorage.setBearerToken(md[1]);
           }
         }, 0);
 
       });
+    },
+
+    rsChange: function (event) {
+      if (event.origin !== 'window') this.fetch();
     }
 
   });
