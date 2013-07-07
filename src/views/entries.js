@@ -11,11 +11,9 @@ define(function(require) {
     el: '#entries',
 
     initialize: function(options) {
+
       this.app = options.app;
       this.template = _.template(entriesTemplate);
-
-      // TODO: update height on resize
-      this.height = this.$el.height() - 50;
 
       this.collection
         .on('fetch', function ready() { this.render(); this.collection.off('fetch', ready); }, this) // TODO: backbone 1.0 - redundant
@@ -28,6 +26,12 @@ define(function(require) {
       this.app.doc.on('change:id', this.selectDoc, this);
 
       this.app.state.on('change:query', this.render, this);
+
+    },
+
+    events: {
+      'click': 'tabOnMobile',
+      'click .item': 'openDoc'
     },
 
     serialize: function() {
@@ -81,18 +85,17 @@ define(function(require) {
       this.scrollToSelected();
     },
 
+    height: function () {
+      return this.$el.height() - 50;
+    },
+
     scrollToSelected: function() {
       var position = this.$selected.position();
       if (!position) return;
       var top = position.top;
-      if (top < 0 || top > this.height) {
+      if ( top < 0 || top > this.height() ) {
         this.$el.scrollTop( top - 15 );
       }
-    },
-
-    events: {
-      'click': 'tabOnMobile',
-      'click .item': 'openDoc'
     },
 
     tabOnMobile: function(e) {
@@ -108,14 +111,6 @@ define(function(require) {
     }
 
   });
-
-
-  // see link for more info:
-  // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
-  function escapeRegExp(str) {
-    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-
-  }
 
 
 

@@ -10,8 +10,8 @@ define(function(require) {
     el: 'body',
 
     initialize: function(options) {
+
       this.app = options.app;
-      // TODO: add this: this.entries = new EntriesView();
 
       this.app.on('ready', function() {
         // if only one doc or open doc empty return
@@ -20,10 +20,9 @@ define(function(require) {
         if (utils.isDesktop) _.delay(_.bind(this.hide, this), 3000);
       }, this);
 
-      this.app.doc.on( 'change:title', this.desktopHide, this );
-
       this.collection
         .on( 'add', this.desktopShow, this )
+        .on( 'change', this.desktopHide, this )
         .on( 'fetch', this.desktopShow, this );
 
     },
