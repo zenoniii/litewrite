@@ -52,6 +52,7 @@ define(function(require) {
       this.aside.toggle();
     },
 
+    // global key handler for shortcuts
     handleKey: function(e) {
       if (e.which === 9) { // tab
         e.preventDefault();

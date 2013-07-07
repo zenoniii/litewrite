@@ -26,6 +26,7 @@ define(function(require) {
     },
 
     updateLastEdited: function(doc, val) {
+      // only update lastEdited if you didn't switch the document
       if ( !doc.changed.id ) this.set( 'lastEdited', new Date().getTime() );
     },
 

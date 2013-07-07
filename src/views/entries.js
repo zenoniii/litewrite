@@ -22,7 +22,7 @@ define(function(require) {
         .on('reset', this.render) // TODO: backbone 1.0 - use sort event
         .on('add', this.render)
         .on('change:title', this.update)
-        .on('change:lastEdited', this.moveItem)
+        .on('change:lastEdited', this.toTop)
         .on('destroy', this.removeItem);
 
       this.app.doc.on('change:id', this.selectDoc);
@@ -35,19 +35,27 @@ define(function(require) {
       'click .item': 'openDoc'
     },
 
+    // generate opacity for docs and filter them
     serialize: function() {
-      var query = this.app.state.get('query');
       var docs = this.collection
-        .filter(function(doc) {
-          var match = query ? new RegExp(utils.escapeRegExp(query), 'i').test( doc.get('title') ) : true;
-          return !doc.isEmpty() && match;
-        }).map(function(doc) {
+        .filter(this.filter).map(function(doc) {
           var res = doc.toJSON();
           res.opacity = doc.getOpacity();
           return res;
         });
 
       return { docs: docs };
+    },
+
+    // remove empty doc and check if it matches state.query
+    filter: function(doc) {
+      var query = this.app.state.get('query');
+      if (query) {
+        var reg = new RegExp(utils.escapeRegExp(query), 'i');
+        var match = reg.test( doc.get('title') );
+        if (!match) return;
+      }
+      return !doc.isEmpty();
     },
 
     render: function() {
@@ -59,17 +67,16 @@ define(function(require) {
       return this.$('.item[data-id=' + id + ']');
     },
 
+    // update text and href for a doc
     update: function(doc) {
       var $item = this.find(doc.id).find('a');
-      if ($item.length && !doc.isEmpty()) {
-        $item.text( doc.get('title') );
-        $item.attr( 'href', '#!' + doc.get('uri') );
-      } else {
-        this.render();
-      }
+      if (!$item.length || doc.isEmpty()) return this.render();
+      $item.text( doc.get('title') );
+      $item.attr( 'href', '#!' + doc.get('uri') );
     },
 
-    moveItem: function(doc) {
+    // moves a doc from its current position to the top of the list
+    toTop: function(doc) {
       this.$el.prepend( this.removeItem(doc) );
     },
 
@@ -77,6 +84,7 @@ define(function(require) {
       return this.find(doc.id).remove();
     },
 
+    // add a 'selected' class to the open doc
     selectDoc: function() {
       if (this.$selected) {
         this.$selected.removeClass('selected');
@@ -91,6 +99,8 @@ define(function(require) {
       return this.$el.height() - 50;
     },
 
+    // TODO: test this on mobile
+    // scrolls to the selected element
     scrollToSelected: function() {
       var position = this.$selected.position();
       if (!position) return;
@@ -100,6 +110,7 @@ define(function(require) {
       }
     },
 
+    // event handler to open a document
     openDoc: function(e) {
       e.preventDefault();
       var id = this.$(e.currentTarget).attr('data-id');

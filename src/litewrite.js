@@ -48,15 +48,18 @@ define(function(require) {
       this.trigger('ready');
     },
 
+    // loads document from state
     setDoc: function () {
       this.open( this.state.get('openDocId') );
     },
 
+    // open a document. either pass a Doc or an id
     open: function(doc) {
       if ( !doc.toJSON ) doc = this.docs.get(doc) || this.docs.first();
       this.doc.set( doc.toJSON() );
     },
 
+    // remove empty documents
     handlePrevious: function(doc) {
       var previous = this.docs.get( doc.previous('id') );
       if (previous) previous.isEmpty() ? previous.destroy() : previous.save();

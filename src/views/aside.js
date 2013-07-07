@@ -47,6 +47,8 @@ define(function(require) {
       if (utils.isDesktop) _.delay( this.hide, 1000 );
     },
 
+    // only needed on initialization.
+    // show or hide aside depending on how many docs you have
     showOrHide: function() {
       // if only one doc or open doc empty return
       if ( this.collection.length < 2 || this.app.doc.isEmpty() ) return;

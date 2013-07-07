@@ -40,12 +40,14 @@ define(function(require) {
       return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
     },
 
+    // send updates at most once per second to remotestorage
     saveTimeout: undefined,
     saveWhenIdle: function(doc) {
       clearTimeout(this.saveTimeout);
       this.saveTimeout = setTimeout(doc.save, 1000);
     },
 
+    // fetch from remotestorage at most all 300ms
     fetch: _.debounce(function() {
       return Backbone.Collection.prototype.fetch.call(this, {
         success: this.handleFetch
