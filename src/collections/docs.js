@@ -17,6 +17,7 @@ define(function(require) {
     initialize: function(models, options) {
 
       this
+        .on('change:lastEdited', this.sort, this)
         .on('change:lastEdited', this.saveWhenIdle);
 
       this.initRemotestorage();

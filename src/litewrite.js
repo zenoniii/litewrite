@@ -68,10 +68,11 @@ define(function(require) {
     updateUri: function(doc) {
       var uri = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
       if (uri.length < 1) return doc.set('uri', '');
+      var match = new RegExp( '^' + utils.escapeRegExp(uri) + '(-[0-9]|$)' );
       var len = this.docs.filter(function(doc) {
-        return new RegExp('^' + utils.escapeRegExp(uri) + '(-[0-9]|$)').test(doc.get('uri'));
+        return match.test( doc.get('uri') );
       }).length;
-      uri = len < 1 ? uri : uri + '-' + len;
+      if (len) uri += '-' + len;
       doc.set( 'uri', uri );
     },
 

@@ -19,7 +19,7 @@ define(function(require) {
         .on('fetch', function ready() { this.render(); this.collection.off('fetch', ready); }, this) // TODO: backbone 1.0 - redundant
         .on('reset', this.render, this) // TODO: backbone 1.0 - use sort event
         .on('add', this.render, this)
-        .on('change:title', this.updateTitle, this)
+        .on('change:title', this.update, this)
         .on('change:lastEdited', this.moveItem, this)
         .on('destroy', this.removeItem, this);
 
@@ -57,10 +57,11 @@ define(function(require) {
       return this.$('.item[data-id=' + id + ']');
     },
 
-    updateTitle: function(doc) {
+    update: function(doc) {
       var $item = this.find(doc.id).find('a');
       if ($item.length && !doc.isEmpty()) {
-        $item.text(doc.get('title'));
+        $item.text( doc.get('title') );
+        $item.attr( 'href', '#!' + doc.get('uri') );
       } else {
         this.render();
       }

@@ -41,7 +41,6 @@ define(function(require) {
 
     newDoc: function(e) {
       e.preventDefault();
-      console.log('enw');
       if (this.app.doc.isEmpty()) return this.editor.focus();
       this.collection.addNew();
     },
