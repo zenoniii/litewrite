@@ -28,27 +28,25 @@ define(function(require) {
         .on('focus', this.aside.show, this.aside)
         .on('blur', this.aside.desktopHide, this.aside);
 
-      this.entries.on( 'tab', this.aside.toggle, this.aside );
       this.editor.on( 'modKey', this.aside.hide, this.aside );
 
     },
 
     events: {
       'click #add': 'newDoc',
-      'click #menu-button': 'toggleAsideOnMobile',
+      'touchend #add': 'newDoc',
+      'touchend #menu-button': 'toggleAside',
       'keydown': 'handleKey'
     },
 
     newDoc: function(e) {
       e.preventDefault();
-
+      console.log('enw');
       if (this.app.doc.isEmpty()) return this.editor.focus();
       this.collection.addNew();
     },
 
-    toggleAsideOnMobile: function(e) {
-      if (utils.isDesktop) return;
-      e.stopImmediatePropagation();
+    toggleAside: function() {
       this.aside.toggle();
     },
 

@@ -27,6 +27,10 @@ define(function(require) {
 
     },
 
+    events: {
+      'touchend #aside': 'toggle'
+    },
+
     show: function() {
       this.$el.addClass('show-aside');
     },

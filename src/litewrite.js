@@ -7,7 +7,6 @@ define(function(require) {
   var Doc = require('models/doc');
   var Docs = require('collections/docs');
   var State = require('models/state');
-  var FastClick = require('../lib/fastclick');
   var utils = require('utils');
 
 
@@ -39,7 +38,6 @@ define(function(require) {
         .then( _.bind(this.loadDoc, this) );
 
       new AppView({ app: this, collection: docs });
-      new FastClick( document.body );
 
     },
 

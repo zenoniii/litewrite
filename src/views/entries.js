@@ -30,7 +30,6 @@ define(function(require) {
     },
 
     events: {
-      'click': 'tabOnMobile',
       'click .item': 'openDoc'
     },
 
@@ -96,12 +95,6 @@ define(function(require) {
       if ( top < 0 || top > this.height() ) {
         this.$el.scrollTop( top - 15 );
       }
-    },
-
-    tabOnMobile: function(e) {
-      if (utils.isDesktop) return;
-      e.stopImmediatePropagation();
-      this.trigger('tab');
     },
 
     openDoc: function(e) {
