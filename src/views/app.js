@@ -18,14 +18,13 @@ define(function(require) {
 
       this.editor = new EditorView({ app: this.app });
       this.entries = new EntriesView({ app: this.app, collection: this.collection });
-      this.search = new SearchView();
+      this.search = new SearchView({ model: this.app.state });
       this.aside = new AsideView({ app: this.app, collection: this.collection });
 
 
       this.collection.on( 'fetch', this.editor.render, this.editor );
 
       this.search
-        .on('find', this.entries.render, this.entries)
         .on('focus', this.aside.show, this.aside)
         .on('blur', this.aside.desktopHide, this.aside);
 

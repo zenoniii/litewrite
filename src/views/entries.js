@@ -26,10 +26,12 @@ define(function(require) {
         .on('destroy', this.removeItem, this);
 
       this.app.doc.on('change:id', this.selectDoc, this);
+
+      this.app.state.on('change:query', this.render, this);
     },
 
-    serialize: function(options) {
-      var query = options && options.query;
+    serialize: function() {
+      var query = this.app.state.get('query');
       var docs = this.collection
         .filter(function(doc) {
           var match = query ? new RegExp(utils.escapeRegExp(query), 'i').test( doc.get('title') ) : true;
@@ -43,8 +45,8 @@ define(function(require) {
       return { docs: docs };
     },
 
-    render: function(options) {
-      this.$el.html( this.template( this.serialize(options) ) );
+    render: function() {
+      this.$el.html( this.template( this.serialize() ) );
       this.selectDoc();
     },
 

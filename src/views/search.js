@@ -5,6 +5,10 @@ define(function(require) {
 
   var SearchView = Backbone.View.extend({
 
+    initialize: function () {
+      this.render();
+    },
+
     el: '#search',
 
     events: {
@@ -14,9 +18,17 @@ define(function(require) {
       'blur': 'triggerBlur'
     },
 
+    serialize: function () {
+      return this.model.get('query');
+    },
+
+    render: function () {
+      this.$el.val( this.serialize() );
+    },
+
     search: function() {
       var query = this.$el.val();
-      this.trigger( 'find', { query: query } );
+      this.model.save( 'query', query );
     },
 
     focus: function() {
