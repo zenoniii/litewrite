@@ -32,7 +32,8 @@ define(function(require) {
         .on( 'change', this.updateDocs, this );
 
       docs
-        .on( 'add', this.open, this );
+        .on( 'add', this.open, this )
+        .on( 'fetch', this.setDoc, this )
 
       $.when( state.fetch(), docs.fetch() )
         .then( _.bind(this.loadDoc, this) );
@@ -42,8 +43,12 @@ define(function(require) {
     },
 
     loadDoc: function() {
-      this.open( this.state.get('openDocId') );
+      this.setDoc();
       this.trigger('ready');
+    },
+
+    setDoc: function () {
+      this.open( this.state.get('openDocId') );
     },
 
     open: function(doc) {
