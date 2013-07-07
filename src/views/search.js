@@ -35,8 +35,7 @@ define(function(require) {
       this.$el.focus();
     },
 
-    triggerFocus: function(e) {
-      e.stopPropagation();
+    triggerFocus: function() {
       this.trigger('focus');
     },
 

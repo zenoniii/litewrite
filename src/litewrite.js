@@ -65,7 +65,7 @@ define(function(require) {
       this.state.save( 'openDocId', doc.id );
     },
 
-    // TODO: uris aren't unique right now:
+    // TODO: URIs aren't unique right now:
     // * create 'doc', 'doc-2', 'doc-3'
     // * delete 'doc-2'
     // * create a new document with title 'doc'

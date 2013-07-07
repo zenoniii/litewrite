@@ -102,6 +102,7 @@ define(function(require) {
       e.preventDefault();
       var id = this.$(e.currentTarget).attr('data-id');
       this.app.open(id);
+      this.trigger('open');
     }
 
   });

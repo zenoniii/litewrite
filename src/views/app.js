@@ -30,6 +30,8 @@ define(function(require) {
 
       this.editor.on( 'modKey', this.aside.hide, this.aside );
 
+      this.entries.on( 'open', this.aside.toggle, this.aside );
+
     },
 
     events: {
@@ -41,6 +43,7 @@ define(function(require) {
 
     newDoc: function(e) {
       e.preventDefault();
+      if (utils.isMobile) this.aside.toggle();
       if (this.app.doc.isEmpty()) return this.editor.focus();
       this.collection.addNew();
     },

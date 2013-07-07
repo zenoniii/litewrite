@@ -20,11 +20,11 @@ define(function(require) {
       if (!content) return this.$el.text(' ');
       if ( content === this.$el.html() ) return;
       this.$el.html(content);
-      if (utils.isDesktop) this.focus();
+      this.focus();
     },
 
     focus: function() {
-      this.$el.focus();
+      if (utils.isDesktop) this.$el.focus();
     },
 
     events: {
