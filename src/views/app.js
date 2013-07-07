@@ -13,14 +13,16 @@ define(function(require) {
     el: 'body',
 
     initialize: function(options) {
+
       this.app = options.app;
+
       this.editor = new EditorView({ app: this.app });
       this.entries = new EntriesView({ app: this.app, collection: this.collection });
       this.search = new SearchView();
       this.aside = new AsideView({ app: this.app, collection: this.collection });
 
 
-      this.collection.on('fetch', this.editor.render, this.editor);
+      this.collection.on( 'fetch', this.editor.render, this.editor );
 
       this.search
         .on('find', function(query) {
@@ -31,8 +33,8 @@ define(function(require) {
           if (!utils.isMobile) this.aside.hide();
         }, this);
 
-      this.entries.on('tab', this.aside.toggle, this.aside);
-      this.editor.on('modKey', this.aside.hide, this.aside);
+      this.entries.on( 'tab', this.aside.toggle, this.aside );
+      this.editor.on( 'modKey', this.aside.hide, this.aside );
 
     },
 
@@ -57,16 +59,16 @@ define(function(require) {
     },
 
     handleKey: function(e) {
-      if (e.which === 9) { //tab
+      if (e.which === 9) { // tab
         e.preventDefault();
       } else if (e[utils.modKey.name]) {
         this.aside.show();
-        if (e.which === 78) { //n
+        if (e.which === 78) { // n
           this.newDoc(e);
-        } else if (e.which === 38) { //up
+        } else if (e.which === 38) { // up
           this.previous();
           return false;
-        } else if (e.which === 40) { //down
+        } else if (e.which === 40) { // down
           this.next();
           return false;
         } else if (e.which === 70) // f

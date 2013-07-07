@@ -25,26 +25,16 @@ define(function(require) {
       } else {
 
         this.show();
-
-        setTimeout(_.bind(function() {
-          this.hide();
-        }, this), 3000);
+        _.delay(_.bind(this.hide, this), 3000);
 
       }
 
 
-      this.app.doc.on('change:title', function() {
-          setTimeout(_.bind(function() {
-            if (!utils.isMobile) this.hide();
-          }, this), 1000);
-      }, this);
+      this.app.doc.on( 'change:title', this.desktopHide, this );
 
-
-      function showOnDesktop() {
-        if (!utils.isMobile) this.show();
-      }
-      this.collection.on('add', showOnDesktop, this);
-      this.collection.on('fetch', showOnDesktop, this);
+      this.collection
+        .on( 'add', this.desktopShow, this )
+        .on( 'fetch', this.desktopShow, this );
 
     },
 
@@ -53,14 +43,24 @@ define(function(require) {
     },
 
     hide: function() {
-      //hide sidebar when 3 or more docs and the open doc is not empty
-      if (this.collection.length > 2 && !this.app.doc.isEmpty()) {
+      // hide sidebar when 3 or more docs and the open doc is not empty
+      if ( this.collection.length > 2 && !this.app.doc.isEmpty() ) {
         this.$el.removeClass('show-aside');
       }
     },
 
     toggle: function() {
       this.$el.toggleClass('show-aside');
+    },
+
+    desktopShow: function() {
+      if (!utils.isMobile) this.show();
+    },
+
+    desktopHide: function() {
+      _.delay(function(aside) {
+        if (!utils.isMobile) aside.hide();
+      }, 1000, this);
     }
 
   });

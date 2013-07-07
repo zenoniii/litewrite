@@ -18,8 +18,8 @@ define(function(require) {
       this.height = this.$el.height() - 50;
 
       this.collection
-        .on('fetch', function ready() { this.render(); this.collection.off('fetch', ready); }, this) // TODO: backbone 1.0 - use once()
-        .on('reset', this.render, this)
+        .on('fetch', function ready() { this.render(); this.collection.off('fetch', ready); }, this) // TODO: backbone 1.0 - redundant
+        .on('reset', this.render, this) // TODO: backbone 1.0 - use sort event
         .on('add', this.render, this)
         .on('change:title', this.updateTitle, this)
         .on('change:lastEdited', this.moveItem, this)

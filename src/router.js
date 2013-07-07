@@ -9,7 +9,7 @@ define(function(require) {
       this.app = options.app;
     },
 
-    //use ! for urls to not conflict with remotestorage's #access_token parameter
+    // use ! for urls to not conflict with remotestorage's #access_token parameter
     routes: {
       '': 'openLastEdited',
       '!': 'openLastEdited',
@@ -18,13 +18,17 @@ define(function(require) {
     },
 
     openLastEdited: function() {
-      this.navigate(this.app.doc.get('uri'), { trigger: true, replace: true });
+      this.go( this.app.doc.get('uri') );
     },
 
     open: function(uri) {
       var doc = this.app.docs.where({ uri: uri })[0]; // TODO: backbone 1.0 - use findWhere
-      if (!doc) return this.navigate('', { trigger: true, replace: true });
+      if (!doc) return this.go('');
       this.app.open(doc);
+    },
+
+    go: function (url) {
+      return this.navigate( url, { trigger: true, replace: true } );
     }
 
   });

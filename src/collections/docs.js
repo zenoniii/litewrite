@@ -7,6 +7,7 @@ define(function(require) {
   var remoteStorageDocuments = require('remotestorage-documents');
   var rsSync = require('rs-adapter');
 
+
   var Docs = Backbone.Collection.extend({
 
     model: Doc,
@@ -53,11 +54,11 @@ define(function(require) {
     }, 300),
 
     before: function(id) {
-      return this.at( this.indexOf( this.get(id) ) - 1);
+      return this.at( this.indexOf( this.get(id) ) - 1 );
     },
 
     after: function(id) {
-      return this.at( this.indexOf( this.get(id) ) + 1);
+      return this.at( this.indexOf( this.get(id) ) + 1 );
     },
 
     initRemotestorage: function() {

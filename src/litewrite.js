@@ -11,9 +11,8 @@ define(function(require) {
   var utils = require('utils');
 
 
-  function Litewrite() {
-    this.initialize.apply(this, arguments);
-  }
+  function Litewrite() { this.initialize(); }
+
 
   _.extend(Litewrite.prototype, Backbone.Events, {
 
@@ -21,28 +20,28 @@ define(function(require) {
 
       this.state = new State();
 
-      this.doc = new Doc();
-      this.doc
-        .on('change:content', this.doc.updateLastEdited)
-        .on('change:content', this.doc.updateTitle)
-        .on('change:id', this.updateState, this)
-        .on('change:id', this.handlePrevious, this)
-        .on('change:title', this.setWindowTitle)
-        .on('change:title', this.updateUri, this)
-        .on('change:uri', this.setUrl)
-        .on('change', this.updateDocs, this);
+      var doc = this.doc = new Doc();
+      doc
+        .on( 'change:content', doc.updateLastEdited )
+        .on( 'change:content', doc.updateTitle )
+        .on( 'change:id', this.updateState, this )
+        .on( 'change:id', this.handlePrevious, this )
+        .on( 'change:title', this.setWindowTitle )
+        .on( 'change:title', this.updateUri, this )
+        .on( 'change:uri', this.setUrl )
+        .on( 'change', this.updateDocs, this );
 
-      this.docs = new Docs()
-        .on('add', this.open, this);
+      var docs = this.docs = new Docs()
+        .on( 'add', this.open, this );
 
       this.state.fetch();
-      this.docs.fetch();
+      docs.fetch();
 
-      $.when( this.state.loading, this.docs.loading )
+      $.when( this.state.loading, docs.loading )
         .done( _.bind(this.loadDoc, this) );
 
-      new AppView({ app: this, collection: this.docs });
-      new FastClick(document.body);
+      new AppView({ app: this, collection: docs });
+      new FastClick( document.body );
 
     },
 
@@ -52,7 +51,7 @@ define(function(require) {
     },
 
     open: function(doc) {
-      if (!doc.toJSON) doc = this.docs.get(doc) || this.docs.first();
+      if ( !doc.toJSON ) doc = this.docs.get(doc) || this.docs.first();
       this.doc.set( doc.toJSON() );
     },
 
@@ -62,11 +61,12 @@ define(function(require) {
     },
 
     updateDocs: function(doc) {
-      this.docs.get(doc.id).set( doc.toJSON() ); // TODO: backbone 1.0 - docs.set( doc.toJSON() )
+      // TODO: backbone 1.0 - this.docs.set( doc.toJSON(), { remove: false } );
+      this.docs.get(doc.id).set( doc.toJSON() );
     },
 
     updateState: function(doc) {
-      this.state.save('openDocId', doc.id);
+      this.state.save( 'openDocId', doc.id );
     },
 
     updateUri: function(doc) {
@@ -76,7 +76,7 @@ define(function(require) {
         return new RegExp('^' + utils.escapeRegExp(uri) + '(-[0-9]|$)').test(doc.get('uri'));
       }).length;
       uri = len < 1 ? uri : uri + '-' + len;
-      doc.set('uri', uri);
+      doc.set( 'uri', uri );
     },
 
     setWindowTitle: function(doc) {

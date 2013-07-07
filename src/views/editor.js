@@ -11,14 +11,14 @@ define(function(require) {
 
     initialize: function(options) {
       this.app = options.app;
-      this.app.on('ready', this.render, this);
-      this.app.doc.on('change:id', this.render, this);
+      this.app.on( 'ready', this.render, this );
+      this.app.doc.on( 'change:id', this.render, this );
     },
 
     render: function() {
       var content = this.app.doc.get('content');
       if (!content) return this.$el.text(' ');
-      if (content === this.$el.html()) return;
+      if ( content === this.$el.html() ) return;
       this.$el.html(content);
       if (!utils.isMobile) this.focus();
     },
@@ -32,7 +32,7 @@ define(function(require) {
     },
 
     updateOpenDoc: function(e) {
-      if (e.which === (utils.modKey.code)) this.trigger('modKey');
+      if ( e.which === (utils.modKey.code) ) return this.trigger('modKey');
       this.app.doc.set( 'content', this.$el.html() );
     }
 
