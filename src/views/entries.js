@@ -18,8 +18,10 @@ define(function(require) {
       this.template = _.template(entriesTemplate);
 
       this.collection
-        .on('fetch', function ready() { this.render(); this.collection.off('fetch', ready); }, this) // TODO: backbone 1.0 - redundant
-        .on('reset', this.render) // TODO: backbone 1.0 - use sort event
+        .on('sort', this.render) // TODO: not sure is if sort the right thing here
+        .on('sort', function () {
+          console.log('sort');
+        })
         .on('add', this.render)
         .on('change:title', this.update)
         .on('change:lastEdited', this.toTop)

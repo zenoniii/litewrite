@@ -66,8 +66,7 @@ define(function(require) {
     },
 
     updateDocs: function(doc) {
-      // TODO: backbone 1.0 - this.docs.set( doc.toJSON(), { remove: false } );
-      this.docs.get(doc.id).set( doc.toJSON() );
+      this.docs.set( doc.toJSON(), { add: false, remove: false } );
     },
 
     updateState: function(doc) {

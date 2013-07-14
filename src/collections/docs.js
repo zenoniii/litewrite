@@ -34,7 +34,6 @@ define(function(require) {
       });
     },
 
-    // TODO: backbone 1.0 - use string as comparator
     // Sort by 'lastEdited'
     comparator: function(first, second) {
       return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
@@ -56,7 +55,6 @@ define(function(require) {
 
     handleFetch: function () {
       if (this.isEmpty()) this.addNew();
-      this.trigger('fetch'); // TODO: backbone 1.0 - this can be removed
     },
 
     before: function(id) {
