@@ -18,7 +18,7 @@ define(function(require) {
       this.template = _.template(entriesTemplate);
 
       this.collection
-        .on('sort', this.render) // TODO: not sure is if sort the right thing here
+        .on('sort', this.render) // TODO: not sure if sort is the right thing here
         .on('add', this.render)
         .on('change:title', this.update)
         .on('change:lastEdited', this.toTop)

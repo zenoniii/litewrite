@@ -24,7 +24,7 @@ define(function(require) {
     // only re-render when content changed
     render: function() {
       var content = this.app.doc.get('content');
-      if (!content) return this.$el.text(' '); // TODO: is redundant as soon as we use codemirror
+      if (!content) return this.$el.text(' '); // NOTE: is redundant as soon as we use codemirror
       if ( content === this.$el.html() ) return;
       this.$el.html(content);
       this.focus();
