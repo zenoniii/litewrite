@@ -37,19 +37,21 @@ define(function(require) {
     events: {
       'click #add': 'newDoc',
       'touchend #add': 'newDoc',
+      'click #menu-button': 'toggleAside',
       'touchend #menu-button': 'toggleAside',
       'keydown': 'handleKey'
     },
 
-    newDoc: function(e) {
-      e.preventDefault();
+    newDoc: function() {
       if (utils.isMobile) this.aside.toggle();
       if (this.app.doc.isEmpty()) return this.editor.focus();
       this.collection.addNew();
+      return false;
     },
 
     toggleAside: function() {
       this.aside.toggle();
+      return false;
     },
 
     // global key handler for shortcuts
