@@ -35,7 +35,7 @@ define(function(require) {
 
       docs
         .on('add', this.open)
-        .on('fetch', this.setDoc);
+        .on('sync', this.setDoc);
 
       $.when( state.fetch(), docs.fetch() ).then( this.loadDoc );
 

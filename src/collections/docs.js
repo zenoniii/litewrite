@@ -6,6 +6,8 @@ define(function(require) {
   var Doc = require('models/doc');
   var remoteStorageDocuments = require('remotestorage-documents');
   var rsSync = require('rs-adapter');
+  var welcome = require('text!templates/welcome.md');
+
 
 
   var Docs = Backbone.Collection.extend({
@@ -20,18 +22,19 @@ define(function(require) {
 
       this
         .on('change:lastEdited', this.sort)
-        .on('change:lastEdited', this.saveWhenIdle);
+        .on('change:lastEdited', this.saveWhenIdle)
+        .once('sync', this.welcome);
 
       this.initRemotestorage();
 
     },
 
-    addNew: function() {
-      this.add({
+    addNew: function(options) {
+      return this.add( _.defaults(options || {}, {
         // TODO: remotestorage should create id
         id: Math.round( Math.random() * 10000000000000 ),
         lastEdited: new Date().getTime()
-      });
+      }) );
     },
 
     // Sort by 'lastEdited'
@@ -63,6 +66,12 @@ define(function(require) {
 
     after: function(id) {
       return this.at( this.indexOf( this.get(id) ) + 1 );
+    },
+
+    welcome: function () {
+      var data = { content: welcome };
+      if ( this.findWhere(data) ) return this;
+      return this.addNew(data);
     },
 
     initRemotestorage: function() {
