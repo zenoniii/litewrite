@@ -1,12 +1,21 @@
 define(function(require) {
 
+  var _ = require('underscore');
   var Backbone = require('backbone');
 
 
   var SearchView = Backbone.View.extend({
 
     initialize: function () {
+
+      _.bindAll(this, 'toggle');
+
       this.render();
+
+      this.collection
+        .on('add', this.toggle)
+        .on('remove', this.toggle);
+
     },
 
     el: '#search',
@@ -41,6 +50,18 @@ define(function(require) {
 
     triggerBlur: function() {
       this.trigger('blur');
+    },
+
+    toggle: function() {
+      this.collection.length > 7 ? this.show() : this.hide();
+    },
+
+    show: function() {
+      this.$el.removeClass('hide');
+    },
+
+    hide: function() {
+      this.$el.addClass('hide');
     }
 
   });

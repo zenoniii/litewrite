@@ -18,7 +18,7 @@ define(function(require) {
 
       this.editor = new EditorView({ app: this.app });
       this.entries = new EntriesView({ app: this.app, collection: this.collection });
-      this.search = new SearchView({ model: this.app.state });
+      this.search = new SearchView({ model: this.app.state, collection: this.collection });
       this.aside = new AsideView({ app: this.app, collection: this.collection });
 
 
