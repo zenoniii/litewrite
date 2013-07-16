@@ -16,7 +16,7 @@ define(function(require) {
 
     initialize: function(models, options) {
 
-      _.bindAll(this);
+      _.bindAll(this, 'sort', 'saveWhenIdle', 'handleFetch', 'rsChange');
 
       this
         .on('change:lastEdited', this.sort)

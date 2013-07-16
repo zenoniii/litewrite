@@ -8,7 +8,7 @@ define(function(require) {
   var Doc = Backbone.Model.extend({
 
     initialize: function () {
-      _.bindAll(this);
+      _.bindAll(this, 'save');
     },
 
     defaults: {
@@ -25,17 +25,17 @@ define(function(require) {
       return this.get('content').match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/) !== null;
     },
 
-    updateLastEdited: function(doc, val) {
+    updateLastEdited: function(doc) {
       // only update lastEdited if you didn't switch the document
-      if ( !doc.changed.id ) this.set( 'lastEdited', new Date().getTime() );
+      if ( !doc.changed.id ) doc.set( 'lastEdited', new Date().getTime() );
     },
 
-    updateTitle: function() {
+    updateTitle: function(doc) {
       // Title consists of the first 40 characters of the first not empty line
-      var title = this.get('content')
+      var title = doc.get('content')
         .match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*([^<]{0,40}).*?(<div>|<\/div>|<br>|$)/)[2]
         .replace(/&nbsp;/gi,'');
-      this.set( 'title', title );
+      doc.set( 'title', title );
     },
 
     getOpacity: function() {

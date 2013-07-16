@@ -17,7 +17,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this);
+      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
 
       var state = this.state = new State();
       var doc = this.doc = new Doc();

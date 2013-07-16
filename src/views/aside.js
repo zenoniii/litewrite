@@ -11,7 +11,7 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this);
+      _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide');
 
       this.app = options.app;
 

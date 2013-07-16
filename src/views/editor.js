@@ -12,7 +12,7 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this);
+      _.bindAll(this, 'render', 'focus');
 
       this.app = options.app;
 

@@ -12,7 +12,7 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this);
+      _.bindAll(this, 'filter', 'render', 'update', 'toTop', 'removeItem', 'selectDoc');
 
       this.app = options.app;
       this.template = _.template(entriesTemplate);
