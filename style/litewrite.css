@@ -42,6 +42,7 @@ aside {
 aside:hover, aside:focus, .show-aside aside { opacity:1; }
 
 #search {
+  display: block;
   z-index: 100;
   width: 92%;
   font-size: 16px;
