@@ -4,6 +4,8 @@ define(function(require) {
   var _ = require('underscore');
   var Backbone = require('backbone');
   var Doc = require('models/doc');
+  var remoteStorage = require('remotestorage');
+
   var remoteStorageDocuments = require('remotestorage-documents');
   var rsSync = require('rs-adapter');
 
@@ -16,7 +18,7 @@ define(function(require) {
 
     initialize: function(models, options) {
 
-      _.bindAll(this, 'sort', 'saveWhenIdle', 'handleFetch', 'rsChange');
+      _.bindAll(this, 'fetch', 'sort', 'saveWhenIdle', 'ensureDoc', 'rsChange');
 
       this
         .on('change:lastEdited', this.sort)
@@ -49,11 +51,11 @@ define(function(require) {
     // fetch from remotestorage at most all 300ms
     fetch: _.debounce(function() {
       return Backbone.Collection.prototype.fetch.call(this, {
-        success: this.handleFetch
+        success: this.ensureDoc
       });
     }, 300, true),
 
-    handleFetch: function () {
+    ensureDoc: function () {
       if (this.isEmpty()) this.addNew();
     },
 

@@ -55,7 +55,7 @@ define(function(require) {
 
     // open a document. either pass a Doc or an id
     open: function(doc) {
-      if ( !doc.toJSON ) doc = this.docs.get(doc) || this.docs.first();
+      if ( !_.isObject(doc) ) doc = this.docs.get(doc) || this.docs.first();
       this.doc.set( doc.toJSON() );
     },
 
@@ -73,12 +73,7 @@ define(function(require) {
       this.state.save( 'openDocId', doc.id );
     },
 
-    // TODO: URIs aren't unique right now:
-    // * create 'doc', 'doc-2', 'doc-3'
-    // * delete 'doc-2'
-    // * create a new document with title 'doc'
-    // * litewrite counts 3 docs ('doc', 'doc-3' and the new one)
-    // * new name is 'doc-3' again
+    // TODO: add id to uri instead of version number. also removes the neccesity to save uri at all
     updateUri: function(doc) {
       var uri = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
       if (uri.length < 1) return doc.set('uri', '');

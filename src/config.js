@@ -9,7 +9,7 @@ require.config( {
     underscore: '../lib/underscore',
     backbone: '../lib/backbone',
     localstorage: '../lib/backbone.localstorage',
-    remotestorage: '../lib/remotestorage.min',
+    remotestorage: '../lib/remotestorage',
     'remotestorage-documents': '../lib/remotestorage-documents',
     'rs-adapter': '../lib/backbone.remoteStorage-documents'
   },
@@ -21,9 +21,6 @@ require.config( {
     backbone: {
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
-    },
-    remotestorage: {
-      exports: 'RemoteStorage'
     }
   }
 });
