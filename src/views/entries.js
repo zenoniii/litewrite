@@ -46,7 +46,8 @@ define(function(require) {
       return { docs: docs };
     },
 
-    // remove empty doc and check if it matches state.query
+    // check if it matches state.query
+    // TODO: filter should only be run if ther is a query. would be faster.
     filter: function(doc) {
       var query = this.app.state.get('query');
       if (query) {
@@ -54,7 +55,7 @@ define(function(require) {
         var match = reg.test( doc.get('title') );
         if (!match) return;
       }
-      return !doc.isEmpty();
+      return true;
     },
 
     render: function() {
