@@ -91,6 +91,11 @@ aside a, .add {
 }
 .entries a:hover, .entries a:focus, .entries .selected { color:#000; font-weight:bold; }
 
+.entries li:last-child {
+	margin-bottom: 50px; /* some space after the last document in the list */
+}
+
+
 footer { position:fixed; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
 footer a { display:inline; padding:0; }
 
