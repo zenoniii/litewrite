@@ -72,7 +72,7 @@ define(function(require) {
 
       var origHash = document.location.hash;
 
-      remoteStorage.on('ready', docs.fetch);
+      remoteStorage.on('ready', setTimeout(function() { docs.fetch(); }, 1000));
 
       remoteStorage.on('disconnect', function() {
         docs.reset().addNew();
