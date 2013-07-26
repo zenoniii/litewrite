@@ -49,11 +49,11 @@ define(function(require) {
     },
 
     // fetch from remotestorage at most all 300ms
-    fetch: _.debounce(function() {
+    fetch: function() {
       return Backbone.Collection.prototype.fetch.call(this, {
         success: this.ensureDoc
       });
-    }, 300, true),
+    },
 
     ensureDoc: function () {
       if (this.isEmpty()) this.addNew();
@@ -71,8 +71,6 @@ define(function(require) {
       var docs = this;
 
       var origHash = document.location.hash;
-
-      remoteStorage.on('ready', setTimeout(function() { docs.fetch(); }, 1000));
 
       remoteStorage.on('disconnect', function() {
         docs.reset().addNew();
@@ -93,9 +91,22 @@ define(function(require) {
       }, 0);
     },
 
+    events: [],
+
     rsChange: function (event) {
-      if (event.origin !== 'window') this.fetch();
-    }
+      this.events.push(event);
+      this.handleEvents();
+    },
+
+    handleEvents: _.throttle(function() {
+      _.each(this.events, function(event) {
+        if (event.origin !== 'window') {
+          if (event.oldValue && !event.newValue) return this.remove(event.oldValue);
+          this.set(event.newValue, { remove: false });
+        }
+      }, this);
+      this.events = [];
+    }, 400, { leading: true, trailing: true })
 
   });
 
