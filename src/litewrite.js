@@ -19,13 +19,13 @@ define(function(require) {
 
       _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
 
-      var state = this.state = new State();
-      var doc = this.doc = new Doc();
-      var docs = this.docs = new Docs();
+      this.state = new State();
+      this.doc = new Doc();
+      this.docs = new Docs();
 
-      doc
-        .on('change:content', doc.updateLastEdited)
-        .on('change:content', doc.updateTitle)
+      this.doc
+        .on('change:content', this.doc.updateLastEdited)
+        .on('change:content', this.doc.updateTitle)
         .on('change:id', this.handlePrevious)
         .on('change:title', this.setWindowTitle)
         .on('change:title', this.updateUri)
@@ -33,9 +33,9 @@ define(function(require) {
         .on('change', this.updateDocs);
 
 
-      $.when( state.fetch(), docs.fetch() ).then( this.loadDoc );
+      $.when( this.state.fetch(), this.docs.fetch() ).then( this.loadDoc );
 
-      new AppView({ app: this, collection: docs });
+      new AppView({ app: this, collection: this.docs });
 
     },
 
