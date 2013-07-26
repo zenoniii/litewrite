@@ -26,16 +26,12 @@ define(function(require) {
       doc
         .on('change:content', doc.updateLastEdited)
         .on('change:content', doc.updateTitle)
-        .on('change:id', this.updateState)
         .on('change:id', this.handlePrevious)
         .on('change:title', this.setWindowTitle)
         .on('change:title', this.updateUri)
         .on('change:uri', this.setUrl)
         .on('change', this.updateDocs);
 
-      docs
-        .on('add', this.open)
-        .on('fetch', this.setDoc);
 
       $.when( state.fetch(), docs.fetch() ).then( this.loadDoc );
 
@@ -44,8 +40,16 @@ define(function(require) {
     },
 
     loadDoc: function() {
+
       this.setDoc();
+
+      this.doc.on('change:id', this.updateState);
+      this.docs
+        .on('add', this.open)
+        .on('fetch', this.setDoc);
+
       this.trigger('ready');
+
     },
 
     // loads document from state
