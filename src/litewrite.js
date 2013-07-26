@@ -57,7 +57,7 @@ define(function(require) {
     open: _.throttle(function(doc) {
       if ( !_.isObject(doc) ) doc = this.docs.get(doc) || this.docs.first();
       this.doc.set( doc.toJSON() );
-    }, 200),
+    }, 400, { leading: true, trailing: true }),
 
     // remove empty documents
     handlePrevious: function(doc) {
