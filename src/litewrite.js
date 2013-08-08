@@ -17,7 +17,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
+      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'throttledOpen', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
 
       this.state = new State();
       this.doc = new Doc();
@@ -58,9 +58,13 @@ define(function(require) {
     },
 
     // open a document. either pass a Doc or an id
-    open: _.throttle(function(doc) {
+    open: function(doc) {
       if ( !_.isObject(doc) ) doc = this.docs.get(doc) || this.docs.first();
       this.doc.set( doc.toJSON() );
+    },
+
+    throttledOpen: _.throttle(function(doc) {
+      this.open(doc);
     }, 400, { leading: true, trailing: true }),
 
     // remove empty documents
