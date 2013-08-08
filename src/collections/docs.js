@@ -24,6 +24,10 @@ define(function(require) {
         .on('change:lastEdited', this.sort)
         .on('change:lastEdited', this.saveWhenIdle);
 
+      this.ready = $.Deferred();
+
+      this.ensureDoc();
+
       this.initRemotestorage();
 
     },
@@ -48,13 +52,6 @@ define(function(require) {
       this.saveTimeout = setTimeout(doc.save, 1000);
     },
 
-    // fetch from remotestorage at most all 300ms
-    fetch: function() {
-      return Backbone.Collection.prototype.fetch.call(this, {
-        success: this.ensureDoc
-      });
-    },
-
     ensureDoc: function () {
       if (this.isEmpty()) this.addNew();
     },
@@ -72,11 +69,15 @@ define(function(require) {
 
       var origHash = document.location.hash;
 
+      setTimeout(function(){
+        docs.ready.resolve();
+      }, 1000);
+
       remoteStorage.on('disconnect', function() {
         docs.reset().addNew();
       });
 
-      remoteStorage.claimAccess('documents', 'rw');
+      remoteStorage.access.claim('documents', 'rw');
       remoteStorage.documents.init();
       remoteStorage.displayWidget('remotestorage-connect');
 

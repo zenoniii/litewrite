@@ -33,7 +33,9 @@ define(function(require) {
         .on('change', this.updateDocs);
 
 
-      $.when( this.state.fetch(), this.docs.fetch() ).then( this.loadDoc );
+      this.state.fetch().always(_.bind(function() {
+        this.docs.ready.then(this.loadDoc);
+      }, this));
 
       new AppView({ app: this, collection: this.docs });
 
