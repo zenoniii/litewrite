@@ -39,6 +39,7 @@ define(function(require) {
         .filter(this.filter).map(function(doc) {
           var res = doc.toJSON();
           res.opacity = doc.getOpacity();
+          res.url = doc.getUrl();
           return res;
         });
 
@@ -71,7 +72,7 @@ define(function(require) {
       var $item = this.find(doc.id).find('a');
       if (!$item.length || doc.isEmpty()) return this.render();
       $item.html( doc.get('title') );
-      $item.attr( 'href', '#!' + doc.get('uri') );
+      $item.attr( 'href', '#!' + doc.getUrl() );
     },
 
     // moves a doc from its current position to the top of the list

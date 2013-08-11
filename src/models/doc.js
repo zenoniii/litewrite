@@ -9,7 +9,6 @@ define(function(require) {
 
     defaults: {
       title: '',
-      uri: '',
       content: '',
       lastEdited: undefined
     },
@@ -32,6 +31,14 @@ define(function(require) {
         .match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*([^<]{0,40}).*?(<div>|<\/div>|<br>|$)/)[2]
         .replace(/&nbsp;/gi,'');
       doc.set( 'title', title );
+    },
+
+    getUrl: function() {
+      var url = this.get('title')
+        .toLowerCase()
+        .replace(/\s|&nbsp;/g, '-')
+        .replace(/"|’|'|\//g, '');
+      return '!' + encodeURI(url) + '-(' + this.id + ')';
     },
 
     getOpacity: function() {

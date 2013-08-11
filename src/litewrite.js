@@ -18,7 +18,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'debouncedOpen', 'updateDoc', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
+      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'debouncedOpen', 'updateDoc', 'handlePrevious', 'updateDocs', 'updateState');
 
       this.state = new State();
       this.doc = new Doc();
@@ -29,8 +29,7 @@ define(function(require) {
         .on('change:content', this.doc.updateTitle)
         .on('change:id', this.handlePrevious)
         .on('change:title', this.setWindowTitle)
-        .on('change:title', this.updateUri)
-        .on('change:uri', this.setUrl)
+        .on('change:title', this.setUrl)
         .on('change', this.updateDocs);
 
       this.state.fetch().always(_.bind(function() {
@@ -95,24 +94,12 @@ define(function(require) {
       this.state.save( 'openDocId', doc.id );
     },
 
-    // TODO: add id to uri instead of version number. also removes the neccesity to save uri at all
-    updateUri: function(doc) {
-      var uri = encodeURI(doc.get('title').toLowerCase().replace(/\s|&nbsp;/g, '-'));
-      if (uri.length < 1) return doc.set('uri', '');
-      var match = new RegExp( '^' + utils.escapeRegExp(uri) + '(-[0-9]|$)' );
-      var len = this.docs.filter(function(doc) {
-        return match.test( doc.get('uri') );
-      }).length;
-      if (len) uri += '-' + len;
-      doc.set( 'uri', uri );
-    },
-
     setWindowTitle: function(doc) {
       document.title = doc.get('title') || 'Litewrite';
     },
 
     setUrl: function(doc) {
-      Backbone.history.navigate('!' + doc.get('uri'));
+      Backbone.history.navigate(doc.getUrl());
     }
 
   });
