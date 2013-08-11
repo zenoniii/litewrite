@@ -3,6 +3,7 @@ define(function(require) {
   var _ = require('underscore');
   var Backbone = require('backbone');
   var rsSync = require('rs-adapter');
+  var moment = require('moment');
 
 
   var Doc = Backbone.Model.extend({
@@ -11,7 +12,7 @@ define(function(require) {
       title: '',
       uri: '',
       content: '',
-      lastEdited: undefined
+      lastEdited: null
     },
 
     sync: rsSync,
@@ -43,6 +44,10 @@ define(function(require) {
       var limit = 14 * 86400000;
       var opacity = diff > limit ? 0.4 : Math.round( (0.4 + ((limit - diff) / limit) * 0.6) * 100 ) / 100;
       return opacity;
+    },
+
+    formatDate: function() {
+      return moment( this.get('lastEdited') ).fromNow();
     }
 
   });

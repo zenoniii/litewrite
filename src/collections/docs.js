@@ -45,7 +45,7 @@ define(function(require) {
     },
 
     // send updates at most once per second to remotestorage
-    saveTimeout: undefined,
+    saveTimeout: null,
     saveWhenIdle: function(doc) {
       clearTimeout(this.saveTimeout);
       this.saveTimeout = setTimeout(function() {
@@ -67,7 +67,7 @@ define(function(require) {
       return this.addNew(data);
     },
 
-    remote: undefined,
+    remote: null,
 
     initRemotestorage: function() {
       var docs = this;

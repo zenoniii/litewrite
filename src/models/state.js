@@ -8,7 +8,7 @@ define(function(require) {
 
     defaults: {
       id: 0,
-      openDocId: undefined
+      openDocId: null
     },
 
     localStorage: new Store('litewriteState')
