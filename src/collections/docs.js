@@ -49,7 +49,9 @@ define(function(require) {
     saveTimeout: undefined,
     saveWhenIdle: function(doc) {
       clearTimeout(this.saveTimeout);
-      this.saveTimeout = setTimeout(doc.save, 1000);
+      this.saveTimeout = setTimeout(function() {
+        doc.save();
+      }, 1000);
     },
 
     before: function(id) {
@@ -104,7 +106,6 @@ define(function(require) {
           var existingDoc = this.get(event.newValue.id);
           if (!existingDoc) return this.add(event.newValue);
           var isNew = event.newValue.lastEdited > existingDoc.get('lastEdited');
-          console.log('m',isNew);
           if (isNew) this.set(event.newValue, { remove: false });
         }
       }, this);

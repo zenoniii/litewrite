@@ -7,10 +7,6 @@ define(function(require) {
 
   var Doc = Backbone.Model.extend({
 
-    initialize: function () {
-      _.bindAll(this, 'save');
-    },
-
     defaults: {
       title: '',
       uri: '',
