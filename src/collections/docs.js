@@ -26,9 +26,7 @@ define(function(require) {
         .on('change:lastEdited', this.sort)
         .on('change:lastEdited', this.saveWhenIdle);
 
-      this.ready = $.Deferred();
-
-      this.ready.then(this.welcome);
+      this.once('sync', this.welcome);
 
       this.initRemotestorage();
 
@@ -72,10 +70,6 @@ define(function(require) {
       var docs = this;
 
       var origHash = document.location.hash;
-
-      setTimeout(function(){
-        docs.ready.resolve();
-      }, 1000);
 
       remoteStorage.on('disconnect', function() {
         docs.reset().addNew();

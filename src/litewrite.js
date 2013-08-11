@@ -17,7 +17,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'throttledOpen', 'updateDoc', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
+      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'debouncedOpen', 'updateDoc', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
 
       this.state = new State();
       this.doc = new Doc();
@@ -33,7 +33,7 @@ define(function(require) {
         .on('change', this.updateDocs);
 
       this.state.fetch().always(_.bind(function() {
-        this.docs.ready.then(this.loadDoc);
+        this.docs.fetch().always(this.loadDoc);
       }, this));
 
       new AppView({ app: this, collection: this.docs });
@@ -47,7 +47,7 @@ define(function(require) {
       this.doc.on('change:id', this.updateState);
 
       this.docs
-        .on('add', this.open)
+        .on('add', this.debouncedOpen)
         .on('change', this.updateDoc);
 
       this.trigger('ready');
@@ -65,9 +65,9 @@ define(function(require) {
       this.doc.set( doc.toJSON() );
     },
 
-    throttledOpen: _.throttle(function(doc) {
+    debouncedOpen: _.debounce(function(doc) {
       this.open(doc);
-    }, 400, { leading: true, trailing: true }),
+    }, 400, true),
 
     updateDoc: function() {
       this.open(this.doc.id);

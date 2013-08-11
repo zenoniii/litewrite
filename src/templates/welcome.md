@@ -2,7 +2,7 @@
 
 <br>
 
-This is a distraction-free app designed for simple note taking and writing. It works offline and your browser will keep your data saved (nerd facts: AppCache & localStorage). You can also synchronize your notes to different devices using the open remoteStorage standard. Just check out the widget in the top right to get started.
+This is a distraction-free app designed for simple note taking and writing. It works offline and your browser will keep your data saved (nerd facts: AppCache &amp; localStorage). You can also synchronize your notes to different devices using the open remoteStorage standard. Just check out the widget in the top right to get started.
 
 <br><br>
 
@@ -14,4 +14,4 @@ Cool you’re here, hope you like it!
 
 <br><br>
 
-Jorin & Jan-Christoph
+Jorin &amp; Jan-Christoph
