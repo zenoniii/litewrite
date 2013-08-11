@@ -11,22 +11,22 @@ define(function(require) {
 
     routes: {
       // use ! for urls to not conflict with remotestorage's #access_token parameter
-      '!:uri': 'open',
+      '!:url': 'open',
       '*404': 'lastEdited'
     },
 
     lastEdited: function() {
-      this.go( '!' + this.app.doc.get('uri') );
+      this.navigate(this.app.doc.getUrl(), { trigger: true, replace: true });
     },
 
-    open: function(uri) {
-      var doc = this.app.docs.findWhere({ uri: uri });
+    open: function(url) {
+      var match = url.match(/\((.+?)\)$/);
+      if (!match) return this.lastEdited();
+      var id = match[1];
+      if (!id) return this.lastEdited();
+      var doc = this.app.docs.get(id);
       if (!doc) return this.lastEdited();
       this.app.open(doc);
-    },
-
-    go: function (url) {
-      return this.navigate( url, { trigger: true, replace: true } );
     }
 
   });
