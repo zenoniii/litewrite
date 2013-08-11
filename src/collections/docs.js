@@ -8,6 +8,8 @@ define(function(require) {
 
   var remoteStorageDocuments = require('remotestorage-documents');
   var rsSync = require('rs-adapter');
+  var welcome = require('text!templates/welcome.md');
+
 
 
   var Docs = Backbone.Collection.extend({
@@ -18,7 +20,7 @@ define(function(require) {
 
     initialize: function(models, options) {
 
-      _.bindAll(this, 'fetch', 'sort', 'saveWhenIdle', 'ensureDoc', 'rsChange');
+      _.bindAll(this, 'sort', 'saveWhenIdle', 'welcome', 'rsChange');
 
       this
         .on('change:lastEdited', this.sort)
@@ -26,18 +28,18 @@ define(function(require) {
 
       this.ready = $.Deferred();
 
-      this.ensureDoc();
+      this.ready.then(this.welcome);
 
       this.initRemotestorage();
 
     },
 
-    addNew: function() {
-      this.add({
+    addNew: function(options) {
+      return this.add( _.defaults(options || {}, {
         // TODO: remotestorage should create id
         id: Math.round( Math.random() * 10000000000000 ),
         lastEdited: new Date().getTime()
-      });
+      }) );
     },
 
     // Sort by 'lastEdited'
@@ -52,16 +54,18 @@ define(function(require) {
       this.saveTimeout = setTimeout(doc.save, 1000);
     },
 
-    ensureDoc: function () {
-      if (this.isEmpty()) this.addNew();
-    },
-
     before: function(id) {
       return this.at( this.indexOf( this.get(id) ) - 1 );
     },
 
     after: function(id) {
       return this.at( this.indexOf( this.get(id) ) + 1 );
+    },
+
+    welcome: function () {
+      var data = { content: welcome };
+      if ( this.findWhere(data) ) return this;
+      return this.addNew(data);
     },
 
     initRemotestorage: function() {
@@ -99,7 +103,7 @@ define(function(require) {
       this.handleEvents();
     },
 
-    handleEvents: _.throttle(function() {
+    handleEvents: _.debounce(function() {
       _.each(this.events, function(event) {
         if (event.origin !== 'window') {
           if (event.oldValue && !event.newValue) return this.remove(event.oldValue);
@@ -107,7 +111,7 @@ define(function(require) {
         }
       }, this);
       this.events = [];
-    }, 400, { leading: true, trailing: true })
+    }, 400)
 
   });
 

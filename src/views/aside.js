@@ -17,10 +17,12 @@ define(function(require) {
 
       this.app.on('ready', this.showOrHide);
 
+      this.app.doc.on('change:content', this.desktopHide);
+
       this.collection
         .on( 'add', this.desktopShow)
-        .on( 'change', this.desktopHide)
-        .on( 'fetch', this.desktopShow);
+        .on( 'remove', this.desktopShow)
+        .on( 'change:title', this.desktopShow);
 
     },
 

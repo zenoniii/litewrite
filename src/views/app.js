@@ -22,8 +22,6 @@ define(function(require) {
       this.aside = new AsideView({ app: this.app, collection: this.collection });
 
 
-      this.collection.on('fetch', this.editor.render);
-
       this.search
         .on('focus', this.aside.show)
         .on('blur', this.aside.desktopHide);

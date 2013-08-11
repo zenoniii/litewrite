@@ -17,7 +17,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'throttledOpen', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
+      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'throttledOpen', 'updateDoc', 'handlePrevious', 'updateDocs', 'updateState', 'updateUri');
 
       this.state = new State();
       this.doc = new Doc();
@@ -32,7 +32,6 @@ define(function(require) {
         .on('change:uri', this.setUrl)
         .on('change', this.updateDocs);
 
-
       this.state.fetch().always(_.bind(function() {
         this.docs.ready.then(this.loadDoc);
       }, this));
@@ -46,9 +45,10 @@ define(function(require) {
       this.setDoc();
 
       this.doc.on('change:id', this.updateState);
+
       this.docs
         .on('add', this.open)
-        .on('fetch', this.setDoc);
+        .on('change', this.updateDoc);
 
       this.trigger('ready');
 
@@ -68,6 +68,11 @@ define(function(require) {
     throttledOpen: _.throttle(function(doc) {
       this.open(doc);
     }, 400, { leading: true, trailing: true }),
+
+    updateDoc: function() {
+      this.open(this.doc.id);
+      this.doc.trigger('update');
+    },
 
     // remove empty documents
     handlePrevious: function(doc) {

@@ -18,11 +18,10 @@ define(function(require) {
       this.template = _.template(entriesTemplate);
 
       this.collection
-        .on('sort', this.render) // TODO: not sure if sort is the right thing here
         .on('add', this.render)
         .on('change:title', this.update)
         .on('change:lastEdited', this.toTop)
-        .on('destroy', this.removeItem);
+        .on('remove', this.removeItem);
 
       this.app.doc.on('change:id', this.selectDoc);
 
@@ -71,7 +70,7 @@ define(function(require) {
     update: function(doc) {
       var $item = this.find(doc.id).find('a');
       if (!$item.length || doc.isEmpty()) return this.render();
-      $item.text( doc.get('title') );
+      $item.html( doc.get('title') );
       $item.attr( 'href', '#!' + doc.get('uri') );
     },
 

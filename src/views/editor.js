@@ -18,6 +18,7 @@ define(function(require) {
 
       this.app.on('ready', this.render);
       this.app.doc.on('change:id', this.render);
+      this.app.doc.on('update', this.render);
 
     },
 
