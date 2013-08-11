@@ -37,7 +37,7 @@ define(function(require) {
       var url = this.get('title')
         .toLowerCase()
         .replace(/\s|&nbsp;/g, '-')
-        .replace(/"|’|'|\//g, '');
+        .replace(/"|’|'|,|\//g, '');
       return '!' + encodeURI(url) + '-(' + this.id + ')';
     },
 
