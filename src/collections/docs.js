@@ -68,6 +68,8 @@ define(function(require) {
       return this.addNew(data);
     },
 
+    remote: undefined,
+
     initRemotestorage: function() {
       var docs = this;
 
@@ -79,9 +81,9 @@ define(function(require) {
 
       remoteStorage.access.claim('documents', 'rw');
       remoteStorage.documents.init();
-      remoteStorage.displayWidget('remotestorage-connect');
 
-      remoteStorageDocuments.onChange('notes', docs.rsChange);
+      docs.remote = remoteStorageDocuments.privateList('notes');
+      docs.remote.on('change', docs.rsChange);
 
       setTimeout(function() {
         var md = origHash.match(/access_token=([^&]+)/);

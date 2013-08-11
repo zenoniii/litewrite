@@ -3,6 +3,7 @@ define(function(require) {
   var $ = require('jquery');
   var _ = require('underscore');
   var Backbone = require('backbone');
+  var remoteStorage = require('remotestorage');
   var AppView = require('views/app');
   var Doc = require('models/doc');
   var Docs = require('collections/docs');
@@ -37,6 +38,12 @@ define(function(require) {
       }, this));
 
       new AppView({ app: this, collection: this.docs });
+
+      // make remoteStorage globally accessible even if we use amd.
+      // this is helpful for debugging
+      window.remoteStorage = remoteStorage;
+
+      remoteStorage.displayWidget('remotestorage-connect');
 
     },
 
