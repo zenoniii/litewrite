@@ -130,8 +130,8 @@ footer a { display:inline; padding:0; }
 
 /* Smartphones (portrait and landscape) ----------- */
 
-/* keep in sync with value in utils/cache.js */
-@media (max-width:720px) {
+/* keep in sync with value in utils.js */
+@media (max-width:1024px) {
 	body>.scrollbox{
 		position: absolute; width:100%; margin: 0;
 		overflow-x: hidden;
@@ -141,7 +141,7 @@ footer a { display:inline; padding:0; }
 	.editor {
 		top: 50px; padding: 0 14px 50px; font-size:20px;
 	}
-		.show-aside>.scrollbox { position: fixed; left: 85%; opacity:.2; }
+		.show-aside>.scrollbox { position: fixed; left: 100%; opacity:.2; }
 
 	aside {
 		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/noise.png) repeat; right:100%;

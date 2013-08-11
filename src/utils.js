@@ -11,7 +11,8 @@ define(function(require) {
 
 
   function setModes () {
-    utils.isMobile = matchMedia('(max-width:720px)').matches;
+    // keep in sync with value in litewrite.css
+    utils.isMobile = matchMedia('(max-width:1024px)').matches;
     utils.isDesktop = !utils.isMobile;
   }
 
