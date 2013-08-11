@@ -32,13 +32,13 @@ define(function(require) {
 
     },
 
-    addNew: function(options) {
+    addNew: _.throttle(function(options) {
       return this.add( _.defaults(options || {}, {
         // TODO: remotestorage should create id
         id: Math.round( Math.random() * 10000000000000 ),
         lastEdited: new Date().getTime()
       }) );
-    },
+    }, 1000, { leading: true }),
 
     // Sort by 'lastEdited'
     comparator: function(first, second) {
