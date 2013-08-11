@@ -101,7 +101,11 @@ define(function(require) {
       _.each(this.events, function(event) {
         if (event.origin !== 'window') {
           if (event.oldValue && !event.newValue) return this.remove(event.oldValue);
-          this.set(event.newValue, { remove: false });
+          var existingDoc = this.get(event.newValue.id);
+          if (!existingDoc) return this.add(event.newValue);
+          var isNew = event.newValue.lastEdited > existingDoc.get('lastEdited');
+          console.log('m',isNew);
+          if (isNew) this.set(event.newValue, { remove: false });
         }
       }, this);
       this.events = [];
