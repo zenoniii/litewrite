@@ -50,7 +50,12 @@ define(function(require) {
       var limit = 14 * 86400000;
       var opacity = diff > limit ? 0.4 : Math.round( (0.4 + ((limit - diff) / limit) * 0.6) * 100 ) / 100;
       return opacity;
-    }
+    },
+
+    // send updates at most once per second to remotestorage
+    saveWhenIdle: _.throttle(function() {
+      this.save();
+    }, 1000)
 
   });
 

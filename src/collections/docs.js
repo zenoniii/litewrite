@@ -44,13 +44,8 @@ define(function(require) {
       return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
     },
 
-    // send updates at most once per second to remotestorage
-    saveTimeout: undefined,
     saveWhenIdle: function(doc) {
-      clearTimeout(this.saveTimeout);
-      this.saveTimeout = setTimeout(function() {
-        doc.save();
-      }, 1000);
+      doc.saveWhenIdle();
     },
 
     before: function(id) {

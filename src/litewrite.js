@@ -83,7 +83,7 @@ define(function(require) {
     // remove empty documents
     handlePrevious: function(doc) {
       var previous = this.docs.get( doc.previous('id') );
-      if (previous) previous.isEmpty() ? previous.destroy() : previous.save();
+      if ( previous && previous.isEmpty() ) previous.destroy();
     },
 
     updateDocs: function(doc) {
