@@ -59,9 +59,9 @@ define(function(require) {
       if (utils.isDesktop) this.show();
     },
 
-    desktopHide: function() {
-      if (utils.isDesktop) _.delay( this.hide, 1000 );
-    },
+    desktopHide: _.debounce(function() {
+      if (utils.isDesktop) this.hide();
+    }, 3000),
 
     // only needed on initialization.
     // show or hide aside depending on how many docs you have
