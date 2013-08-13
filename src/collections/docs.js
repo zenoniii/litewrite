@@ -70,7 +70,7 @@ define(function(require) {
       var origHash = document.location.hash;
 
       remoteStorage.on('disconnect', function() {
-        docs.reset().addNew();
+        docs.reset().welcome();
       });
 
       remoteStorage.access.claim('documents', 'rw');
