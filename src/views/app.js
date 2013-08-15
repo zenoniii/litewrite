@@ -51,6 +51,7 @@ define(function(require) {
 
     toggleAside: function() {
       this.aside.toggle();
+      return false;
     },
 
     // global key handler for shortcuts
