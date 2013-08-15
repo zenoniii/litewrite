@@ -166,6 +166,14 @@ footer a { display:inline; padding:0; }
 	.editor {
 		top: 50px; padding: 0 14px 50px; font-size:20px;
 	}
+	.show-aside .editor {
+		opacity: .5;
+		-webkit-transition: opacity .3s ease;
+		-moz-transition: opacity .3s ease;
+		-ms-transition: opacity .3s ease;
+		-o-transition: opacity .3s ease;
+		transition: opacity .3s ease;
+	}
 
 	#date {
 		display: none;
