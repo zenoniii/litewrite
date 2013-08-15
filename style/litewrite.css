@@ -2,6 +2,7 @@ html, body {
 	margin:0; padding:0; overflow: hidden;
 	color:#000;
 	background:#fcfcfc url(../img/noise.png) repeat;
+	font:16px FreeSans,Helvetica,sans-serif;
 }
 
 @font-face { font-family:'Alegreya'; font-weight:normal; src:url(Alegreya-Regular.ttf); }
@@ -31,12 +32,18 @@ body>.scrollbox{width:84%; position: fixed;}
 }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
 
+#date {
+	position: absolute;
+	top: 56px;
+	right: 15px;
+	opacity: .2;
+	font-size: 14px;
+}
 
 aside>.scrollbox{width:100%; margin:0;}
 aside {
 	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
 	position:fixed; width:16%; min-width:135px; height:100%;
-	font:16px FreeSans,Helvetica,sans-serif;
 	opacity:0; -webkit-transition:opacity 300ms; -moz-transition:opacity 300ms; -o-transition:opacity 300ms; transition:opacity 300ms;
 	overflow:auto;
 	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
@@ -143,6 +150,10 @@ footer a { display:inline; padding:0; }
 	}
 		.show-aside>.scrollbox { position: fixed; left: 100%; opacity:.2; }
 
+	#date {
+		display: none;
+	}
+
 	aside {
 		opacity:1; font-size:24px; width:85%; background:#fcfcfc url(../img/noise.png) repeat; right:100%;
 		-webkit-transition:0.3s right ease; -moz-transition:0.3s right ease; transition:0.3s right ease;
@@ -185,5 +196,9 @@ footer a { display:inline; padding:0; }
 		height:auto;
 		width:auto;
 		position:static;
+	}
+
+	#date {
+		display: none;
 	}
 }
