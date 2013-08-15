@@ -61,6 +61,10 @@ aside:hover, aside:focus, .show-aside aside { opacity:1; }
   -o-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #search.hide { height: 0; padding: 0; margin: 0; border: 0; }
