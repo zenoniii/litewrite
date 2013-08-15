@@ -28,11 +28,11 @@ define(function(require) {
       if (!content) return this.$el.text(' '); // NOTE: is redundant as soon as we use codemirror
       if ( content === this.$el.html() ) return;
       this.$el.html(content);
-      this.focus();
+      if (utils.isDesktop) this.focus();
     },
 
     focus: function() {
-      if (utils.isDesktop) this.$el.focus();
+      this.$el.focus();
     },
 
     events: {
