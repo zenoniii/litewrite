@@ -3,6 +3,7 @@ define(function(require) {
   var _ = require('underscore');
   var Backbone = require('backbone');
   var rsSync = require('rs-adapter');
+  var moment = require('moment');
 
 
   var Doc = Backbone.Model.extend({
@@ -10,7 +11,7 @@ define(function(require) {
     defaults: {
       title: '',
       content: '',
-      lastEdited: undefined
+      lastEdited: null
     },
 
     sync: rsSync,
@@ -55,7 +56,11 @@ define(function(require) {
     // send updates at most once per second to remotestorage
     saveWhenIdle: _.throttle(function() {
       this.save();
-    }, 1000)
+    }, 1000),
+
+    formatDate: function() {
+      return moment( this.get('lastEdited') ).fromNow();
+    }
 
   });
 

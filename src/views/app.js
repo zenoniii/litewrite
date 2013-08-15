@@ -3,6 +3,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var EntriesView = require('views/entries');
   var EditorView = require('views/editor');
+  var DateView = require('views/date');
   var AsideView = require('views/aside');
   var SearchView = require('views/search');
   var utils = require('utils');
@@ -17,6 +18,7 @@ define(function(require) {
       this.app = options.app;
 
       this.editor = new EditorView({ app: this.app });
+      this.date = new DateView({ model: this.app.doc });
       this.entries = new EntriesView({ app: this.app, collection: this.collection });
       this.search = new SearchView({ model: this.app.state, collection: this.collection });
       this.aside = new AsideView({ app: this.app, collection: this.collection });

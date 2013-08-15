@@ -1,6 +1,7 @@
 require.config( {
   deps: [
     '../lib/matchMedia',
+    '../lib/requestAnimationFrame',
     'main'
   ],
   paths: {
@@ -12,7 +13,8 @@ require.config( {
     remotestorage: '../lib/remotestorage',
     'remotestorage-documents': '../lib/remotestorage-documents',
     'rs-adapter': '../lib/backbone.remoteStorage-documents',
-    snap: '../lib/snap'
+    snap: '../lib/snap',
+    moment: '../lib/moment'
   },
   baseUrl: 'src',
   shim: {

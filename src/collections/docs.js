@@ -62,7 +62,7 @@ define(function(require) {
       return this.addNew(data);
     },
 
-    remote: undefined,
+    remote: null,
 
     initRemotestorage: function() {
       var docs = this;
