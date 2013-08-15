@@ -37,12 +37,12 @@ define(function(require) {
     },
 
     show: function() {
-      if (utils.isDesktop) this.$el.addClass('show-aside');
+      if (utils.isDesktop) return this.$el.addClass('show-aside');
       this.snapper.open('left');
     },
 
     hide: function() {
-      if (utils.isMobile) this.snapper.close();
+      if (utils.isMobile) return this.snapper.close();
       // hide sidebar when 3 or more docs and the open doc is not empty
       if ( this.collection.length > 2 && !this.app.doc.isEmpty() ) {
         this.$el.removeClass('show-aside');
@@ -50,8 +50,7 @@ define(function(require) {
     },
 
     toggle: function() {
-      this.$el.toggleClass('show-aside');
-      if (utils.isDesktop) return;
+      if (utils.isDesktop) return this.$el.toggleClass('show-aside');
       if ( this.snapper.state().state === 'closed' ) return this.show();
       this.hide();
     },
