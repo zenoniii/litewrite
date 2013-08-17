@@ -35,7 +35,8 @@ define(function(require) {
 
       $(window).on('resize', this.handleSnapper);
 
-      this.snapper.on('start', _.bind(function() {
+      this.snapper.on('drag', _.bind(function() {
+        console.log('m');
         if ( this.snapper.state().state === 'closed' ) this.trigger('open');
       }, this));
 
