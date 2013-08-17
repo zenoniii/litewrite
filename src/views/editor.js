@@ -12,7 +12,7 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this, 'render', 'focus');
+      _.bindAll(this, 'render', 'focus', 'blur');
 
       this.app = options.app;
 
@@ -33,6 +33,10 @@ define(function(require) {
 
     focus: function() {
       this.$el.focus();
+    },
+
+    blur: function() {
+      this.$el.blur();
     },
 
     events: {

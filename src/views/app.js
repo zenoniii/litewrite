@@ -32,6 +32,8 @@ define(function(require) {
 
       this.entries.on('open', this.aside.hide);
 
+      this.aside.on('open', this.editor.blur)
+
     },
 
     events: {

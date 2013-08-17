@@ -28,11 +28,16 @@ define(function(require) {
 
       this.snapper = new Snap({
         element: this.$('#snap-content')[0],
-        disable: 'right'
+        disable: 'right',
+        maxPosition: 265
       });
       this.handleSnapper();
 
       $(window).on('resize', this.handleSnapper);
+
+      this.snapper.on('start', _.bind(function() {
+        if ( this.snapper.state().state === 'closed' ) this.trigger('open');
+      }, this));
 
     },
 
