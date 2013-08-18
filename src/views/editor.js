@@ -26,6 +26,7 @@ define(function(require) {
     renderTimeout: null,
     render: function() {
       var content = this.app.doc.get('content');
+
       if ( content === this.$el.html() ) return;
 
       var DURATION = 150;
@@ -33,15 +34,13 @@ define(function(require) {
       clearTimeout(this.renderTimeout);
       this.renderTimeout = setTimeout(_.bind(function() {
 
-        if (!content) return this.$el.text(' ');
-        this.$el.html(content);
-
-        this.$el.removeClass('hide');
-
-        if (utils.isDesktop) {
-          this.renderTimeout = setTimeout(this.focus, DURATION);
+        if (content) {
+          this.$el.html(content);
+        } else {
+          this.$el.text(' ');
         }
 
+        this.$el.removeClass('hide');
       }, this), DURATION);
     },
 
