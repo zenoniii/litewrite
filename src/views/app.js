@@ -27,7 +27,8 @@ define(function(require) {
       this.search
         .on('focus', this.aside.show)
         .on('blur', this.editor.focus)
-        .on('blur', this.aside.desktopHide);
+        .on('blur', this.aside.desktopHide)
+        .on('search', this.entries.openFirst);
 
       this.editor.on('modKey', this.aside.hide);
 

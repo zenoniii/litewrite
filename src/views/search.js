@@ -38,6 +38,7 @@ define(function(require) {
     search: function() {
       var query = this.$el.val();
       this.model.save( 'query', query );
+      this.trigger('search');
     },
 
     handleKey: function(e) {

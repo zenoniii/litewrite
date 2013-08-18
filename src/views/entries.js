@@ -12,7 +12,7 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this, 'filter', 'render', 'update', 'toTop', 'removeItem', 'selectDoc');
+      _.bindAll(this, 'filter', 'render', 'update', 'toTop', 'removeItem', 'selectDoc', 'openFirst');
 
       this.app = options.app;
       this.template = _.template(entriesTemplate);
@@ -116,6 +116,11 @@ define(function(require) {
       var id = this.$(e.currentTarget).attr('data-id');
       this.app.open(id);
       this.trigger('open');
+    },
+
+    openFirst: function() {
+      var id = this.$('.item').attr('data-id');
+      this.app.open(id);
     }
 
   });

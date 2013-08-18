@@ -17,6 +17,7 @@ define(function(require) {
       this.app = options.app;
 
       this.app.on('ready', this.render);
+      this.app.on('ready', this.focus);
       this.app.doc.on('change:id', this.render);
       this.app.doc.on('update', this.render);
 
