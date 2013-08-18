@@ -27,22 +27,9 @@ define(function(require) {
     renderTimeout: null,
     render: function() {
       var content = this.app.doc.get('content');
-
       if ( content === this.$el.html() ) return;
-
-      var DURATION = 150;
-      this.$el.addClass('hide');
-      clearTimeout(this.renderTimeout);
-      this.renderTimeout = setTimeout(_.bind(function() {
-
-        if (content) {
-          this.$el.html(content);
-        } else {
-          this.$el.text(' ');
-        }
-
-        this.$el.removeClass('hide');
-      }, this), DURATION);
+      if (content) return this.$el.html(content);
+      this.$el.text(' ');
     },
 
     focus: function() {
