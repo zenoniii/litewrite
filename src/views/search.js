@@ -42,6 +42,7 @@ define(function(require) {
 
     handleKey: function(e) {
       if (e.which === 27) { // ESC
+      if (e.which === 13) { // ENTER
         e.preventDefault();
         return this.triggerBlur();
       }
