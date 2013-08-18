@@ -41,7 +41,6 @@ define(function(require) {
     },
 
     handleKey: function(e) {
-      if (e.which === 27) { // ESC
       if (e.which === 13) { // ENTER
         e.preventDefault();
         return this.triggerBlur();
@@ -71,6 +70,11 @@ define(function(require) {
 
     hide: function() {
       this.$el.addClass('hide');
+    },
+
+    clear: function() {
+      this.model.save('query', '');
+      this.render();
     }
 
   });

@@ -49,6 +49,7 @@ define(function(require) {
       if (utils.isMobile) this.aside.hide();
       if (! this.app.doc.isEmpty()) this.collection.addNew();
       this.editor.focus();
+      this.search.clear();
       return false;
     },
 
