@@ -22,7 +22,7 @@ define(function(require) {
 
     events: {
       'search': 'search',
-      'keyup': 'search',
+      'keyup': 'handleKey',
       'focus': 'triggerFocus',
       'blur': 'triggerBlur'
     },
@@ -38,6 +38,14 @@ define(function(require) {
     search: function() {
       var query = this.$el.val();
       this.model.save( 'query', query );
+    },
+
+    handleKey: function(e) {
+      if (e.which === 27) { // ESC
+        e.preventDefault();
+        return this.triggerBlur();
+      }
+      this.search();
     },
 
     focus: function() {

@@ -26,13 +26,14 @@ define(function(require) {
 
       this.search
         .on('focus', this.aside.show)
+        .on('blur', this.editor.focus)
         .on('blur', this.aside.desktopHide);
 
       this.editor.on('modKey', this.aside.hide);
 
       this.entries.on('open', this.aside.hide);
 
-      this.aside.on('open', this.editor.blur)
+      this.aside.on('open', this.editor.blur);
 
     },
 
