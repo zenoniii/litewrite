@@ -35,9 +35,7 @@ define(function(require) {
 
       $(window).on('resize', this.handleSnapper);
 
-      console.log('animated test');
       this.snapper.on('animated', _.bind(function() {
-        console.log('ani');
         if ( this.snapper.state().state === 'closed' ) this.trigger('open');
       }, this));
 

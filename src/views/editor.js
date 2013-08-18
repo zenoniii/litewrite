@@ -23,12 +23,26 @@ define(function(require) {
     },
 
     // only re-render when content changed
+    renderTimeout: null,
     render: function() {
       var content = this.app.doc.get('content');
-      if (!content) return this.$el.text(' '); // NOTE: is redundant as soon as we use codemirror
       if ( content === this.$el.html() ) return;
-      this.$el.html(content);
-      if (utils.isDesktop) this.focus();
+
+      var DURATION = 150;
+      this.$el.addClass('hide');
+      clearTimeout(this.renderTimeout);
+      this.renderTimeout = setTimeout(_.bind(function() {
+
+        if (!content) return this.$el.text(' ');
+        this.$el.html(content);
+
+        this.$el.removeClass('hide');
+
+        if (utils.isDesktop) {
+          this.renderTimeout = setTimeout(this.focus, DURATION);
+        }
+
+      }, this), DURATION);
     },
 
     focus: function() {

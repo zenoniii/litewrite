@@ -29,8 +29,11 @@ body>.scrollbox{width:84%; position: fixed;}
 	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
 	word-wrap:break-word; /* prevent scrolling for long words or links without whitespace */
 	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
+  -webkit-transition:opacity 150ms; -moz-transition:opacity 150ms; -o-transition:opacity 150ms; transition:opacity 150ms;
 }
 [contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
+
+.editor.hide { opacity: 0; }
 
 #date {
 	position: absolute;
