@@ -97,19 +97,11 @@ define(function(require) {
       this.scrollToSelected();
     },
 
-    height: function () {
-      return this.$el.height() - 50;
-    },
-
-    // TODO: test this on mobile
     // scrolls to the selected element
     scrollToSelected: function() {
-      var position = this.$selected.position();
-      if (!position) return;
-      var top = position.top;
-      if ( top < 0 || top > this.height() ) {
-        this.$el.scrollTop( top - 15 );
-      }
+      // let the browser handle this for us
+      this.$selected.children('a').focus();
+      this.trigger('scroll');
     },
 
     // event handler to open a document

@@ -32,7 +32,9 @@ define(function(require) {
 
       this.editor.on('modKey', this.aside.hide);
 
-      this.entries.on('open', this.aside.hide);
+      this.entries
+        .on('open', this.aside.hide)
+        .on('scroll', this.editor.desktopFocus);
 
       this.aside.on('open', this.editor.blur);
 

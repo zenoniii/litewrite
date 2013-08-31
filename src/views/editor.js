@@ -12,7 +12,7 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this, 'render', 'focus', 'blur');
+      _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus');
 
       this.app = options.app;
 
@@ -34,6 +34,10 @@ define(function(require) {
 
     focus: function() {
       this.$el.focus();
+    },
+
+    desktopFocus: function() {
+      if (utils.isDeskop) this.focus();
     },
 
     blur: function() {
