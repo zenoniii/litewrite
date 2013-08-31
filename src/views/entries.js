@@ -77,7 +77,9 @@ define(function(require) {
 
     // moves a doc from its current position to the top of the list
     toTop: function(doc) {
-      this.$el.prepend( this.removeItem(doc) );
+      var $item = this.removeItem(doc);
+      $item.children('a').css('opacity', 1);
+      this.$el.prepend($item);
     },
 
     removeItem: function(doc) {
