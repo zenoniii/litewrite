@@ -8,7 +8,7 @@ define(function(require) {
 
   var remoteStorageDocuments = require('remotestorage-documents');
   var rsSync = require('rs-adapter');
-  var welcome = require('text!templates/welcome.md');
+  var welcome = require('text!templates/welcome.html');
 
 
 
