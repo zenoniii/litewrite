@@ -8,8 +8,7 @@ define(function(require) {
 
     defaults: {
       id: 0,
-      query: '',
-      openDocId: null
+      query: ''
     },
 
     localStorage: new Store('litewriteState')

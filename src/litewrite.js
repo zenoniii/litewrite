@@ -18,7 +18,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this, 'loadDoc', 'setDoc', 'open', 'debouncedOpen', 'updateDoc', 'handlePrevious', 'updateDocs', 'updateState');
+      _.bindAll(this, 'loadDoc', 'open', 'debouncedOpen', 'updateDoc', 'handlePrevious', 'updateDocs');
 
       this.state = new State();
       this.doc = new Doc();
@@ -48,21 +48,12 @@ define(function(require) {
 
     loadDoc: function() {
 
-      this.setDoc();
-
-      this.doc.on('change:id', this.updateState);
-
       this.docs
         .on('add', this.debouncedOpen)
         .on('change', this.updateDoc);
 
       this.trigger('ready');
 
-    },
-
-    // loads document from state
-    setDoc: function () {
-      this.open( this.state.get('openDocId') );
     },
 
     // open a document. either pass a Doc or an id
@@ -88,10 +79,6 @@ define(function(require) {
 
     updateDocs: function(doc) {
       this.docs.set( doc.toJSON(), { add: false, remove: false } );
-    },
-
-    updateState: function(doc) {
-      this.state.save( 'openDocId', doc.id );
     },
 
     setWindowTitle: function(doc) {
