@@ -35,11 +35,12 @@ define(function(require) {
     },
 
     getUrl: function() {
-      var url = this.get('title')
+      var title = this.get('title')
         .toLowerCase()
         .replace(/\s|&nbsp;/g, '-')
         .replace(/"|’|'|,|\//g, '');
-      return '!' + encodeURI(url) + '-(' + this.id + ')';
+      if (!title) return '';
+      return '!' + encodeURI(title) + '-(' + this.id + ')';
     },
 
     getOpacity: function() {
