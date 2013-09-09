@@ -13,7 +13,7 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide', 'handleSnapper');
+      _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide', 'handleSnapper', 'handleSnapperAnimation');
 
       this.app = options.app;
 
@@ -26,18 +26,22 @@ define(function(require) {
         .on( 'remove', this.desktopShow)
         .on( 'change:title', this.desktopShow);
 
+      this.initSnapper();
+
+    },
+
+    initSnapper: function() {
+
       this.snapper = new Snap({
         element: this.$('#snap-content')[0],
         disable: 'right',
         maxPosition: 265
       });
-      this.handleSnapper();
 
+      this.handleSnapper();
       $(window).on('resize', this.handleSnapper);
 
-      this.snapper.on('animated', _.bind(function() {
-        if ( this.snapper.state().state === 'closed' ) this.trigger('open');
-      }, this));
+      this.snapper.on('animated', this.handleSnapperAnimation);
 
     },
 
@@ -81,8 +85,11 @@ define(function(require) {
       if (utils.isMobile) return this.snapper.enable();
       this.snapper.close();
       this.snapper.disable();
-    }, 700)
+    }, 700),
 
+    handleSnapperAnimation: function() {
+      if ( this.snapper.state().state === 'closed' ) this.trigger('open');
+    }
 
   });
 

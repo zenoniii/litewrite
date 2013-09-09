@@ -50,12 +50,10 @@ define(function(require) {
     // TODO: filter should only be run if ther is a query. would be faster.
     filter: function(doc) {
       var query = this.app.state.get('query');
-      if (query) {
-        var reg = new RegExp(utils.escapeRegExp(query), 'i');
-        var match = reg.test( doc.get('title') );
-        if (!match) return;
-      }
-      return true;
+      if (!query) return true;
+      var reg = new RegExp(utils.escapeRegExp(query), 'i');
+      var match = reg.test( doc.get('title') );
+      return match;
     },
 
     render: function() {
@@ -107,6 +105,7 @@ define(function(require) {
     // event handler to open a document
     openDoc: function(e) {
       e.preventDefault();
+
       var id = this.$(e.currentTarget).attr('data-id');
       this.app.open(id);
       this.trigger('open');

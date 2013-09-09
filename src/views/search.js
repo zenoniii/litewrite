@@ -6,6 +6,8 @@ define(function(require) {
 
   var SearchView = Backbone.View.extend({
 
+    el: '#search',
+
     initialize: function () {
 
       _.bindAll(this, 'toggle');
@@ -17,8 +19,6 @@ define(function(require) {
         .on('remove', this.toggle);
 
     },
-
-    el: '#search',
 
     events: {
       'search': 'search',

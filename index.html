@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+
 	<title>Litewrite</title>
 	<meta name="description" content="distraction-free writing">
+
 	<link rel="stylesheet" href="style/litewrite.css">
 	<link rel="shortcut icon" href="img/litewrite.png">
 	<link rel="apple-touch-icon-precomposed" href="img/litewrite-touch.png">
 </head>
+
 <body>
 	<div id="snap-content" class="scrollbox">
 		<div id="menu-button" class="menu-button">
-			<!-- menu button as svg to make sure it runs everywhere -->
 			<svg height="15" width="15">
 				<path d="m0 0v3h15v-3h-15zm0 6v3h15v-3h-15zm0 6v3h15v-3h-15z"/>
 			</svg>
 		</div>
+
 		<div id="remotestorage-connect"></div>
     <div id="editor" data-placeholder="Write …" class="editor" contenteditable></div>
 		<div class="date">modified <span id="date"></span></div>
 	</div>
+
   <aside id="aside">
     <input type="search" id="search" class="hide" placeholder="Search …" value="">
     <div id="add" class="add">+</div>
@@ -30,6 +35,8 @@
       write lite, <a href="http://github.com/litewrite/litewrite" target="_blank">open source</a>
     </footer>
   </aside>
+
 	<script src="lib/require.js" data-main="src/config"></script>
 </body>
+
 </html>

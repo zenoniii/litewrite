@@ -24,7 +24,6 @@ define(function(require) {
     },
 
     // only re-render when content changed
-    renderTimeout: null,
     render: function() {
       var content = this.app.doc.get('content');
       if ( content === this.$el.html() ) return;

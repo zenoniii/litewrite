@@ -1,9 +1,11 @@
 require.config( {
+
   deps: [
     '../lib/matchMedia',
     '../lib/requestAnimationFrame',
     'main'
   ],
+
   paths: {
     text: '../lib/require.text',
     jquery: '../lib/jquery.min',
@@ -16,7 +18,9 @@ require.config( {
     snap: '../lib/snap',
     moment: '../lib/moment'
   },
+
   baseUrl: 'src',
+
   shim: {
     underscore: {
       exports: '_'
@@ -26,4 +30,5 @@ require.config( {
       exports: 'Backbone'
     }
   }
+
 });

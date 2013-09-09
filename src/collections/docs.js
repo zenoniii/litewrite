@@ -20,11 +20,11 @@ define(function(require) {
 
     initialize: function(models, options) {
 
-      _.bindAll(this, 'sort', 'saveWhenIdle', 'welcome', 'rsChange');
+      _.bindAll(this, 'sort', 'save', 'welcome', 'rsChange');
 
       this
         .on('change:lastEdited', this.sort)
-        .on('change:lastEdited', this.saveWhenIdle);
+        .on('change:lastEdited', this.save);
 
       this.once('sync', this.welcome);
 
@@ -46,8 +46,8 @@ define(function(require) {
       return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
     },
 
-    saveWhenIdle: function(doc) {
-      doc.saveWhenIdle();
+    save: function(doc) {
+      doc.throttledSave();
     },
 
     before: function(id) {

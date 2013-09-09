@@ -55,7 +55,7 @@ define(function(require) {
     },
 
     // send updates at most once per second to remotestorage
-    saveWhenIdle: _.throttle(function() {
+    throttledSave: _.throttle(function() {
       this.save();
     }, 1000),
 
