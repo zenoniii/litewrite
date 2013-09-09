@@ -76,7 +76,6 @@ define(function(require) {
       });
 
       remoteStorage.access.claim('documents', 'rw');
-      remoteStorage.documents.init();
 
       docs.remote = remoteStorageDocuments.privateList('notes');
       docs.remote.on('change', docs.rsChange);
