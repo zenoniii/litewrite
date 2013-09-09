@@ -1,12 +1,25 @@
 html, body {
-	margin:0; padding:0; overflow: hidden;
+	margin:0;
+  padding:0;
+  overflow: hidden;
 	color:#000;
 	background:#fcfcfc url(../img/noise.png) repeat;
 	font:16px FreeSans,Helvetica,sans-serif;
 }
 
-@font-face { font-family:'Alegreya'; font-weight:normal; src:url(Alegreya-Regular.ttf); }
-@font-face { font-family:'Alegreya'; font-weight:bold; src:url(Alegreya-Bold.ttf); }
+
+@font-face {
+  font-family:'Alegreya';
+  font-weight:normal;
+  src:url(Alegreya-Regular.ttf);
+}
+
+@font-face {
+  font-family:'Alegreya';
+  font-weight:bold;
+  src:url(Alegreya-Bold.ttf);
+}
+
 
 .scrollbox {
 	height: 100%;
@@ -16,21 +29,34 @@ html, body {
 	background-color: transparent;
 }
 
-body>.scrollbox{width:84%; position: fixed;}
-.editor {
-	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
-	position: relative;
-	width: 96%;
-	margin: 3.5% 0 0 4%; /* make sure cursor is not hidden in very top left corner */
-	padding: 0 20% 8% 0;
-	min-height: 90%;
-	font:normal 28px/150% 'Alegreya',Georgia,serif;
-	outline:none; overflow:auto; border:none;
-	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
-	word-wrap:break-word; /* prevent scrolling for long words or links without whitespace */
-	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
+body > .scrollbox {
+  width:84%;
+  position: fixed;
 }
-[contenteditable]:empty::after { content:attr(data-placeholder); color:#ccc; }
+
+.editor {
+  position: relative;
+  width: 96%;
+  margin: 3.5% 0 0 4%; /* make sure cursor is not hidden in very top left corner */
+  padding: 0 20% 8% 0;
+  min-height: 90%;
+  font:normal 28px/150% 'Alegreya', Georgia, serif;
+  outline: none;
+  overflow: auto;
+  border: none;
+  -webkit-overflow-scrolling: touch; /* enable native smooth scrolling on iOS */
+  word-wrap: break-word; /* prevent scrolling for long words or links without whitespace */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* prevent grey flash when clicking */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
+
+.editor:empty::after {
+  content:attr(data-placeholder);
+  color:#ccc;
+}
 
 .date {
 	position: relative;
@@ -39,18 +65,34 @@ body>.scrollbox{width:84%; position: fixed;}
 	font-size: 14px;
 }
 
-aside>.scrollbox{width:100%; margin:0;}
-aside {
-	-moz-box-sizing:border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;
-	position:fixed; width:16%; min-width:135px; height:100%;
-	opacity:0;
-	overflow:auto;
-	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
-	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
+aside > .scrollbox{
+  width:100%;
+  margin:0;
 }
-aside:hover, aside:focus, .show-aside aside { opacity:1; }
 
-#search {
+aside {
+  position: fixed;
+  width: 16%;
+  min-width: 135px;
+  height: 100%;
+  opacity: 0;
+  overflow: auto;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  /* prevent grey flash when clicking */
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
+
+aside:hover, aside:focus, .show-aside aside {
+  opacity:1;
+}
+
+.search {
   display: block;
   z-index: 100;
   width: 92%;
@@ -73,12 +115,21 @@ aside:hover, aside:focus, .show-aside aside { opacity:1; }
   box-sizing: border-box;
 }
 
-#search.hide { height: 0; padding: 0; margin: 0; border: 0; }
+.search.hide {
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
 
 aside a, .add {
-	display:block; cursor:pointer; outline:none;
-	color:#444; text-decoration:none;
-	white-space:nowrap; overflow:hidden;
+	display: block;
+  cursor: pointer;
+  outline: none;
+	color: #444;
+  text-decoration: none;
+	white-space: nowrap;
+  overflow: hidden;
 }
 
 .add {
@@ -88,23 +139,32 @@ aside a, .add {
 	padding: 6px 18px;
 	font-weight: bold;
 }
-.add:hover, .add:focus { color:#000; }
+
+.add:hover, .add:focus {
+  color:#000;
+}
 
 .entries {
-	height:auto; display:block;
-	margin:0;
-	padding:0;
+	height: auto;
+  display: block;
+	margin: 0;
+	padding: 0;
 	padding-top: 7px;
-	-webkit-overflow-scrolling:touch; /* enable native smooth scrolling on iOS */
-	list-style:none;
+	-webkit-overflow-scrolling: touch; /* enable native smooth scrolling on iOS */
+	list-style: none;
 }
+
 .entries a {
-	text-overflow:ellipsis; height:1.35em; padding:.5em 0 .5em 1.2em;
+	text-overflow:ellipsis;
+  height:1.35em;
+  padding:.5em 0 .5em 1.2em;
 	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
 }
+
 .entries a:hover, .entries a:focus, .entries .selected {
 	color: #000;
 }
+
 .entries .selected {
 	font-weight: bold;
 }
@@ -114,8 +174,19 @@ aside a, .add {
 }
 
 
-footer { position:fixed; bottom:0; padding:1em 2em; font-size:.7em; white-space:nowrap; opacity:.7; }
-footer a { display:inline; padding:0; }
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 1em 2em;
+  font-size: .7em;
+  white-space: nowrap;
+  opacity: .7;
+}
+
+footer a {
+  display:inline;
+  padding:0;
+}
 
 
 #remotestorage-widget {
@@ -123,92 +194,134 @@ footer a { display:inline; padding:0; }
 	right: 3px !important;
 }
 
+::-webkit-scrollbar {
+  width: .2em;
+}
 
-::-webkit-scrollbar { width:.2em; }
-::-webkit-scrollbar-track-piece { background-color:transparent; }
-::-webkit-scrollbar-thumb { background:rgba(50,50,50,.3); }
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
 
-::selection { background-color:rgba(255,255,0,.5); }
-::-moz-selection { background-color:rgba(255,255,0,.5); }
+::-webkit-scrollbar-thumb {
+  background: rgba(50,50,50,.3);
+}
+
+::selection {
+  background-color: rgba(255,255,0,.5);
+}
+
+::-moz-selection {
+  background-color: rgba(255,255,0,.5);
+}
 
 
 .menu-button {
-	display:none; position:absolute; left:0; top:0;
-	-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;
-	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
+	display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+	-moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  /* prevent grey flash when clicking */
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+
 
 /* Smartphones (portrait and landscape) ----------- */
 
 /* keep in sync with value in utils.js */
-@media (max-width:1024px) {
-	body>.scrollbox{
+@media (max-width: 1024px) {
+
+	body > .scrollbox {
 		width:100%;
     margin: 0;
 		overflow-x: hidden;
 	}
+
   #snap-content {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 2;
     overflow: auto;
-    background:#fcfcfc url(../img/noise.png) repeat;
+    background: #fcfcfc url(../img/noise.png) repeat;
     -webkit-overflow-scrolling: touch;
+            transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
        -moz-transform: translate3d(0, 0, 0);
         -ms-transform: translate3d(0, 0, 0);
          -o-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-	-webkit-box-shadow: 0 0 20px -2px rgba(100,100,110,.3);
-	box-shadow: 0 0 20px -2px rgba(100,100,110,.3);
+	  -webkit-box-shadow: 0 0 20px -2px rgba(100,100,110,.3);
+	  box-shadow: 0 0 20px -2px rgba(100,100,110,.3);
   }
+
 	.editor {
-		top: 50px; font-size:20px;
+		top: 50px;
+    font-size:20px;
 	}
+
 	.snapjs-left .editor {
 		opacity: .5;
 	}
 
-
 	aside {
-		opacity:1; font-size:24px; background:#fcfcfc url(../img/noise.png) repeat;
+		opacity: 1;
+    font-size: 24px;
+    background: #fcfcfc url(../img/noise.png) repeat;
     position: absolute;
-    top: 0; bottom: 0;
-    /* TODO: find good width here */
+    top: 0;
+    bottom: 0;
     width: 265px;
     -webkit-overflow-scrolling: touch;
 	}
 
-	.add { padding:4px .5em; }
+	.add {
+    padding:4px .5em;
+  }
 
 	.entries {
-		overflow-y: auto; /* always show scrollbar on mobile to prevent scroll issues */
+    /* always show scrollbar on mobile to prevent scroll issues */
+		overflow-y: auto;
 	}
-	.entries a { padding:10px 0 10px 14px; }
-	.entries a:hover, .entries a:focus {
+
+	.entries a {
+    padding: 10px 0 10px 14px;
+  }
+
+  .entries a:hover, .entries a:focus {
 		color: initial; /* prevent flickering when scrolling on mobile */
 	}
 
 	.menu-button {
-		position:absolute; display:block; padding:14px; cursor:pointer;
+		position: absolute;
+    display: block;
+    padding: 14px;
+    cursor: pointer;
 		left:0;
 	}
 
-	footer { display:none; }
+	footer {
+    display: none;
+  }
+
+/* end of Smartphone styles */
 }
 
 
 @media print {
 	.entries, .menu-button, footer, #remotestorage-widget {
-		display:none;
+		display: none;
 	}
 
 	body, .editor {
-		margin:0;
-		padding:10px;
-		height:auto;
-		width:auto;
-		position:static;
+		margin: 0;
+		padding: 10px;
+		height: auto;
+		width: auto;
+		position: static;
 	}
 
 }
