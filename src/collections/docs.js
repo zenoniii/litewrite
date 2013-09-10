@@ -60,8 +60,7 @@ define(function(require) {
 
     welcome: function () {
       var data = { content: welcome };
-      if ( this.findWhere(data) ) return this;
-      return this.addNew(data);
+      if (this.isEmpty()) this.addNew(data);
     },
 
     remote: null,
