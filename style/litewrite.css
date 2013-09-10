@@ -244,6 +244,17 @@ footer a {
 	display: none;
 }
 
+.share {
+  position: fixed;
+  right: 7px;
+  top: 50px;
+  background: #FF00EB;
+  border: none;
+  color: white;
+  border-radius: 2px;
+  font-size: 15px;
+}
+
 
 /* Smartphones (portrait and landscape) ----------- */
 
