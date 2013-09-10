@@ -66,10 +66,9 @@ define(function(require) {
       this.open(doc);
     }, 400, true),
 
-    updateDoc: function() {
-      this.open(this.doc.id);
+    updateDoc: _.debounce(function() {
       this.doc.trigger('update');
-    },
+    }, 5000),
 
     // remove empty documents
     handlePrevious: function(doc) {
