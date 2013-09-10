@@ -6,6 +6,7 @@ define(function(require) {
   var DateView = require('views/date');
   var AsideView = require('views/aside');
   var SearchView = require('views/search');
+  var PlaceholderView = require('views/placeholder');
   var utils = require('utils');
 
 
@@ -22,6 +23,7 @@ define(function(require) {
       this.entries = new EntriesView({ app: this.app, collection: this.collection });
       this.search = new SearchView({ model: this.app.state, collection: this.collection });
       this.aside = new AsideView({ app: this.app, collection: this.collection });
+      this.placeholder = new PlaceholderView({ model: this.app.doc });
 
 
       this.search
