@@ -276,7 +276,11 @@ footer a {
 	  box-shadow: 0 0 20px -2px rgba(100,100,110,.3);
   }
 
-	.editor {
+  .editor {
+    padding-right: 4%;
+  }
+
+	.editor, .editor-placeholder {
 		top: 50px;
     font-size:20px;
 	}
@@ -322,6 +326,10 @@ footer a {
 	}
 
 	footer {
+    display: none;
+  }
+
+  .date {
     display: none;
   }
 
