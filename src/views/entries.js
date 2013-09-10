@@ -97,9 +97,15 @@ define(function(require) {
 
     // scrolls to the selected element
     scrollToSelected: function() {
+      // don't trigger focus if first element is selcted
+      if (this.selectedFirst) return;
       // let the browser handle this for us
       this.$selected.children('a').focus();
       this.trigger('scroll');
+    },
+
+    selectedFirst: function () {
+      this.$selected.attr('data-id') == this.app.docs.first().id;
     },
 
     // event handler to open a document
