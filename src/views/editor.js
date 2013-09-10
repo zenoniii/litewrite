@@ -36,7 +36,7 @@ define(function(require) {
     },
 
     desktopFocus: function() {
-      if (utils.isDeskop) this.focus();
+      if (utils.isDesktop) this.focus();
     },
 
     blur: function() {
