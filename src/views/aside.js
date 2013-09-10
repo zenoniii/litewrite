@@ -13,7 +13,7 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide', 'handleSnapper', 'handleSnapperAnimation');
+      _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide', 'handleSnapper');
 
       this.app = options.app;
 
@@ -85,11 +85,8 @@ define(function(require) {
       if (utils.isMobile) return this.snapper.enable();
       this.snapper.close();
       this.snapper.disable();
-    }, 700),
+    }, 700)
 
-    handleSnapperAnimation: function() {
-      if ( this.snapper.state().state === 'closed' ) this.trigger('open');
-    }
 
   });
 

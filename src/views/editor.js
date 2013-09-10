@@ -32,7 +32,8 @@ define(function(require) {
     },
 
     focus: function() {
-      this.$el.focus();
+      if (utils.isDesktop) return this.$el.focus();
+      setTimeout(_.bind(this.$el.focus, this.$el), 500);
     },
 
     desktopFocus: function() {

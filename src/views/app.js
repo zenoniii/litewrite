@@ -37,8 +37,6 @@ define(function(require) {
         .on('open', this.aside.hide)
         .on('scroll', this.editor.desktopFocus);
 
-      this.aside.on('open', this.editor.blur);
-
       this.$placeholder = $('.editor-placeholder');
       this.app.doc.on('change:title', this.togglePlaceholder);
 
@@ -95,11 +93,9 @@ define(function(require) {
     },
 
     togglePlaceholder: function() {
-      console.log('togglePlaceholder',this.app.doc.isEmpty());
       if (this.app.doc.isEmpty()) {
         this.$placeholder.removeClass('hide');
       } else {
-        console.log('hide');
         this.$placeholder.addClass('hide');
       }
     }
