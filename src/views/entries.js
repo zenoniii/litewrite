@@ -26,6 +26,7 @@ define(function(require) {
       this.app.doc.on('change:id', this.selectDoc);
 
       this.app.state.on('change:query', this.render);
+      this.app.state.on('change:query', this.openFirst);
 
     },
 

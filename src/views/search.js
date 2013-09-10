@@ -23,8 +23,7 @@ define(function(require) {
     events: {
       'search': 'search',
       'keyup': 'handleKey',
-      'focus': 'triggerFocus',
-      'blur': 'triggerBlur'
+      'focus': 'triggerFocus'
     },
 
     serialize: function () {
