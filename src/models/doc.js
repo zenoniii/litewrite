@@ -40,7 +40,7 @@ define(function(require) {
         .replace(/\s|&nbsp;/g, '-')
         .replace(/"|’|'|,|\//g, '');
       if (!title) return '';
-      return '!' + encodeURI(title) + '-(' + this.id + ')';
+      return '!' + '(' + this.id + ')-' + encodeURI(title);
     },
 
     getOpacity: function() {

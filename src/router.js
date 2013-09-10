@@ -20,7 +20,7 @@ define(function(require) {
     },
 
     open: function(url) {
-      var match = url.match(/\((.+?)\)$/);
+      var match = url.match(/^\((.+?)\)/);
       if (!match) return this.openFirst();
       var id = match[1];
       if (!id) return this.openFirst();

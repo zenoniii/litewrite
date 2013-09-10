@@ -34,9 +34,7 @@ define(function(require) {
 
     addNew: _.throttle(function(options) {
       return this.add( _.defaults(options || {}, {
-        // since we display the ID in the URL it should be as short as possible.
-        // as long as you don't abuse litewrite it should be save to use a unix timestamp here.
-        id: Date.now(),
+        id: this.remote.uuid(),
         lastEdited: Date.now()
       }) );
     }, 1000, { leading: true }),
