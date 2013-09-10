@@ -40,7 +40,7 @@ body > .scrollbox {
   margin: 3.5% 0 0 4%; /* make sure cursor is not hidden in very top left corner */
   padding: 0 20% 8% 0;
   min-height: 90%;
-  font:normal 28px/150% 'Alegreya', Georgia, serif;
+  font: normal 28px/150% 'Alegreya', Georgia, serif;
   outline: none;
   overflow: auto;
   border: none;
@@ -53,9 +53,22 @@ body > .scrollbox {
   -ms-box-sizing: border-box;
 }
 
-.editor:empty::after {
-  content:attr(data-placeholder);
-  color:#ccc;
+.editor-placeholder {
+  font: normal 28px/150% 'Alegreya', Georgia, serif;
+  margin: 3.5% 0 0 4%;
+  padding: 0 20% 8% 0;
+  color: #ccc;
+  position: absolute;
+  opacity: 1;
+  transition: opacity 0.4s;
+  -webkit-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  -ms-transition: opacity 0.4s;
+}
+
+.editor-placeholder.hide {
+  opacity: 0;
 }
 
 .date {
