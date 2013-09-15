@@ -255,6 +255,10 @@ footer a {
   font-size: 15px;
 }
 
+.share-hide {
+  display: none;
+}
+
 
 /* Smartphones (portrait and landscape) ----------- */
 
