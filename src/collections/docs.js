@@ -20,11 +20,12 @@ define(function(require) {
 
     initialize: function(models, options) {
 
-      _.bindAll(this, 'sort', 'save', 'welcome', 'rsChange');
+      _.bindAll(this, 'sort', 'save', 'welcome', 'rsChange', 'uniqueWelcomeDoc');
 
       this
         .on('change:lastEdited', this.sort)
-        .on('change:lastEdited', this.save);
+        .on('change:lastEdited', this.save)
+        .on('add', this.uniqueWelcomeDoc);
 
       this.once('sync', this.welcome);
 
@@ -57,7 +58,7 @@ define(function(require) {
     },
 
     welcome: function () {
-      var data = { content: welcome };
+      var data = { id: 'welcome', content: welcome };
       if (this.isEmpty()) this.addNew(data);
     },
 
@@ -110,7 +111,12 @@ define(function(require) {
         }
       }, this);
       this.events = [];
-    }, 400)
+    }, 400),
+
+    uniqueWelcomeDoc: function() {
+      var welcomes = this.where({ id: 'welcome' });
+      if (welcomes.length > 1) this.remove(welcomes[0]);
+    }
 
   });
 
