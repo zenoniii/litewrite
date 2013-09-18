@@ -77,7 +77,7 @@ define(function(require) {
         } else if (e.which === 40) { // down
           this.next();
           return false;
-        } else if (e.which === 70) // f
+        } else if (e.which === 74) // j
           this.search.focus();
       }
     },
