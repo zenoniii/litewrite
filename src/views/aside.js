@@ -41,8 +41,6 @@ define(function(require) {
       this.handleSnapper();
       $(window).on('resize', this.handleSnapper);
 
-      this.snapper.on('animated', this.handleSnapperAnimation);
-
     },
 
     show: function() {
