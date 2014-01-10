@@ -199,6 +199,7 @@ footer {
   font-size: .7em;
   white-space: nowrap;
   opacity: .7;
+  cursor: default;
 }
 
 footer a {
