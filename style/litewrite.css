@@ -40,7 +40,7 @@ body > .scrollbox {
   margin: 3.5% 0 0 4%; /* make sure cursor is not hidden in very top left corner */
   padding: 0 20% 8% 0;
   min-height: 84%;
-  font: normal 28px/150% 'Alegreya', Georgia, serif;
+  font: normal 24px/150% 'Alegreya', Georgia, serif;
   outline: none;
   overflow: auto;
   border: none;
