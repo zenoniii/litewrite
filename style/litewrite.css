@@ -198,8 +198,8 @@ footer {
   padding: 1em 2em;
   font-size: .7em;
   white-space: nowrap;
-  opacity: .7;
   cursor: default;
+  text-shadow: 1px 0 white, 0 1px white, -1px 0 white, 0 -1px white;
 }
 
 footer a {
