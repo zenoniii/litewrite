@@ -26,9 +26,7 @@ define(function(require) {
     // only re-render when content changed
     render: function() {
       var content = this.app.doc.get('content');
-      if ( content === this.$el.html() ) return;
-      if (content) return this.$el.html(content);
-      this.$el.text(' ');
+      if ( content !== this.$el.val() ) this.$el.val(content || ' ');
     },
 
     focus: function() {
@@ -50,7 +48,7 @@ define(function(require) {
 
     updateOpenDoc: function(e) {
       if ( e.which === (utils.modKey.code) ) return this.trigger('modKey');
-      this.app.doc.set( 'content', this.$el.html() );
+      this.app.doc.set( 'content', this.$el.val() );
     }
 
   });

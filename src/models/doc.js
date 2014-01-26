@@ -17,8 +17,7 @@ define(function(require) {
     sync: rsSync,
 
     isEmpty: function() {
-      // Contenteditable never is really empty
-      return this.get('content').match(/^(<\/{0,1}div>|<br>|\s|&nbsp;)*?$/) !== null;
+      return this.get('content').trim() === '';
     },
 
     updateLastEdited: function(doc) {
@@ -28,10 +27,8 @@ define(function(require) {
 
     updateTitle: function(doc) {
       // Title consists of the first 40 characters of the first not empty line
-      var title = doc.get('content')
-        .match(/^(<div>|<\/div>|<br>|\s|&nbsp;)*([^<]{0,40}).*?(<div>|<\/div>|<br>|$)/)[2]
-        .replace(/&nbsp;/gi,'');
-      doc.set( 'title', title );
+      var matchTitle = doc.get('content').match(/[^\s].{0,40}/);
+      doc.set( 'title', matchTitle ? matchTitle[0] : '' );
     },
 
     getUrl: function() {
@@ -39,8 +36,7 @@ define(function(require) {
         .toLowerCase()
         .replace(/\s|&nbsp;/g, '-')
         .replace(/"|’|'|,|\//g, '');
-      if (!title) return '';
-      return '!' + '(' + this.id + ')-' + encodeURI(title);
+      return title ? '!' + '(' + this.id + ')-' + encodeURI(title) : '';
     },
 
     getOpacity: function() {
