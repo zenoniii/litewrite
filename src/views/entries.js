@@ -70,7 +70,7 @@ define(function(require) {
     update: function(doc) {
       var $item = this.find(doc.id).find('a');
       if (!$item.length || doc.isEmpty()) return this.render();
-      $item.html( doc.get('title') );
+      $item.text( doc.get('title') );
       $item.attr( 'href', '#!' + doc.getUrl() );
     },
 
