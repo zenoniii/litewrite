@@ -1,23 +1,23 @@
 html, body {
-	margin:0;
-  padding:0;
+	margin: 0;
+  padding: 0;
   overflow: hidden;
-	color:#000;
-	background:#fcfcfc url(../img/noise.png) repeat;
-	font:16px FreeSans,Helvetica,sans-serif;
+	color: #000;
+	background: #fcfcfc url(../img/noise.png) repeat;
+	font:16px FreeSans, Helvetica, sans-serif;
 }
 
 
 @font-face {
-  font-family:'Alegreya';
-  font-weight:normal;
-  src:url(Alegreya-Regular.ttf);
+  font-family: 'Alegreya';
+  font-weight: normal;
+  src: url(Alegreya-Regular.ttf);
 }
 
 @font-face {
-  font-family:'Alegreya';
-  font-weight:bold;
-  src:url(Alegreya-Bold.ttf);
+  font-family: 'Alegreya';
+  font-weight: bold;
+  src: url(Alegreya-Bold.ttf);
 }
 
 
@@ -30,7 +30,7 @@ html, body {
 }
 
 body > .scrollbox {
-  width:84%;
+  width: 84%;
   position: fixed;
 }
 
@@ -112,7 +112,7 @@ aside {
 }
 
 aside:hover, aside:focus, .show-aside aside {
-  opacity:1;
+  opacity: 1;
 }
 
 #search {
