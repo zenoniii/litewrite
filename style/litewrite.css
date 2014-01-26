@@ -34,7 +34,7 @@ body > .scrollbox {
   position: fixed;
 }
 
-.editor {
+#editor {
   position: relative;
   width: 96%;
   margin: 3.5% 0 0 4%; /* make sure cursor is not hidden in very top left corner */
@@ -71,7 +71,7 @@ body > .scrollbox {
   opacity: 0;
 }
 
-.date {
+#date {
 	position: relative;
 	margin: 0 0 2% 4%;
 	opacity: .2;
@@ -110,7 +110,7 @@ aside:hover, aside:focus, .show-aside aside {
   opacity:1;
 }
 
-.search {
+#search {
   display: block;
   z-index: 100;
   width: 92%;
@@ -133,14 +133,14 @@ aside:hover, aside:focus, .show-aside aside {
   box-sizing: border-box;
 }
 
-.search.hide {
+#search.hide {
   height: 0;
   padding: 0;
   margin: 0;
   border: 0;
 }
 
-aside a, .add {
+aside a, #add {
 	display: block;
   cursor: pointer;
   outline: none;
@@ -150,7 +150,7 @@ aside a, .add {
   overflow: hidden;
 }
 
-.add {
+#add {
 	position: relative;
 	font-weight: normal;
 	color: #999;
@@ -158,11 +158,11 @@ aside a, .add {
 	font-weight: bold;
 }
 
-.add:hover, .add:focus {
-  color:#000;
+#add:hover, #add:focus {
+  color: #000;
 }
 
-.entries {
+#entries {
 	height: auto;
   display: block;
 	margin: 0;
@@ -172,22 +172,22 @@ aside a, .add {
 	list-style: none;
 }
 
-.entries a {
-	text-overflow:ellipsis;
-  height:1.35em;
-  padding:.5em 0 .5em 1.2em;
-	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent grey flash when clicking */
+#entries a {
+	text-overflow: ellipsis;
+  height: 1.35em;
+  padding: .5em 0 .5em 1.2em;
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /* prevent grey flash when clicking */
 }
 
-.entries a:hover, .entries a:focus, .entries .selected {
+#entries a:hover, #entries a:focus, #entries .selected {
 	color: #000;
 }
 
-.entries .selected {
+#entries .selected {
 	font-weight: bold;
 }
 
-.entries li:last-child {
+#entries li:last-child {
 	margin-bottom: 50px; /* some space after the last document in the list */
 }
 
@@ -203,8 +203,8 @@ footer {
 }
 
 footer a {
-  display:inline;
-  padding:0;
+  display: inline;
+  padding: 0;
 }
 
 
@@ -234,16 +234,8 @@ footer a {
 }
 
 
-.menu-button {
+#menu-button {
 	display: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-	-moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  /* prevent grey flash when clicking */
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 
@@ -253,7 +245,7 @@ footer a {
 @media (max-width: 1024px) {
 
 	body > .scrollbox {
-		width:100%;
+		width: 100%;
     margin: 0;
 		overflow-x: hidden;
 	}
@@ -277,16 +269,16 @@ footer a {
 	  box-shadow: 0 0 20px -2px rgba(100,100,110,.3);
   }
 
-  .editor {
+  #editor {
     padding-right: 4%;
   }
 
 	.editor, .editor-placeholder {
 		top: 50px;
-    font-size:20px;
+    font-size: 20px;
 	}
 
-	.snapjs-left .editor {
+	.snapjs-left #editor {
 		opacity: .5;
 	}
 
@@ -301,36 +293,42 @@ footer a {
     -webkit-overflow-scrolling: touch;
 	}
 
-	.add {
+	#add {
     padding:4px .5em;
   }
 
-	.entries {
+	#entries {
     /* always show scrollbar on mobile to prevent scroll issues */
 		overflow-y: auto;
 	}
 
-	.entries a {
+	#entries a {
     padding: 10px 0 10px 14px;
   }
 
-  .entries a:hover, .entries a:focus {
+  #entries a:hover, #entries a:focus {
 		color: initial; /* prevent flickering when scrolling on mobile */
 	}
 
-	.menu-button {
-		position: absolute;
+	#menu-button {
+    position: absolute;
     display: block;
+    z-index: 1;
+    left: 0; top: 0;
     padding: 14px;
     cursor: pointer;
-		left:0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    /* prevent grey flash when clicking */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 	}
 
 	footer {
     display: none;
   }
 
-  .date {
+  #date {
     display: none;
   }
 
@@ -339,11 +337,11 @@ footer a {
 
 
 @media print {
-	.entries, .menu-button, footer, #remotestorage-widget {
+	#entries, #menu-button, footer, #remotestorage-widget {
 		display: none;
 	}
 
-	body, .editor {
+	body, #editor {
 		margin: 0;
 		padding: 10px;
 		height: auto;

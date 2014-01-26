@@ -15,24 +15,21 @@
 
 <body>
 	<div id="snap-content" class="scrollbox">
-		<div id="menu-button" class="menu-button">
-			<svg height="15" width="15">
-				<path d="m0 0v3h15v-3h-15zm0 6v3h15v-3h-15zm0 6v3h15v-3h-15z"/>
-			</svg>
-		</div>
+		<svg id="menu-button" height="15" width="15">
+			<path d="m0 0v3h15v-3h-15zm0 6v3h15v-3h-15zm0 6v3h15v-3h-15z"/>
+		</svg>
 
 		<div id="remotestorage-connect"></div>
-    <div class="editor-placeholder hide">Write …</div>
-    <textarea id="editor" class="editor"></textarea>
-		<div class="date">modified <span id="date"></span></div>
+    <textarea id="editor" placeholder="Write …"></textarea>
+		<div id="date">modified <span></span></div>
 	</div>
 
-  <aside id="aside">
-    <input type="search" id="search" class="search hide" placeholder="Search …" value="">
-    <div id="add" class="add">+</div>
-    <ul id="entries" class="entries scrollbox"></ul>
+  <aside>
+    <input type="search" id="search" class="hide" placeholder="Search …">
+    <div id="add">+</div>
+    <ul id="entries" class="scrollbox"></ul>
 
-    <footer id="credits">
+    <footer>
       write lite, <a href="http://github.com/litewrite/litewrite" target="_blank">open source</a>
     </footer>
   </aside>

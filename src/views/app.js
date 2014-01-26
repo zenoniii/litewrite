@@ -15,8 +15,6 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this, 'togglePlaceholder');
-
       this.app = options.app;
 
       this.editor = new EditorView({ app: this.app });
@@ -36,9 +34,6 @@ define(function(require) {
       this.entries
         .on('open', this.aside.hide)
         .on('scroll', this.editor.desktopFocus);
-
-      this.$placeholder = $('.editor-placeholder');
-      this.app.doc.on('change:title', this.togglePlaceholder);
 
     },
 
@@ -90,14 +85,6 @@ define(function(require) {
     next: function() {
       var doc = this.collection.after(this.app.doc.id);
       if (doc) this.app.open(doc);
-    },
-
-    togglePlaceholder: function() {
-      if (this.app.doc.isEmpty()) {
-        this.$placeholder.removeClass('hide');
-      } else {
-        this.$placeholder.addClass('hide');
-      }
     }
 
   });

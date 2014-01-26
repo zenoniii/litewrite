@@ -26,7 +26,7 @@ define(function(require) {
     // only re-render when content changed
     render: function() {
       var content = this.app.doc.get('content');
-      if ( content !== this.$el.val() ) this.$el.val(content || ' ');
+      if ( content !== this.$el.val() ) this.$el.val(content || '');
     },
 
     focus: function() {

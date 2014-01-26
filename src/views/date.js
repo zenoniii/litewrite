@@ -6,7 +6,7 @@ define(function(require) {
 
   var EditorView = Backbone.View.extend({
 
-    el: '#date',
+    el: '#date span',
 
     initialize: function(options) {
       _.bindAll(this, 'render');
