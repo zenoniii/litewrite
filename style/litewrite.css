@@ -317,7 +317,6 @@ footer a {
 	}
 
 	#menu-button {
-    position: absolute;
     display: block;
     z-index: 1;
     left: 0; top: 0;
