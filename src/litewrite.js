@@ -28,8 +28,8 @@ define(function(require) {
         .on('change:content', this.doc.updateLastEdited)
         .on('change:content', this.doc.updateTitle)
         .on('change:id', this.handlePrevious)
+        .on('change:id', this.setUrl)
         .on('change:title', this.setWindowTitle)
-        .on('change:title', this.setUrl)
         .on('change', this.updateDocs);
 
       this.state.fetch().always(_.bind(function() {
