@@ -4,6 +4,7 @@ define(function(require) {
   var $ = require('jquery');
   var Backbone = require('backbone');
   var utils = require('utils');
+  require('autosize');
 
 
   var EditorView = Backbone.View.extend({
@@ -21,12 +22,14 @@ define(function(require) {
       this.app.doc.on('change:id', this.render);
       this.app.doc.on('update', this.render);
 
+      this.$el.autosize();
     },
 
     // only re-render when content changed
     render: function() {
       var content = this.app.doc.get('content');
-      if ( content !== this.$el.val() ) this.$el.val(content || '');
+      if ( content === this.$el.val() ) return;
+      this.$el.val(content || '').trigger('autosize.resize');
     },
 
     focus: function() {

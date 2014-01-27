@@ -9,6 +9,7 @@ require.config( {
   paths: {
     text: '../lib/require.text',
     jquery: '../lib/jquery.min',
+    autosize: '../lib/jquery.autosize',
     underscore: '../lib/underscore',
     backbone: '../lib/backbone',
     localstorage: '../lib/backbone.localstorage',
@@ -28,6 +29,9 @@ require.config( {
     backbone: {
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
+    },
+    autosize: {
+      deps: ['jquery']
     }
   }
 
