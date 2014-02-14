@@ -60,20 +60,27 @@ define(function(require) {
 
     // global key handler for shortcuts
     handleKey: function(e) {
-      if (e.which === 9) { // tab
-        e.preventDefault();
-      } else if (e[utils.modKey.name]) {
-        this.aside.show();
-        if (e.which === 78) { // n
-          this.newDoc(e);
-        } else if (e.which === 38) { // up
-          this.previous();
-          return false;
-        } else if (e.which === 40) { // down
-          this.next();
-          return false;
-        } else if (e.which === 74) // j
-          this.search.focus();
+      if (e.which === 9) return e.preventDefault(); // prevent tabkey
+      if (! e[utils.modKey.name] ) return;
+      this.aside.show();
+      var shortcut = this.shortcuts[e.which];
+      if (shortcut) return shortcut.call(this, e);
+    },
+
+    shortcuts: {
+      78: function n() {
+        this.newDoc();
+      },
+      38: function up() {
+        this.previous();
+        return false;
+      },
+      40: function down() {
+        this.next();
+        return false;
+      },
+      74: function j() {
+        this.search.focus();
       }
     },
 
