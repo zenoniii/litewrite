@@ -18,7 +18,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this, 'loadDoc', 'open', 'debouncedOpen', 'updateDoc', 'handlePrevious', 'updateDocs', 'triggerConnected', 'triggerDisconnected');
+      _.bindAll(this, 'loadDoc', 'open', 'debouncedOpen', 'updateCurrentDoc', 'handlePrevious', 'updateDocs', 'triggerConnected', 'triggerDisconnected');
 
       this.state = new State();
       this.doc = new Doc();
@@ -54,7 +54,7 @@ define(function(require) {
 
       this.docs
         .on('add', this.debouncedOpen)
-        .on('change', this.updateDoc);
+        .on('change', this.updateCurrentDoc);
 
       this.trigger('ready');
 
@@ -70,9 +70,11 @@ define(function(require) {
       this.open(doc);
     }, 400, true),
 
-    updateDoc: _.debounce(function() {
-      this.doc.trigger('update');
-    }, 5000),
+    updateCurrentDoc: _.debounce(function(doc) {
+      if (doc.id === this.doc.id) {
+        this.doc.set( doc.toJSON() ).trigger('update');
+      }
+    }, 3000),
 
     // remove empty documents
     handlePrevious: function(doc) {
