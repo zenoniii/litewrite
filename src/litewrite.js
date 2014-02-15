@@ -18,7 +18,7 @@ define(function(require) {
 
     initialize: function() {
 
-      _.bindAll(this, 'loadDoc', 'open', 'debouncedOpen', 'updateCurrentDoc', 'handlePrevious', 'updateDocs', 'triggerConnected', 'triggerDisconnected');
+      _.bindAll(this, 'loadDoc', 'open', 'debouncedOpen', 'updateCurrentDoc', 'handlePrevious', 'updateDocs', 'handleRemoteRemove', 'triggerConnected', 'triggerDisconnected');
 
       this.state = new State();
       this.doc = new Doc();
@@ -54,7 +54,8 @@ define(function(require) {
 
       this.docs
         .on('add', this.debouncedOpen)
-        .on('change', this.updateCurrentDoc);
+        .on('change', this.updateCurrentDoc)
+        .on('remove', this.handleRemoteRemove);
 
       this.trigger('ready');
 
@@ -84,6 +85,12 @@ define(function(require) {
 
     updateDocs: function(doc) {
       this.docs.set( doc.toJSON(), { add: false, remove: false } );
+    },
+
+    handleRemoteRemove: function(doc, docs, options) {
+      var removedLocally = options.success && options.error;
+      // open first doc so editor doesn't display the removed doc
+      if (!removedLocally) this.open();
     },
 
     triggerConnected: function() {

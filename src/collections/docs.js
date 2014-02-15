@@ -25,7 +25,6 @@ define(function(require) {
       this
         .on('change:lastEdited', this.sort)
         .on('change:lastEdited', this.save)
-        .on('add', this.uniqueWelcomeDoc);
 
       this.once('sync', this.welcome);
 
@@ -95,19 +94,15 @@ define(function(require) {
 
     handleEvents: _.debounce(function() {
       _.each(this.events, function(event) {
-        if (event.origin !== 'window') {
-          // TODO: normally this should work
-          // but I completely disabled deletion of doc on remote events
-          // because right now sometimes randomly docs disappear
-          // after syncing different devices.
-          // this is really annoying -.-
-          //
-          // if (event.oldValue && !event.newValue) return this.remove(event.oldValue);
-          var existingDoc = this.get(event.newValue.id);
-          if (!existingDoc) return this.add(event.newValue);
-          var isNew = event.newValue.lastEdited > existingDoc.get('lastEdited');
-          if (isNew) this.set(event.newValue, { remove: false });
-        }
+        if (event.origin === 'window') return;
+        // delete
+        if (event.oldValue && !event.newValue) return this.remove(event.oldValue);
+        var existingDoc = this.get(event.newValue.id);
+        // create
+        if (!existingDoc) return this.add(event.newValue);
+        var isLatest = event.newValue.lastEdited > existingDoc.get('lastEdited');
+        // update
+        if (isLatest) this.set(event.newValue, { remove: false });
       }, this);
       this.events = [];
     }, 400)
