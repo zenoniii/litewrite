@@ -117,6 +117,7 @@ aside:hover, aside:focus, .show-aside aside {
 
 #search {
   display: block;
+  opacity: 0.5;
   z-index: 100;
   width: 92%;
   font-size: 16px;
@@ -137,6 +138,8 @@ aside:hover, aside:focus, .show-aside aside {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+#search:hover, #search:focus { opacity: 1; }
 
 #search.hide {
   height: 0;
