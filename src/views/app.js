@@ -35,7 +35,6 @@ define(function(require) {
 
       this.entries
         .on('open', this.aside.hide)
-        .on('scroll', this.editor.desktopFocus);
 
     },
 
