@@ -36,7 +36,7 @@ define(function(require) {
     },
 
     focus: function() {
-      this.$el.focus();
+      if (!this.$el.hasClass('hide')) this.$el.focus();
     },
 
     triggerFocus: function() {
