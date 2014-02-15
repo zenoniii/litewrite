@@ -95,10 +95,10 @@ define(function(require) {
     handleEvents: _.debounce(function() {
       _.each(this.events, function(event) {
         if (event.origin === 'window') return;
-        // delete
+        // remove
         if (event.oldValue && !event.newValue) return this.remove(event.oldValue);
         var existingDoc = this.get(event.newValue.id);
-        // create
+        // add
         if (!existingDoc) return this.add(event.newValue);
         var isLatest = event.newValue.lastEdited > existingDoc.get('lastEdited');
         // update
