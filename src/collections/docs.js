@@ -68,7 +68,8 @@ define(function(require) {
       var origHash = document.location.hash;
 
       remoteStorage.on('disconnect', function() {
-        docs.reset().welcome();
+        docs.reset();
+        docs.welcome();
       });
 
       remoteStorage.access.claim('documents', 'rw');

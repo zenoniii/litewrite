@@ -8,7 +8,7 @@ require.config( {
 
   paths: {
     text: '../lib/require.text',
-    jquery: '../lib/jquery.min',
+    jquery: '../lib/jquery',
     autosize: '../lib/jquery.autosize',
     underscore: '../lib/underscore',
     backbone: '../lib/backbone',
@@ -23,13 +23,6 @@ require.config( {
   baseUrl: 'src',
 
   shim: {
-    underscore: {
-      exports: '_'
-    },
-    backbone: {
-      deps: ['underscore', 'jquery'],
-      exports: 'Backbone'
-    },
     autosize: {
       deps: ['jquery']
     }
