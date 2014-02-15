@@ -54,24 +54,6 @@ body > .scrollbox {
   -ms-box-sizing: border-box;
 }
 
-.editor-placeholder {
-  font: normal 28px/150% 'Alegreya', Georgia, serif;
-  margin: 3.5% 0 0 4%;
-  padding: 0 20% 8% 0;
-  color: #ccc;
-  position: absolute;
-  opacity: 1;
-  transition: opacity 0.4s;
-  -webkit-transition: opacity 0.4s;
-  -moz-transition: opacity 0.4s;
-  -o-transition: opacity 0.4s;
-  -ms-transition: opacity 0.4s;
-}
-
-.editor-placeholder.hide {
-  opacity: 0;
-}
-
 #date {
 	position: relative;
 	margin: 0 0 2% 4%;
@@ -160,7 +142,6 @@ aside a, #add {
 
 #add {
 	position: relative;
-	font-weight: normal;
 	color: #999;
 	padding: 6px 18px;
 	font-weight: bold;
@@ -296,11 +277,6 @@ footer a {
   #editor {
     padding-right: 4%;
   }
-
-	.editor, .editor-placeholder {
-		top: 50px;
-    font-size: 20px;
-	}
 
 	.snapjs-left #editor {
 		opacity: .5;
