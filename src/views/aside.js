@@ -16,6 +16,7 @@ define(function(require) {
       _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide', 'handleSnapper');
 
       this.app = options.app;
+      this.$sidebar = this.$('aside');
 
       this.app.on('ready', this.showOrHide);
 
@@ -83,7 +84,12 @@ define(function(require) {
       if (utils.isMobile) return this.snapper.enable();
       this.snapper.close();
       this.snapper.disable();
-    }, 700)
+    }, 700),
+
+    hasScrollbar: function() {
+      // thanks to http://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
+      return this.$sidebar.get(0).scrollHeight > this.$sidebar.height();
+    }
 
 
   });

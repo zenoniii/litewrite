@@ -16,15 +16,21 @@ define(function(require) {
 
     initialize: function(options) {
 
+      _.bindAll(this, 'toggleSearch');
+
       this.app = options.app;
 
       this.editor = new EditorView({ app: this.app });
       this.date = new DateView({ model: this.app.doc });
       this.entries = new EntriesView({ app: this.app, collection: this.collection });
-      this.search = new SearchView({ model: this.app.state, collection: this.collection });
+      this.search = new SearchView({ model: this.app.state });
       this.aside = new AsideView({ app: this.app, collection: this.collection });
       this.share = new ShareView({ model: this.app.doc , collection: this.collection, app: this.app });
 
+
+      this.collection
+        .on('add', this.toggleSearch)
+        .on('remove', this.toggleSearch);
 
       this.search
         .on('focus', this.aside.show)
@@ -57,6 +63,10 @@ define(function(require) {
     toggleAside: function() {
       this.aside.toggle();
       return false;
+    },
+
+    toggleSearch: function() {
+      this.aside.hasScrollbar() ? this.search.show() : this.search.hide();
     },
 
     // global key handler for shortcuts

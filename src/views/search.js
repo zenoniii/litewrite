@@ -1,6 +1,5 @@
 define(function(require) {
 
-  var _ = require('underscore');
   var Backbone = require('backbone');
 
 
@@ -9,15 +8,7 @@ define(function(require) {
     el: '#search',
 
     initialize: function () {
-
-      _.bindAll(this, 'toggle');
-
       this.render();
-
-      this.collection
-        .on('add', this.toggle)
-        .on('remove', this.toggle);
-
     },
 
     events: {
@@ -26,12 +17,8 @@ define(function(require) {
       'focus': 'triggerFocus'
     },
 
-    serialize: function () {
-      return this.model.get('query');
-    },
-
     render: function () {
-      this.$el.val( this.serialize() );
+      this.$el.val( this.model.get('query') );
     },
 
     search: function() {
@@ -43,7 +30,7 @@ define(function(require) {
     handleKey: function(e) {
       if (e.which === 13) { // ENTER
         e.preventDefault();
-        return this.triggerBlur();
+        return this.trigger('blur');
       }
       this.search();
     },
@@ -54,14 +41,6 @@ define(function(require) {
 
     triggerFocus: function() {
       this.trigger('focus');
-    },
-
-    triggerBlur: function() {
-      this.trigger('blur');
-    },
-
-    toggle: function() {
-      this.collection.length > 7 ? this.show() : this.hide();
     },
 
     show: function() {
