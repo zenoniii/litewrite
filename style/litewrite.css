@@ -20,6 +20,12 @@ html, body {
   src: url(Alegreya-Bold.ttf);
 }
 
+/* for cyrillic text */
+@font-face {
+  font-family: 'Gregor';
+  font-weight: normal;
+  src: url(Gregor-Regular.otf);
+}
 
 .scrollbox {
 	height: 100%;
@@ -52,6 +58,10 @@ body > .scrollbox {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
+}
+
+#editor.cyrillic {
+  font-family: 'Gregor', Georgia, serif;
 }
 
 #date {
