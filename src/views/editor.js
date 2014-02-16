@@ -31,6 +31,7 @@ define(function(require) {
       // we can remove this later on.
       content = content.replace(/<br>/ig,'\n').replace(/<[^>]+>/ig,'');
       this.$el.val(content || '').trigger('autosize.resize');
+      this.desktopFocus();
     },
 
     focus: function() {
