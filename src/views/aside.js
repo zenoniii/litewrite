@@ -11,16 +11,13 @@ define(function(require) {
 
     el: 'body',
 
-    initialize: function(options) {
+    initialize: function() {
 
       _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide', 'handleSnapper');
 
-      this.app = options.app;
       this.$sidebar = this.$('aside');
 
-      this.app.on('ready', this.showOrHide);
-
-      this.app.doc.on('change:content', this.desktopHide);
+      this.model.on('change:content', this.desktopHide);
 
       this.collection
         .on( 'add', this.desktopShow)
@@ -52,7 +49,7 @@ define(function(require) {
     hide: function() {
       if (utils.isMobile) return this.snapper.close();
       // hide sidebar when 3 or more docs and the open doc is not empty
-      if ( this.collection.length > 2 && !this.app.doc.isEmpty() ) {
+      if ( this.collection.length > 2 && !this.model.isEmpty() ) {
         this.$el.removeClass('show-aside');
       }
     },
@@ -75,7 +72,7 @@ define(function(require) {
     // show or hide aside depending on how many docs you have
     showOrHide: function() {
       // if only one doc or open doc empty return
-      if ( this.collection.length < 2 || this.app.doc.isEmpty() ) return;
+      if ( this.collection.length < 2 || this.model.isEmpty() ) return;
       this.show();
       if (utils.isDesktop) _.delay(this.hide, 3000);
     },

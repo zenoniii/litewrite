@@ -20,13 +20,20 @@ define(function(require) {
 
       this.app = options.app;
 
-      this.editor = new EditorView({ app: this.app });
-      this.date = new DateView({ model: this.app.doc });
+      this.editor = new EditorView({ model: this.model });
+      this.date = new DateView({ model: this.model });
       this.entries = new EntriesView({ app: this.app, collection: this.collection });
       this.search = new SearchView({ model: this.app.state });
-      this.aside = new AsideView({ app: this.app, collection: this.collection });
-      this.share = new ShareView({ model: this.app.doc , collection: this.collection, app: this.app });
+      this.aside = new AsideView({ model: this.model, collection: this.collection });
+      this.share = new ShareView({ model: this.model, collection: this.collection });
 
+
+      this.app
+        .on('ready', this.editor.render)
+        .on('ready', this.editor.desktopFocus)
+        .on('ready', this.aside.showOrHide)
+        .on('connected', this.share.show)
+        .on('disconnected', this.share.hide);
 
       this.collection
         .on('add', this.toggleSearch)
@@ -37,7 +44,6 @@ define(function(require) {
         .on('blur', this.editor.desktopFocus)
         .on('blur', this.aside.desktopHide);
 
-      this.editor.on('modKey', this.aside.hide);
 
       this.entries
         .on('open', this.aside.hide)
@@ -54,7 +60,7 @@ define(function(require) {
 
     newDoc: function() {
       if (utils.isMobile) this.aside.hide();
-      if (! this.app.doc.isEmpty()) this.collection.addNew();
+      if (! this.model.isEmpty()) this.collection.addNew();
       this.editor.focus();
       this.search.clear();
       return false;
@@ -96,12 +102,12 @@ define(function(require) {
     },
 
     previous: function() {
-      var doc = this.collection.before(this.app.doc.id);
+      var doc = this.collection.before(this.model.id);
       if (doc) this.app.open(doc);
     },
 
     next: function() {
-      var doc = this.collection.after(this.app.doc.id);
+      var doc = this.collection.after(this.model.id);
       if (doc) this.app.open(doc);
     }
 

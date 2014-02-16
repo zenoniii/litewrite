@@ -15,20 +15,16 @@ define(function(require) {
 
       _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic');
 
-      this.app = options.app;
-
-      this.app.on('ready', this.render);
-      this.app.on('ready', this.desktopFocus);
-      this.app.doc.on('change:id', this.render);
-      this.app.doc.on('change:content', this.handleCyrillic);
-      this.app.doc.on('update', this.render);
+      this.model.on('change:id', this.render);
+      this.model.on('change:content', this.handleCyrillic);
+      this.model.on('update', this.render);
 
       this.$el.autosize();
     },
 
     // only re-render when content changed
     render: function() {
-      var content = this.app.doc.get('content');
+      var content = this.model.get('content');
       if ( content === this.$el.val() ) return;
       // strip html tags from documents.
       // this is just for migration from contenteditable to textarea.
@@ -55,7 +51,7 @@ define(function(require) {
     },
 
     updateOpenDoc: function(e) {
-      this.app.doc.set( 'content', this.$el.val() );
+      this.model.set( 'content', this.$el.val() );
     },
 
     // if a cyrillic doc is detected change to cyrillic font
@@ -64,7 +60,7 @@ define(function(require) {
       var isCyrillic = doc.get('content').match('[\u0400-\u04FF\u0500-\u052F]');
       if (!isCyrillic) return;
       this.$el.addClass('cyrillic');
-      this.app.doc.off(null, this.handleCyrillic);
+      this.model.off(null, this.handleCyrillic);
     }
 
   });

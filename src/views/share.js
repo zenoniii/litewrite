@@ -11,7 +11,7 @@ define(function(require) {
 
     el: '#share',
 
-    initialize: function(options) {
+    initialize: function() {
 
       _.bindAll(this, 'setLink', 'updatePublic', 'show', 'hide');
 
@@ -23,8 +23,6 @@ define(function(require) {
 
       this.model.on('change:public', this.setLink);
       this.collection.on('sync', this.updatePublic);
-      options.app.on('connected', this.show);
-      options.app.on('disconnected', this.hide);
 
     },
 
