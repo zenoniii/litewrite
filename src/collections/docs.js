@@ -103,7 +103,9 @@ define(function(require) {
         if (!existingDoc) return this.add(event.newValue);
         var isLatest = event.newValue.lastEdited > existingDoc.get('lastEdited');
         // update
-        if (isLatest) this.set(event.newValue, { remove: false });
+        if (!isLatest) return;
+        this.set(event.newValue, { remove: false });
+        this.trigger('remoteUpdate', event.newValue.id);
       }, this);
       this.events = [];
     }, 400)

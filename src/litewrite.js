@@ -54,7 +54,7 @@ define(function(require) {
 
       this.docs
         .on('add', this.openOnCreate)
-        .on('change', this.updateCurrentDoc)
+        .on('remoteUpdate', this.updateCurrentDoc)
         .on('remove', this.handleRemoteRemove);
 
       this.trigger('ready');
@@ -71,12 +71,11 @@ define(function(require) {
       if (doc.isEmpty()) this.open(doc);
     },
 
-    updateCurrentDoc: _.debounce(function(doc) {
-      if (doc.id === this.doc.id) {
-        this.doc.set( doc.toJSON() );
-        this.doc.trigger('update');
-      }
-    }, 3000),
+    updateCurrentDoc: function(id) {
+      if (this.doc.id != id) return;
+      this.open(id);
+      this.doc.trigger('update');
+    },
 
     // remove empty documents
     handlePrevious: function(doc) {
