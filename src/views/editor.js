@@ -13,13 +13,14 @@ define(function(require) {
 
     initialize: function(options) {
 
-      _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus');
+      _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic');
 
       this.app = options.app;
 
       this.app.on('ready', this.render);
       this.app.on('ready', this.desktopFocus);
       this.app.doc.on('change:id', this.render);
+      this.app.doc.on('change:content', this.handleCyrillic);
       this.app.doc.on('update', this.render);
 
       this.$el.autosize();
@@ -33,7 +34,6 @@ define(function(require) {
       // this is just for migration from contenteditable to textarea.
       // we can remove this later on.
       content = content.replace(/<br>/ig,'\n').replace(/<[^>]+>/ig,'');
-      this.handleCyrillic(content);
       this.$el.val(content || '').trigger('autosize.resize');
     },
 
@@ -58,10 +58,13 @@ define(function(require) {
       this.app.doc.set( 'content', this.$el.val() );
     },
 
-    handleCyrillic: function(content) {
+    // if a cyrillic doc is detected change to cyrillic font
+    handleCyrillic: function(doc) {
       // see http://kourge.net/projects/regexp-unicode-block
-      var isCyrillic = content.match('[\u0400-\u04FF\u0500-\u052F]');
-      isCyrillic ? this.$el.addClass('cyrillic') : this.$el.removeClass('cyrillic');
+      var isCyrillic = doc.get('content').match('[\u0400-\u04FF\u0500-\u052F]');
+      if (!isCyrillic) return;
+      this.$el.addClass('cyrillic');
+      this.app.doc.off(null, this.handleCyrillic);
     }
 
   });
