@@ -55,7 +55,6 @@ define(function(require) {
     },
 
     updateOpenDoc: function(e) {
-      if ( e.which === (utils.modKey.code) ) return this.trigger('modKey');
       this.app.doc.set( 'content', this.$el.val() );
     },
 
