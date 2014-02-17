@@ -21,19 +21,19 @@ define(function(require) {
       this.app = options.app;
 
       this.editor = new EditorView({ model: this.model });
-      this.date = new DateView({ model: this.model });
-      this.entries = new EntriesView({ app: this.app, collection: this.collection });
       this.search = new SearchView({ model: this.app.state });
       this.aside = new AsideView({ model: this.model, collection: this.collection });
-      this.share = new ShareView({ model: this.model, collection: this.collection });
+      var entries = new EntriesView({ app: this.app, collection: this.collection });
+      var share = new ShareView({ model: this.model, collection: this.collection });
+      new DateView({ model: this.model });
 
 
       this.app
         .on('ready', this.editor.render)
         .on('ready', this.editor.desktopFocus)
         .on('ready', this.aside.showOrHide)
-        .on('connected', this.share.show)
-        .on('disconnected', this.share.hide);
+        .on('connected', share.show)
+        .on('disconnected', share.hide);
 
       this.collection
         .on('add', this.toggleSearch)
@@ -44,10 +44,11 @@ define(function(require) {
         .on('blur', this.editor.desktopFocus)
         .on('blur', this.aside.desktopHide);
 
+      // this way we don't hide the sidebar while search is focusesd
       this.editor
         .on('typing', this.aside.desktopHide)
 
-      this.entries
+      entries
         .on('open', this.aside.hide)
 
     },
