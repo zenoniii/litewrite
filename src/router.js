@@ -24,9 +24,7 @@ define(function(require) {
       if (!match) return this.openFirst();
       var id = match[1];
       if (!id) return this.openFirst();
-      var doc = this.litewrite.docs.get(id);
-      if (!doc) return this.openFirst();
-      this.litewrite.open(doc);
+      this.litewrite.open(id);
     }
 
   });
