@@ -49,6 +49,7 @@ define(function(require) {
 
     hide: function() {
       this.$el.addClass('hide');
+      this.clear();
     },
 
     clear: function() {
