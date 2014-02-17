@@ -5,10 +5,9 @@ define(function(require) {
   var Backbone = require('backbone');
   var Doc = require('models/doc');
   var remoteStorage = require('remotestorage');
-
   var remoteStorageDocuments = require('remotestorage-documents');
   var rsSync = require('rs-adapter');
-  var welcome = require('text!templates/welcome.txt');
+  var lang = require('i18n!nls/lang');
 
 
 
@@ -49,7 +48,7 @@ define(function(require) {
     },
 
     welcome: function () {
-      if (this.isEmpty()) this.addNew({ content: welcome });
+      if (this.isEmpty()) this.addNew({ content: lang.welcome });
     },
 
     remote: null,

@@ -1,6 +1,7 @@
 define(function(require) {
 
   var Backbone = require('backbone');
+  var lang = require('i18n!nls/lang');
 
 
   var SearchView = Backbone.View.extend({
@@ -9,6 +10,7 @@ define(function(require) {
 
     initialize: function () {
       this.render();
+      this.setPlaceholder();
     },
 
     events: {
@@ -55,6 +57,10 @@ define(function(require) {
     clear: function() {
       this.model.save('query', '');
       this.render();
+    },
+
+    setPlaceholder: function() {
+      this.$el.attr('placeholder', lang.search);
     }
 
   });

@@ -5,6 +5,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var utils = require('utils');
   var Snap = require('snap');
+  var lang = require('i18n!nls/lang');
 
 
   var AsideView = Backbone.View.extend({
@@ -23,6 +24,7 @@ define(function(require) {
         .on( 'change:title', this.desktopShow);
 
       this.initSnapper();
+      this.setFooter();
 
     },
 
@@ -84,6 +86,10 @@ define(function(require) {
     hasScrollbar: function() {
       // thanks to http://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
       return this.$sidebar.get(0).scrollHeight > this.$sidebar.height();
+    },
+
+    setFooter: function() {
+      this.$sidebar.find('footer a').text(lang.footer);
     }
 
 

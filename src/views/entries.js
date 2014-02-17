@@ -4,6 +4,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var entriesTemplate = require('text!templates/entries.html');
   var utils = require('utils');
+  var lang = require('i18n!nls/lang');
 
 
   var EntriesView = Backbone.View.extend({
@@ -46,7 +47,7 @@ define(function(require) {
           return res;
         });
 
-      return { docs: docs };
+      return { docs: docs, placeholder: lang.emptyDoc };
     },
 
     // check if it matches state.query

@@ -8,6 +8,7 @@ require.config( {
 
   paths: {
     text: '../lib/require.text',
+    i18n: '../lib/require.i18n',
     jquery: '../lib/jquery',
     autosize: '../lib/jquery.autosize',
     underscore: '../lib/underscore',

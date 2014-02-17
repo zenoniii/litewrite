@@ -2,11 +2,12 @@ define(function(require) {
 
   var _ = require('underscore');
   var Backbone = require('backbone');
+  var lang = require('i18n!nls/lang');
 
 
   var EditorView = Backbone.View.extend({
 
-    el: '#date span',
+    el: '#date',
 
     initialize: function(options) {
       _.bindAll(this, 'render');
@@ -16,7 +17,7 @@ define(function(require) {
 
     // only re-render when content changed
     render: function() {
-      this.$el.html( this.model.formatDate() );
+      this.$el.html( lang.modified+' '+this.model.formatDate() );
       this.refresh();
     },
 

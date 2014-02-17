@@ -5,6 +5,7 @@ define(function(require) {
   var remoteStorageDocuments = require('remotestorage-documents');
   var remoteStorage = require('remotestorage');
   var template = require('text!templates/share.html');
+  var lang = require('i18n!nls/lang');
 
 
   var ShareView = Backbone.View.extend({
@@ -48,9 +49,9 @@ define(function(require) {
 
     setLink: function() {
       var link = this.model.get('public');
-      if (!link) return this.$button.text('share');
+      if (!link) return this.$button.text(lang.share);
       this.$el.attr('href', this.model.get('public'));
-      this.$button.text('open');
+      this.$button.text(lang.open);
     },
 
     updatePublic: function(doc) {

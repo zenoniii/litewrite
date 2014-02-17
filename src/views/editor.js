@@ -4,6 +4,7 @@ define(function(require) {
   var $ = require('jquery');
   var Backbone = require('backbone');
   var utils = require('utils');
+  var lang = require('i18n!nls/lang');
   require('autosize');
 
 
@@ -20,6 +21,7 @@ define(function(require) {
       this.model.on('update', this.render);
 
       this.$el.autosize();
+      this.setPlaceholder();
     },
 
     // only re-render when content changed
@@ -63,6 +65,10 @@ define(function(require) {
       if (!isCyrillic) return;
       this.$el.addClass('cyrillic');
       this.model.off(null, this.handleCyrillic);
+    },
+
+    setPlaceholder: function() {
+      this.$el.attr('placeholder', lang.emptyDoc);
     }
 
   });
