@@ -36,6 +36,7 @@ define(function(require) {
 
     focus: function() {
       if (utils.isDesktop) return this.$el.focus();
+      // doesn't seem to work for textarea on iOS at all. maybe it works on other platforms.
       setTimeout(_.bind(this.$el.focus, this.$el), 500);
     },
 
