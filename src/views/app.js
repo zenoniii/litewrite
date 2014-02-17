@@ -23,7 +23,7 @@ define(function(require) {
       this.editor = new EditorView({ model: this.model });
       this.search = new SearchView({ model: this.litewrite.state });
       this.aside = new AsideView({ model: this.model, collection: this.collection });
-      var entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection });
+      this.entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection });
       var share = new ShareView({ model: this.model, collection: this.collection });
       new DateView({ model: this.model });
 
@@ -48,7 +48,7 @@ define(function(require) {
       this.editor
         .on('typing', this.aside.desktopHide);
 
-      entries
+      this.entries
         .on('open', this.editor.desktopFocus)
         .on('open', this.aside.hide);
 
@@ -106,13 +106,13 @@ define(function(require) {
     },
 
     previous: function() {
-      var doc = this.collection.before(this.model.id);
-      if (doc) this.litewrite.open(doc);
+      var id = this.entries.previous(this.model.id);
+      if (id) this.litewrite.open(id);
     },
 
     next: function() {
-      var doc = this.collection.after(this.model.id);
-      if (doc) this.litewrite.open(doc);
+      var id = this.entries.next(this.model.id);
+      if (id) this.litewrite.open(id);
     }
 
   });

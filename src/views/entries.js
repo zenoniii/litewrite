@@ -112,6 +112,14 @@ define(function(require) {
     openFirst: function() {
       var id = this.$('.item').attr('data-id');
       this.litewrite.open(id);
+    },
+
+    previous: function(id) {
+      return this.find(id).prev().attr('data-id');
+    },
+
+    next: function(id) {
+      return this.find(id).next().attr('data-id');
     }
 
   });

@@ -48,14 +48,6 @@ define(function(require) {
       doc.throttledSave();
     },
 
-    before: function(id) {
-      return this.at( this.indexOf( this.get(id) ) - 1 );
-    },
-
-    after: function(id) {
-      return this.at( this.indexOf( this.get(id) ) + 1 );
-    },
-
     welcome: function () {
       if (this.isEmpty()) this.addNew({ content: welcome });
     },
