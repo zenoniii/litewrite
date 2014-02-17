@@ -6,7 +6,7 @@ define(function(require) {
   var Router = Backbone.Router.extend({
 
     initialize: function (options) {
-      this.app = options.app;
+      this.litewrite = options.litewrite;
     },
 
     routes: {
@@ -16,7 +16,7 @@ define(function(require) {
     },
 
     openFirst: function() {
-      this.app.open();
+      this.litewrite.open();
     },
 
     open: function(url) {
@@ -24,9 +24,9 @@ define(function(require) {
       if (!match) return this.openFirst();
       var id = match[1];
       if (!id) return this.openFirst();
-      var doc = this.app.docs.get(id);
+      var doc = this.litewrite.docs.get(id);
       if (!doc) return this.openFirst();
-      this.app.open(doc);
+      this.litewrite.open(doc);
     }
 
   });
