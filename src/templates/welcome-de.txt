@@ -1,0 +1,18 @@
+Oh look, it’s Litewrite!
+
+This is a distraction-free app designed for simple note taking and writing. It works offline and your browser will keep your data saved (nerd facts: AppCache &amp; localStorage). You can also synchronize your notes to different devices using the open remoteStorage standard. Just check out the widget in the top right to get started.
+
+And Litewrite is open source, meaning you can help make it better! If you have any problems or suggestions let us know at http://github.com/litewrite/litewrite/issues
+
+Cool you’re here, hope you like it!
+
+Jorin &amp; Jan-Christoph
+
+
+
+By the way, you can also use shortcuts to work more quickly:
+- Alt + n: new document
+- Alt + j: focus search field
+- Alt + ↑: switch to document above
+- Alt + ↓: switch to document below
+(on Mac use Ctrl instead of Alt)

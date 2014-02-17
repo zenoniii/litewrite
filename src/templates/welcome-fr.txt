@@ -1,0 +1,18 @@
+Salut !
+
+Litewrite est une application minimaliste créé pour prendre des notes et écrire simplement. Elle fonctionne hors-ligne dans votre navigateur et sauvegarde vos données (un peu de technique ? AppCache & localStorage). Vous pouvez également synchroniser vos notes sur vos différents appareils en utilisant le protocole ouvert remoteStorage. Jetez un œil au lien en haut à droite pour paramétrer la synchronisation.
+
+Litewrite est libre, ce qui signifie que vous pouvez participer à son amélioration ! Si vous avez le moindre problème ou des suggestions, dites nous le ici : a
+
+Ravi de vous avoir à bord !
+
+Jorin & Jan-Christoph
+
+
+
+Au fait, vous pouvez utiliser ces raccourcis claviers :
+- Alt + n: nouveau document
+- Alt + j: aller au champ de recherche
+- Alt + ↑: passer au document du dessus
+- Alt + ↓:passer au document du dessous
+(sur Mac, utiliser ctrl au lieu de Alt)
