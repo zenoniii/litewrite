@@ -46,10 +46,11 @@ define(function(require) {
 
       // this way we don't hide the sidebar while search is focusesd
       this.editor
-        .on('typing', this.aside.desktopHide)
+        .on('typing', this.aside.desktopHide);
 
       entries
-        .on('open', this.aside.hide)
+        .on('open', this.editor.desktopFocus)
+        .on('open', this.aside.hide);
 
     },
 
