@@ -10,7 +10,7 @@ require(['litewrite', 'router'], function(Litewrite, Router) {
     .on('ready', startHistory);
 
 
-  new Router({ app: litewrite });
+  new Router({ litewrite: litewrite });
 
 
   function startHistory() {
