@@ -37,7 +37,7 @@ define(function(require) {
         this.docs.fetch().always(this.loadDoc);
       }, this));
 
-      new AppView({ app: this, model: this.doc, collection: this.docs });
+      new AppView({ litewrite: this, model: this.doc, collection: this.docs });
 
       // make remoteStorage globally accessible even if we use amd.
       // this is helpful for debugging

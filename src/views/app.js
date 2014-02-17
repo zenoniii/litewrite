@@ -18,17 +18,17 @@ define(function(require) {
 
       _.bindAll(this, 'toggleSearch');
 
-      this.app = options.app;
+      this.litewrite = options.litewrite;
 
       this.editor = new EditorView({ model: this.model });
-      this.search = new SearchView({ model: this.app.state });
+      this.search = new SearchView({ model: this.litewrite.state });
       this.aside = new AsideView({ model: this.model, collection: this.collection });
-      var entries = new EntriesView({ app: this.app, collection: this.collection });
+      var entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection });
       var share = new ShareView({ model: this.model, collection: this.collection });
       new DateView({ model: this.model });
 
 
-      this.app
+      this.litewrite
         .on('ready', this.editor.render)
         .on('ready', this.editor.desktopFocus)
         .on('ready', this.aside.showOrHide)
@@ -106,12 +106,12 @@ define(function(require) {
 
     previous: function() {
       var doc = this.collection.before(this.model.id);
-      if (doc) this.app.open(doc);
+      if (doc) this.litewrite.open(doc);
     },
 
     next: function() {
       var doc = this.collection.after(this.model.id);
-      if (doc) this.app.open(doc);
+      if (doc) this.litewrite.open(doc);
     }
 
   });

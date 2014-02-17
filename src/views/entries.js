@@ -14,7 +14,7 @@ define(function(require) {
 
       _.bindAll(this, 'filter', 'render', 'update', 'toTop', 'removeItem', 'selectDoc', 'openFirst');
 
-      this.app = options.app;
+      this.litewrite = options.litewrite;
       this.template = _.template(entriesTemplate);
 
       this.collection
@@ -23,10 +23,12 @@ define(function(require) {
         .on('change:lastEdited', this.toTop)
         .on('remove', this.removeItem);
 
-      this.app.doc.on('change:id', this.selectDoc);
+      this.litewrite.doc
+        .on('change:id', this.selectDoc);
 
-      this.app.state.on('change:query', this.render);
-      this.app.state.on('change:query', this.openFirst);
+      this.litewrite.state
+        .on('change:query', this.render)
+        .on('change:query', this.openFirst);
 
     },
 
@@ -50,7 +52,7 @@ define(function(require) {
     // check if it matches state.query
     // TODO: filter should only be run if ther is a query. would be faster.
     filter: function(doc) {
-      var query = this.app.state.get('query');
+      var query = this.litewrite.state.get('query');
       if (!query) return true;
       var reg = new RegExp(utils.escapeRegExp(query), 'i');
       var match = reg.test( doc.get('title') );
@@ -90,12 +92,12 @@ define(function(require) {
       if (this.$selected) {
         this.$selected.removeClass('selected');
       }
-      this.$selected = this.find( this.app.doc.id )
+      this.$selected = this.find( this.litewrite.doc.id )
         .addClass('selected');
     },
 
     selectedFirst: function () {
-      return this.$selected.attr('data-id') == this.app.docs.first().id;
+      return this.$selected.attr('data-id') == this.collection.first().id;
     },
 
     // event handler to open a document
@@ -103,13 +105,13 @@ define(function(require) {
       e.preventDefault();
 
       var id = this.$(e.currentTarget).attr('data-id');
-      this.app.open(id);
+      this.litewrite.open(id);
       this.trigger('open');
     },
 
     openFirst: function() {
       var id = this.$('.item').attr('data-id');
-      this.app.open(id);
+      this.litewrite.open(id);
     }
 
   });
