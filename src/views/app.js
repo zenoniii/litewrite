@@ -44,6 +44,8 @@ define(function(require) {
         .on('blur', this.editor.desktopFocus)
         .on('blur', this.aside.desktopHide);
 
+      this.editor
+        .on('typing', this.aside.desktopHide)
 
       this.entries
         .on('open', this.aside.hide)

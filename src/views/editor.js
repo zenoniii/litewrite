@@ -54,6 +54,7 @@ define(function(require) {
 
     updateOpenDoc: function(e) {
       this.model.set( 'content', this.$el.val() );
+      this.trigger('typing');
     },
 
     // if a cyrillic doc is detected change to cyrillic font

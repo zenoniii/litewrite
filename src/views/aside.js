@@ -17,8 +17,6 @@ define(function(require) {
 
       this.$sidebar = this.$('aside');
 
-      this.model.on('change:content', this.desktopHide);
-
       this.collection
         .on( 'add', this.desktopShow)
         .on( 'remove', this.desktopShow)
