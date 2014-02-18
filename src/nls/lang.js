@@ -29,11 +29,11 @@ define(function(require) {
 
     ru: {
         emptyDoc: 'Пишите …',
-        search: 'Search …',
+        search: 'Искать …',
         footer: 'пишите с легкостью. код открыт',
         share: 'Поделиться',
-        open: 'open',
-        modified: 'modified',
+        open: 'открыть',
+        modified: 'изменен',
         welcome: require('text!templates/welcome-ru.txt')
     },
 
