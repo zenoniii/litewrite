@@ -25,6 +25,8 @@ define(function(require) {
       this.model.on('change:public', this.setLink);
       this.collection.on('sync', this.updatePublic);
 
+      this.setLink();
+
     },
 
     events: {
