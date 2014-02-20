@@ -239,18 +239,20 @@ footer a {
 }
 
 .share {
-  position: absolute;
-  right: 7px;
-  top: 50px;
-  background: #FF00EB;
-  border: none;
-  color: white;
-  border-radius: 2px;
-  font-size: 15px;
+	position: absolute;
+	top: 38px;
+	right: 0;
+	color: #000;
+	font-size: 15px;
+	background: url('../img/share.svg') no-repeat 5px center;
+	padding: 14px 6px 14px 28px;
+	border: none;
+	margin: 0;
+	opacity: .5;
 }
 
 .share-hide {
-  display: none;
+	display: none;
 }
 
 
