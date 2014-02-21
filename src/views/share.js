@@ -53,6 +53,7 @@ define(function(require) {
       var link = this.model.get('public');
       if (!link) return this.$button.text(lang.share);
       this.$el.attr('href', this.model.get('public'));
+      this.$button.text(lang.open);
     },
 
     updatePublic: function(doc) {
