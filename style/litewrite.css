@@ -50,7 +50,7 @@ body > .scrollbox {
   outline: none;
   overflow: auto;
   border: none;
-  background-color: transparent;
+  background: transparent;  /* firefox mobile has a gradient otherwise */
   -webkit-overflow-scrolling: touch; /* enable native smooth scrolling on iOS */
   word-wrap: break-word; /* prevent scrolling for long words or links without whitespace */
   -webkit-tap-highlight-color: rgba(0,0,0,0); /* prevent grey flash when clicking */
