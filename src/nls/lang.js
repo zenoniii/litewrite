@@ -19,11 +19,11 @@ define(function(require) {
 
     fr: {
         emptyDoc: 'Écrire …',
-        search: 'Search …',
-        footer: 'write lite, open source',
+        search: 'Rechercher …',
+        footer: 'Ecrivez léger, écrivez libre !',
         share: 'Partagez',
-        open: 'montrer',
-        modified: 'modified',
+        open: 'ouvrir',
+        modified: 'modifier',
         welcome: require('text!templates/welcome-fr.txt')
     },
 
