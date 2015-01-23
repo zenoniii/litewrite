@@ -13,6 +13,7 @@ require.config( {
     autosize: '../lib/jquery.autosize',
     underscore: '../lib/underscore',
     backbone: '../lib/backbone',
+    bluebird: '../lib/bluebird',
     localstorage: '../lib/backbone.localstorage',
     remotestorage: '../lib/remotestorage',
     'remotestorage-documents': '../lib/remotestorage-documents',
