@@ -28,9 +28,10 @@ Jorin & Jan-Christoph
 
 Play with the [development version](http://litewrite.github.com/litewrite), check out [issues](http://github.com/litewrite/litewrite/issues) and dive into the code if you like. Set up your development environment:
 
-1. git clone http://github.com/litewrite/litewrite
+1. git clone https://github.com/litewrite/litewrite.git
+2. cd litewrite
 2. Install [node.js](http://nodejs.org/#download)
-3. Install grunt gobally via (`sudo `)`npm install -g grunt-cli`
+3. Install grunt gobally via (`sudo`) `npm install -g grunt-cli`
 4. Run `npm install` to install the development dependencies
 5. `grunt` to start a web server at [http://localhost:8000](http://localhost:8000)
 
