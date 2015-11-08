@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var rsSync = require('rs-adapter');
-var moment = require('moment');
+var timeAgo = require('../utils').timeAgo;
 
 
 var Doc = Backbone.Model.extend({
@@ -55,7 +55,7 @@ var Doc = Backbone.Model.extend({
   }, 1000),
 
   formatDate: function() {
-    return moment( this.get('lastEdited') ).fromNow();
+    return timeAgo( this.get('lastEdited') );
   }
 
 });

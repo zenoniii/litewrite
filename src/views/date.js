@@ -15,7 +15,8 @@ var EditorView = Backbone.View.extend({
 
   // only re-render when content changed
   render: function() {
-    this.$el.html( lang.modified+' '+this.model.formatDate() );
+    var lastModified = this.model.formatDate();
+    this.$el.html(lastModified ? lang.modified + ' ' + lastModified : '')
     this.refresh();
   },
 
