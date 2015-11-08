@@ -1,0 +1,21 @@
+module.exports = {
+  emptyDoc: 'Écrire …',
+  search:   'Rechercher …',
+  footer:   'Ecrivez léger, écrivez libre !',
+  share:    'Partagez',
+  open:     'ouvrir',
+  modified: 'modifier',
+  welcome:  require('./welcome-fr.txt'),
+  secondAgo:   function ()  { return 'il y a une seconde'      ; },
+  secondsAgo:  function (x) { return 'il y a ' + x + ' secondes' ; },
+  minuteAgo:   function ()  { return 'il y a une minute'       ; },
+  minutesAgo:  function (x) { return 'il y a ' + x + ' minutes'  ; },
+  hourAgo:     function ()  { return 'il y a une heure'       ; },
+  hoursAgo:    function (x) { return 'il y a ' + x + ' heures'  ; },
+  dayAgo:      function ()  { return 'il y a un jour'          ; },
+  daysAgo:     function (x) { return 'il y a ' + x + ' jours'    ; },
+  monthAgo:    function ()  { return 'il y a un mois'        ; },
+  monthsAgo:   function (x) { return 'il y a ' + x + ' mois'  ; },
+  yearAgo:     function ()  { return 'il y a un an'         ; },
+  yearsAgo:    function (x) { return 'il y a ' + x + ' ans'   ; }
+};
