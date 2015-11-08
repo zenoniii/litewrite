@@ -1,7 +1,6 @@
 require('match-media');
 require('window.requestanimationframe');
-var remoteStorage = require('remotestorage');
-window.remoteStorage = remoteStorage;
+require('remotestorage');
 require('remotestorage-documents');
 window.$ = require('jquery');
 window.Backbone = require('backbone');
