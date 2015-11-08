@@ -1,5 +1,5 @@
 # [Litewrite](http://litewrite.net)
-**unobtrusive writing** by [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](http://jorin-vogel.com)
+**Unobtrusive Writing** by [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](http://jorin-vogel.com)
 
 Litewrite was built out of a need to have a simple way of taking notes, having them everywhere, working on any device, regardless if on- or offline.
 
@@ -11,10 +11,10 @@ No current solution provides that. It's quite strange that something as benign a
 
 So we built Litewrite
 
-* simple design: There are lots of other self-titled distraction-free editors which offer music, themes, different typefaces, etc etc. We don't, because we think that's unnecessary. If you want music you can listen to it using your favorite music player, if you want to change the font size you can zoom using your browser, …
-* device compatibility: It’s a web app which works on all devices and operating systems.
-* synced data: Notes are available everywhere, using the open remoteStorage standard. Compatibility with Dropbox, Google Drive, ownCloud, etc.
-* offline: Once loaded, it’s essentially a desktop app. Thanks to AppCache and localStorage, both app and data are fully cached offline and synced whenever online.
+* Simple design: There are lots of other self-titled distraction-free editors which offer music, themes, different typefaces, etc etc. We don't, because we think that's unnecessary. If you want music you can listen to it using your favorite music player, if you want to change the font size you can zoom using your browser, …
+* Device compatibility: It’s a web app which works on all devices and operating systems.
+* Synced data: Notes are available everywhere, using the open remoteStorage standard. Compatibility with Dropbox, Google Drive, ownCloud, etc.
+* Offline: Once loaded, it’s essentially a desktop app. Thanks to AppCache and localStorage, both app and data are fully cached offline and synced whenever online.
 
 Now of course it's far from perfect, but we and lots of others use it day-to-day. And that's also why we made it open source If you experience any problems or have suggestions, please let us know at http://github.com/litewrite/litewrite/issues
 And if you know a little about web development you're welcome to dive into the code at http://github.com/litewrite/litewrite
@@ -26,18 +26,16 @@ Jorin & Jan-Christoph
 
 ## Contribute
 
-Play with the [development version](http://litewrite.github.com/litewrite), check out [issues](http://github.com/litewrite/litewrite/issues) and dive into the code if you like. Set up your development environment:
+Play with the [development version](http://litewrite.github.com/litewrite), check out [issues](http://github.com/litewrite/litewrite/issues) and dive into the code if you like.
 
-1. git clone https://github.com/litewrite/litewrite.git
-2. cd litewrite
-3. Install [node.js](http://nodejs.org/#download)
-4. Install grunt gobally via (`sudo`)` npm install -g grunt-cli`
+Set up your development environment:
+
+1. `git clone https://github.com/litewrite/litewrite.git`
+2. `cd litewrite`
+3. Install [node.js](http://nodejs.org/)
 5. Run `npm install` to install the development dependencies
-6. `grunt` to start a web server at [http://localhost:8000](http://localhost:8000)
-
-### Building the production version
-
-Run `grunt build`. But keep attention because it overwrites the existing files.
+6. `npm start` to start a web server at [http://localhost:8000](http://localhost:8000)
+7. Building the production version with `npm run build`. Check it out in the `dist/` folder.
 
 
 ## Thanks
