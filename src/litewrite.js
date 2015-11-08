@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
+var remoteStorage = require('remotestorage');
 var AppView = require('./views/app');
 var Doc = require('./models/doc');
 var Docs = require('./collections/docs');
@@ -34,9 +35,6 @@ _.extend(Litewrite.prototype, Backbone.Events, {
     }, this));
 
     new AppView({ litewrite: this, model: this.doc, collection: this.docs });
-
-    // make remoteStorage globally accessible even if we use amd.
-    // this is helpful for debugging
 
     remoteStorage.displayWidget('remotestorage-connect');
 

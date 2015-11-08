@@ -1,9 +1,6 @@
+require('es6-promise').polyfill();
 require('match-media');
 require('window.requestanimationframe');
-require('remotestorage');
-require('remotestorage-documents');
-window.$ = require('jquery');
-window.Backbone = require('backbone');
 var Litewrite = require('./litewrite');
 var Router = require('./router');
 

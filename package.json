@@ -22,6 +22,7 @@
     "autosize": "^3.0.13",
     "backbone": "^1.1.1",
     "backbone.localstorage": "^1.1.6",
+    "es6-promise": "^3.0.2",
     "jquery": "^2.1.0",
     "match-media": "^0.2.0",
     "raw-loader": "^0.5.1",
