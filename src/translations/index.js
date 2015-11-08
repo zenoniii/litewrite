@@ -1,11 +1,12 @@
 // set language for momentjs
 var moment = require('moment');
-moment.lang((navigator.language || navigator.browserLanguage).slice(0, 2));
+var lang = (navigator.language || navigator.browserLanguage).slice(0, 2);
+moment.lang(lang);
 
 
-module.exports = {
+var translations = {
 
-  root: {
+  en: {
       emptyDoc: 'Write …',
       search: 'Search …',
       footer: 'write lite, open source',
@@ -46,3 +47,6 @@ module.exports = {
   }
 
 };
+
+
+module.exports = translations[lang] || translations.en;
