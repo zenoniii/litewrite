@@ -15,6 +15,10 @@ if (process.env.NODE_ENV !== 'production') {
   }))
 
   app.use(webpackHotMiddleware(compiler))
+} else {
+  app.get('/litewrite.js', function (req, res) {
+    res.sendFile(__dirname + '/litewrite.js')
+  })
 }
 
 app.get('/', function (req, res) {
