@@ -2,7 +2,8 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 var template = require('../templates/share.html');
 var lang = require('../translations');
-var remoteStorageDocuments = window.remoteStorage.documents;
+var remoteStorage = require('remotestorage');
+var remoteStorageDocuments = require('remotestorage-documents');
 
 
 var ShareView = Backbone.View.extend({

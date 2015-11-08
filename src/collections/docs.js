@@ -4,7 +4,8 @@ var Backbone = require('backbone');
 var Doc = require('../models/doc');
 var rsSync = require('rs-adapter');
 var lang = require('../translations');
-var remoteStorageDocuments = window.remoteStorage.documents;
+var remoteStorage = require('remotestorage');
+var remoteStorageDocuments = require('remotestorage-documents');
 
 var Docs = Backbone.Collection.extend({
 
