@@ -23,17 +23,10 @@ var config = {
   },
   resolve: {
     alias: {
-      backbone: __dirname + '/lib/backbone',
-      underscore: __dirname + '/lib/underscore',
-      jquery: __dirname + '/lib/jquery',
       remotestorage: __dirname + '/lib/remotestorage',
-      autosize: __dirname + '/lib/jquery.autosize',
-      localstorage: __dirname + '/lib/backbone.localstorage',
       'remotestorage-documents': __dirname + '/lib/remotestorage-documents',
       'rs-adapter': __dirname + '/lib/backbone.remoteStorage-documents',
-      snap: __dirname + '/lib/snap',
-      moment: __dirname + '/lib/moment'
-
+      snap: __dirname + '/lib/snap'
     }
   },
   cssnext: {

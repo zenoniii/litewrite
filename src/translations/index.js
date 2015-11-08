@@ -1,7 +1,7 @@
 // set language for momentjs
 var moment = require('moment');
 var lang = (navigator.language || navigator.browserLanguage).slice(0, 2);
-moment.lang(lang);
+moment.locale(lang);
 
 
 var translations = {

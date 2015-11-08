@@ -1,6 +1,5 @@
-require('remotestorage')
-require('../lib/matchMedia');
-require('../lib/requestAnimationFrame');
+require('match-media');
+require('window.requestanimationframe');
 var remoteStorage = require('remotestorage');
 window.remoteStorage = remoteStorage;
 require('remotestorage-documents');

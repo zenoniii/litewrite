@@ -2,7 +2,7 @@
   "name": "litewrite",
   "version": "0.0.1",
   "homepage": "http://litewrite.net",
-  "license": "AGPL",
+  "license": "AGPL-3.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/litewrite/litewrite.git"
@@ -19,9 +19,17 @@
     "express": "^4.13.3"
   },
   "devDependencies": {
+    "autosize": "^3.0.13",
+    "backbone": "^1.1.1",
+    "backbone.localstorage": "^1.1.6",
+    "jquery": "^2.1.0",
+    "match-media": "^0.2.0",
+    "moment": "^2.5.1",
     "raw-loader": "^0.5.1",
+    "underscore": "^1.6.0",
     "webpack": "^1.12.3",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.4.1"
+    "webpack-hot-middleware": "^2.4.1",
+    "window.requestanimationframe": "^1.0.0"
   }
 }

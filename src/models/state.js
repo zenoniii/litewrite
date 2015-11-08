@@ -1,5 +1,5 @@
 var Backbone = require('backbone');
-var Store = require('localstorage');
+var Store = require('backbone.localstorage');
 
 var State = Backbone.Model.extend({
 

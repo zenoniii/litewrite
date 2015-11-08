@@ -3,7 +3,7 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 var utils = require('../utils');
 var lang = require('../translations');
-require('autosize');
+var autosize = require('autosize');
 
 
 var EditorView = Backbone.View.extend({
@@ -18,7 +18,7 @@ var EditorView = Backbone.View.extend({
     this.model.on('change:content', this.handleCyrillic);
     this.model.on('update', this.render);
 
-    this.$el.autosize();
+    autosize(this.$el);
     this.setPlaceholder();
   },
 
