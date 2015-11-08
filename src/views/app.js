@@ -1,122 +1,119 @@
-define(function(require) {
-
-  var Backbone = require('backbone');
-  var EntriesView = require('views/entries');
-  var EditorView = require('views/editor');
-  var DateView = require('views/date');
-  var AsideView = require('views/aside');
-  var SearchView = require('views/search');
-  var ShareView = require('views/share');
-  var utils = require('utils');
-
-
-  var AppView = Backbone.View.extend({
-
-    el: 'body',
-
-    initialize: function(options) {
-
-      _.bindAll(this, 'toggleSearch');
-
-      this.litewrite = options.litewrite;
-
-      this.editor = new EditorView({ model: this.model });
-      this.search = new SearchView({ model: this.litewrite.state });
-      this.aside = new AsideView({ model: this.model, collection: this.collection });
-      this.entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection });
-      var share = new ShareView({ model: this.model, collection: this.collection });
-      new DateView({ model: this.model });
+var Backbone = require('backbone');
+var _ = require('underscore');
+var EntriesView = require('./entries');
+var EditorView = require('./editor');
+var DateView = require('./date');
+var AsideView = require('./aside');
+var SearchView = require('./search');
+var ShareView = require('./share');
+var utils = require('../utils');
 
 
-      this.litewrite
-        .on('ready', this.editor.render)
-        .on('ready', this.editor.desktopFocus)
-        .on('ready', this.aside.showOrHide)
-        .on('connected', share.show)
-        .on('disconnected', share.hide);
+var AppView = Backbone.View.extend({
 
-      this.collection
-        .on('add', this.toggleSearch)
-        .on('remove', this.toggleSearch);
+  el: 'body',
 
-      this.search
-        .on('focus', this.aside.show)
-        .on('blur', this.editor.desktopFocus)
-        .on('blur', this.aside.desktopHide);
+  initialize: function(options) {
 
-      // this way we don't hide the sidebar while search is focusesd
-      this.editor
-        .on('typing', this.aside.desktopHide);
+    _.bindAll(this, 'toggleSearch');
 
-      this.entries
-        .on('open', this.editor.desktopFocus)
-        .on('open', this.aside.hide);
+    this.litewrite = options.litewrite;
 
+    this.editor = new EditorView({ model: this.model });
+    this.search = new SearchView({ model: this.litewrite.state });
+    this.aside = new AsideView({ model: this.model, collection: this.collection });
+    this.entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection });
+    var share = new ShareView({ model: this.model, collection: this.collection });
+    new DateView({ model: this.model });
+
+
+    this.litewrite
+      .on('ready', this.editor.render)
+      .on('ready', this.editor.desktopFocus)
+      .on('ready', this.aside.showOrHide)
+      .on('connected', share.show)
+      .on('disconnected', share.hide);
+
+    this.collection
+      .on('add', this.toggleSearch)
+      .on('remove', this.toggleSearch);
+
+    this.search
+      .on('focus', this.aside.show)
+      .on('blur', this.editor.desktopFocus)
+      .on('blur', this.aside.desktopHide);
+
+    // this way we don't hide the sidebar while search is focusesd
+    this.editor
+      .on('typing', this.aside.desktopHide);
+
+    this.entries
+      .on('open', this.editor.desktopFocus)
+      .on('open', this.aside.hide);
+
+  },
+
+  events: {
+    'click #add': 'newDoc',
+    'touchend #add': 'newDoc',
+    'click #menu-button': 'toggleAside',
+    'touchend #menu-button': 'toggleAside',
+    'keydown': 'handleKey'
+  },
+
+  newDoc: function() {
+    if (utils.isMobile) this.aside.hide();
+    if (! this.model.isEmpty()) this.collection.addNew();
+    this.editor.focus();
+    this.search.clear();
+    return false;
+  },
+
+  toggleAside: function() {
+    this.aside.toggle();
+    return false;
+  },
+
+  toggleSearch: function() {
+    this.aside.hasScrollbar() ? this.search.show() : this.search.hide();
+  },
+
+  // global key handler for shortcuts
+  handleKey: function(e) {
+    if (e.which === 9) return e.preventDefault(); // prevent tabkey
+    if (! e[utils.modKey.name] ) return;
+    this.aside.show();
+    var shortcut = this.shortcuts[e.which];
+    if (shortcut) return shortcut.call(this, e);
+  },
+
+  shortcuts: {
+    78: function n() {
+      this.newDoc();
     },
-
-    events: {
-      'click #add': 'newDoc',
-      'touchend #add': 'newDoc',
-      'click #menu-button': 'toggleAside',
-      'touchend #menu-button': 'toggleAside',
-      'keydown': 'handleKey'
-    },
-
-    newDoc: function() {
-      if (utils.isMobile) this.aside.hide();
-      if (! this.model.isEmpty()) this.collection.addNew();
-      this.editor.focus();
-      this.search.clear();
+    38: function up() {
+      this.previous();
       return false;
     },
-
-    toggleAside: function() {
-      this.aside.toggle();
+    40: function down() {
+      this.next();
       return false;
     },
-
-    toggleSearch: function() {
-      this.aside.hasScrollbar() ? this.search.show() : this.search.hide();
-    },
-
-    // global key handler for shortcuts
-    handleKey: function(e) {
-      if (e.which === 9) return e.preventDefault(); // prevent tabkey
-      if (! e[utils.modKey.name] ) return;
-      this.aside.show();
-      var shortcut = this.shortcuts[e.which];
-      if (shortcut) return shortcut.call(this, e);
-    },
-
-    shortcuts: {
-      78: function n() {
-        this.newDoc();
-      },
-      38: function up() {
-        this.previous();
-        return false;
-      },
-      40: function down() {
-        this.next();
-        return false;
-      },
-      74: function j() {
-        this.search.focus();
-      }
-    },
-
-    previous: function() {
-      var id = this.entries.previous(this.model.id);
-      if (id) this.litewrite.open(id);
-    },
-
-    next: function() {
-      var id = this.entries.next(this.model.id);
-      if (id) this.litewrite.open(id);
+    74: function j() {
+      this.search.focus();
     }
+  },
 
-  });
+  previous: function() {
+    var id = this.entries.previous(this.model.id);
+    if (id) this.litewrite.open(id);
+  },
 
+  next: function() {
+    var id = this.entries.next(this.model.id);
+    if (id) this.litewrite.open(id);
+  }
 
-  return AppView;
 });
+
+module.exports = AppView;

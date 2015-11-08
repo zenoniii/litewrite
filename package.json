@@ -2,17 +2,26 @@
   "name": "litewrite",
   "version": "0.0.1",
   "homepage": "http://litewrite.net",
+  "license": "AGPL",
   "repository": {
     "type": "git",
     "url": "git://github.com/litewrite/litewrite.git"
   },
+  "bugs": {
+    "url": "https://github.com/litewrite/litewrite/issues"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack",
+    "production": "export NODE_ENV=production; npm run build && npm start"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-requirejs": "~0.4.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-connect": "~0.2.0",
-    "grunt-contrib-watch": "~0.4.4",
-    "connect": "~2.7.11",
-    "connect-livereload": "~0.2.0"
+    "raw-loader": "^0.5.1",
+    "webpack": "^1.12.3",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.4.1"
   }
 }

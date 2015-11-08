@@ -1,109 +1,102 @@
-define(function(require) {
+var $ = require('jquery');
+var _ = require('underscore');
+var Backbone = require('backbone');
+var Doc = require('../models/doc');
+var rsSync = require('rs-adapter');
+var lang = require('../translations');
+var remoteStorageDocuments = window.remoteStorage.documents;
 
-  var $ = require('jquery');
-  var _ = require('underscore');
-  var Backbone = require('backbone');
-  var Doc = require('models/doc');
-  var remoteStorage = require('remotestorage');
-  var remoteStorageDocuments = require('remotestorage-documents');
-  var rsSync = require('rs-adapter');
-  var lang = require('i18n!nls/lang');
+var Docs = Backbone.Collection.extend({
 
+  model: Doc,
 
+  sync: rsSync,
 
-  var Docs = Backbone.Collection.extend({
+  initialize: function(models, options) {
 
-    model: Doc,
+    _.bindAll(this, 'sort', 'save', 'welcome', 'rsChange');
 
-    sync: rsSync,
+    this
+      .on('change:lastEdited', this.sort)
+      .on('change:lastEdited', this.save)
 
-    initialize: function(models, options) {
+    this.once('sync', this.welcome);
 
-      _.bindAll(this, 'sort', 'save', 'welcome', 'rsChange');
+    this.initRemotestorage();
 
-      this
-        .on('change:lastEdited', this.sort)
-        .on('change:lastEdited', this.save)
+  },
 
-      this.once('sync', this.welcome);
+  addNew: _.throttle(function(options) {
+    return this.add( _.defaults(options || {}, {
+      id: this.remote.uuid(),
+      lastEdited: Date.now()
+    }) );
+  }, 1000, { leading: true }),
 
-      this.initRemotestorage();
+  // Sort by 'lastEdited'
+  comparator: function(first, second) {
+    return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
+  },
 
-    },
+  save: function(doc) {
+    doc.throttledSave();
+  },
 
-    addNew: _.throttle(function(options) {
-      return this.add( _.defaults(options || {}, {
-        id: this.remote.uuid(),
-        lastEdited: Date.now()
-      }) );
-    }, 1000, { leading: true }),
+  welcome: function () {
+    if (this.isEmpty()) this.addNew({ content: lang.welcome });
+  },
 
-    // Sort by 'lastEdited'
-    comparator: function(first, second) {
-      return first.get('lastEdited') > second.get('lastEdited') ? -1 : 1 ;
-    },
+  remote: null,
 
-    save: function(doc) {
-      doc.throttledSave();
-    },
+  initRemotestorage: function() {
+    var docs = this;
 
-    welcome: function () {
-      if (this.isEmpty()) this.addNew({ content: lang.welcome });
-    },
+    var origHash = document.location.hash;
 
-    remote: null,
+    remoteStorage.on('disconnected', function() {
+      docs.reset();
+      docs.welcome();
+    });
 
-    initRemotestorage: function() {
-      var docs = this;
+    remoteStorage.access.claim('documents', 'rw');
 
-      var origHash = document.location.hash;
+    docs.remote = remoteStorageDocuments.privateList('notes');
+    docs.remote.on('change', docs.rsChange);
 
-      remoteStorage.on('disconnected', function() {
-        docs.reset();
-        docs.welcome();
-      });
+    setTimeout(function() {
+      var md = origHash.match(/access_token=([^&]+)/);
+      if ( md && (! remoteStorage.getBearerToken()) ) {
+        // backbone stole our access token
+        remoteStorage.setBearerToken(md[1]);
+      }
+    }, 0);
+  },
 
-      remoteStorage.access.claim('documents', 'rw');
+  events: [],
 
-      docs.remote = remoteStorageDocuments.privateList('notes');
-      docs.remote.on('change', docs.rsChange);
+  rsChange: function (event) {
+    this.events.push(event);
+    this.handleEvents();
+  },
 
-      setTimeout(function() {
-        var md = origHash.match(/access_token=([^&]+)/);
-        if ( md && (! remoteStorage.getBearerToken()) ) {
-          // backbone stole our access token
-          remoteStorage.setBearerToken(md[1]);
-        }
-      }, 0);
-    },
-
-    events: [],
-
-    rsChange: function (event) {
-      this.events.push(event);
-      this.handleEvents();
-    },
-
-    handleEvents: _.debounce(function() {
-      _.each(this.events, function(event) {
-        if (event.origin === 'window') return;
-        // remove
-        if (event.oldValue && !event.newValue) return this.remove(event.oldValue);
-        var existingDoc = this.get(event.newValue.id);
-        // add
-        if (!existingDoc) return this.add(event.newValue);
-        var isLatest = event.newValue.lastEdited > existingDoc.get('lastEdited');
-        // update
-        if (!isLatest) return;
-        this.set(event.newValue, { remove: false });
-        this.trigger('remoteUpdate', event.newValue.id);
-      }, this);
-      this.events = [];
-    }, 400)
-
-  });
-
-
-  return Docs;
+  handleEvents: _.debounce(function() {
+    _.each(this.events, function(event) {
+      if (event.origin === 'window') return;
+      // remove
+      if (event.oldValue && !event.newValue) return this.remove(event.oldValue);
+      var existingDoc = this.get(event.newValue.id);
+      // add
+      if (!existingDoc) return this.add(event.newValue);
+      var isLatest = event.newValue.lastEdited > existingDoc.get('lastEdited');
+      // update
+      if (!isLatest) return;
+      this.set(event.newValue, { remove: false });
+      this.trigger('remoteUpdate', event.newValue.id);
+    }, this);
+    this.events = [];
+  }, 400)
 
 });
+
+
+module.exports = Docs;

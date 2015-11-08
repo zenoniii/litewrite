@@ -1,33 +1,30 @@
-define(function(require) {
-
-  var Backbone = require('backbone');
+var Backbone = require('backbone');
 
 
-  var Router = Backbone.Router.extend({
+var Router = Backbone.Router.extend({
 
-    initialize: function (options) {
-      this.litewrite = options.litewrite;
-    },
+  initialize: function (options) {
+    this.litewrite = options.litewrite;
+  },
 
-    routes: {
-      // use ! for urls to not conflict with remotestorage's #access_token parameter
-      '!:url': 'open',
-      '*404': 'openFirst'
-    },
+  routes: {
+    // use ! for urls to not conflict with remotestorage's #access_token parameter
+    '!:url': 'open',
+    '*404': 'openFirst'
+  },
 
-    openFirst: function() {
-      this.litewrite.open();
-    },
+  openFirst: function() {
+    this.litewrite.open();
+  },
 
-    open: function(url) {
-      var match = url.match(/^\((.+?)\)/);
-      if (!match) return this.openFirst();
-      var id = match[1];
-      if (!id) return this.openFirst();
-      this.litewrite.open(id);
-    }
+  open: function(url) {
+    var match = url.match(/^\((.+?)\)/);
+    if (!match) return this.openFirst();
+    var id = match[1];
+    if (!id) return this.openFirst();
+    this.litewrite.open(id);
+  }
 
-  });
-
-  return Router;
 });
+
+module.exports = Router;
