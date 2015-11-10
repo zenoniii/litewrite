@@ -1,8 +1,3 @@
-function plural(word, num) {
-  var forms = word.split('_');
-  return num % 10 === 1 && num % 100 !== 11 ? forms[0] : (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? forms[1] : forms[2]);
-}
-    
 module.exports = {
   emptyDoc: 'Пишите …',
   search:   'Искать …',
@@ -11,19 +6,33 @@ module.exports = {
   open:     'открыть',
   modified: 'изменен',
   welcome:  require('./welcome-ru.txt'),
-  timeAgo: function relativeTimeWithPlural(number, key) {
-      var format = {
-          'mm': 'минуту_минуты_минут',
-          'hh': 'час_часа_часов',
-          'dd': 'день_дня_дней',
-          'MM': 'месяц_месяца_месяцев',
-          'yy': 'год_года_лет'
-      };
-      if (key === 'm') {
-          return 'минуту';
-      }
-      else {
-          return number + ' ' + plural(format[key], +number);
-      }
+  secondsAgo: function (x) {
+    if (x === 1) return 'a second ago';
+    return x + ' seconds ago';
+  },
+  minutesAgo: function (x) {
+    if (x === 1) return 'минуту';
+    return timeAgoWithPlural('минуту_минуты_минут' , x);
+  },
+  hoursAgo: function (x) {
+    return timeAgoWithPlural('час_часа_часов', x);
+  },
+  daysAgo: function (x) {
+    return timeAgoWithPlural('день_дня_дней', x);
+  },
+  monthsAgo: function (x) {
+    return timeAgoWithPlural('месяц_месяца_месяцев', x);
+  },
+  yearsAgo: function (x) {
+    return timeAgoWithPlural('год_года_лет', x);
   }
 };
+
+function timeAgoWithPlural(word, number) {
+  return number + ' ' + plural(word, +number);
+}
+
+function plural(word, num) {
+  var forms = word.split('_');
+  return num % 10 === 1 && num % 100 !== 11 ? forms[0] : (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? forms[1] : forms[2]);
+}

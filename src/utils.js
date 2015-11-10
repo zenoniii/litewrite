@@ -33,13 +33,13 @@ var month = 30.4 * day;
 var year  = 365 * day;
 
 var quantifiers = [
-  { name: 'year'    , time: year  },
-  { name: 'month'   , time: month },
-  { name: 'week'    , time: week  },
-  { name: 'day'     , time: day   },
-  { name: 'hour'    , time: hour  },
-  { name: 'minute'  , time: 60    },
-  { name: 'second'  , time: 1     }
+  { name: 'yearsAgo'    , time: year  },
+  { name: 'monthsAgo'   , time: month },
+  { name: 'weeksAgo'    , time: week  },
+  { name: 'daysAgo'     , time: day   },
+  { name: 'hoursAgo'    , time: hour  },
+  { name: 'minutesAgo'  , time: 60    },
+  { name: 'secondsAgo'  , time: 1     }
 ];
 
 utils.timeAgo = function(date) {
@@ -50,11 +50,9 @@ utils.timeAgo = function(date) {
   });
 
   if (!quantifier) return;
-
+  
   var count = Math.round(diff / quantifier.time);
-  var name = quantifier.name + (count > 1 ? 's' : '') + 'Ago';
-
-  return translations[name](count);
+  return translations[quantifier.name](count);
 };
 
 module.exports = utils;

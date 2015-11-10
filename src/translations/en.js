@@ -6,16 +6,28 @@ module.exports = {
   open:     'open',
   modified: 'modified',
   welcome:  require('./welcome.txt'),
-  secondAgo:   function ()  { return 'a second ago'     ; },
-  secondsAgo:  function (x) { return x + ' seconds ago' ; },
-  minuteAgo:   function ()  { return 'a minute ago'     ; },
-  minutesAgo:  function (x) { return x + ' minutes ago' ; },
-  hourAgo:     function ()  { return 'an hour ago'      ; },
-  hoursAgo:    function (x) { return x + ' hours ago'   ; },
-  dayAgo:      function ()  { return 'a day ago'        ; },
-  daysAgo:     function (x) { return x + ' days ago'    ; },
-  monthAgo:    function ()  { return 'a month ago'      ; },
-  monthsAgo:   function (x) { return x + ' months ago'  ; },
-  yearAgo:     function ()  { return 'a year ago'       ; },
-  yearsAgo:    function (x) { return x + ' years ago'   ; }
-  };
+  secondsAgo: function (x) {
+    if (x === 1) return 'a second ago';
+    return x + ' seconds ago';
+  },
+  minutesAgo: function (x) {
+    if (x === 1) return 'a minute ago';
+    return x + ' minutes ago';
+  },
+  hoursAgo: function (x) {
+    if (x === 1) return 'an hour ago';
+    return x + ' hours ago';
+  },
+  daysAgo: function (x) {
+    if (x === 1) return 'a day ago';
+    return x + ' days ago';
+  },
+  monthsAgo: function (x) {
+    if (x === 1) return 'a month ago';
+    return x + ' months ago';
+  },
+  yearsAgo: function (x) {
+    if (x === 1) return 'a year ago';
+    return x + ' years ago';
+  }
+};
