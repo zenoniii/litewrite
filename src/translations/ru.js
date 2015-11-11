@@ -1,17 +1,16 @@
 module.exports = {
   emptyDoc: 'Пишите …',
   search:   'Искать …',
-  footer:   'пишите с легкостью. код открыт',
+  footer:   'Пишите с легкостью! Исходный код открыт.',
   share:    'Поделиться',
   open:     'открыть',
-  modified: 'изменен',
+  modified: 'изменён',
   welcome:  require('./welcome-ru.txt'),
   secondsAgo: function (x) {
     if (x === 1) return 'a second ago';
-    return x + ' seconds ago';
+    return timeAgoWithPlural('секунду_секунды_секунд' , x);
   },
   minutesAgo: function (x) {
-    if (x === 1) return 'минуту';
     return timeAgoWithPlural('минуту_минуты_минут' , x);
   },
   hoursAgo: function (x) {
@@ -29,7 +28,8 @@ module.exports = {
 };
 
 function timeAgoWithPlural(word, number) {
-  return number + ' ' + plural(word, +number);
+  var num = number > 1 ? (number + ' ') : '';
+  return num + plural(word, +number) + ' назад';
 }
 
 function plural(word, num) {
