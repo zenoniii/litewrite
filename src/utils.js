@@ -1,4 +1,6 @@
 var $ = require('jquery');
+var _ = require('underscore');
+var translations = require('./translations');
 
 var utils = {};
 
@@ -23,6 +25,34 @@ utils.escapeRegExp = function(str) { return str.replace(/[-\/\\^$*+?.()|[\]{}]/g
 
 utils.modKey = utils.isMac ? { name: 'ctrlKey', code: 17 } : { name: 'altKey', code: 18 };
 
+// in seconds
+var hour  = 3600;
+var day   = 24 * hour;
+var week  = 7 * day;
+var month = 30.4 * day;
+var year  = 365 * day;
 
+var quantifiers = [
+  { name: 'yearsAgo'    , time: year  },
+  { name: 'monthsAgo'   , time: month },
+  { name: 'weeksAgo'    , time: week  },
+  { name: 'daysAgo'     , time: day   },
+  { name: 'hoursAgo'    , time: hour  },
+  { name: 'minutesAgo'  , time: 60    },
+  { name: 'secondsAgo'  , time: 1     }
+];
+
+utils.timeAgo = function(date) {
+  var diff = (Date.now() - date) / 1000; // in seconds
+
+  var quantifier = _.find(quantifiers, function(q) {
+    return diff >= q.time;
+  });
+
+  if (!quantifier) return;
+  
+  var count = Math.round(diff / quantifier.time);
+  return translations[quantifier.name](count);
+};
 
 module.exports = utils;

@@ -25,7 +25,6 @@
     "es6-promise": "^3.0.2",
     "jquery": "^2.1.0",
     "match-media": "^0.2.0",
-    "moment": "^2.5.1",
     "raw-loader": "^0.5.1",
     "underscore": "^1.6.0",
     "webpack": "^1.12.3",
