@@ -129,6 +129,8 @@ aside:hover, aside:focus, .show-aside aside {
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
+  // Default search style in Safari conflicts with our styling
+  -webkit-appearance: textfield;
 }
 
 #search:hover, #search:focus { opacity: 1; }
