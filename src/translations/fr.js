@@ -22,6 +22,10 @@ module.exports = {
     if (x === 1) return 'il y a un jour';
     return 'il y a ' + x + ' jours';
   },
+  weeksAgo: function (x) {
+    if (x === 1) return 'il y a une semaine';
+    return 'il y a ' + x + ' semaines';
+  },
   monthsAgo: function (x) {
     if (x === 1) return 'il y a un mois';
     return 'il y a ' + x + ' mois';
