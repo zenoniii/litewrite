@@ -22,6 +22,10 @@ module.exports = {
     if (x === 1) return 'a day ago';
     return x + ' days ago';
   },
+  weeksAgo: function (x) {
+    if (x === 1) return 'a week ago';
+    return x + ' weeks ago';
+  },
   monthsAgo: function (x) {
     if (x === 1) return 'a month ago';
     return x + ' months ago';

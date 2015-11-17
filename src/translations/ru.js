@@ -19,6 +19,9 @@ module.exports = {
   daysAgo: function (x) {
     return timeAgoWithPlural('день_дня_дней', x);
   },
+  weeksAgo: function (x) {
+    return timeAgoWithPlural('неделю_недели_недель', x);
+  },
   monthsAgo: function (x) {
     return timeAgoWithPlural('месяц_месяца_месяцев', x);
   },
