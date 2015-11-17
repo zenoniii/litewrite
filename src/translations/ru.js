@@ -20,9 +20,7 @@ module.exports = {
     return timeAgoWithPlural('день_дня_дней', x);
   },
   weeksAgo: function (x) {
-    // TODO
-    if (x === 1) return 'a week ago';
-    return x + ' weeks ago';
+    return timeAgoWithPlural('неделю_недели_недель', x);
   },
   monthsAgo: function (x) {
     return timeAgoWithPlural('месяц_месяца_месяцев', x);
