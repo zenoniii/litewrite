@@ -80,10 +80,15 @@ var AppView = Backbone.View.extend({
 
   // global key handler for shortcuts
   handleKey: function(e) {
-    if (e.which === 9) return e.preventDefault(); // prevent tabkey
+    var tabKey = e.keyCode === 9
+
+    var sKey = e.keyCode === 83;
+    var saveShortcut = sKey && e[utils.metaKey];
+
+    if (tabKey || saveShortcut) return e.preventDefault();
     if (! e[utils.modKey.name] ) return;
     this.aside.show();
-    var shortcut = this.shortcuts[e.which];
+    var shortcut = this.shortcuts[e.keyCode];
     if (shortcut) return shortcut.call(this, e);
   },
 
