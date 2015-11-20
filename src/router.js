@@ -1,10 +1,8 @@
-var Backbone = require('backbone');
-
+var Backbone = require('backbone')
 
 var Router = Backbone.Router.extend({
-
   initialize: function (options) {
-    this.litewrite = options.litewrite;
+    this.litewrite = options.litewrite
   },
 
   routes: {
@@ -13,18 +11,18 @@ var Router = Backbone.Router.extend({
     '*404': 'openFirst'
   },
 
-  openFirst: function() {
-    this.litewrite.open();
+  openFirst: function () {
+    this.litewrite.open()
   },
 
-  open: function(url) {
-    var match = url.match(/^\((.+?)\)/);
-    if (!match) return this.openFirst();
-    var id = match[1];
-    if (!id) return this.openFirst();
-    this.litewrite.open(id);
+  open: function (url) {
+    var match = url.match(/^\((.+?)\)/)
+    if (!match) return this.openFirst()
+    var id = match[1]
+    if (!id) return this.openFirst()
+    this.litewrite.open(id)
   }
 
-});
+})
 
-module.exports = Router;
+module.exports = Router

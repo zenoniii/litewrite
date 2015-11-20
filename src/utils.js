@@ -1,59 +1,57 @@
-var $ = require('jquery');
-var _ = require('underscore');
-var translations = require('./translations');
+var $ = require('jquery')
+var _ = require('underscore')
+var translations = require('./translations')
 
-var utils = {};
+var utils = {}
 
-
-utils.isMac = /Mac/.test(navigator.platform);
-
+utils.isMac = /Mac/.test(navigator.platform)
 
 function setModes () {
   // keep in sync with value in litewrite.css
-  utils.isMobile = matchMedia('(max-width:1024px)').matches;
-  utils.isDesktop = !utils.isMobile;
+  utils.isMobile = window.matchMedia('(max-width:1024px)').matches
+  utils.isDesktop = !utils.isMobile
 }
 
-$(window).on('resize', setModes);
-setModes();
-
+$(window).on('resize', setModes)
+setModes()
 
 // for more info:
 // http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
-utils.escapeRegExp = function(str) { return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); };
+utils.escapeRegExp = function (str) {
+  return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+}
 
-
-utils.modKey = utils.isMac ? { name: 'ctrlKey', code: 17 } : { name: 'altKey', code: 18 };
-utils.metaKey = utils.isMac ? 'metaKey' : 'ctrlKey';
+utils.modKey = utils.isMac ? { name: 'ctrlKey', code: 17 } : { name: 'altKey', code: 18 }
+utils.metaKey = utils.isMac ? 'metaKey' : 'ctrlKey'
 
 // in seconds
-var hour  = 3600;
-var day   = 24 * hour;
-var week  = 7 * day;
-var month = 30.4 * day;
-var year  = 365 * day;
+var hour = 3600
+var day = 24 * hour
+var week = 7 * day
+var month = 30.4 * day
+var year = 365 * day
 
 var quantifiers = [
-  { name: 'yearsAgo'    , time: year  },
-  { name: 'monthsAgo'   , time: month },
-  { name: 'weeksAgo'    , time: week  },
-  { name: 'daysAgo'     , time: day   },
-  { name: 'hoursAgo'    , time: hour  },
-  { name: 'minutesAgo'  , time: 60    },
-  { name: 'secondsAgo'  , time: 1     }
-];
+  { name: 'yearsAgo', time: year },
+  { name: 'monthsAgo', time: month },
+  { name: 'weeksAgo', time: week },
+  { name: 'daysAgo', time: day },
+  { name: 'hoursAgo', time: hour },
+  { name: 'minutesAgo', time: 60 },
+  { name: 'secondsAgo', time: 1 }
+]
 
-utils.timeAgo = function(date) {
-  var diff = (Date.now() - date) / 1000; // in seconds
+utils.timeAgo = function (date) {
+  var diff = (Date.now() - date) / 1000 // in seconds
 
-  var quantifier = _.find(quantifiers, function(q) {
-    return diff >= q.time;
-  });
+  var quantifier = _.find(quantifiers, function (q) {
+    return diff >= q.time
+  })
 
-  if (!quantifier) return;
+  if (!quantifier) return
 
-  var count = Math.round(diff / quantifier.time);
-  return translations[quantifier.name](count);
-};
+  var count = Math.round(diff / quantifier.time)
+  return translations[quantifier.name](count)
+}
 
-module.exports = utils;
+module.exports = utils

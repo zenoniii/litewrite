@@ -11,7 +11,7 @@ var config = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.IgnorePlugin(new RegExp("^(xmlhttprequest|./lang)$"))
+    new webpack.IgnorePlugin(new RegExp('^(xmlhttprequest|./lang)$'))
   ],
   module: {
     loaders: [
