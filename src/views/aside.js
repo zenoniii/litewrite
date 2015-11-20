@@ -1,97 +1,89 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var Backbone = require('backbone');
-var utils = require('../utils');
-var Snap = require('snap');
-var lang = require('../translations');
-
+var _ = require('underscore')
+var $ = require('jquery')
+var Backbone = require('backbone')
+var utils = require('../utils')
+var Snap = require('snap')
+var lang = require('../translations')
 
 var AsideView = Backbone.View.extend({
-
   el: 'body',
 
-  initialize: function() {
+  initialize: function () {
+    _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide', 'handleSnapper')
 
-    _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'showOrHide', 'handleSnapper');
-
-    this.$sidebar = this.$('aside');
+    this.$sidebar = this.$('aside')
 
     this.collection
-      .on( 'add', this.desktopShow)
-      .on( 'remove', this.desktopShow)
-      .on( 'change:title', this.desktopShow);
+      .on('add', this.desktopShow)
+      .on('remove', this.desktopShow)
+      .on('change:title', this.desktopShow)
 
-    this.initSnapper();
-    this.setFooter();
-
+    this.initSnapper()
+    this.setFooter()
   },
 
-  initSnapper: function() {
-
+  initSnapper: function () {
     this.snapper = new Snap({
       element: this.$('#snap-content')[0],
       disable: 'right',
       maxPosition: 265
-    });
+    })
 
-    this.handleSnapper();
-    $(window).on('resize', this.handleSnapper);
-
+    this.handleSnapper()
+    $(window).on('resize', this.handleSnapper)
   },
 
-  show: function() {
-    if (utils.isDesktop) return this.$el.addClass('show-aside');
-    this.snapper.open('left');
+  show: function () {
+    if (utils.isDesktop) return this.$el.addClass('show-aside')
+    this.snapper.open('left')
   },
 
-  hide: function() {
-    if (utils.isMobile) return this.snapper.close();
+  hide: function () {
+    if (utils.isMobile) return this.snapper.close()
     // hide sidebar when 3 or more docs and the open doc is not empty
-    if ( this.collection.length > 2 && !this.model.isEmpty() ) {
-      this.$el.removeClass('show-aside');
+    if (this.collection.length > 2 && !this.model.isEmpty()) {
+      this.$el.removeClass('show-aside')
     }
   },
 
-  toggle: function() {
-    if (utils.isDesktop) return this.$el.toggleClass('show-aside');
-    if ( this.snapper.state().state === 'closed' ) return this.show();
-    this.hide();
+  toggle: function () {
+    if (utils.isDesktop) return this.$el.toggleClass('show-aside')
+    if (this.snapper.state().state === 'closed') return this.show()
+    this.hide()
   },
 
-  desktopShow: function() {
-    if (utils.isDesktop) this.show();
+  desktopShow: function () {
+    if (utils.isDesktop) this.show()
   },
 
-  desktopHide: _.debounce(function() {
-    if (utils.isDesktop) this.hide();
+  desktopHide: _.debounce(function () {
+    if (utils.isDesktop) this.hide()
   }, 3000),
 
   // only needed on initialization.
   // show or hide aside depending on how many docs you have
-  showOrHide: function() {
+  showOrHide: function () {
     // if only one doc or open doc empty return
-    if ( this.collection.length < 2 || this.model.isEmpty() ) return;
-    this.show();
-    if (utils.isDesktop) _.delay(this.hide, 3000);
+    if (this.collection.length < 2 || this.model.isEmpty()) return
+    this.show()
+    if (utils.isDesktop) _.delay(this.hide, 3000)
   },
 
-  handleSnapper: _.debounce(function() {
-    if (utils.isMobile) return this.snapper.enable();
-    this.snapper.close();
-    this.snapper.disable();
+  handleSnapper: _.debounce(function () {
+    if (utils.isMobile) return this.snapper.enable()
+    this.snapper.close()
+    this.snapper.disable()
   }, 700),
 
-  hasScrollbar: function() {
+  hasScrollbar: function () {
     // thanks to http://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
-    return this.$sidebar.get(0).scrollHeight > this.$sidebar.height();
+    return this.$sidebar.get(0).scrollHeight > this.$sidebar.height()
   },
 
-  setFooter: function() {
-    this.$sidebar.find('footer a').text(lang.footer);
+  setFooter: function () {
+    this.$sidebar.find('footer a').text(lang.footer)
   }
 
+})
 
-});
-
-
-module.exports = AsideView;
+module.exports = AsideView

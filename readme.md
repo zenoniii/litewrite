@@ -35,7 +35,8 @@ Set up your development environment:
 3. Install [node.js](http://nodejs.org/)
 5. Run `npm install` to install the development dependencies
 6. `npm start` to start a web server at [http://localhost:8000](http://localhost:8000)
-7. Building the production version with `npm run build`. Check it out in the `dist/` folder.
+7. Check your code style with `npm run lint`
+8. Building the production version with `npm run build` and check it out in the `dist/` folder
 
 
 ## Thanks

@@ -1,14 +1,12 @@
-var Backbone = require('backbone');
-var lang = require('../translations');
-
+var Backbone = require('backbone')
+var lang = require('../translations')
 
 var SearchView = Backbone.View.extend({
-
   el: '#search',
 
   initialize: function () {
-    this.render();
-    this.setPlaceholder();
+    this.render()
+    this.setPlaceholder()
   },
 
   events: {
@@ -18,50 +16,49 @@ var SearchView = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.val( this.model.get('query') );
+    this.$el.val(this.model.get('query'))
   },
 
-  search: function() {
-    var query = this.$el.val();
-    this.model.save( 'query', query );
-    this.trigger('search');
+  search: function () {
+    var query = this.$el.val()
+    this.model.save('query', query)
+    this.trigger('search')
   },
 
-  handleKey: function(e) {
+  handleKey: function (e) {
     if (e.which === 13) { // ENTER
-      e.preventDefault();
-      return this.trigger('blur');
+      e.preventDefault()
+      return this.trigger('blur')
     }
-    this.search();
+    this.search()
   },
 
-  focus: function() {
-    if (!this.$el.hasClass('hide')) this.$el.focus();
+  focus: function () {
+    if (!this.$el.hasClass('hide')) this.$el.focus()
   },
 
-  triggerFocus: function() {
-    this.trigger('focus');
+  triggerFocus: function () {
+    this.trigger('focus')
   },
 
-  show: function() {
-    this.$el.removeClass('hide');
+  show: function () {
+    this.$el.removeClass('hide')
   },
 
-  hide: function() {
-    this.$el.addClass('hide');
-    this.clear();
+  hide: function () {
+    this.$el.addClass('hide')
+    this.clear()
   },
 
-  clear: function() {
-    this.model.save('query', '');
-    this.render();
+  clear: function () {
+    this.model.save('query', '')
+    this.render()
   },
 
-  setPlaceholder: function() {
-    this.$el.attr('placeholder', lang.search);
+  setPlaceholder: function () {
+    this.$el.attr('placeholder', lang.search)
   }
 
-});
+})
 
-
-module.exports = SearchView;
+module.exports = SearchView

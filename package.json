@@ -12,8 +12,9 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "webpack && mkdir -p dist && cp -R img index.html indie.json license.txt litewrite.js readme.md style dist",
-    "production": "export NODE_ENV=production; npm run build && npm start"
+    "build": "NODE_ENV=production webpack && mkdir -p dist && cp -R img index.html indie.json license.txt litewrite.js readme.md style dist",
+    "lint": "standard",
+    "production": "npm run build && NODE_ENV=production npm start"
   },
   "dependencies": {
     "express": "^4.13.3"
@@ -26,10 +27,17 @@
     "jquery": "^2.1.0",
     "match-media": "^0.2.0",
     "raw-loader": "^0.5.1",
+    "standard": "^5.4.1",
     "underscore": "^1.6.0",
     "webpack": "^1.12.3",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.4.1",
     "window.requestanimationframe": "^1.0.0"
+  },
+  "standard": {
+    "ignore": [
+      "lib",
+      "litewrite.js"
+    ]
   }
 }

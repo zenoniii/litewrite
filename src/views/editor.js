@@ -1,77 +1,72 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var Backbone = require('backbone');
-var utils = require('../utils');
-var lang = require('../translations');
-var autosize = require('autosize');
-
+var _ = require('underscore')
+var Backbone = require('backbone')
+var utils = require('../utils')
+var lang = require('../translations')
+var autosize = require('autosize')
 
 var EditorView = Backbone.View.extend({
-
   el: '#editor',
 
-  initialize: function(options) {
+  initialize: function (options) {
+    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic')
 
-    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic');
+    this.model.on('change:id', this.render)
+    this.model.on('change:content', this.handleCyrillic)
+    this.model.on('update', this.render)
 
-    this.model.on('change:id', this.render);
-    this.model.on('change:content', this.handleCyrillic);
-    this.model.on('update', this.render);
-
-    autosize(this.$el);
-    this.setPlaceholder();
+    autosize(this.$el)
+    this.setPlaceholder()
   },
 
   // only re-render when content changed
-  render: function() {
-    var content = this.model.get('content');
-    if ( content === this.$el.val() ) return;
+  render: function () {
+    var content = this.model.get('content')
+    if (content === this.$el.val()) return
     // strip html tags from documents.
     // this is just for migration from contenteditable to textarea.
     // we can remove this later on.
-    content = content.replace(/<br>/ig,'\n').replace(/<\/br>/ig,'\n').replace(/<div>/ig,'\n').replace(/<[^>]+>/ig,'').replace(/\&amp;/ig,'&');
+    content = content.replace(/<br>/ig, '\n').replace(/<\/br>/ig, '\n').replace(/<div>/ig, '\n').replace(/<[^>]+>/ig, '').replace(/\&amp;/ig, '&')
     this.$el
       .val(content || '')
-      .trigger('autosize:update');
+      .trigger('autosize:update')
   },
 
-  focus: function() {
-    if (utils.isDesktop) return this.$el.focus();
+  focus: function () {
+    if (utils.isDesktop) return this.$el.focus()
     // doesn't seem to work for textarea on iOS at all. maybe it works on other platforms.
-    setTimeout(_.bind(this.$el.focus, this.$el), 500);
+    setTimeout(_.bind(this.$el.focus, this.$el), 500)
   },
 
-  desktopFocus: function() {
-    if (utils.isDesktop) this.focus();
+  desktopFocus: function () {
+    if (utils.isDesktop) this.focus()
   },
 
-  blur: function() {
-    this.$el.blur();
+  blur: function () {
+    this.$el.blur()
   },
 
   events: {
     'keyup': 'updateOpenDoc'
   },
 
-  updateOpenDoc: function(e) {
-    this.model.set( 'content', this.$el.val() );
-    this.trigger('typing');
+  updateOpenDoc: function (e) {
+    this.model.set('content', this.$el.val())
+    this.trigger('typing')
   },
 
   // if a cyrillic doc is detected change to cyrillic font
-  handleCyrillic: function(doc) {
+  handleCyrillic: function (doc) {
     // see http://kourge.net/projects/regexp-unicode-block
-    var isCyrillic = doc.get('content').match('[\u0400-\u04FF\u0500-\u052F]');
-    if (!isCyrillic) return;
-    this.$el.addClass('cyrillic');
-    this.model.off(null, this.handleCyrillic);
+    var isCyrillic = doc.get('content').match('[\u0400-\u04FF\u0500-\u052F]')
+    if (!isCyrillic) return
+    this.$el.addClass('cyrillic')
+    this.model.off(null, this.handleCyrillic)
   },
 
-  setPlaceholder: function() {
-    this.$el.attr('placeholder', lang.emptyDoc);
+  setPlaceholder: function () {
+    this.$el.attr('placeholder', lang.emptyDoc)
   }
 
-});
+})
 
-
-module.exports = EditorView;
+module.exports = EditorView
