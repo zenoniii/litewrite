@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 
 const app = express()
 const port = process.env.PORT || 8000
@@ -17,15 +18,15 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(webpackHotMiddleware(compiler))
 } else {
   app.get('/litewrite.js', function (req, res) {
-    res.sendFile(__dirname + '/litewrite.js')
+    res.sendFile(path.join(__dirname, '../litewrite.js'))
   })
 }
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile(path.join(__dirname, '../index.html'))
 })
-app.use('/img', express.static('img'))
-app.use('/style', express.static('style'))
+app.use('/img', express.static(path.join(__dirname, '../img')))
+app.use('/style', express.static(path.join(__dirname, '../style')))
 
 if (require.main === module) {
   app.listen(port, function (error) {

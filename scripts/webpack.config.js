@@ -1,11 +1,12 @@
-var webpack = require('webpack')
+const webpack = require('webpack')
+const path = require('path')
 
 var config = {
   entry: [
     './src/main'
   ],
   output: {
-    path: __dirname,
+    path: path.join(__dirname, '..'),
     filename: 'litewrite.min.js'
   },
   plugins: [
@@ -23,10 +24,10 @@ var config = {
   },
   resolve: {
     alias: {
-      remotestorage: __dirname + '/lib/remotestorage',
-      'remotestorage-documents': __dirname + '/lib/remotestorage-documents',
-      'rs-adapter': __dirname + '/lib/backbone.remoteStorage-documents',
-      snap: __dirname + '/lib/snap'
+      remotestorage: path.join(__dirname, '../lib/remotestorage'),
+      'remotestorage-documents': path.join(__dirname, '../lib/remotestorage-documents'),
+      'rs-adapter': path.join(__dirname, '../lib/backbone.remoteStorage-documents'),
+      snap: path.join(__dirname, '../lib/snap')
     }
   },
   cssnext: {
