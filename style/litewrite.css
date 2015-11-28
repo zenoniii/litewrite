@@ -241,7 +241,7 @@ footer a {
 	display: none;
 }
 
-.share {
+.sharing {
 	position: absolute;
 	top: 38px;
 	right: 0;
@@ -255,7 +255,21 @@ footer a {
   cursor: pointer;
 }
 
-.share-hide {
+.sharing .link,
+.sharing .unshare {
+	display: none;
+}
+
+.is-shared .link,
+.is-shared .unshare {
+	display: block;
+}
+
+.is-shared .share {
+	display: none;
+}
+
+.hide-sharing {
 	display: none;
 }
 

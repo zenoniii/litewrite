@@ -3,6 +3,7 @@ module.exports = {
   search: 'Suchen …',
   footer: 'write lite, open source',
   share: 'teilen',
+  unshare: 'unshare',
   open: 'öffnen',
   modified: 'zuletzt bearbeitet',
   welcome: require('./welcome-de.txt'),

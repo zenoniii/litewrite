@@ -3,6 +3,7 @@ module.exports = {
   search: 'Искать …',
   footer: 'Пишите с легкостью! Исходный код открыт.',
   share: 'Поделиться',
+  unshare: 'unshare',
   open: 'открыть',
   modified: 'изменён',
   welcome: require('./welcome-ru.txt'),
