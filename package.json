@@ -36,8 +36,7 @@
   },
   "standard": {
     "ignore": [
-      "lib",
-      "litewrite.js"
+      "lib"
     ]
   }
 }

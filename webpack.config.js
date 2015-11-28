@@ -6,7 +6,7 @@ var config = {
   ],
   output: {
     path: __dirname,
-    filename: 'litewrite.js'
+    filename: 'litewrite.min.js'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
