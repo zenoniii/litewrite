@@ -1,0 +1,3 @@
+# Node runs `npm install` and `npm test` by default
+language: node_js
+node_js: node # Uses the latest version (via nvm)
