@@ -14,8 +14,8 @@ var EditorView = Backbone.View.extend({
     this.model.on('change:content', this.handleCyrillic)
     this.model.on('update', this.render)
 
-    autosize(this.$el)
     this.setPlaceholder()
+    this.render()
   },
 
   // only re-render when content changed
@@ -26,9 +26,8 @@ var EditorView = Backbone.View.extend({
     // this is just for migration from contenteditable to textarea.
     // we can remove this later on.
     content = content.replace(/<br>/ig, '\n').replace(/<\/br>/ig, '\n').replace(/<div>/ig, '\n').replace(/<[^>]+>/ig, '').replace(/\&amp;/ig, '&')
-    this.$el
-      .val(content || '')
-      .trigger('autosize:update')
+    this.$el.val(content || '')
+    autosize(this.$el)
   },
 
   focus: function () {
