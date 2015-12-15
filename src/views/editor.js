@@ -46,10 +46,10 @@ var EditorView = Backbone.View.extend({
   },
 
   events: {
-    'keyup': 'updateOpenDoc'
+    'input': 'updateOpenDoc'
   },
 
-  updateOpenDoc: function (e) {
+  updateOpenDoc: function () {
     this.model.set('content', this.$el.val())
     this.trigger('typing')
   },
