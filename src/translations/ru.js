@@ -1,14 +1,13 @@
 module.exports = {
   emptyDoc: 'Пишите …',
-  search: 'Искать …',
+  search: 'Найти …',
   footer: 'Пишите с легкостью! Исходный код открыт.',
-  share: 'Поделиться',
-  unshare: 'unshare',
+  share: 'опубликовать',
+  unshare: 'отменить публикацию',
   open: 'открыть',
   modified: 'изменён',
   welcome: require('./welcome-ru.txt'),
   secondsAgo: function (x) {
-    if (x === 1) return 'a second ago'
     return timeAgoWithPlural('секунду_секунды_секунд', x)
   },
   minutesAgo: function (x) {
