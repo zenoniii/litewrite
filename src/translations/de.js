@@ -3,6 +3,7 @@ module.exports = {
   search: 'Suchen …',
   footer: 'write lite, open source',
   share: 'teilen',
+  unshare: 'verstecken',
   open: 'öffnen',
   modified: 'zuletzt bearbeitet',
   updateCache: 'Eine neue Version von Litewrite ist verfügbar. Seite neuladen?',
