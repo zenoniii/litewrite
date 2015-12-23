@@ -259,6 +259,8 @@ footer a {
 }
 
 .link {
+	color: #444;
+	text-decoration: none;
 	margin-right: 15px;
 	display: none;
 }
