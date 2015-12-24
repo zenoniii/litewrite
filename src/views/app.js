@@ -26,7 +26,7 @@ var AppView = Backbone.View.extend({
     this.litewrite
       .on('ready', this.editor.render)
       .on('ready', this.editor.desktopFocus)
-      .on('ready', this.aside.showOrHide)
+      .on('ready', this.aside.desktopHide)
       .on('connected', share.show)
       .on('disconnected', share.hide)
 
