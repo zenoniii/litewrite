@@ -34,11 +34,11 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   app.get('/', serveFile('index.html'))
   app.get('/litewrite.min.js', serveFile('litewrite.min.js'))
+  app.get('/cache.manifest', serveFile('cache.manifest'))
 }
 
 app.use('/img', express.static(path.join(__dirname, '../img')))
 app.use('/style', express.static(path.join(__dirname, '../style')))
-app.get('/cache.manifest', serveFile('cache.manifest'))
 
 if (require.main === module) {
   app.listen(port, function (error) {
