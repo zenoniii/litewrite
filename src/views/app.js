@@ -53,7 +53,8 @@ var AppView = Backbone.View.extend({
     'touchend #add': 'newDoc',
     'click #menu-button': 'toggleAside',
     'touchend #menu-button': 'toggleAside',
-    'keydown': 'handleKey'
+    'keydown': 'handleKey',
+    'keyup': 'closeAside'
   },
 
   newDoc: function () {
@@ -112,6 +113,13 @@ var AppView = Backbone.View.extend({
   next: function () {
     var id = this.entries.next(this.model.id)
     if (id) this.litewrite.open(id)
+  },
+
+  closeAside: function (e) {
+    var isModKey = e.keyCode === utils.modKey.code
+    if (!isModKey) return
+    if (this.search.isFocused()) return
+    this.aside.hide()
   }
 
 })
