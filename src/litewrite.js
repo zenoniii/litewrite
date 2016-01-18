@@ -81,7 +81,7 @@ _.extend(Litewrite.prototype, Backbone.Events, {
   },
 
   triggerConnected: function () {
-    this.trigger('connected')
+    if (remoteStorage.connected) this.trigger('connected')
   },
 
   triggerDisconnected: function () {
