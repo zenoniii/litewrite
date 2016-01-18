@@ -87,6 +87,7 @@ aside {
   width: 16%;
   min-width: 135px;
   height: 100%;
+  padding-right: 5px; /* If the sidebar has a scrollbar, there should be some space */
   opacity: 0;
   overflow: auto;
   -moz-user-select: none;
