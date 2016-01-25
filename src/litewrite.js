@@ -24,7 +24,6 @@ _.extend(Litewrite.prototype, Backbone.Events, {
       .on('change:content', this.doc.updateTitle)
       .on('change:id', this.handlePrevious)
       .on('change:id', this.setUrl)
-      .on('change:title', this.setWindowTitle)
       .on('change', this.updateDocs)
 
     this.state.fetch().always(_.bind(function () {
@@ -86,10 +85,6 @@ _.extend(Litewrite.prototype, Backbone.Events, {
 
   triggerDisconnected: function () {
     this.trigger('disconnected')
-  },
-
-  setWindowTitle: function (doc) {
-    document.title = doc.get('title') || 'Litewrite'
   },
 
   setUrl: function (doc) {
