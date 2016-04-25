@@ -13,7 +13,7 @@ So we built Litewrite
 
 * Simple design: There are lots of other self-titled distraction-free editors which offer music, themes, different typefaces, etc etc. We don't, because we think that's unnecessary. If you want music you can listen to it using your favorite music player, if you want to change the font size you can zoom using your browser, …
 * Device compatibility: It’s a web app which works on all devices and operating systems.
-* Synced data: Notes are available everywhere, using the open remoteStorage standard. Compatibility with Dropbox, Google Drive, ownCloud, etc.
+* Synced data: Notes are available everywhere, using the open remoteStorage standard.
 * Offline: Once loaded, it’s essentially a desktop app. Thanks to AppCache and localStorage, both app and data are fully cached offline and synced whenever online.
 
 Now of course it's far from perfect, but we and lots of others use it day-to-day. And that's also why we made it open source If you experience any problems or have suggestions, please let us know at http://github.com/litewrite/litewrite/issues
