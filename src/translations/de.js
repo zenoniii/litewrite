@@ -1,6 +1,6 @@
 module.exports = {
   emptyDoc: 'Schreibe etwas …',
-  search: 'Suchen …',
+  search: 'Suchen',
   footer: 'write lite, open source',
   share: 'teilen',
   unshare: 'verstecken',
