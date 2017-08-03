@@ -1,7 +1,8 @@
-const webpack = require('webpack')
 const path = require('path')
+const webpack = require('webpack')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
-var config = {
+const config = {
   entry: [
     './src/main'
   ],
@@ -41,6 +42,20 @@ if (process.env.NODE_ENV === 'production') {
       compressor: {
         warnings: false
       }
+    }),
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'litewrite',
+      minify: true,
+      staticFileGlobs: [
+        'style/litewrite.css',
+        'style/*.ttf',
+        'style/*.otf',
+        'img/*.png',
+        'img/*.svg'
+      ]
+    }),
+    new webpack.DefinePlugin({
+      'window.PRODUCTION': 'true'
     })
   )
 } else {

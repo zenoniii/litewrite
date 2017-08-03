@@ -6,6 +6,11 @@ var Litewrite = require('./litewrite')
 var Router = require('./router')
 var utils = require('./utils')
 
+// use service worker for offline caching
+if (window.PRODUCTION && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+}
+
 // this way we can prevent remotestorage from stealing the url hash
 var originalHash = window.location.hash
 
