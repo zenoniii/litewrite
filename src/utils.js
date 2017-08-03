@@ -21,9 +21,6 @@ utils.escapeRegExp = function (str) {
   return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 }
 
-utils.modKey = utils.isMac ? { name: 'ctrlKey', code: 17 } : { name: 'altKey', code: 18 }
-utils.metaKey = utils.isMac ? 'metaKey' : 'ctrlKey'
-
 // in seconds
 var hour = 3600
 var day = 24 * hour

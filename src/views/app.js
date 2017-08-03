@@ -79,10 +79,10 @@ var AppView = Backbone.View.extend({
     var tabKey = e.keyCode === 9
 
     var sKey = e.keyCode === 83
-    var saveShortcut = sKey && e[utils.metaKey]
+    var saveShortcut = sKey && e.metaKey
 
     if (tabKey || saveShortcut) return e.preventDefault()
-    if (!e[utils.modKey.name]) return
+    if (!e.altKey) return
     this.aside.show()
     var shortcut = this.shortcuts[e.keyCode]
     if (shortcut) return shortcut.call(this, e)
@@ -116,7 +116,7 @@ var AppView = Backbone.View.extend({
   },
 
   closeAside: function (e) {
-    var isModKey = e.keyCode === utils.modKey.code
+    var isModKey = e.keyCode === 18
     if (!isModKey) return
     if (this.search.isFocused()) return
     this.aside.hide()

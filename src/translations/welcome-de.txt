@@ -16,4 +16,3 @@ Wenn du eine Tastatur benutzt, kannst du übrigens auch Tastenkürzel nutzen, um
 - Alt + j: Suchfeld fokussieren
 - Alt + ↑: Zur Notiz darüber wechseln
 - Alt + ↓: Zur Notiz darunter wechseln
-(auf Mac ist es Ctrl statt Alt)
