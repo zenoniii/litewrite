@@ -1,6 +1,5 @@
 module.exports = {
   emptyDoc: 'Écrire …',
-  search: 'Rechercher',
   footer: 'Ecrivez léger, écrivez libre !',
   share: 'partager',
   unshare: 'cacher',

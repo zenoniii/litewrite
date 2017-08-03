@@ -66,11 +66,6 @@ var AsideView = Backbone.View.extend({
     this.snapper.disable()
   }, 700),
 
-  hasScrollbar: function () {
-    // thanks to http://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
-    return this.$sidebar.get(0).scrollHeight > this.$sidebar.height()
-  },
-
   setFooter: function () {
     this.$sidebar.find('footer a').text(lang.footer)
   }

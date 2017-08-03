@@ -14,6 +14,5 @@ Jorin & Jan-Christoph
 
 Si vous avez un clavier, vous avez la possibilité d'utiliser des raccourcis claviers pour aller plus vite:
 - Alt + n: nouvelle note
-- Alt + j: aller au champ de recherche
 - Alt + ↑: passer à la note du dessus
 - Alt + ↓: passer à la note du dessous

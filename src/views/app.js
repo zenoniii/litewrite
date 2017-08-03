@@ -1,10 +1,8 @@
 var Backbone = require('backbone')
-var _ = require('underscore')
 var EntriesView = require('./entries')
 var EditorView = require('./editor')
 var DateView = require('./date')
 var AsideView = require('./aside')
-var SearchView = require('./search')
 var ShareView = require('./share')
 var utils = require('../utils')
 
@@ -12,12 +10,9 @@ var AppView = Backbone.View.extend({
   el: 'body',
 
   initialize: function (options) {
-    _.bindAll(this, 'toggleSearch')
-
     this.litewrite = options.litewrite
 
     this.editor = new EditorView({ model: this.model })
-    this.search = new SearchView({ model: this.litewrite.state })
     this.aside = new AsideView({ model: this.model, collection: this.collection })
     this.entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection })
     this.date = new DateView({ model: this.model })
@@ -30,16 +25,6 @@ var AppView = Backbone.View.extend({
       .on('connected', share.show)
       .on('disconnected', share.hide)
 
-    this.collection
-      .on('add', this.toggleSearch)
-      .on('remove', this.toggleSearch)
-
-    this.search
-      .on('focus', this.aside.show)
-      .on('blur', this.editor.desktopFocus)
-      .on('blur', this.aside.desktopHide)
-
-    // this way we don't hide the sidebar while search is focusesd
     this.editor
       .on('typing', this.aside.desktopHide)
 
@@ -61,17 +46,12 @@ var AppView = Backbone.View.extend({
     if (utils.isMobile) this.aside.hide()
     if (!this.model.isEmpty()) this.collection.addNew()
     this.editor.focus()
-    this.search.clear()
     return false
   },
 
   toggleAside: function () {
     this.aside.toggle()
     return false
-  },
-
-  toggleSearch: function () {
-    this.aside.hasScrollbar() ? this.search.show() : this.search.hide()
   },
 
   // global key handler for shortcuts
@@ -99,9 +79,6 @@ var AppView = Backbone.View.extend({
     40: function down () {
       this.next()
       return false
-    },
-    74: function j () {
-      this.search.focus()
     }
   },
 
@@ -118,7 +95,6 @@ var AppView = Backbone.View.extend({
   closeAside: function (e) {
     var isModKey = e.keyCode === 18
     if (!isModKey) return
-    if (this.search.isFocused()) return
     this.aside.hide()
   }
 
