@@ -1,14 +1,13 @@
 var _ = require('underscore')
 var Backbone = require('backbone')
 var entriesTemplate = require('../templates/entries.html')
-var utils = require('../utils')
 var lang = require('../translations')
 
 var EntriesView = Backbone.View.extend({
   el: '#entries',
 
   initialize: function (options) {
-    _.bindAll(this, 'filter', 'render', 'update', 'toTop', 'removeItem', 'selectDoc', 'openFirst')
+    _.bindAll(this, 'render', 'update', 'toTop', 'removeItem', 'selectDoc', 'openFirst')
 
     this.litewrite = options.litewrite
     this.template = _.template(entriesTemplate)
@@ -31,28 +30,16 @@ var EntriesView = Backbone.View.extend({
     'click .item': 'openDoc'
   },
 
-  // generate opacity for docs and filter them
+  // generate opacity for docs
   serialize: function () {
-    var docs = this.collection
-      .filter(this.filter)
-      .map(function (doc) {
-        var res = doc.toJSON()
-        res.opacity = doc.getOpacity()
-        res.url = doc.getUrl()
-        return res
-      })
+    var docs = this.collection.map(function (doc) {
+      var res = doc.toJSON()
+      res.opacity = doc.getOpacity()
+      res.url = doc.getUrl()
+      return res
+    })
 
     return { docs: docs, placeholder: lang.emptyDoc }
-  },
-
-  // check if it matches state.query
-  // TODO: filter should only be run if ther is a query. would be faster.
-  filter: function (doc) {
-    var query = this.litewrite.state.get('query')
-    if (!query) return true
-    var reg = new RegExp(utils.escapeRegExp(query), 'i')
-    var match = reg.test(doc.get('title'))
-    return match
   },
 
   render: function () {

@@ -41,8 +41,8 @@ var Doc = Backbone.Model.extend({
     var diff = new Date().getTime() - this.get('lastEdited')
     // The older the document the smaller the opacity
     // but the opacity is allway between 0.4 and 1
-    // For documents older than 2 weeks the opacity won't change anymore
-    var limit = 14 * 86400000
+    // For documents older than 3 months the opacity won't change anymore
+    var limit = 90 * 86400000
     var opacity = diff > limit ? 0.4 : Math.round((0.4 + ((limit - diff) / limit) * 0.6) * 100) / 100
     return opacity
   },
