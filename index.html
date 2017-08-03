@@ -18,13 +18,13 @@
 </head>
 
 <body>
-	<div id="snap-content" class="scrollbox">
-		<svg id="menu-button" height="15" width="15">
+	<div id="snap-content" class="snap-content scrollbox">
+		<svg id="menu-button" class="menu-button" height="15" width="15">
 			<path d="m0 0v3h15v-3h-15zm0 6v3h15v-3h-15zm0 6v3h15v-3h-15z"/>
 		</svg>
 
 		<div id="remotestorage-connect"></div>
-    <textarea id="editor"></textarea>
+    <textarea id="editor" class="editor"></textarea>
 
 		<div id="sharing" class="sharing hide-sharing">
     	<span class="share"></span>
@@ -32,13 +32,13 @@
 			<span class="unshare"></span>
 		</div>
 
-		<div id="date"></div>
+		<div id="date" class="date"></div>
 	</div>
 
   <aside>
-    <input type="search" id="search" class="hide">
-    <div id="add">+</div>
-    <ul id="entries" class="scrollbox"></ul>
+    <input type="search" id="search" class="search hide">
+    <div id="add" class="add">+</div>
+    <ul id="entries" class="entries scrollbox"></ul>
 
     <footer>
       <a href="http://github.com/litewrite/litewrite" target="_blank">open source</a>
