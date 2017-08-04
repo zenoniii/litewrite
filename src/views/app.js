@@ -71,6 +71,7 @@ var AppView = Backbone.View.extend({
   shortcuts: {
     78: function n () {
       this.newDoc()
+      return false
     },
     38: function up () {
       this.previous()
