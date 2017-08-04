@@ -4,5 +4,6 @@ sudo: false # Allows Travis to run this project in container
 deploy:
   provider: script
   script: scripts/deploy.sh
+  skip_cleanup: true
   on:
     branch: master
