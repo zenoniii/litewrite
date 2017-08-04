@@ -8,7 +8,7 @@ var EditorView = Backbone.View.extend({
   el: '#editor',
 
   initialize: function (options) {
-    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic', 'insertTab')
+    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic', 'setCursor', 'insertTab')
 
     this.model.on('change:id', this.render)
     this.model.on('change:content', this.handleCyrillic)
@@ -25,6 +25,8 @@ var EditorView = Backbone.View.extend({
     if (content === this.$el.val()) return
     this.$el.val(content || '')
     autosize.update(this.$el)
+    var pos = this.model.get('cursorPos')
+    if (pos) this.setCursor(pos)
   },
 
   focus: function () {
@@ -46,7 +48,10 @@ var EditorView = Backbone.View.extend({
   },
 
   updateOpenDoc: function () {
-    this.model.set('content', this.$el.val())
+    this.model.set({
+      content: this.$el.val(),
+      cursorPos: this.$el.prop('selectionStart')
+    })
     this.trigger('typing')
   },
 
@@ -63,13 +68,17 @@ var EditorView = Backbone.View.extend({
     this.$el.attr('placeholder', lang.emptyDoc)
   },
 
+  setCursor: function (pos) {
+    this.$el
+      .prop('selectionStart', pos)
+      .prop('selectionEnd', pos)
+  },
+
   insertTab: function () {
     var pos = this.$el.prop('selectionStart')
     var v = this.$el.val()
-    this.$el
-      .val(v.substring(0, pos) + '  ' + v.substring(pos, v.length))
-      .prop('selectionStart', pos)
-      .prop('selectionEnd', pos)
+    this.$el.val(v.substring(0, pos) + '  ' + v.substring(pos, v.length))
+    this.setCursor(pos)
     this.updateOpenDoc()
   }
 

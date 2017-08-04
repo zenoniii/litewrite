@@ -8,7 +8,8 @@ var Doc = Backbone.Model.extend({
     title: '',
     content: '',
     lastEdited: null,
-    public: null
+    public: null,
+    cursorPos: 0
   },
 
   sync: rsSync,
