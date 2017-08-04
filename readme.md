@@ -1,5 +1,5 @@
 # [Litewrite](http://litewrite.net)
-**Unobtrusive Writing** by [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](http://jorin-vogel.com)
+**Unobtrusive Writing** by [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](https://jorin.me)
 
 Litewrite was built out of a need to have a simple way of taking notes, having them everywhere, working on any device, regardless if on- or offline.
 
@@ -54,4 +54,4 @@ This is an [unhosted web app](http://unhosted.org), meaning its code is fully cl
 
 ## License
 
-Copyright (c) 2012 [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](http://jorin-vogel.com), licensed under the [Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html) version 3 or later. See license.txt for the full license text. Short: **Do anything you want as long as you credit us and redistribute your changes under the same conditions.**
+Copyright (c) 2012 [Jan-Christoph Borchardt](http://jancborchardt.net) & [Jorin Vogel](https://jorin.me), licensed under the [Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html) version 3 or later. See license.txt for the full license text. Short: **Do anything you want as long as you credit us and redistribute your changes under the same conditions.**
