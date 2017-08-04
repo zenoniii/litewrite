@@ -8,7 +8,7 @@ var EditorView = Backbone.View.extend({
   el: '#editor',
 
   initialize: function (options) {
-    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic')
+    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic', 'insertTab')
 
     this.model.on('change:id', this.render)
     this.model.on('change:content', this.handleCyrillic)
@@ -61,6 +61,16 @@ var EditorView = Backbone.View.extend({
 
   setPlaceholder: function () {
     this.$el.attr('placeholder', lang.emptyDoc)
+  },
+
+  insertTab: function () {
+    var pos = this.$el.prop('selectionStart')
+    var v = this.$el.val()
+    this.$el
+      .val(v.substring(0, pos) + '  ' + v.substring(pos, v.length))
+      .prop('selectionStart', pos)
+      .prop('selectionEnd', pos)
+    this.updateOpenDoc()
   }
 
 })

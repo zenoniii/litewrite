@@ -61,7 +61,14 @@ var AppView = Backbone.View.extend({
     var sKey = e.keyCode === 83
     var saveShortcut = sKey && e.metaKey
 
-    if (tabKey || saveShortcut) return e.preventDefault()
+    if (tabKey && !e.shiftKey) {
+      this.editor.insertTab()
+    }
+
+    if (tabKey || saveShortcut) {
+      e.preventDefault()
+      return
+    }
     if (!e.altKey) return
     this.aside.show()
     var shortcut = this.shortcuts[e.keyCode]
