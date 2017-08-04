@@ -7,5 +7,5 @@ chmod 600 deploy_key.pem # this key should have push access
 ssh-add deploy_key.pem
 
 echo Push deployment
-git remote add deploy $REPO_URI
-git push deploy master
+git remote add deploy $REPO_URI 2>&1
+git push deploy master 2>&1
