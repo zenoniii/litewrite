@@ -9,7 +9,7 @@ var ShareView = Backbone.View.extend({
   el: '#sharing',
 
   initialize: function () {
-    _.bindAll(this, 'setLink', 'updatePublic', 'show', 'hide')
+    _.bindAll(this, 'setLink', 'updatePublic', 'show', 'hide', 'unshare')
     this.remote = remoteStorageDocuments.publicList('notes')
     this.template = _.template(template)
 
@@ -45,7 +45,9 @@ var ShareView = Backbone.View.extend({
   },
 
   unshare: function () {
-    var publicId = this.model.get('public').split('/').slice(-2).join('/')
+    var url = this.model.get('public')
+    if (!url) return
+    var publicId = url.split('/').slice(-2).join('/')
     this.remote.remove(publicId).then(_.bind(function (url) {
       remoteStorage.sync.sync().then(_.bind(function () {
         this.model.set('public', null)
@@ -73,11 +75,11 @@ var ShareView = Backbone.View.extend({
   },
 
   show: function () {
-    this.$el.removeClass('hide-sharing')
+    this.$el.removeClass('hide')
   },
 
   hide: function () {
-    this.$el.addClass('hide-sharing')
+    this.$el.addClass('hide')
   }
 
 })

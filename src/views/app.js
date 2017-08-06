@@ -4,6 +4,7 @@ var EditorView = require('./editor')
 var DateView = require('./date')
 var AsideView = require('./aside')
 var ShareView = require('./share')
+var DeleteView = require('./delete')
 var utils = require('../utils')
 
 var AppView = Backbone.View.extend({
@@ -16,6 +17,7 @@ var AppView = Backbone.View.extend({
     this.aside = new AsideView({ model: this.model, collection: this.collection })
     this.entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection })
     this.date = new DateView({ model: this.model })
+    var deleteView = new DeleteView({ model: this.model })
     var share = new ShareView({ model: this.model, collection: this.collection })
 
     this.litewrite
@@ -31,6 +33,11 @@ var AppView = Backbone.View.extend({
     this.entries
       .on('open', this.editor.desktopFocus)
       .on('open', this.aside.hide)
+
+    deleteView
+      .on('delete', this.editor.render)
+      .on('delete', this.editor.focus)
+      .on('delete', share.unshare)
   },
 
   events: {

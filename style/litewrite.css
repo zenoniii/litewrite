@@ -35,6 +35,10 @@ html, body {
 	background-color: transparent;
 }
 
+.hide {
+	display: none;
+}
+
 body > .scrollbox {
   width: 84%;
   position: fixed;
@@ -217,24 +221,31 @@ footer a {
 	display: none;
 }
 
-.sharing {
+.actions {
 	color: #444;
   opacity: .5;
 	font-size: 14px;
 	float: right;
 	margin-right: 2%;
 	margin-bottom: 2%;
-	cursor: pointer;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
 }
-.sharing:hover {
+.actions:hover {
   opacity: 1;
 }
 
-.hide-sharing {
-	display: none;
+.delete,
+.share,
+.unshare,
+.link {
+	cursor: pointer;
+}
+
+.sharing {
+  display: inline;
+  margin-left: 15px;
 }
 
 .link {
@@ -248,9 +259,10 @@ footer a {
 	display: none;
 }
 
+.delete:hover,
 .share:hover,
-.link:hover,
-.unshare:hover {
+.unshare:hover,
+.link:hover {
 	text-decoration: underline;
 }
 
