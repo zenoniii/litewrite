@@ -9,15 +9,15 @@ Litewrite was built out of a need to have a simple way of taking notes, having t
 
 No current solution provides that. It's quite strange that something as benign as jotting down text isn't really solved unless you buy into one specific »ecosystem«. Either the design is complicated, or they only work on Apple hardware, or they are tied to Dropbox, or you can't do anything if you don't have wifi, or or or …
 
-So we built Litewrite
+So we built Litewrite.
 
 * Simple design: There are lots of other self-titled distraction-free editors which offer music, themes, different typefaces, etc etc. We don't, because we think that's unnecessary. If you want music you can listen to it using your favorite music player, if you want to change the font size you can zoom using your browser, …
 * Device compatibility: It’s a web app which works on all devices and operating systems.
 * Synced data: Notes are available everywhere, using the open remoteStorage standard.
 * Offline: Once loaded, it’s essentially a desktop app. Thanks to AppCache and localStorage, both app and data are fully cached offline and synced whenever online.
 
-Now of course it's far from perfect, but we and lots of others use it day-to-day. And that's also why we made it open source If you experience any problems or have suggestions, please let us know at http://github.com/litewrite/litewrite/issues
-And if you know a little about web development you're welcome to dive into the code at http://github.com/litewrite/litewrite
+Now of course it's far from perfect, but we and lots of others use it day-to-day. And that's also why we made it open source. If you experience any problems or have suggestions, please let us know at http://github.com/litewrite/litewrite/issues.
+And if you know a little about web development, you're welcome to dive into the code at http://github.com/litewrite/litewrite.
 
 
 Cheers,
@@ -26,7 +26,7 @@ Jorin & Jan-Christoph
 
 ## Contribute
 
-[![Build Status](https://travis-ci.org/litewrite/litewrite.svg?branch=master)](https://travis-ci.org/litewrite/litewrite)
+[![Build Status](https://travis-ci.org/litewrite/litewrite.svg?branch=gh-pages)](https://travis-ci.org/litewrite/litewrite)
 
 
 Play with the [development version](http://litewrite.github.com/litewrite), check out [issues](http://github.com/litewrite/litewrite/issues) and dive into the code if you like.
@@ -44,7 +44,7 @@ Set up your development environment:
 
 ## Thanks
 
-Inspired by [iA Writer](http://iawriter.com) & [LightWrite](http://gun.io/w). Initial prototype built on [Notes](http://nv.github.com/notes). [Alegreya](http://www.huertatipografica.com.ar/tipografias/alegreya/ejemplos.html) typeface by Juan Pablo del Peral
+Inspired by [iA Writer](http://iawriter.com) & [LightWrite](http://gun.io/w). Initial prototype built on [Notes](http://nv.github.com/notes). [Alegreya](http://www.huertatipografica.com.ar/tipografias/alegreya/ejemplos.html) typeface by Juan Pablo del Peral.
 
 
 ## Remotestorage
