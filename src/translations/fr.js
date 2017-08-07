@@ -2,7 +2,7 @@ module.exports = {
   emptyDoc: 'Écrire …',
   footer: 'Ecrivez léger, écrivez libre !',
   delete: 'effacer',
-  confirmDelete: 'Voulez-vous vraiment supprimer la note?',
+  confirmDelete: 'Voulez-vous vraiment supprimer la note ?',
   share: 'partager',
   unshare: 'cacher',
   open: 'ouvrir',
