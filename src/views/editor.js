@@ -8,10 +8,10 @@ var EditorView = Backbone.View.extend({
   el: '#editor',
 
   initialize: function (options) {
-    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCyrillic', 'setCursor', 'insertTab')
+    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCharEncodings', 'setCursor', 'insertTab')
 
     this.model.on('change:id', this.render)
-    this.model.on('change:content', this.handleCyrillic)
+    this.model.on('change:content', this.handleCharEncodings)
     this.model.on('update', this.render)
 
     autosize(this.$el)
@@ -55,13 +55,17 @@ var EditorView = Backbone.View.extend({
     this.trigger('typing')
   },
 
-  // if a cyrillic doc is detected change to cyrillic font
-  handleCyrillic: function (doc) {
-    // see http://kourge.net/projects/regexp-unicode-block
-    var isCyrillic = doc.get('content').match('[\u0400-\u04FF\u0500-\u052F]')
-    if (!isCyrillic) return
-    this.$el.addClass('cyrillic')
-    this.model.off(null, this.handleCyrillic)
+  // Set CSS class for certain languages to adjust styling.
+  // For char classes see http://kourge.net/projects/regexp-unicode-block
+  handleCharEncodings: function (doc) {
+    var c = doc.get('content')
+    var isCyrillic = !!c.match('[\u0400-\u04FF\u0500-\u052F]')
+    this.$el.toggleClass('cyrillic', isCyrillic)
+
+    // Arabic, Hebrew, Syriac & Thaana
+    var isRTL = !!c.match('[\u0600-\u06FF\u0750-\u077F\u0590-\u05FF\u0700-\u074F\u0780-\u07BF]')
+    console.log(isRTL)
+    this.$el.toggleClass('rtl', isRTL)
   },
 
   setPlaceholder: function () {

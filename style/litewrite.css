@@ -69,6 +69,10 @@ body > .scrollbox {
   font-family: 'Gregor', Georgia, serif;
 }
 
+.editor.rtl {
+  direction: rtl;
+}
+
 .date {
 	position: relative;
 	float: left;
