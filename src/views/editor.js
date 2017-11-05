@@ -82,7 +82,7 @@ var EditorView = Backbone.View.extend({
     var pos = this.$el.prop('selectionStart')
     var v = this.$el.val()
     this.$el.val(v.substring(0, pos) + '  ' + v.substring(pos, v.length))
-    this.setCursor(pos+2)
+    this.setCursor(pos + 2)
     this.updateOpenDoc()
   }
 
