@@ -44,6 +44,9 @@ var AppView = Backbone.View.extend({
     this.editor
       .on('typing', this.aside.desktopHide)
 
+    this.aside
+      .on('opening', this.editor.blur)
+
     this.entries
       .on('open', this.editor.desktopFocus)
       .on('open', this.aside.hide)

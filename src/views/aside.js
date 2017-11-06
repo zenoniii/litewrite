@@ -12,7 +12,7 @@ var AsideView = Backbone.View.extend({
   el: 'body',
 
   initialize: function () {
-    _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'handleSnapper')
+    _.bindAll(this, 'show', 'hide', 'toggle', 'desktopShow', 'desktopHide', 'handleSnapper', 'triggerOpening')
 
     this.$sidebar = this.$('aside')
 
@@ -32,8 +32,14 @@ var AsideView = Backbone.View.extend({
       maxPosition: 265
     })
 
+    this.snapper.on('start', this.triggerOpening)
+
     this.handleSnapper()
     $(window).on('resize', this.handleSnapper)
+  },
+
+  triggerOpening: function () {
+    this.trigger('opening')
   },
 
   show: function () {
