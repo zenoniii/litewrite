@@ -1,5 +1,6 @@
 module.exports = {
   emptyDoc: 'Écrire …',
+  search: 'Rechercher',
   footer: 'Ecrivez léger, écrivez libre !',
   delete: 'effacer',
   confirmDelete: 'Voulez-vous vraiment supprimer la note ?',

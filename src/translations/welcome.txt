@@ -13,6 +13,7 @@ Jorin & Jan-Christoph
 
 
 By the way, if you use a keyboard you can also use shortcuts to work more quickly:
-- Alt + n: new note
+- Alt + d: new note
+- Alt + f: focus search field
 - Alt + ↑: switch to note above
 - Alt + ↓: switch to note below

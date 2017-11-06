@@ -2,12 +2,13 @@ var _ = require('underscore')
 var Backbone = require('backbone')
 var entriesTemplate = require('../templates/entries.html')
 var lang = require('../translations')
+var utils = require('../utils')
 
 var EntriesView = Backbone.View.extend({
   el: '#entries',
 
   initialize: function (options) {
-    _.bindAll(this, 'render', 'update', 'toTop', 'removeItem', 'selectDoc', 'openFirst')
+    _.bindAll(this, 'filter', 'render', 'update', 'toTop', 'removeItem', 'selectDoc', 'openFirst')
 
     this.litewrite = options.litewrite
     this.template = _.template(entriesTemplate)
@@ -30,9 +31,9 @@ var EntriesView = Backbone.View.extend({
     'click .item': 'openDoc'
   },
 
-  // generate opacity for docs
+  // generate opacity for docs and filter by query
   serialize: function () {
-    var docs = this.collection.map(function (doc) {
+    var docs = this.collection.filter(this.filter).map(function (doc) {
       var res = doc.toJSON()
       res.opacity = doc.getOpacity()
       res.url = doc.getUrl()
@@ -40,6 +41,14 @@ var EntriesView = Backbone.View.extend({
     })
 
     return { docs: docs, placeholder: lang.emptyDoc }
+  },
+
+  filter: function (doc) {
+    var query = this.litewrite.state.get('query')
+    if (!query) {
+      return true
+    }
+    return doc.get('content').indexOf(query) !== -1
   },
 
   render: function () {
@@ -51,7 +60,7 @@ var EntriesView = Backbone.View.extend({
     return this.$('.item[data-id=' + id + ']')
   },
 
-  // update text and href for a doc
+  // Update text and href for a doc
   update: function (doc) {
     var $item = this.find(doc.id).find('a')
     if (!$item.length || doc.isEmpty()) return this.render()
@@ -59,7 +68,7 @@ var EntriesView = Backbone.View.extend({
     $item.attr('href', '#!' + doc.getUrl())
   },
 
-  // moves a doc from its current position to the top of the list
+  // Moves a doc from its current position to the top of the list
   toTop: function (doc) {
     var $item = this.removeItem(doc)
     $item.children('a').css('opacity', 1)
@@ -70,7 +79,7 @@ var EntriesView = Backbone.View.extend({
     return this.find(doc.id).remove()
   },
 
-  // add a 'selected' class to the open doc
+  // Add a 'selected' class to the open doc
   selectDoc: function () {
     if (this.$selected) {
       this.$selected.removeClass('selected')

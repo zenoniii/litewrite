@@ -1,5 +1,6 @@
 module.exports = {
   emptyDoc: 'Schreibe etwas …',
+  search: 'Suchen',
   footer: 'write lite, open source',
   delete: 'löschen',
   confirmDelete: 'Möchtest du die Notiz wirklich löschen?',

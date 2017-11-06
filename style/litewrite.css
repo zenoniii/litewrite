@@ -120,6 +120,44 @@ aside:focus,
   opacity: 1;
 }
 
+.search {
+  display: block;
+  opacity: 0.5;
+  z-index: 100;
+  width: 76%;
+  font-size: 16px;
+  margin: 18px 15px 15px 17px;
+  padding: 0;
+  background: none;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #999;
+  height: 33px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  /* Default search style in Safari conflicts with our styling */
+  -webkit-appearance: textfield;
+}
+
+.search:hover,
+.search:focus {
+  opacity: 1;
+}
+
+.search.hide {
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 aside a,
 .add {
 	display: block;

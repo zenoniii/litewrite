@@ -64,7 +64,6 @@ var EditorView = Backbone.View.extend({
 
     // Arabic, Hebrew, Syriac & Thaana
     var isRTL = !!c.match('[\u0600-\u06FF\u0750-\u077F\u0590-\u05FF\u0700-\u074F\u0780-\u07BF]')
-    console.log(isRTL)
     this.$el.toggleClass('rtl', isRTL)
   },
 

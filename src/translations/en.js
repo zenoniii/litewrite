@@ -1,5 +1,6 @@
 module.exports = {
   emptyDoc: 'Write …',
+  search: 'Search',
   footer: 'write lite, open source',
   delete: 'delete',
   confirmDelete: 'Are you sure that you want to delete the document?',

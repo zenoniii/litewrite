@@ -5,6 +5,9 @@ var utils = require('../utils')
 var Snap = require('snap')
 var lang = require('../translations')
 
+// Allow hiding of sitebar if at list this number of docs
+var minDocsForHide = 3
+
 var AsideView = Backbone.View.extend({
   el: 'body',
 
@@ -34,34 +37,54 @@ var AsideView = Backbone.View.extend({
   },
 
   show: function () {
-    if (utils.isDesktop) return this.$el.addClass('show-aside')
+    if (utils.isDesktop) {
+      this.$el.addClass('show-aside')
+      return
+    }
     this.snapper.open('left')
   },
 
   hide: function () {
-    if (utils.isMobile) return this.snapper.close()
-    // hide sidebar when 3 or more docs and the open doc is not empty
-    if (this.collection.length > 2 && !this.model.isEmpty()) {
-      this.$el.removeClass('show-aside')
+    if (utils.isMobile) {
+      this.snapper.close()
+      return
     }
+    // Hide sidebar when 3 or more docs and the open doc is not empty
+    if (this.collection.length < minDocsForHide || this.model.isEmpty()) {
+      return
+    }
+    this.$el.removeClass('show-aside')
   },
 
   toggle: function () {
-    if (utils.isDesktop) return this.$el.toggleClass('show-aside')
-    if (this.snapper.state().state === 'closed') return this.show()
+    if (utils.isDesktop) {
+      this.$el.toggleClass('show-aside')
+      return
+    }
+    if (this.snapper.state().state === 'closed') {
+      this.show()
+      return
+    }
     this.hide()
   },
 
   desktopShow: function () {
-    if (utils.isDesktop) this.show()
+    if (utils.isDesktop) {
+      this.show()
+    }
   },
 
   desktopHide: _.debounce(function () {
-    if (utils.isDesktop) this.hide()
+    if (utils.isDesktop) {
+      this.hide()
+    }
   }, 3000),
 
   handleSnapper: _.debounce(function () {
-    if (utils.isMobile) return this.snapper.enable()
+    if (utils.isMobile) {
+      this.snapper.enable()
+      return
+    }
     this.snapper.close()
     this.snapper.disable()
   }, 700),
@@ -69,7 +92,6 @@ var AsideView = Backbone.View.extend({
   setFooter: function () {
     this.$sidebar.find('footer a').text(lang.footer)
   }
-
 })
 
 module.exports = AsideView
