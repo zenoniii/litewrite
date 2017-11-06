@@ -8,7 +8,6 @@ var State = Backbone.Model.extend({
   },
 
   localStorage: new Store('litewriteState')
-
 })
 
 module.exports = State

@@ -6,7 +6,7 @@ var Router = Backbone.Router.extend({
   },
 
   routes: {
-    // use ! for urls to not conflict with remotestorage's #access_token parameter
+    // Use ! for urls to not conflict with remotestorage's #access_token parameter
     '!:url': 'open',
     '*404': 'openFirst'
   },
@@ -17,9 +17,17 @@ var Router = Backbone.Router.extend({
 
   open: function (url) {
     var match = url.match(/^\((.+?)\)/)
-    if (!match) return this.openFirst()
+    if (!match) {
+      this.openFirst()
+      return
+    }
+
     var id = match[1]
-    if (!id) return this.openFirst()
+    if (!id) {
+      this.openFirst()
+      return
+    }
+
     this.litewrite.open(id)
   }
 

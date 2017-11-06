@@ -40,7 +40,9 @@ var Docs = Backbone.Collection.extend({
   },
 
   welcome: function () {
-    if (this.isEmpty()) this.addNew({ content: lang.welcome })
+    if (this.isEmpty()) {
+      this.addNew({ content: lang.welcome })
+    }
   },
 
   remote: null,
@@ -63,7 +65,7 @@ var Docs = Backbone.Collection.extend({
     setTimeout(function () {
       var md = origHash.match(/access_token=([^&]+)/)
       if (md && !remoteStorage.getBearerToken()) {
-        // backbone stole our access token
+        // Backbone stole our access token
         remoteStorage.setBearerToken(md[1])
       }
     }, 0)
@@ -78,15 +80,25 @@ var Docs = Backbone.Collection.extend({
 
   handleEvents: _.debounce(function () {
     _.each(this.events, function (event) {
-      if (event.origin === 'window') return
-      // remove
-      if (event.oldValue && !event.newValue) return this.remove(event.oldValue)
+      if (event.origin === 'window') {
+        return
+      }
+      // Remove
+      if (event.oldValue && !event.newValue) {
+        this.remove(event.oldValue)
+        return
+      }
+      // Add
       var existingDoc = this.get(event.newValue.id)
-      // add
-      if (!existingDoc) return this.add(event.newValue)
+      if (!existingDoc) {
+        this.add(event.newValue)
+        return
+      }
+      // Update
       var isLatest = event.newValue.lastEdited > existingDoc.get('lastEdited')
-      // update
-      if (!isLatest) return
+      if (!isLatest) {
+        return
+      }
       this.set(event.newValue, { remove: false })
       this.trigger('remoteUpdate', event.newValue.id)
     }, this)

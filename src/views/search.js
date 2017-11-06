@@ -25,7 +25,8 @@ var SearchView = Backbone.View.extend({
   },
 
   handleKey: function (e) {
-    if (e.which === 13) { // ENTER
+    var isEnter = e.which === 13
+    if (isEnter) {
       e.preventDefault()
       this.trigger('blur')
       return

@@ -64,8 +64,12 @@ var AppView = Backbone.View.extend({
   },
 
   newDoc: function () {
-    if (utils.isMobile) this.aside.hide()
-    if (!this.model.isEmpty()) this.collection.addNew()
+    if (utils.isMobile) {
+      this.aside.hide()
+    }
+    if (!this.model.isEmpty()) {
+      this.collection.addNew()
+    }
     this.editor.focus()
     this.search.clear()
     return false
@@ -99,16 +103,21 @@ var AppView = Backbone.View.extend({
       e.preventDefault()
       return
     }
+
     if (!e.altKey) {
       return
     }
+
     this.aside.show()
+
     var shortcut = this.shortcuts[e.keyCode]
     if (!shortcut) {
       return
     }
+
     e.preventDefault()
     e.stopPropagation()
+
     shortcut.call(this, e)
   },
 

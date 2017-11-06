@@ -8,35 +8,58 @@ var EditorView = Backbone.View.extend({
   el: '#editor',
 
   initialize: function (options) {
-    _.bindAll(this, 'render', 'focus', 'blur', 'desktopFocus', 'handleCharEncodings', 'setCursor', 'insertTab')
+    _.bindAll(
+      this,
+      'render',
+      'focus',
+      'blur',
+      'desktopFocus',
+      'handleCharEncodings',
+      'setCursor',
+      'insertTab'
+    )
 
-    this.model.on('change:id', this.render)
-    this.model.on('change:content', this.handleCharEncodings)
-    this.model.on('update', this.render)
+    this.model
+      .on('change:id', this.render)
+      .on('change:content', this.handleCharEncodings)
+      .on('update', this.render)
 
     autosize(this.$el)
     this.setPlaceholder()
     this.render()
   },
 
-  // only re-render when content changed
   render: function () {
+    // Only re-render when content changed
     var content = this.model.get('content')
-    if (content === this.$el.val()) return
+    if (content === this.$el.val()) {
+      return
+    }
+
     this.$el.val(content || '')
     autosize.update(this.$el)
+
     var pos = this.model.get('cursorPos')
-    if (pos) this.setCursor(pos)
+    if (pos) {
+      this.setCursor(pos)
+    }
   },
 
   focus: function () {
-    if (utils.isDesktop) return this.$el.focus()
-    // doesn't seem to work for textarea on iOS at all. maybe it works on other platforms.
+    if (utils.isDesktop) {
+      this.$el.focus()
+      return
+    }
+
+    // Doesn't seem to work for textarea on iOS at all.
+    // Maybe it works on other platforms.
     setTimeout(_.bind(this.$el.focus, this.$el), 500)
   },
 
   desktopFocus: function () {
-    if (utils.isDesktop) this.focus()
+    if (utils.isDesktop) {
+      this.focus()
+    }
   },
 
   blur: function () {
@@ -56,7 +79,7 @@ var EditorView = Backbone.View.extend({
   },
 
   // Set CSS class for certain languages to adjust styling.
-  // For char classes see http://kourge.net/projects/regexp-unicode-block
+  // For char classes see: http://kourge.net/projects/regexp-unicode-block
   handleCharEncodings: function (doc) {
     var c = doc.get('content')
     var isCyrillic = !!c.match('[\u0400-\u04FF\u0500-\u052F]')

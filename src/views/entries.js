@@ -2,7 +2,6 @@ var _ = require('underscore')
 var Backbone = require('backbone')
 var entriesTemplate = require('../templates/entries.html')
 var lang = require('../translations')
-var utils = require('../utils')
 
 var EntriesView = Backbone.View.extend({
   el: '#entries',
@@ -31,7 +30,7 @@ var EntriesView = Backbone.View.extend({
     'click .item': 'openDoc'
   },
 
-  // generate opacity for docs and filter by query
+  // Generate opacity for docs and filter by query
   serialize: function () {
     var docs = this.collection.filter(this.filter).map(function (doc) {
       var res = doc.toJSON()
@@ -40,7 +39,10 @@ var EntriesView = Backbone.View.extend({
       return res
     })
 
-    return { docs: docs, placeholder: lang.emptyDoc }
+    return {
+      docs: docs,
+      placeholder: lang.emptyDoc
+    }
   },
 
   filter: function (doc) {
@@ -63,7 +65,10 @@ var EntriesView = Backbone.View.extend({
   // Update text and href for a doc
   update: function (doc) {
     var $item = this.find(doc.id).find('a')
-    if (!$item.length || doc.isEmpty()) return this.render()
+    if (!$item.length || doc.isEmpty()) {
+      this.render()
+      return
+    }
     $item.text(doc.get('title'))
     $item.attr('href', '#!' + doc.getUrl())
   },
@@ -92,7 +97,7 @@ var EntriesView = Backbone.View.extend({
     return this.$selected.attr('data-id') === this.collection.first().id
   },
 
-  // event handler to open a document
+  // Event handler to open a document
   openDoc: function (e) {
     e.preventDefault()
 

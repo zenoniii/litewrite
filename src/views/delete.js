@@ -21,7 +21,10 @@ var DeleteView = Backbone.View.extend({
   },
 
   delete: function () {
-    if (!window.confirm(lang.confirmDelete)) return
+    if (!window.confirm(lang.confirmDelete)) {
+      return
+    }
+
     this.model.set({
       content: '',
       cursorPos: 0

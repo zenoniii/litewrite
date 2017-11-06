@@ -2,7 +2,9 @@ var _ = require('underscore')
 var Backbone = require('backbone')
 var lang = require('../translations')
 
-var EditorView = Backbone.View.extend({
+var updateInterval = 20000
+
+var DateView = Backbone.View.extend({
   el: '#date',
 
   initialize: function (options) {
@@ -11,7 +13,6 @@ var EditorView = Backbone.View.extend({
     this.refreshTimeout = null
   },
 
-  // only re-render when content changed
   render: function () {
     var lastModified = this.model.formatDate()
     this.$el.html(lastModified ? lang.modified + ' ' + lastModified : '')
@@ -21,11 +22,11 @@ var EditorView = Backbone.View.extend({
   refresh: function () {
     clearTimeout(this.refreshTimeout)
     this.refreshTimeout = setTimeout(_.bind(function () {
-      // stop updating when window is inactive
+      // Stop updating when window is inactive
       window.requestAnimationFrame(this.render)
-    }, this), 20000)
+    }, this), updateInterval)
   }
 
 })
 
-module.exports = EditorView
+module.exports = DateView

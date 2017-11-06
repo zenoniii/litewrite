@@ -46,7 +46,10 @@ var ShareView = Backbone.View.extend({
 
   unshare: function () {
     var url = this.model.get('public')
-    if (!url) return
+    if (!url) {
+      return
+    }
+
     var publicId = url.split('/').slice(-2).join('/')
     this.remote.remove(publicId).then(_.bind(function (url) {
       remoteStorage.sync.sync().then(_.bind(function () {
@@ -57,12 +60,16 @@ var ShareView = Backbone.View.extend({
 
   setLink: function () {
     var link = this.model.get('public')
-    if (link) this.$link.attr('href', link)
+    if (link) {
+      this.$link.attr('href', link)
+    }
     this.$el.toggleClass('is-shared', !!link)
   },
 
   updatePublic: function (doc) {
-    if (!doc.get('public')) return
+    if (!doc.get('public')) {
+      return
+    }
     var id = doc.get('public').match(/.+\/(.+?)$/)[1]
     var html = this.renderDocument(doc)
     this.remote.setRaw(id, 'text/html', html)

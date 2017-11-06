@@ -12,7 +12,18 @@ function Litewrite () {
 
 _.extend(Litewrite.prototype, Backbone.Events, {
   initialize: function () {
-    _.bindAll(this, 'loadDoc', 'open', 'openOnCreate', 'updateCurrentDoc', 'handlePrevious', 'updateDocs', 'handleRemoteRemove', 'triggerConnected', 'triggerDisconnected')
+    _.bindAll(
+      this,
+      'loadDoc',
+      'open',
+      'openOnCreate',
+      'updateCurrentDoc',
+      'handlePrevious',
+      'updateDocs',
+      'handleRemoteRemove',
+      'triggerConnected',
+      'triggerDisconnected'
+    )
 
     this.state = new State()
     this.doc = new Doc()
@@ -30,7 +41,11 @@ _.extend(Litewrite.prototype, Backbone.Events, {
       this.docs.fetch().always(this.loadDoc)
     }, this))
 
-    this.app = new AppView({ litewrite: this, model: this.doc, collection: this.docs })
+    this.app = new AppView({
+      litewrite: this,
+      model: this.doc,
+      collection: this.docs
+    })
 
     remoteStorage.displayWidget('remotestorage-connect')
 
@@ -47,18 +62,24 @@ _.extend(Litewrite.prototype, Backbone.Events, {
     this.trigger('ready')
   },
 
-  // open a document. either pass a Doc or an id
+  // Open a document. either pass a Doc or an id
   open: function (doc) {
-    if (!_.isObject(doc)) doc = this.docs.get(doc) || this.docs.first()
+    if (!_.isObject(doc)) {
+      doc = this.docs.get(doc) || this.docs.first()
+    }
     this.doc.set(doc.toJSON())
   },
 
   openOnCreate: function (doc) {
-    if (doc.isEmpty()) this.open(doc)
+    if (doc.isEmpty()) {
+      this.open(doc)
+    }
   },
 
   updateCurrentDoc: function (id) {
-    if (this.doc.id !== id) return
+    if (this.doc.id !== id) {
+      return
+    }
     this.open(id)
     this.doc.trigger('update')
   },
@@ -66,7 +87,9 @@ _.extend(Litewrite.prototype, Backbone.Events, {
   // remove empty documents
   handlePrevious: function (doc) {
     var previous = this.docs.get(doc.previous('id'))
-    if (previous && previous.isEmpty()) previous.destroy()
+    if (previous && previous.isEmpty()) {
+      previous.destroy()
+    }
   },
 
   updateDocs: function (doc) {
@@ -75,12 +98,16 @@ _.extend(Litewrite.prototype, Backbone.Events, {
 
   handleRemoteRemove: function (doc, docs, options) {
     var removedLocally = options.success && options.error
-    // open first doc so editor doesn't display the removed doc
-    if (!removedLocally) this.open()
+    // Open first doc so editor doesn't display the removed doc
+    if (!removedLocally) {
+      this.open()
+    }
   },
 
   triggerConnected: function () {
-    if (remoteStorage.connected) this.trigger('connected')
+    if (remoteStorage.connected) {
+      this.trigger('connected')
+    }
   },
 
   triggerDisconnected: function () {

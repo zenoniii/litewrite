@@ -18,13 +18,15 @@ var Doc = Backbone.Model.extend({
     return this.get('content').trim() === ''
   },
 
+  // Only update lastEdited if you didn't switch the document
   updateLastEdited: function (doc) {
-    // only update lastEdited if you didn't switch the document
-    if (!doc.changed.id) doc.set('lastEdited', new Date().getTime())
+    if (!doc.changed.id) {
+      doc.set('lastEdited', new Date().getTime())
+    }
   },
 
+  // Title consists of the first 40 characters of the first not empty line
   updateTitle: function (doc) {
-    // Title consists of the first 40 characters of the first not empty line
     var matchTitle = doc.get('content').match(/[^\s].{0,40}/)
     doc.set('title', matchTitle ? matchTitle[0] : '')
   },
