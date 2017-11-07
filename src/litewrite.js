@@ -78,10 +78,14 @@ _.extend(Litewrite.prototype, Backbone.Events, {
     this.trigger('ready')
   },
 
-  // Open a document. either pass a Doc or an id
+  // Open a document. Either pass a Doc or an ID.
   open: function (doc) {
     if (!_.isObject(doc)) {
-      doc = this.docs.get(doc) || this.docs.first()
+      doc = this.docs.get(doc)
+      if (!doc) {
+        this.docs.welcome()
+        doc = this.docs.first()
+      }
     }
     this.doc.set(doc.toJSON())
   },
@@ -127,7 +131,7 @@ _.extend(Litewrite.prototype, Backbone.Events, {
   triggerDisconnected: function () {
     this.trigger('disconnected')
     this.docs.reset()
-    this.docs.welcome()
+    this.open()
   },
 
   setUrl: function (doc) {
