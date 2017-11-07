@@ -50,7 +50,7 @@ var EntriesView = Backbone.View.extend({
     if (!query) {
       return true
     }
-    return doc.get('content').toLowerCase().indexOf(query) !== -1
+    return doc.get('content').toLowerCase().indexOf(query.toLowerCase()) !== -1
   },
 
   render: function () {
