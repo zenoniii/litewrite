@@ -38,9 +38,9 @@ _.extend(Litewrite.prototype, Backbone.Events, {
     rs.access.claim('documents', 'rw')
     rs.caching.enable('/documents/notes/')
     new Widget(rs).attach('remotestorage-connect')
-    rs.on('connected', function () {
+    rs.on('connected', _.bind(function () {
       this.triggerConnected(rs.backend)
-    })
+    }, this))
     rs.on('disconnected', this.triggerDisconnected)
 
     this.state = new State()
