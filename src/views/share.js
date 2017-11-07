@@ -77,10 +77,9 @@ var ShareView = Backbone.View.extend({
 
   show: function (backend) {
     // Enable sharing only for supported backends
-    if (backend === 'dropbox' || backend === 'googledrive') {
-      return
+    if (backend === 'remotestorage') {
+      this.$el.removeClass('hide')
     }
-    this.$el.removeClass('hide')
   },
 
   hide: function () {
