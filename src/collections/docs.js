@@ -3,8 +3,7 @@ var Backbone = require('backbone')
 var Doc = require('../models/doc')
 var rsSync = require('rs-adapter')
 var lang = require('../translations')
-var remoteStorage = require('remotestorage')
-var remoteStorageDocuments = require('remotestorage-documents')
+const uuid = require('uuid/v4')
 
 var Docs = Backbone.Collection.extend({
   model: Doc,
@@ -20,12 +19,14 @@ var Docs = Backbone.Collection.extend({
 
     this.once('sync', this.welcome)
 
-    this.initRemotestorage()
+    this.remote = options.remote
+
+    this.remote.on('change', this.rsChange)
   },
 
   addNew: _.throttle(function (options) {
     return this.add(_.defaults(options || {}, {
-      id: this.remote.uuid(),
+      id: uuid(),
       lastEdited: Date.now()
     }))
   }, 1000, { leading: true }),
@@ -43,32 +44,6 @@ var Docs = Backbone.Collection.extend({
     if (this.isEmpty()) {
       this.addNew({ content: lang.welcome })
     }
-  },
-
-  remote: null,
-
-  initRemotestorage: function () {
-    var docs = this
-
-    var origHash = document.location.hash
-
-    remoteStorage.on('disconnected', function () {
-      docs.reset()
-      docs.welcome()
-    })
-
-    remoteStorage.access.claim('documents', 'rw')
-
-    docs.remote = remoteStorageDocuments.privateList('notes')
-    docs.remote.on('change', docs.rsChange)
-
-    setTimeout(function () {
-      var md = origHash.match(/access_token=([^&]+)/)
-      if (md && !remoteStorage.getBearerToken()) {
-        // Backbone stole our access token
-        remoteStorage.setBearerToken(md[1])
-      }
-    }, 0)
   },
 
   events: [],

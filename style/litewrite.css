@@ -228,13 +228,14 @@ footer a {
   cursor: alias;
 }
 
-
-#remotestorage-widget {
-  opacity: .1;
+#remotestorage-connect {
+  position: absolute;
   top: 0 !important;
 	right: 3px !important;
+  z-index: 100000;
+  opacity: .3;
 }
-#remotestorage-widget:hover {
+#remotestorage-connect:hover {
   opacity: 1;
 }
 
@@ -414,7 +415,7 @@ footer a {
 	.entries,
   .menu-button,
   footer,
-  #remotestorage-widget {
+  #remotestorage-connect {
 		display: none;
 	}
 

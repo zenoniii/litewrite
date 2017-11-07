@@ -25,8 +25,6 @@ const config = {
   },
   resolve: {
     alias: {
-      remotestorage: path.join(__dirname, '../lib/remotestorage'),
-      'remotestorage-documents': path.join(__dirname, '../lib/remotestorage-documents'),
       'rs-adapter': path.join(__dirname, '../lib/backbone.remoteStorage-documents'),
       snap: path.join(__dirname, '../lib/snap')
     }

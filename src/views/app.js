@@ -26,7 +26,7 @@ var AppView = Backbone.View.extend({
     this.entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection })
     this.date = new DateView({ model: this.model })
     var deleteView = new DeleteView({ model: this.model })
-    var share = new ShareView({ model: this.model, collection: this.collection })
+    var share = new ShareView({ model: this.model, collection: this.collection, remote: options.remote })
 
     this.litewrite
       .on('ready', this.editor.render)

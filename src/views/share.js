@@ -2,15 +2,13 @@ var _ = require('underscore')
 var Backbone = require('backbone')
 var template = require('../templates/share.html')
 var lang = require('../translations')
-var remoteStorage = require('remotestorage')
-var remoteStorageDocuments = require('remotestorage-documents')
 
 var ShareView = Backbone.View.extend({
   el: '#sharing',
 
-  initialize: function () {
+  initialize: function (options) {
     _.bindAll(this, 'setLink', 'updatePublic', 'show', 'hide', 'unshare')
-    this.remote = remoteStorageDocuments.publicList('notes')
+    this.remote = options.remote
     this.template = _.template(template)
 
     this.$shareButton = this.$('.share')
@@ -38,9 +36,7 @@ var ShareView = Backbone.View.extend({
   share: function () {
     var html = this.renderDocument(this.model)
     this.remote.addRaw('text/html', html).then(_.bind(function (url) {
-      remoteStorage.sync.sync().then(_.bind(function () {
-        this.model.set('public', url)
-      }, this))
+      this.model.set('public', url)
     }, this))
   },
 
@@ -52,9 +48,7 @@ var ShareView = Backbone.View.extend({
 
     var publicId = url.split('/').slice(-2).join('/')
     this.remote.remove(publicId).then(_.bind(function (url) {
-      remoteStorage.sync.sync().then(_.bind(function () {
-        this.model.set('public', null)
-      }, this))
+      this.model.set('public', null)
     }, this))
   },
 
@@ -81,7 +75,11 @@ var ShareView = Backbone.View.extend({
     return this.template(data)
   },
 
-  show: function () {
+  show: function (backend) {
+    // Enable sharing only for supported backends
+    if (backend === 'dropbox' || backend === 'googledrive') {
+      return
+    }
     this.$el.removeClass('hide')
   },
 

@@ -1,10 +1,15 @@
 var _ = require('underscore')
 var Backbone = require('backbone')
-var remoteStorage = require('remotestorage')
+var RemoteStorage = require('remotestoragejs')
+var RemostStorageDocuments = require('remotestorage-module-documents')
+var Widget = require('remotestorage-widget')
 var AppView = require('./views/app')
 var Doc = require('./models/doc')
 var Docs = require('./collections/docs')
 var State = require('./models/state')
+
+var dropboxApiKey = 'dz0e75y34k109dg'
+var googleDriveClientID = '376607343336-uabp27dse5s1jkr767jpdeqhj7t90bll.apps.googleusercontent.com'
 
 function Litewrite () {
   this.initialize()
@@ -25,9 +30,24 @@ _.extend(Litewrite.prototype, Backbone.Events, {
       'triggerDisconnected'
     )
 
+    var rs = new RemoteStorage({ modules: [RemostStorageDocuments] })
+    rs.setApiKeys({
+      dropbox: dropboxApiKey,
+      googledrive: googleDriveClientID
+    })
+    rs.access.claim('documents', 'rw')
+    rs.caching.enable('/documents/notes/')
+    new Widget(rs).attach('remotestorage-connect')
+    rs.on('connected', function () {
+      this.triggerConnected(rs.backend)
+    })
+    rs.on('disconnected', this.triggerDisconnected)
+
     this.state = new State()
     this.doc = new Doc()
-    this.docs = new Docs()
+    this.docs = new Docs(null, {
+      remote: rs.documents.privateList('notes')
+    })
 
     this.doc
       .on('change:content', this.doc.updateLastEdited)
@@ -43,14 +63,10 @@ _.extend(Litewrite.prototype, Backbone.Events, {
 
     this.app = new AppView({
       litewrite: this,
+      remote: rs.documents.publicList('notes'),
       model: this.doc,
       collection: this.docs
     })
-
-    remoteStorage.displayWidget('remotestorage-connect')
-
-    remoteStorage.on('ready', this.triggerConnected)
-    remoteStorage.on('disconnected', this.triggerDisconnected)
   },
 
   loadDoc: function () {
@@ -104,14 +120,14 @@ _.extend(Litewrite.prototype, Backbone.Events, {
     }
   },
 
-  triggerConnected: function () {
-    if (remoteStorage.connected) {
-      this.trigger('connected')
-    }
+  triggerConnected: function (backend) {
+    this.trigger('connected', backend)
   },
 
   triggerDisconnected: function () {
     this.trigger('disconnected')
+    this.docs.reset()
+    this.docs.welcome()
   },
 
   setUrl: function (doc) {
