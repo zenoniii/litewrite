@@ -2,7 +2,7 @@ Litewrite
 
 Salut !
 
-Litewrite est une application minimaliste créé pour prendre des notes et écrire simplement. Elle fonctionne hors-ligne dans votre navigateur et fait des sauvegarde en permanence de vos données (un peu de technique: AppCache & localStorage). Vous pouvez également synchroniser vos notes sur vos différents appareils en utilisant le protocole ouvert remoteStorage. Jetez un œil au widget en haut à droite pour paramétrer la synchronisation.
+Litewrite est une application minimaliste créé pour prendre des notes et écrire simplement. Elle fonctionne hors-ligne dans votre navigateur et fait des sauvegarde en permanence de vos données. Vous pouvez également synchroniser vos notes sur vos différents appareils en utilisant le protocole ouvert remoteStorage. Jetez un œil au widget en haut à droite pour paramétrer la synchronisation.
 
 Litewrite est libre, ce qui signifie que vous pouvez participer à son amélioration ! Si vous avez le moindre problème ou des suggestions, dites nous le ici http://github.com/litewrite/litewrite/issues
 

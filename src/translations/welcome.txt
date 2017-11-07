@@ -2,7 +2,7 @@ Litewrite
 
 Hey! Good to see you! :)
 
-This is a distraction-free app designed for simple note taking and writing. It works offline and your browser will keep your data saved (nerd facts: AppCache & localStorage). If you like your notes to be saved permanently and available on all your devices, you can use the open remoteStorage standard, Dropbox or Google Drive. Just check out the widget in the top right to get started.
+This is a distraction-free app designed for simple note taking and writing. It works offline and your browser will keep your data saved. If you like your notes to be saved permanently and available on all your devices, you can use the open remoteStorage standard, Dropbox or Google Drive. Just check out the widget in the top right to get started.
 
 And Litewrite is open source, meaning you can help make it better! If you have any problems or suggestions let us know at http://github.com/litewrite/litewrite/issues
 

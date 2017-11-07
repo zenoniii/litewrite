@@ -2,7 +2,7 @@ Litewrite
 
 Hallo, schön dass du hier bist!
 
-Litewrite ist eine simple Anwendung für Notizen und Schreibarbeiten. Es funktioniert offline und dein Browser speichert deine Daten (Nerd-Fakten: AppCache & localStorage). Um deine Notizen langfristig zu speichern und auf verschiedenen Geräten zu benutzen, kannst du sie mit dem offenen remoteStorage-Standard, Dropbox oder Google Drive synchronisieren. Nutze dafür einfach das Widget oben rechts.
+Litewrite ist eine simple Anwendung für Notizen und Schreibarbeiten. Es funktioniert offline und dein Browser speichert deine Daten. Um deine Notizen langfristig zu speichern und auf verschiedenen Geräten zu benutzen, kannst du sie mit dem offenen remoteStorage-Standard, Dropbox oder Google Drive synchronisieren. Nutze dafür einfach das Widget oben rechts.
 
 Der komplette Code ist open-source, daher kannst du uns helfen, das App zu verbessern! Wenn du Probleme oder Vorschläge hast, melde das einfach auf http://github.com/litewrite/litewrite/issues
 
