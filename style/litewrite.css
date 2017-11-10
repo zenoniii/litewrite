@@ -352,6 +352,11 @@ footer a {
     padding-right: 4%;
   }
 
+  .actions {
+    margin-right: 5%;
+    margin-bottom: 5%;
+  }
+
 	.snapjs-left .editor {
 		opacity: .5;
 	}
