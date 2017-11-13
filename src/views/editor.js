@@ -103,8 +103,8 @@ var EditorView = Backbone.View.extend({
   insertTab: function () {
     var pos = this.$el.prop('selectionStart')
     var v = this.$el.val()
-    this.$el.val(v.substring(0, pos) + '  ' + v.substring(pos, v.length))
-    this.setCursor(pos + 2)
+    this.$el.val(v.substring(0, pos) + '\t' + v.substring(pos, v.length))
+    this.setCursor(pos + 1)
     this.updateOpenDoc()
   }
 
