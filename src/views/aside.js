@@ -32,7 +32,7 @@ var AsideView = Backbone.View.extend({
       maxPosition: 265
     })
 
-    this.snapper.on('start', this.triggerOpening)
+    this.snapper.on('end', this.triggerOpening)
 
     this.handleSnapper()
     $(window).on('resize', this.handleSnapper)
