@@ -233,6 +233,8 @@ footer a {
   top: 0 !important;
 	right: 3px !important;
   z-index: 100000;
+  /* Add some space on left to keep menu button visible on mobile */
+  margin-left: 36px;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
