@@ -22,7 +22,6 @@ _.extend(Litewrite.prototype, Backbone.Events, {
       'loadDoc',
       'open',
       'openOnCreate',
-      'updateCurrentDoc',
       'handlePrevious',
       'updateDocs',
       'handleRemoteRemove',
@@ -72,7 +71,6 @@ _.extend(Litewrite.prototype, Backbone.Events, {
   loadDoc: function () {
     this.docs
       .on('add', this.openOnCreate)
-      .on('remoteUpdate', this.updateCurrentDoc)
       .on('remove', this.handleRemoteRemove)
 
     this.trigger('ready')
@@ -94,14 +92,6 @@ _.extend(Litewrite.prototype, Backbone.Events, {
     if (doc.isEmpty()) {
       this.open(doc)
     }
-  },
-
-  updateCurrentDoc: function (id) {
-    if (this.doc.id !== id) {
-      return
-    }
-    this.open(id)
-    this.doc.trigger('update')
   },
 
   // remove empty documents
