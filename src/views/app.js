@@ -20,7 +20,7 @@ var AppView = Backbone.View.extend({
 
     this.litewrite = options.litewrite
 
-    this.editor = new EditorView({ model: this.model })
+    this.editor = new EditorView({ model: this.model, litewrite: this.litewrite })
     this.aside = new AsideView({ model: this.model, collection: this.collection })
     this.search = new SearchView({ model: this.litewrite.state })
     this.entries = new EntriesView({ litewrite: this.litewrite, collection: this.collection })
