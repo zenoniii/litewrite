@@ -3,6 +3,7 @@ var Backbone = require('backbone')
 var utils = require('../utils')
 var lang = require('../translations')
 var autosize = require('autosize')
+var $ = require('jquery')
 
 var EditorView = Backbone.View.extend({
   el: '#editor',
@@ -19,6 +20,10 @@ var EditorView = Backbone.View.extend({
       'insertTab'
     )
 
+    this.litewrite = options.litewrite
+    this.litewrite.state
+      .on('change:query', this.render)
+
     this.model
       .on('change:id', this.render)
       .on('change:content', this.handleCharEncodings)
@@ -32,6 +37,11 @@ var EditorView = Backbone.View.extend({
   render: function () {
     // Only re-render when content changed
     var content = this.model.get('content')
+    var query = this.litewrite.state.get('query')
+
+    var highlightedText = this.applyHighlights(content, query)
+    this.updateHighlight(highlightedText)
+
     if (content === this.$el.val()) {
       return
     }
@@ -106,6 +116,30 @@ var EditorView = Backbone.View.extend({
     this.$el.val(v.substring(0, pos) + '\t' + v.substring(pos, v.length))
     this.setCursor(pos + 1)
     this.updateOpenDoc()
+  },
+
+  escapeRegex: function (str) {
+    return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+  },
+
+  applyHighlights: function (text, query) {
+    var queryRegex = new RegExp(this.escapeRegex(query), 'gi')
+    text = text
+      .replace(/\n$/g, '\n\n')
+      .replace(queryRegex, '<mark>$&</mark>')
+
+    var ua = window.navigator.userAgent.toLowerCase()
+    var isIE = !!ua.match(/msie|trident\/7|edge/)
+    if (isIE) {
+      // IE wraps whitespace differently in a div vs textarea, this fixes it
+      text = text.replace(/ /g, ' <wbr>')
+    }
+
+    return text
+  },
+
+  updateHighlight: function (highlightedText) {
+    $('.highlights').html(highlightedText)
   }
 
 })

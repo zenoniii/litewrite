@@ -44,7 +44,7 @@ body > .scrollbox {
   position: fixed;
 }
 
-.editor {
+.editor , .backdrop {
   position: relative;
   width: 96%;
   margin: 3.5% 0 0 4%; /* make sure cursor is not hidden in very top left corner */
@@ -350,7 +350,7 @@ footer a {
 	  box-shadow: 0 0 20px -2px rgba(100,100,110,.3);
   }
 
-  .editor {
+  .editor, .backdrop {
     padding-right: 4%;
   }
 
@@ -359,7 +359,7 @@ footer a {
     margin-bottom: 5%;
   }
 
-	.snapjs-left .editor {
+	.snapjs-left .editor, .snapjs-left .backdrop {
 		opacity: .5;
 	}
 
@@ -425,7 +425,7 @@ footer a {
 		display: none;
 	}
 
-	body, .editor {
+	body, .editor , .backdrop{
 		margin: 0;
 		padding: 10px;
 		height: auto;
@@ -434,3 +434,34 @@ footer a {
 	}
 
 }
+
+.editor {
+  z-index: 2;
+}
+
+.backdrop {
+  position: absolute;
+  z-index: 1;
+  /* border: 2px solid #685972; */
+  /* background-color: #fff; */
+  overflow: auto;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+}
+
+.highlights {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	color: transparent;
+}
+
+mark {
+  border-radius: 3px;
+  color: transparent;
+  /* background-color: #b1d5e5; */
+  background-color:rgba(255,255,0,.5);
+}
+
