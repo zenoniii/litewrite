@@ -9,7 +9,7 @@ var Docs = require('./collections/docs')
 var State = require('./models/state')
 
 var dropboxApiKey = '6p6q5imoisraq6k'
-var googleDriveClientID = '376607343336-uabp27dse5s1jkr767jpdeqhj7t90bll.apps.googleusercontent.com'
+var googleDriveClientID = '243755005472-9jqmoao3s086h2gl4jhrglgdc1096efo.apps.googleusercontent.com'
 
 function Litewrite () {
   this.initialize()
